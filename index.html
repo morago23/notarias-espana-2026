@@ -36,6 +36,7 @@
     <div class="tabs">
       <button class="tab-btn active" data-target="tab-notarias">Directorio de Notarías</button>
       <button class="tab-btn" data-target="tab-vacantes">Plazas Vacantes (Concurso)</button>
+      <button class="tab-btn" data-target="tab-preferencias">Mis Preferencias ⭐</button>
       <button class="tab-btn" data-target="tab-estadisticas">Estadísticas y Gráficos</button>
     </div>
 
@@ -131,6 +132,20 @@
       </div>
     </section>
 
+    <!-- MIS PREFERENCIAS -->
+    <section id="tab-preferencias" class="tab-content" style="display:none;">
+      <div class="controls" style="justify-content:space-between; align-items:center;">
+        <h2 style="margin:0; font-size:1.5rem; color:var(--text-color);">Ordena tus Plazas</h2>
+        <button id="export-prefs-btn" class="btn btn-outline" style="background:var(--accent-color); color:var(--bg-dark);">🖨️ Imprimir / Guardar PDF</button>
+      </div>
+      <div class="preferencias-container">
+        <p style="color:var(--text-muted); margin-bottom: 20px;">Arrastra las tarjetas usando el icono (☰) para ordenarlas según tu preferencia (1ª opción, 2ª opción...). Este orden se guarda automáticamente en tu navegador.</p>
+        <ul id="preferencias-list">
+          <!-- Dynamically populated -->
+        </ul>
+      </div>
+    </section>
+
     <!-- ESTADISTICAS -->
     <section id="tab-estadisticas" class="tab-content">
       <div class="charts-grid">
@@ -164,6 +179,7 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
   <script src="coords.js"></script>
   <script src="data.js"></script>
   <script src="app.js"></script>

@@ -13,7 +13,8 @@ const state = {
   userCoords: null
 };
 
-const favVacantes = new Set(JSON.parse(localStorage.getItem('favVacantes') || '[]'));
+const favOrder = JSON.parse(localStorage.getItem('favVacantes') || '[]');
+const favVacantes = new Set(favOrder);
 
 // Utilities
 function normalize(str) {
@@ -21,6 +22,92 @@ function normalize(str) {
   return str.toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
 }
 
+// Preferencias
+function initPreferencias() {
+  document.getElementById('export-prefs-btn').addEventListener('click', () => {
+    window.print();
+  });
+  renderPreferencias();
+}
+
+function renderPreferencias() {
+  const listEl = document.getElementById('preferencias-list');
+  if (!listEl) return;
+  
+  if (favOrder.length === 0) {
+    listEl.innerHTML = '<li class="empty-state">No tienes ninguna plaza guardada en favoritos. Ve a "Plazas Vacantes" y marca la estrella en las notarías que te interesen.</li>';
+    return;
+  }
+  
+  let html = '';
+  favOrder.forEach((id, index) => {
+    // Buscar la vacante
+    const v = DATA_VACANTES.find(vac => {
+       const locClean = vac.localidad.replace(/\s*\([^)]*\)/g, '').trim();
+       const vacId = normalize(locClean) + '|' + normalize(vac.provincia);
+       return vacId === id;
+    });
+    
+    if (v) {
+      const badgeClass = v.clase.startsWith('Jubilación') ? 'badge-jubilacion' : v.clase === 'Resulta' ? 'badge-resulta' : 'badge-desierta';
+      html += `
+        <li data-id="${id}" class="pref-item">
+          <div class="pref-rank">${index + 1}</div>
+          <div class="pref-handle">☰</div>
+          <div class="pref-content">
+            <div class="pref-title"><strong>${escapeHTML(v.localidad.replace(/\s*\([^)]+\)/, '').trim())}</strong> (${escapeHTML(v.provincia)})</div>
+            <div class="pref-meta">
+              <span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span>
+              <span>Categoría: ${escapeHTML(v.categoria)}</span>
+            </div>
+          </div>
+          <button class="pref-remove" data-id="${id}">❌</button>
+        </li>
+      `;
+    }
+  });
+  
+  listEl.innerHTML = html;
+  
+  // Asignar evento borrar
+  listEl.querySelectorAll('.pref-remove').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const id = e.target.getAttribute('data-id');
+      favVacantes.delete(id);
+      const index = favOrder.indexOf(id);
+      if (index > -1) favOrder.splice(index, 1);
+      localStorage.setItem('favVacantes', JSON.stringify(favOrder));
+      if (state.vacantesOnlyFavs) filterVacantes();
+      renderPreferencias(); // Volver a pintar la lista
+    });
+  });
+  
+  // Sortable.js initialization
+  if (window.Sortable) {
+    if (state.sortableInstance) state.sortableInstance.destroy();
+    
+    state.sortableInstance = new Sortable(listEl, {
+      handle: '.pref-handle',
+      animation: 150,
+      ghostClass: 'sortable-ghost',
+      onEnd: function (evt) {
+        // Reordenar array basado en DOM
+        const items = Array.from(listEl.querySelectorAll('.pref-item'));
+        const newOrder = items.map(el => el.getAttribute('data-id'));
+        
+        // Actualizar array y localStorage
+        favOrder.length = 0;
+        favOrder.push(...newOrder);
+        localStorage.setItem('favVacantes', JSON.stringify(favOrder));
+        
+        // Refrescar para actualizar los números
+        renderPreferencias();
+      }
+    });
+  }
+}
+
+// Distance and driving time calculation
 function escapeHTML(str) {
   if (!str) return '';
   return str.toString()
@@ -117,6 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTabs();
   initNotarias();
   initVacantes();
+  initPreferencias();
   initCharts();
 });
 
@@ -268,15 +356,19 @@ function initVacantes() {
       const id = e.target.getAttribute('data-id');
       if (favVacantes.has(id)) {
         favVacantes.delete(id);
+        const index = favOrder.indexOf(id);
+        if (index > -1) favOrder.splice(index, 1);
         e.target.classList.remove('active');
         e.target.textContent = '☆';
       } else {
         favVacantes.add(id);
+        favOrder.push(id);
         e.target.classList.add('active');
         e.target.textContent = '⭐';
       }
-      localStorage.setItem('favVacantes', JSON.stringify([...favVacantes]));
+      localStorage.setItem('favVacantes', JSON.stringify(favOrder));
       if (state.vacantesOnlyFavs) filterVacantes();
+      renderPreferencias();
     }
   });
 
@@ -374,11 +466,11 @@ function renderVacantes() {
     // Extract notario if Jubilación or anteriorNotario is present
     let locHtml = `<strong>${highlightText(v.localidad.replace(/\s*\([^)]+\)/, '').trim(), query)}</strong>`;
     if (v.anteriorNotario) {
-      locHtml += `<br><small style="color:#6c757d">Sustituye a: ${escapeHTML(v.anteriorNotario)}</small>`;
+      locHtml += `<br><small style="color:#6c757d">Notario anterior: ${escapeHTML(v.anteriorNotario)}</small>`;
     } else {
       const notarioMatch = v.localidad.match(/\((Don|Doña)[^)]+\)/);
       if (notarioMatch) {
-        locHtml += `<br><small style="color:#6c757d">Sustituye a: ${escapeHTML(notarioMatch[0].replace(/[()]/g, ''))}</small>`;
+        locHtml += `<br><small style="color:#6c757d">Notario anterior: ${escapeHTML(notarioMatch[0].replace(/[()]/g, ''))}</small>`;
       }
     }
 

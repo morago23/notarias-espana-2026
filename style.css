@@ -448,3 +448,123 @@ mark {
   height: 300px;
   width: 100%;
 }
+
+/* Preferencias (Sortable) */
+#preferencias-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pref-item {
+  display: flex;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 8px;
+  gap: 15px;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.pref-item:hover {
+  border-color: var(--accent-color);
+}
+
+.sortable-ghost {
+  opacity: 0.4;
+  background: var(--bg-dark);
+}
+
+.pref-rank {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  min-width: 30px;
+  text-align: center;
+}
+
+.pref-handle {
+  cursor: grab;
+  color: var(--text-muted);
+  font-size: 1.5rem;
+  padding: 0 10px;
+  user-select: none;
+}
+
+.pref-handle:active {
+  cursor: grabbing;
+}
+
+.pref-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.pref-title {
+  font-size: 1.1rem;
+}
+
+.pref-meta {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.pref-remove {
+  background: none;
+  border: none;
+  color: #ff4b4b;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 5px;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.pref-remove:hover {
+  opacity: 1;
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 40px;
+  background: var(--surface);
+  border-radius: 8px;
+  border: 1px dashed var(--border);
+}
+
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+  }
+  .tabs, header, footer, .controls, .pref-handle, .pref-remove {
+    display: none !important;
+  }
+  .tab-content {
+    display: none !important;
+  }
+  #tab-preferencias {
+    display: block !important;
+  }
+  .pref-item {
+    border: 1px solid #ccc;
+    break-inside: avoid;
+    box-shadow: none;
+  }
+  .pref-rank {
+    color: #000;
+  }
+  .badge {
+    border: 1px solid #666;
+    color: #333;
+    background: transparent !important;
+  }
+}
