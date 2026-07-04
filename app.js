@@ -334,6 +334,11 @@ function filterVacantes() {
 
   if (state.vacantesSortCol) {
     filtered.sort((a, b) => {
+      if (state.vacantesSortCol === 'distancia') {
+        let vA = a.distancia !== null ? a.distancia : 999999;
+        let vB = b.distancia !== null ? b.distancia : 999999;
+        return state.vacantesSortDir === 'asc' ? vA - vB : vB - vA;
+      }
       let vA = a[state.vacantesSortCol] || '';
       let vB = b[state.vacantesSortCol] || '';
       const cmp = String(vA).localeCompare(String(vB), 'es');
@@ -454,12 +459,21 @@ async function calculateDistances() {
       return;
     }
 
+    if (!window.NORMALIZED_COORDS) {
+      window.NORMALIZED_COORDS = {};
+      for (const k in DATA_COORDS) {
+        const parts = k.split('|');
+        const normK = normalize(parts[0]) + '|' + normalize(parts[1]);
+        window.NORMALIZED_COORDS[normK] = DATA_COORDS[k];
+      }
+    }
+
     // Preparar lista de vacantes válidas y sus coordenadas
     const validVacantes = [];
     DATA_VACANTES.forEach(v => {
       const locClean = v.localidad.replace(/\s*\([^)]*\)/g, '').trim();
       const key = normalize(locClean) + '|' + normalize(v.provincia);
-      const c = DATA_COORDS[key];
+      const c = window.NORMALIZED_COORDS[key];
       if (c) {
         validVacantes.push({ v: v, c: c });
       } else {
