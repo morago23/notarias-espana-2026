@@ -57,6 +57,10 @@ DATA_VACANTES.forEach(v => {
   const locClean = locRaw.replace(/\s*\([^)]*\)/g, '').trim();
   const key = normalize(locClean) + '|' + normalize(v.provincia);
   vacantesSet.add(key);
+
+  // Cruzar datos para obtener la categoría (clase de la notaría)
+  const nMatch = DATA_NOTARIAS.find(n => normalize(n.localidad) === normalize(locClean) && normalize(n.provincia) === normalize(v.provincia));
+  v.categoria = nMatch ? nMatch.clase : '-';
 });
 
 function isVacante(notaria) {
@@ -237,7 +241,7 @@ function filterVacantes() {
       if (tipoF !== 'Jubilación' && v.clase !== tipoF) return false;
     }
     if (search) {
-      const txt = normalize(`${v.localidad} ${v.provincia} ${v.comunidad} ${v.notas}`);
+      const txt = normalize(`${v.localidad} ${v.provincia} ${v.comunidad} ${v.categoria}`);
       if (!txt.includes(search)) return false;
     }
     return true;
@@ -271,6 +275,7 @@ function renderVacantes() {
   tbody.innerHTML = page.map(v => {
     const isJubilacion = v.clase.includes('Jubilación');
     const badgeClass = isJubilacion ? 'badge-jubilacion' : v.clase === 'Resulta' ? 'badge-resulta' : 'badge-desierta';
+    const badgeCat = v.categoria === 'Primera' ? 'badge-primera' : v.categoria === 'Segunda' ? 'badge-segunda' : v.categoria === 'Tercera' ? 'badge-tercera' : '';
     
     // Extract notario if Jubilación
     let locHtml = `<strong>${highlightText(v.localidad.replace(/\s*\([^)]+\)/, '').trim(), query)}</strong>`;
@@ -284,8 +289,8 @@ function renderVacantes() {
         <td>${escapeHTML(v.comunidad)}</td>
         <td>${escapeHTML(v.provincia)}</td>
         <td>${locHtml}</td>
-        <td><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
-        <td>${escapeHTML(v.notas)}</td>
+        <td class="center"><span class="badge ${badgeCat}">${escapeHTML(v.categoria)}</span></td>
+        <td class="center"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
       </tr>
     `;
   }).join('');
