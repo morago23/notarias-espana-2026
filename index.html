@@ -13,12 +13,14 @@
 <body>
 
   <header class="header">
-    <div class="container header-inner">
-      <div class="header-titles">
+    <div class="container header-inner" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px;">
+      <div>
         <h1 class="main-title">Concurso de Notarías</h1>
         <p class="sub-title">Guía de Plazas y Directorio de Notarías de España (Puede contener errores)</p>
       </div>
-      <div class="header-stats">
+      
+      <div class="header-stats" style="display:flex; gap:15px; align-items:center; flex-wrap:wrap;">
+        <button id="theme-toggle" class="btn btn-outline" style="border-color:rgba(255,255,255,0.5); color:#fff;" title="Cambiar modo oscuro/claro">🌙 Modo Oscuro</button>
         <div class="stat-box">
           <span class="stat-value" id="stat-notarias">2.854</span>
           <span class="stat-label">Notarías Totales</span>
