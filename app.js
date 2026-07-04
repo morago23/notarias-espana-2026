@@ -65,15 +65,13 @@ function renderPreferencias() {
       const badgeClass = v.clase.startsWith('Jubilación') ? 'badge-jubilacion' : v.clase === 'Resulta' ? 'badge-resulta' : 'badge-desierta';
       const badgeCat = v.categoria === 'Primera' ? 'badge-primera' : v.categoria === 'Segunda' ? 'badge-segunda' : v.categoria === 'Tercera' ? 'badge-tercera' : '';
       
-      let locHtml = `<div class="loc-main">${escapeHTML(v.localidad.replace(/\s*\([^)]+\)/, '').trim())}</div>`;
-      if (v.anteriorNotario) {
-        locHtml += `<small style="color:var(--color-text-muted)">Notario anterior: ${escapeHTML(v.anteriorNotario)}</small>`;
-      } else {
+      let notarioAnt = v.anteriorNotario || "";
+      if (!notarioAnt) {
         const notarioMatch = v.localidad.match(/\((Don|Doña)[^)]+\)/);
-        if (notarioMatch) {
-          locHtml += `<small style="color:var(--color-text-muted)">Notario anterior: ${escapeHTML(notarioMatch[0].replace(/[()]/g, ''))}</small>`;
-        }
+        if (notarioMatch) notarioAnt = notarioMatch[0].replace(/[()]/g, '');
       }
+      if (notarioAnt) notarioAnt = "Notario anterior: " + notarioAnt;
+      else notarioAnt = "-";
 
       html += `
         <tr data-id="${id}" class="pref-item">
@@ -82,14 +80,13 @@ function renderPreferencias() {
           </td>
           <td class="col-comunidad" data-label="Comunidad">${escapeHTML(v.comunidad)}</td>
           <td class="col-provincia" data-label="Provincia">${escapeHTML(v.provincia)}</td>
-          <td data-label="Localidad / Plaza"><div style="display:flex; flex-direction:column; align-items:flex-end;">${locHtml}</div></td>
+          <td data-label="Localidad"><div class="loc-main">${escapeHTML(v.localidad.replace(/\s*\([^)]+\)/, '').trim())}</div></td>
+          <td data-label="Plaza"><small style="color:var(--color-text-muted)">${notarioAnt}</small></td>
           <td data-label="Motivo" class="center"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
           <td data-label="Categoría" class="center"><span class="badge ${badgeCat}">${escapeHTML(v.categoria)}</span></td>
           ${state.userCoords ? `<td data-label="Tiempo y Distancia" class="center">
-            <div style="display:flex; flex-direction:column; align-items:flex-end;">
-              <strong>${v.distancia !== null ? v.distancia.toFixed(1) + ' km' : '-'}</strong>
-              ${v.duration ? `<small style="color:#6c757d">🚗 ${formatDuration(v.duration)}</small>` : ''}
-            </div>
+            <strong>${v.distancia !== null ? v.distancia.toFixed(1) + ' km' : '-'}</strong>
+            ${v.duration ? `<br><small style="color:#6c757d">🚗 ${formatDuration(v.duration)}</small>` : ''}
           </td>` : '<td data-label="Tiempo y Distancia" class="center" style="display:none;"></td>'}
           <td data-label="Borrar" class="center">
             <button class="pref-remove" data-id="${id}">❌</button>
@@ -382,11 +379,11 @@ function renderNotarias() {
         <td class="col-comunidad" data-label="Comunidad">${escapeHTML(cName)}</td>
         <td class="col-provincia" data-label="Provincia">${escapeHTML(n.provincia)}</td>
         <td data-label="Distrito">${escapeHTML(n.distrito)}</td>
-        <td data-label="Localidad / Plaza">
-          <div style="display:flex; flex-direction:column; align-items:flex-end;">
-            <div class="loc-main">${highlightText(n.localidad, query)}</div>
-            ${n.notas ? `<small style="color:var(--color-text-muted)">${escapeHTML(n.notas)}</small>` : ''}
-          </div>
+        <td data-label="Localidad">
+          <div class="loc-main">${highlightText(n.localidad, query)}</div>
+        </td>
+        <td data-label="Plaza">
+          <small style="color:var(--color-text-muted)">${n.notas ? escapeHTML(n.notas) : '-'}</small>
         </td>
         <td class="center" data-label="Número">${escapeHTML(n.numero)}</td>
         <td class="center" data-label="Clase"><span class="badge ${claseBadge}">${escapeHTML(n.clase)}</span></td>
@@ -544,16 +541,13 @@ function renderVacantes() {
     const badgeClass = isJubilacion ? 'badge-jubilacion' : v.clase === 'Resulta' ? 'badge-resulta' : 'badge-desierta';
     const badgeCat = v.categoria === 'Primera' ? 'badge-primera' : v.categoria === 'Segunda' ? 'badge-segunda' : v.categoria === 'Tercera' ? 'badge-tercera' : '';
     
-    // Extract notario if Jubilación or anteriorNotario is present
-    let locHtml = `<strong>${highlightText(v.localidad.replace(/\s*\([^)]+\)/, '').trim(), query)}</strong>`;
-    if (v.anteriorNotario) {
-      locHtml += `<br><small style="color:var(--color-text-muted)">Notario anterior: ${escapeHTML(v.anteriorNotario)}</small>`;
-    } else {
+    let notarioAnt = v.anteriorNotario || "";
+    if (!notarioAnt) {
       const notarioMatch = v.localidad.match(/\((Don|Doña)[^)]+\)/);
-      if (notarioMatch) {
-        locHtml += `<br><small style="color:var(--color-text-muted)">Notario anterior: ${escapeHTML(notarioMatch[0].replace(/[()]/g, ''))}</small>`;
-      }
+      if (notarioMatch) notarioAnt = notarioMatch[0].replace(/[()]/g, '');
     }
+    if (notarioAnt) notarioAnt = "Notario anterior: " + notarioAnt;
+    else notarioAnt = "-";
 
     const isFav = favVacantes.has(v._id);
     const favStar = isFav ? '⭐' : '☆';
@@ -564,14 +558,13 @@ function renderVacantes() {
         <td class="center" data-label="Favorito"><button class="fav-btn ${favClass}" data-id="${escapeHTML(v._id)}">${favStar}</button></td>
         <td class="col-comunidad" data-label="Comunidad">${escapeHTML(v.comunidad)}</td>
         <td class="col-provincia" data-label="Provincia">${escapeHTML(v.provincia)}</td>
-        <td data-label="Localidad / Plaza"><div style="display:flex; flex-direction:column; align-items:flex-end;">${locHtml}</div></td>
+        <td data-label="Localidad"><div class="loc-main">${highlightText(v.localidad.replace(/\s*\([^)]+\)/, '').trim(), query)}</div></td>
+        <td data-label="Plaza"><small style="color:var(--color-text-muted)">${notarioAnt}</small></td>
         <td class="center" data-label="Motivo"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
         <td class="center" data-label="Categoría"><span class="badge ${badgeCat}">${escapeHTML(v.categoria)}</span></td>
         ${state.userCoords ? `<td class="center" data-label="Tiempo y Distancia">
-          <div style="display:flex; flex-direction:column; align-items:flex-end;">
-            <strong>${v.distancia !== null ? v.distancia.toFixed(1) + ' km' : '-'}</strong>
-            ${v.duration ? `<small style="color:#6c757d">🚗 ${formatDuration(v.duration)}</small>` : ''}
-          </div>
+          <strong>${v.distancia !== null ? v.distancia.toFixed(1) + ' km' : '-'}</strong>
+          ${v.duration ? `<br><small style="color:#6c757d">🚗 ${formatDuration(v.duration)}</small>` : ''}
         </td>` : ''}
       </tr>
     `;
