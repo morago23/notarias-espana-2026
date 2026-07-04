@@ -140,26 +140,26 @@
     <section id="tab-preferencias" class="tab-content">
       <div class="controls" style="justify-content:space-between; align-items:center;">
         <h2 style="margin:0; font-size:1.5rem; color:var(--color-text);">Ordena tus Plazas</h2>
-        <div style="display: flex; gap: 10px;">
-          <button id="export-prefs-btn" class="btn btn-outline" style="background:var(--color-primary); color:var(--color-bg);">🖨️ Imprimir / Guardar PDF</button>
-          <button id="export-csv-btn" class="btn" style="background:#28a745; color:#fff;">⬇️ Descargar Excel</button>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button id="export-prefs-btn" class="action-btn-secondary">🖨️ Imprimir / Guardar PDF</button>
+          <button id="export-csv-btn" class="action-btn">⬇️ Descargar Excel</button>
         </div>
       </div>
       
-      <div class="distance-calculator" style="margin-bottom: 20px;">
+      <div class="distance-calculator">
         <div class="distance-header">
           <strong>🚗 Calcula la distancia a tu municipio (Opcional)</strong>
         </div>
         <div class="distance-controls">
-          <input type="text" id="distance-input-pref" placeholder="Escribe tu ciudad (Ej: Madrid)..." class="search-input">
-          <button id="distance-btn-pref" class="btn">Calcular Distancias</button>
-          <button id="distance-clear-pref" class="btn btn-outline" style="display:none;">Limpiar</button>
+          <input type="text" id="distance-input-pref" class="search-input" placeholder="Tu código postal o ciudad (Ej: 28001, Madrid)" />
+          <button id="distance-btn-pref" class="action-btn">Calcular Distancias</button>
+          <button id="distance-clear-pref" class="action-btn-secondary" style="display:none;">Limpiar</button>
         </div>
         <div id="distance-status-pref" class="distance-status"></div>
       </div>
 
       <div class="preferencias-container">
-        <p style="color:var(--color-text-muted); margin-bottom: 20px;">Arrastra las filas usando el icono (☰) para ordenarlas según tu preferencia (1ª opción, 2ª opción...). Este orden se guarda automáticamente en tu navegador.</p>
+        <p>Arrastra las filas usando el icono (☰) para ordenarlas según tu preferencia (1ª opción, 2ª opción...). Este orden se guarda automáticamente en tu navegador.</p>
         <div class="table-responsive">
           <table class="table table-vacantes" id="prefs-table">
             <thead>
