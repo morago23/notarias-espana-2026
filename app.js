@@ -228,7 +228,8 @@ function isVacante(notaria) {
 // Init
 document.addEventListener('DOMContentLoaded', () => {
   // Update header stats dynamically
-  document.getElementById('stat-notarias').textContent = DATA_NOTARIAS.length.toLocaleString('es-ES');
+  const totalNotarias = DATA_NOTARIAS.reduce((sum, n) => sum + (parseInt(n.numero) || 0), 0);
+  document.getElementById('stat-notarias').textContent = totalNotarias.toLocaleString('es-ES');
   document.getElementById('stat-vacantes').textContent = DATA_VACANTES.length.toLocaleString('es-ES');
   
   
