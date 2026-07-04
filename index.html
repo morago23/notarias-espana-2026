@@ -136,13 +136,45 @@
     <section id="tab-preferencias" class="tab-content">
       <div class="controls" style="justify-content:space-between; align-items:center;">
         <h2 style="margin:0; font-size:1.5rem; color:var(--text-color);">Ordena tus Plazas</h2>
-        <button id="export-prefs-btn" class="btn btn-outline" style="background:var(--accent-color); color:var(--bg-dark);">🖨️ Imprimir / Guardar PDF</button>
+        <div style="display: flex; gap: 10px;">
+          <button id="export-prefs-btn" class="btn btn-outline" style="background:var(--accent-color); color:var(--bg-dark);">🖨️ Imprimir / Guardar PDF</button>
+          <button id="export-csv-btn" class="btn" style="background:#28a745; color:#fff;">⬇️ Descargar Excel</button>
+        </div>
       </div>
+      
+      <div class="distance-calculator" style="margin-bottom: 20px;">
+        <div class="distance-header">
+          <strong>🚗 Calcula la distancia a tu municipio (Opcional)</strong>
+        </div>
+        <div class="distance-controls">
+          <input type="text" id="distance-input-pref" placeholder="Escribe tu ciudad (Ej: Madrid)..." class="search-input">
+          <button id="distance-btn-pref" class="btn">Calcular Distancias</button>
+          <button id="distance-clear-pref" class="btn btn-outline" style="display:none;">Limpiar</button>
+        </div>
+        <div id="distance-status-pref" class="distance-status"></div>
+      </div>
+
       <div class="preferencias-container">
         <p style="color:var(--text-muted); margin-bottom: 20px;">Arrastra las tarjetas usando el icono (☰) para ordenarlas según tu preferencia (1ª opción, 2ª opción...). Este orden se guarda automáticamente en tu navegador.</p>
-        <ul id="preferencias-list">
-          <!-- Dynamically populated -->
-        </ul>
+        <div class="table-responsive">
+          <table class="table table-vacantes" id="prefs-table">
+            <thead>
+              <tr>
+                <th class="center" style="width: 80px;">Orden</th>
+                <th>Comunidad</th>
+                <th>Provincia</th>
+                <th>Localidad / Plaza</th>
+                <th class="center">Motivo</th>
+                <th class="center">Categoría</th>
+                <th class="center" id="th-distancia-pref" style="display:none;">Distancia y Tiempo</th>
+                <th class="center">Borrar</th>
+              </tr>
+            </thead>
+            <tbody id="preferencias-list">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
 

@@ -27,6 +27,19 @@ function initPreferencias() {
   document.getElementById('export-prefs-btn').addEventListener('click', () => {
     window.print();
   });
+  
+  document.getElementById('export-csv-btn').addEventListener('click', exportToCSV);
+
+  // Distances for Prefs tab
+  document.getElementById('distance-btn-pref').addEventListener('click', () => {
+    document.getElementById('distance-input').value = document.getElementById('distance-input-pref').value;
+    calculateDistances();
+  });
+  
+  document.getElementById('distance-clear-pref').addEventListener('click', () => {
+    document.getElementById('distance-clear').click();
+  });
+  
   renderPreferencias();
 }
 
@@ -35,7 +48,7 @@ function renderPreferencias() {
   if (!listEl) return;
   
   if (favOrder.length === 0) {
-    listEl.innerHTML = '<li class="empty-state">No tienes ninguna plaza guardada en favoritos. Ve a "Plazas Vacantes" y marca la estrella en las notarías que te interesen.</li>';
+    listEl.innerHTML = '<tr><td colspan="8" class="empty-state">No tienes ninguna plaza guardada en favoritos. Ve a "Plazas Vacantes" y marca la estrella en las notarías que te interesen.</td></tr>';
     return;
   }
   
@@ -50,19 +63,36 @@ function renderPreferencias() {
     
     if (v) {
       const badgeClass = v.clase.startsWith('Jubilación') ? 'badge-jubilacion' : v.clase === 'Resulta' ? 'badge-resulta' : 'badge-desierta';
+      const badgeCat = v.categoria === 'Primera' ? 'badge-primera' : v.categoria === 'Segunda' ? 'badge-segunda' : v.categoria === 'Tercera' ? 'badge-tercera' : '';
+      
+      let locHtml = `<strong>${escapeHTML(v.localidad.replace(/\s*\([^)]+\)/, '').trim())}</strong>`;
+      if (v.anteriorNotario) {
+        locHtml += `<br><small style="color:#6c757d">Notario anterior: ${escapeHTML(v.anteriorNotario)}</small>`;
+      } else {
+        const notarioMatch = v.localidad.match(/\((Don|Doña)[^)]+\)/);
+        if (notarioMatch) {
+          locHtml += `<br><small style="color:#6c757d">Notario anterior: ${escapeHTML(notarioMatch[0].replace(/[()]/g, ''))}</small>`;
+        }
+      }
+
       html += `
-        <li data-id="${id}" class="pref-item">
-          <div class="pref-rank">${index + 1}</div>
-          <div class="pref-handle">☰</div>
-          <div class="pref-content">
-            <div class="pref-title"><strong>${escapeHTML(v.localidad.replace(/\s*\([^)]+\)/, '').trim())}</strong> (${escapeHTML(v.provincia)})</div>
-            <div class="pref-meta">
-              <span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span>
-              <span>Categoría: ${escapeHTML(v.categoria)}</span>
-            </div>
-          </div>
-          <button class="pref-remove" data-id="${id}">❌</button>
-        </li>
+        <tr data-id="${id}" class="pref-item">
+          <td class="center pref-handle" style="font-weight:bold; color:var(--accent-color); font-size:1.1rem; cursor:grab;">
+            ☰ ${index + 1}
+          </td>
+          <td>${escapeHTML(v.comunidad)}</td>
+          <td>${escapeHTML(v.provincia)}</td>
+          <td>${locHtml}</td>
+          <td class="center"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
+          <td class="center"><span class="badge ${badgeCat}">${escapeHTML(v.categoria)}</span></td>
+          ${state.userCoords ? `<td class="center">
+            <strong>${v.distancia !== null ? v.distancia.toFixed(1) + ' km' : '-'}</strong>
+            ${v.duration ? `<br><small style="color:#6c757d">🚗 ${formatDuration(v.duration)}</small>` : ''}
+          </td>` : '<td class="center" style="display:none;"></td>'}
+          <td class="center">
+            <button class="pref-remove" data-id="${id}">❌</button>
+          </td>
+        </tr>
       `;
     }
   });
@@ -380,11 +410,23 @@ function initVacantes() {
     document.getElementById('distance-status').textContent = '';
     document.getElementById('distance-clear').style.display = 'none';
     document.getElementById('th-distancia').style.display = 'none';
-    DATA_VACANTES.forEach(v => v.distancia = null);
+    
+    // Also clear prefs
+    document.getElementById('distance-input-pref').value = '';
+    document.getElementById('distance-status-pref').textContent = '';
+    document.getElementById('distance-clear-pref').style.display = 'none';
+    if(document.getElementById('th-distancia-pref')) document.getElementById('th-distancia-pref').style.display = 'none';
+
+    DATA_VACANTES.forEach(v => {
+      v.distancia = null;
+      v.duration = null;
+    });
+    
     if (state.vacantesSortCol === 'distancia') {
       state.vacantesSortCol = null;
     }
     filterVacantes();
+    renderPreferencias(); // re-render to hide distance col
   });
 
   document.querySelectorAll('#vacantes-table th.sortable').forEach(th => {
@@ -622,6 +664,11 @@ async function calculateDistances() {
     document.getElementById('distance-clear').style.display = 'inline-block';
     document.getElementById('th-distancia').style.display = 'table-cell';
 
+    // Also update prefs distance UI
+    document.getElementById('distance-status-pref').textContent = status.textContent;
+    document.getElementById('distance-clear-pref').style.display = 'inline-block';
+    if(document.getElementById('th-distancia-pref')) document.getElementById('th-distancia-pref').style.display = 'table-cell';
+
     // Auto sort by distance
     state.vacantesSortCol = 'distancia';
     state.vacantesSortDir = 'asc';
@@ -632,6 +679,57 @@ async function calculateDistances() {
   } catch (err) {
     status.textContent = 'Error al conectar con los servidores de mapas/rutas.';
   }
+}
+
+function exportToCSV() {
+  if (favOrder.length === 0) {
+    alert("No tienes plazas en favoritos para exportar.");
+    return;
+  }
+  
+  let csvContent = "\uFEFF"; // BOM for Excel compatibility
+  csvContent += "Orden;Comunidad;Provincia;Localidad / Plaza;Motivo;Categoría;Notario Anterior;Distancia (km);Tiempo (min)\n";
+  
+  favOrder.forEach((id, index) => {
+    const v = DATA_VACANTES.find(vac => {
+       const locClean = vac.localidad.replace(/\s*\([^)]*\)/g, '').trim();
+       const vacId = normalize(locClean) + '|' + normalize(vac.provincia);
+       return vacId === id;
+    });
+    if (v) {
+      let notarioAnt = v.anteriorNotario || "";
+      if (!notarioAnt) {
+        const notarioMatch = v.localidad.match(/\((Don|Doña)[^)]+\)/);
+        if (notarioMatch) notarioAnt = notarioMatch[0].replace(/[()]/g, '');
+      }
+      
+      const loc = v.localidad.replace(/\s*\([^)]+\)/, '').trim();
+      const dist = v.distancia !== null && v.distancia !== undefined ? v.distancia.toFixed(1).replace('.', ',') : "";
+      const mins = v.duration !== null && v.duration !== undefined ? Math.round(v.duration / 60) : "";
+      
+      const row = [
+        index + 1,
+        `"${v.comunidad}"`,
+        `"${v.provincia}"`,
+        `"${loc}"`,
+        `"${v.clase}"`,
+        `"${v.categoria}"`,
+        `"${notarioAnt}"`,
+        `"${dist}"`,
+        `"${mins}"`
+      ];
+      csvContent += row.join(";") + "\n";
+    }
+  });
+  
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.setAttribute("href", url);
+  link.setAttribute("download", "mis_preferencias_notarias.csv");
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
 
 function formatDuration(secs) {
