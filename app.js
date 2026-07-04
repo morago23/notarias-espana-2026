@@ -80,16 +80,16 @@ function renderPreferencias() {
           <td class="center pref-handle" style="font-weight:bold; color:var(--accent-color); font-size:1.1rem; cursor:grab;">
             ☰ ${index + 1}
           </td>
-          <td>${escapeHTML(v.comunidad)}</td>
-          <td>${escapeHTML(v.provincia)}</td>
-          <td>${locHtml}</td>
-          <td class="center"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
-          <td class="center"><span class="badge ${badgeCat}">${escapeHTML(v.categoria)}</span></td>
-          ${state.userCoords ? `<td class="center">
+          <td data-label="Comunidad">${escapeHTML(v.comunidad)}</td>
+          <td data-label="Provincia">${escapeHTML(v.provincia)}</td>
+          <td data-label="Localidad / Plaza">${locHtml}</td>
+          <td data-label="Motivo" class="center"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
+          <td data-label="Categoría" class="center"><span class="badge ${badgeCat}">${escapeHTML(v.categoria)}</span></td>
+          ${state.userCoords ? `<td data-label="Distancia y Tiempo" class="center">
             <strong>${v.distancia !== null ? v.distancia.toFixed(1) + ' km' : '-'}</strong>
             ${v.duration ? `<br><small style="color:#6c757d">🚗 ${formatDuration(v.duration)}</small>` : ''}
-          </td>` : '<td class="center" style="display:none;"></td>'}
-          <td class="center">
+          </td>` : '<td data-label="Distancia y Tiempo" class="center" style="display:none;"></td>'}
+          <td data-label="Borrar" class="center">
             <button class="pref-remove" data-id="${id}">❌</button>
           </td>
         </tr>
@@ -236,16 +236,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const themeToggle = document.getElementById('theme-toggle');
   if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark-mode');
-    themeToggle.textContent = '☀️ Modo Claro';
+    themeToggle.querySelector('.icon').textContent = '☀️';
   }
   themeToggle.addEventListener('click', () => {
     document.body.classList.toggle('dark-mode');
     if (document.body.classList.contains('dark-mode')) {
       localStorage.setItem('theme', 'dark');
-      themeToggle.textContent = '☀️ Modo Claro';
+      themeToggle.querySelector('.icon').textContent = '☀️';
     } else {
       localStorage.setItem('theme', 'light');
-      themeToggle.textContent = '🌙 Modo Oscuro';
+      themeToggle.querySelector('.icon').textContent = '🌙';
     }
   });
 
