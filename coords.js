@@ -1,29 +1,29 @@
 const DATA_COORDS = {
-  "Purchena|Almer\u00eda": {
+  "Purchena|Almería": {
     "lat": 37.3477463,
     "lon": -2.3608085
   },
-  "Ug\u00edjar|Almer\u00eda": {
+  "Ugíjar|Almería": {
     "lat": 36.9471481,
     "lon": -3.0496151
   },
-  "V\u00e9lez-Blanco|Almer\u00eda": {
+  "Vélez-Blanco|Almería": {
     "lat": 37.6914189,
     "lon": -2.0956638
   },
-  "Cabra|C\u00f3rdoba": {
+  "Cabra|Córdoba": {
     "lat": 37.4718153,
     "lon": -4.4335616
   },
-  "Montoro|C\u00f3rdoba": {
+  "Montoro|Córdoba": {
     "lat": 38.0215633,
     "lon": -4.3827296
   },
-  "Moriles|C\u00f3rdoba": {
+  "Moriles|Córdoba": {
     "lat": 37.4353584,
     "lon": -4.6095901
   },
-  "Pe\u00f1arroya-Pueblonuevo|C\u00f3rdoba": {
+  "Peñarroya-Pueblonuevo|Córdoba": {
     "lat": 38.3026178,
     "lon": -5.2714828
   },
@@ -31,23 +31,23 @@ const DATA_COORDS = {
     "lat": 37.3214037,
     "lon": -6.683161
   },
-  "Alcal\u00e1 la Real|Ja\u00e9n": {
+  "Alcalá la Real|Jaén": {
     "lat": 37.4619794,
     "lon": -3.922384
   },
-  "Bail\u00e9n|Ja\u00e9n": {
+  "Bailén|Jaén": {
     "lat": 38.096787,
     "lon": -3.7765601
   },
-  "Lopera|Ja\u00e9n": {
+  "Lopera|Jaén": {
     "lat": 37.9455526,
     "lon": -4.2142298
   },
-  "Ja\u00e9n|Ja\u00e9n": {
+  "Jaén|Jaén": {
     "lat": 37.7728858,
     "lon": -3.7883289
   },
-  "Marbella|M\u00e1laga": {
+  "Marbella|Málaga": {
     "lat": 36.5074781,
     "lon": -4.8047219
   },
@@ -59,7 +59,7 @@ const DATA_COORDS = {
     "lat": 36.8534583,
     "lon": -6.0388327
   },
-  "Lora del R\u00edo|Sevilla": {
+  "Lora del Río|Sevilla": {
     "lat": 37.6574267,
     "lon": -5.5275818
   },
@@ -71,7 +71,7 @@ const DATA_COORDS = {
     "lat": 42.6052663,
     "lon": 0.5237318
   },
-  "Berd\u00fan|Huesca": {
+  "Berdún|Huesca": {
     "lat": 42.6033393,
     "lon": -0.8586427
   },
@@ -79,7 +79,7 @@ const DATA_COORDS = {
     "lat": 41.8675034,
     "lon": 0.421573
   },
-  "Albarrac\u00edn|Teruel": {
+  "Albarracín|Teruel": {
     "lat": 40.4072825,
     "lon": -1.4442792
   },
@@ -91,11 +91,11 @@ const DATA_COORDS = {
     "lat": 41.3527628,
     "lon": -1.6422977
   },
-  "S\u00e1daba|Zaragoza": {
+  "Sádaba|Zaragoza": {
     "lat": 42.2818248,
     "lon": -1.2710096
   },
-  "Sos del Rey Cat\u00f3lico|Zaragoza": {
+  "Sos del Rey Católico|Zaragoza": {
     "lat": 42.4969991,
     "lon": -1.2150631
   },
@@ -107,7 +107,7 @@ const DATA_COORDS = {
     "lat": 41.1222903,
     "lon": 0.1395442
   },
-  "Avil\u00e9s|Asturias": {
+  "Avilés|Asturias": {
     "lat": 43.5554436,
     "lon": -5.9222466
   },
@@ -119,7 +119,7 @@ const DATA_COORDS = {
     "lat": 43.4102403,
     "lon": -6.8351539
   },
-  "Carre\u00f1o|Asturias": {
+  "Carreño|Asturias": {
     "lat": 43.5517905,
     "lon": -5.7894013
   },
@@ -127,7 +127,7 @@ const DATA_COORDS = {
     "lat": 43.4666077,
     "lon": -6.9745589
   },
-  "Gij\u00f3n|Asturias": {
+  "Gijón|Asturias": {
     "lat": 43.5449422,
     "lon": -5.66275
   },
@@ -139,11 +139,11 @@ const DATA_COORDS = {
     "lat": 43.2508048,
     "lon": -6.0170071
   },
-  "Trev\u00edas|Asturias": {
+  "Trevías|Asturias": {
     "lat": 43.5060089,
     "lon": -6.4314696
   },
-  "Alar\u00f3|Illes Balears": {
+  "Alaró|Illes Balears": {
     "lat": 39.7061528,
     "lon": 2.7907216
   },
@@ -203,7 +203,7 @@ const DATA_COORDS = {
     "lat": 40.7854583,
     "lon": -2.6221233
   },
-  "Saced\u00f3n|Guadalajara": {
+  "Sacedón|Guadalajara": {
     "lat": 40.4811774,
     "lon": -2.7328973
   },
@@ -211,7 +211,7 @@ const DATA_COORDS = {
     "lat": 40.5683808,
     "lon": -3.2627134
   },
-  "Cornell\u00e0 de Llobregat|Barcelona": {
+  "Cornellà de Llobregat|Barcelona": {
     "lat": 41.355724,
     "lon": 2.0706225
   },
@@ -231,15 +231,15 @@ const DATA_COORDS = {
     "lat": 41.3778094,
     "lon": 2.0886257
   },
-  "Badia del Vall\u00e8s|Barcelona": {
+  "Badia del Vallès|Barcelona": {
     "lat": 41.5075702,
     "lon": 2.1153773
   },
-  "Vilanova del Cam\u00ed|Barcelona": {
+  "Vilanova del Camí|Barcelona": {
     "lat": 41.5624923,
     "lon": 1.6397998
   },
-  "Sant Cugat del Vall\u00e8s|Barcelona": {
+  "Sant Cugat del Vallès|Barcelona": {
     "lat": 41.4707933,
     "lon": 2.0848815
   },
@@ -247,7 +247,7 @@ const DATA_COORDS = {
     "lat": 41.6756178,
     "lon": 2.7932391
   },
-  "Cadaqu\u00e9s|Girona": {
+  "Cadaqués|Girona": {
     "lat": 42.2893484,
     "lon": 3.2752159
   },
@@ -271,11 +271,11 @@ const DATA_COORDS = {
     "lat": 41.7451889,
     "lon": 2.6330963
   },
-  "Palam\u00f3s|Girona": {
+  "Palamós|Girona": {
     "lat": 41.8495354,
     "lon": 3.1278785
   },
-  "Torroella de Montgr\u00ed-Estartit|Girona": {
+  "Torroella de Montgrí-Estartit|Girona": {
     "lat": 42.0535178,
     "lon": 3.1948345
   },
@@ -307,7 +307,7 @@ const DATA_COORDS = {
     "lat": 41.5320987,
     "lon": 1.3884221
   },
-  "Constant\u00ed|Tarragona": {
+  "Constantí|Tarragona": {
     "lat": 41.1528113,
     "lon": 1.2151822
   },
@@ -339,51 +339,51 @@ const DATA_COORDS = {
     "lat": 37.9775416,
     "lon": -0.6828446
   },
-  "X\u00e0bia/J\u00e1vea|Alicante/Alacant": {
+  "Xàbia/Jávea|Alicante/Alacant": {
     "lat": 38.7893804,
     "lon": 0.1634168
   },
-  "Alboc\u00e0sser|Castell\u00f3/Castell\u00f3n": {
+  "Albocàsser|Castelló/Castellón": {
     "lat": 40.3577713,
     "lon": 0.0241661
   },
-  "Betx\u00ed|Castell\u00f3/Castell\u00f3n": {
+  "Betxí|Castelló/Castellón": {
     "lat": 39.9288397,
     "lon": -0.1974253
   },
-  "Morella|Castell\u00f3/Castell\u00f3n": {
+  "Morella|Castelló/Castellón": {
     "lat": 40.6188277,
     "lon": -0.0998026
   },
-  "Sant Mateu|Castell\u00f3/Castell\u00f3n": {
+  "Sant Mateu|Castelló/Castellón": {
     "lat": 40.4650329,
     "lon": 0.1793192
   },
-  "Alzira|Val\u00e8ncia/Valencia": {
+  "Alzira|València/Valencia": {
     "lat": 39.151212,
     "lon": -0.4346556
   },
-  "Benifai\u00f3|Val\u00e8ncia/Valencia": {
+  "Benifaió|València/Valencia": {
     "lat": 39.2854089,
     "lon": -0.426264
   },
-  "Font d'en Carr\u00f2s, La|Val\u00e8ncia/Valencia": {
+  "Font d'en Carròs, La|València/Valencia": {
     "lat": 38.9167636,
     "lon": -0.1700073
   },
-  "Font de la Figuera, La|Val\u00e8ncia/Valencia": {
+  "Font de la Figuera, La|València/Valencia": {
     "lat": 38.8049372,
     "lon": -0.8798501
   },
-  "Gand\u00eda|Val\u00e8ncia/Valencia": {
+  "Gandía|València/Valencia": {
     "lat": 38.9675925,
     "lon": -0.1803423
   },
-  "Pobla del Duc, La|Val\u00e8ncia/Valencia": {
+  "Pobla del Duc, La|València/Valencia": {
     "lat": 38.9010354,
     "lon": -0.3907092
   },
-  "Valencia|Val\u00e8ncia/Valencia": {
+  "Valencia|València/Valencia": {
     "lat": 39.4697065,
     "lon": -0.3763353
   },
@@ -395,35 +395,35 @@ const DATA_COORDS = {
     "lat": 38.0876314,
     "lon": -6.2732538
   },
-  "Garrovillas de Alcon\u00e9tar|C\u00e1ceres": {
+  "Garrovillas de Alconétar|Cáceres": {
     "lat": 39.7131532,
     "lon": -6.5494403
   },
-  "Guadalupe|C\u00e1ceres": {
+  "Guadalupe|Cáceres": {
     "lat": 39.4520332,
     "lon": -5.3273801
   },
-  "Hoyos|C\u00e1ceres": {
+  "Hoyos|Cáceres": {
     "lat": 40.1707784,
     "lon": -6.7212412
   },
-  "Jarandilla de la Vera|C\u00e1ceres": {
+  "Jarandilla de la Vera|Cáceres": {
     "lat": 40.1282875,
     "lon": -5.6587
   },
-  "Torrejoncillo|C\u00e1ceres": {
+  "Torrejoncillo|Cáceres": {
     "lat": 39.8965404,
     "lon": -6.466299
   },
-  "Mux\u00eda|A Coru\u00f1a": {
+  "Muxía|A Coruña": {
     "lat": 43.0654819,
     "lon": -9.177681
   },
-  "San Sadurni\u00f1o|A Coru\u00f1a": {
+  "San Sadurniño|A Coruña": {
     "lat": 43.5310797,
     "lon": -8.0531845
   },
-  "A Coru\u00f1a|A Coru\u00f1a": {
+  "A Coruña|A Coruña": {
     "lat": 43.3466447,
     "lon": -8.4127029
   },
@@ -463,7 +463,7 @@ const DATA_COORDS = {
     "lat": 42.1804504,
     "lon": -7.1131809
   },
-  "Ca\u00f1iza, A.|Pontevedra": {
+  "Cañiza, A.|Pontevedra": {
     "lat": 42.2158506,
     "lon": -8.2790051
   },
@@ -499,7 +499,7 @@ const DATA_COORDS = {
     "lat": 43.0051774,
     "lon": -1.8956075
   },
-  "Ochagav\u00eda/Otsagabia|Navarra": {
+  "Ochagavía/Otsagabia|Navarra": {
     "lat": 42.9064384,
     "lon": -1.0901999
   },
@@ -507,7 +507,7 @@ const DATA_COORDS = {
     "lat": 42.6626058,
     "lon": -2.022023
   },
-  "Vitoria-Gasteiz|Araba/\u00c1lava": {
+  "Vitoria-Gasteiz|Araba/Álava": {
     "lat": 42.8505845,
     "lon": -2.66145
   },
@@ -531,11 +531,11 @@ const DATA_COORDS = {
     "lat": 43.2248771,
     "lon": -3.3606523
   },
-  "Bergara|Gipuzkoa/Guip\u00fazcoa": {
+  "Bergara|Gipuzkoa/Guipúzcoa": {
     "lat": 43.1248632,
     "lon": -2.4294921
   },
-  "Zumarraga|Gipuzkoa/Guip\u00fazcoa": {
+  "Zumarraga|Gipuzkoa/Guipúzcoa": {
     "lat": 43.0859968,
     "lon": -2.3140925
   },
@@ -546,5 +546,281 @@ const DATA_COORDS = {
   "Torrecilla en Cameros|La Rioja": {
     "lat": 42.2560793,
     "lon": -2.6305716
+  },
+  "Ponferrada|León": {
+    "lat": 42.4984436,
+    "lon": -6.5663176
+  },
+  "Fabero|León": {
+    "lat": 42.7848456,
+    "lon": -6.603663
+  },
+  "Cistierna|León": {
+    "lat": 42.8031437,
+    "lon": -5.1255957
+  },
+  "O Barco de Valdeorras|Ourense": {
+    "lat": 42.4301028,
+    "lon": -6.9801028
+  },
+  "Ciudad Rodrigo|Salamanca": {
+    "lat": 40.5974852,
+    "lon": -6.5337192
+  },
+  "A Cañiza|Pontevedra": {
+    "lat": 42.2158506,
+    "lon": -8.2790051
+  },
+  "Fontiveros|Ávila": {
+    "lat": 40.9298797,
+    "lon": -4.9659172
+  },
+  "A Pontenova|Lugo": {
+    "lat": 43.3258957,
+    "lon": -7.1839858
+  },
+  "Osorno la Mayor|Palencia": {
+    "lat": 42.4106725,
+    "lon": -4.3609815
+  },
+  "Iznájar|Córdoba": {
+    "lat": 37.2572511,
+    "lon": -4.3077099
+  },
+  "Villamañán|León": {
+    "lat": 42.3221133,
+    "lon": -5.5833776
+  },
+  "Puente de Domingo Flórez|León": {
+    "lat": 42.4202584,
+    "lon": -6.772208
+  },
+  "Arcos de Jalón|Soria": {
+    "lat": 41.2157666,
+    "lon": -2.2753018
+  },
+  "Tamames|Salamanca": {
+    "lat": 40.6567714,
+    "lon": -6.1056098
+  },
+  "Valoria la Buena|Valladolid": {
+    "lat": 41.7999746,
+    "lon": -4.5299579
+  },
+  "Roa|Burgos": {
+    "lat": 41.6966212,
+    "lon": -3.9284274
+  },
+  "El Barco de Ávila|Ávila": {
+    "lat": 40.3577409,
+    "lon": -5.5231241
+  },
+  "Frechilla|Palencia": {
+    "lat": 42.1375125,
+    "lon": -4.8410751
+  },
+  "La Vellés|Salamanca": {
+    "lat": 41.0740754,
+    "lon": -5.5672793
+  },
+  "Villarcayo de Merindad de Castilla la Vieja|Burgos": {
+    "lat": 42.9338207,
+    "lon": -3.5878851
+  },
+  "Herrera de Pisuerga|Palencia": {
+    "lat": 42.5938269,
+    "lon": -4.3310029
+  },
+  "Lumbrales|Salamanca": {
+    "lat": 40.9364713,
+    "lon": -6.7204227
+  },
+  "Villada|Palencia": {
+    "lat": 42.2503959,
+    "lon": -4.9671551
+  },
+  "Melgar de Fernamental|Burgos": {
+    "lat": 42.4036374,
+    "lon": -4.2469137
+  },
+  "Valderas|León": {
+    "lat": 42.0787776,
+    "lon": -5.444744
+  },
+  "Granollers|Barcelona": {
+    "lat": 41.6079555,
+    "lon": 2.2876008
+  },
+  "La Pobla de Segur|Lleida": {
+    "lat": 42.2473665,
+    "lon": 0.9672725
+  },
+  "Medina de Rioseco|Valladolid": {
+    "lat": 41.8836792,
+    "lon": -5.0433596
+  },
+  "Calera y Chozas|Toledo": {
+    "lat": 39.8814627,
+    "lon": -4.9786164
+  },
+  "Santa María la Real de Nieva|Segovia": {
+    "lat": 41.0706092,
+    "lon": -4.4065179
+  },
+  "La Font d'en Carròs|València/Valencia": {
+    "lat": 38.9168188,
+    "lon": -0.1702194
+  },
+  "San Leonardo de Yagüe|Soria": {
+    "lat": 41.8293687,
+    "lon": -3.0681415
+  },
+  "La Font de la Figuera|València/Valencia": {
+    "lat": 38.8049372,
+    "lon": -0.8798501
+  },
+  "Astorga|León": {
+    "lat": 42.455401,
+    "lon": -6.052924
+  },
+  "Nava|Badajoz": {
+    "lat": 39.0626847,
+    "lon": -6.5060021
+  },
+  "La Robla|León": {
+    "lat": 42.8029091,
+    "lon": -5.6292227
+  },
+  "Astudillo|Palencia": {
+    "lat": 42.1927215,
+    "lon": -4.2938662
+  },
+  "Pineda de Mar|Barcelona": {
+    "lat": 41.6276807,
+    "lon": 2.6898707
+  },
+  "Valladolid|Valladolid": {
+    "lat": 41.6200024,
+    "lon": -4.7259906
+  },
+  "Espinosa de los Monteros|Burgos": {
+    "lat": 43.1114017,
+    "lon": -3.6207233
+  },
+  "Paredes de Nava|Palencia": {
+    "lat": 42.1528695,
+    "lon": -4.6922384
+  },
+  "El Castillo de las Guardas|Sevilla": {
+    "lat": 37.6936222,
+    "lon": -6.3139109
+  },
+  "Ledesma|Salamanca": {
+    "lat": 41.0903872,
+    "lon": -5.9987649
+  },
+  "Villablino|León": {
+    "lat": 42.9388713,
+    "lon": -6.3183421
+  },
+  "Colunga|Asturias": {
+    "lat": 43.4851194,
+    "lon": -5.2706728
+  },
+  "Amer|Girona": {
+    "lat": 42.0092186,
+    "lon": 2.6030327
+  },
+  "Vegadeo|Asturias": {
+    "lat": 43.4154714,
+    "lon": -6.9992987
+  },
+  "Santa Margarida de Montbui|Barcelona": {
+    "lat": 41.5577979,
+    "lon": 1.5811668
+  },
+  "Calella|Barcelona": {
+    "lat": 41.6132925,
+    "lon": 2.6576102
+  },
+  "Montmeló|Barcelona": {
+    "lat": 41.5515189,
+    "lon": 2.2480812
+  },
+  "Prats de Lluçanès|Barcelona": {
+    "lat": 42.0085421,
+    "lon": 2.0298689
+  },
+  "Arbúcies|Girona": {
+    "lat": 41.8160629,
+    "lon": 2.5141453
+  },
+  "Calaf|Barcelona": {
+    "lat": 41.7323852,
+    "lon": 1.5150275
+  },
+  "Sant Vicenç dels Horts|Barcelona": {
+    "lat": 41.3934193,
+    "lon": 2.0099482
+  },
+  "Berlanga de Duero|Soria": {
+    "lat": 41.4661935,
+    "lon": -2.8608847
+  },
+  "La Bisbal d'Empordà|Girona": {
+    "lat": 41.9598687,
+    "lon": 3.039616
+  },
+  "Cervera del Río Alhama|La Rioja": {
+    "lat": 42.0058319,
+    "lon": -1.9554794
+  },
+  "Almenar|Lleida": {
+    "lat": 41.7961026,
+    "lon": 0.5688317
+  },
+  "Priego|Cuenca": {
+    "lat": 40.449201,
+    "lon": -2.3134558
+  },
+  "Sant Adrià de Besòs|Barcelona": {
+    "lat": 41.4304832,
+    "lon": 2.2182775
+  },
+  "Móra la Nova|Tarragona": {
+    "lat": 41.0933242,
+    "lon": 0.6680965
+  },
+  "Ponts|Lleida": {
+    "lat": 41.9154944,
+    "lon": 1.1863072
+  },
+  "Esporles|Illes Balears": {
+    "lat": 39.6692405,
+    "lon": 2.5775624
+  },
+  "L'Espluga de Francolí|Tarragona": {
+    "lat": 41.3965477,
+    "lon": 1.1023184
+  },
+  "Lucena del Cid|Castelló/Castellón": {
+    "lat": 40.1380471,
+    "lon": -0.2803675
+  },
+  "Valle de Mena|Burgos": {
+    "lat": 43.1094373,
+    "lon": -3.2949068
+  },
+  "Espiel|Córdoba": {
+    "lat": 38.1885533,
+    "lon": -5.0189717
+  },
+  "L'Arboç|Tarragona": {
+    "lat": 41.2677369,
+    "lon": 1.6037535
+  },
+  "Oviedo|Asturias": {
+    "lat": 43.3533452,
+    "lon": -5.8795096
   }
 };

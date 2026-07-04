@@ -11300,449 +11300,463 @@ const DATA_RESUMEN = [
 
 const DATA_VACANTES = [
   {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "distrito": "",
-    "localidad": "Purchena",
-    "clase": "Resulta",
-    "notas": "N.º 120"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "distrito": "",
-    "localidad": "Ugíjar",
-    "clase": "Resulta",
-    "notas": "N.º 47"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Almería",
-    "distrito": "",
-    "localidad": "Vélez-Blanco",
-    "clase": "Resulta",
-    "notas": "N.º 42"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Córdoba",
-    "distrito": "",
-    "localidad": "Cabra",
-    "clase": "Resulta",
-    "notas": "N.º 32"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Córdoba",
-    "distrito": "",
-    "localidad": "Montoro",
-    "clase": "Resulta",
-    "notas": "N.º 70"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Córdoba",
-    "distrito": "",
-    "localidad": "Moriles",
-    "clase": "Resulta",
-    "notas": "N.º 30"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Córdoba",
-    "distrito": "",
-    "localidad": "Peñarroya-Pueblonuevo",
-    "clase": "Resulta",
-    "notas": "N.º 8"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Huelva",
-    "distrito": "",
-    "localidad": "Bonares",
-    "clase": "Resulta",
-    "notas": "N.º 48"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Jaén",
-    "distrito": "",
-    "localidad": "Alcalá la Real",
-    "clase": "Resulta",
-    "notas": "N.º 34"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Jaén",
-    "distrito": "",
-    "localidad": "Bailén",
-    "clase": "Resulta",
-    "notas": "N.º 12"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Jaén",
-    "distrito": "",
-    "localidad": "Lopera",
-    "clase": "Resulta",
-    "notas": "N.º 51"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Jaén",
-    "distrito": "",
-    "localidad": "Jaén (Don Alfonso Argüelles Luis)",
-    "clase": "Jubilación",
-    "notas": "Vacante"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Málaga",
-    "distrito": "",
-    "localidad": "Marbella (Don Miguel Ángel de la Fuente del Real)",
-    "clase": "Jubilación",
-    "notas": "Vacante"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Sevilla",
-    "distrito": "",
-    "localidad": "Castillo de las Guardas, El",
-    "clase": "Resulta",
-    "notas": "N.º 124"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Sevilla",
-    "distrito": "",
-    "localidad": "El Cuervo de Sevilla",
-    "clase": "Resulta",
-    "notas": "N.º 6"
-  },
-  {
-    "comunidad": "Andalucía",
-    "provincia": "Sevilla",
-    "distrito": "",
-    "localidad": "Lora del Río",
-    "clase": "Resulta",
-    "notas": "N.º 52"
-  },
-  {
-    "comunidad": "Aragón",
-    "provincia": "Huesca",
-    "distrito": "",
-    "localidad": "Ayerbe",
+    "comunidad": "País Vasco",
+    "provincia": "Araba/Álava",
+    "localidad": "Vitoria-Gasteiz",
     "clase": "Desierta",
-    "notas": "N.º 139"
-  },
-  {
-    "comunidad": "Aragón",
-    "provincia": "Huesca",
-    "distrito": "",
-    "localidad": "Benasque",
-    "clase": "Desierta",
-    "notas": "N.º 106"
-  },
-  {
-    "comunidad": "Aragón",
-    "provincia": "Huesca",
-    "distrito": "",
-    "localidad": "Berdún",
-    "clase": "Desierta",
-    "notas": "N.º 133"
-  },
-  {
-    "comunidad": "Aragón",
-    "provincia": "Huesca",
-    "distrito": "",
-    "localidad": "Tamarite de Litera",
-    "clase": "Desierta",
-    "notas": "N.º 89"
-  },
-  {
-    "comunidad": "Aragón",
-    "provincia": "Teruel",
-    "distrito": "",
-    "localidad": "Albarracín",
-    "clase": "Desierta",
-    "notas": "N.º 146"
-  },
-  {
-    "comunidad": "Aragón",
-    "provincia": "Teruel",
-    "distrito": "",
-    "localidad": "Mosqueruela",
-    "clase": "Desierta",
-    "notas": "N.º 85"
-  },
-  {
-    "comunidad": "Aragón",
-    "provincia": "Zaragoza",
-    "distrito": "",
-    "localidad": "Calatayud",
-    "clase": "Resulta",
-    "notas": "N.º 13"
-  },
-  {
-    "comunidad": "Aragón",
-    "provincia": "Zaragoza",
-    "distrito": "",
-    "localidad": "Sádaba",
-    "clase": "Resulta",
-    "notas": "N.º 111"
-  },
-  {
-    "comunidad": "Aragón",
-    "provincia": "Zaragoza",
-    "distrito": "",
-    "localidad": "Sos del Rey Católico",
-    "clase": "Desierta",
-    "notas": "N.º 104"
-  },
-  {
-    "comunidad": "Aragón",
-    "provincia": "Zaragoza",
-    "distrito": "",
-    "localidad": "Zaragoza-Actur",
-    "clase": "Resulta",
-    "notas": "N.º 18"
-  },
-  {
-    "comunidad": "Aragón",
-    "provincia": "Zaragoza",
-    "distrito": "",
-    "localidad": "Maella",
-    "clase": "Desierta",
-    "notas": "N.º 132"
+    "notas": "Nº1"
   },
   {
     "comunidad": "Principado de Asturias",
     "provincia": "Asturias",
-    "distrito": "",
     "localidad": "Avilés",
     "clase": "Desierta",
-    "notas": "N.º 15"
+    "notas": "Nº15"
+  },
+  {
+    "comunidad": "País Vasco",
+    "provincia": "Araba/Álava",
+    "localidad": "Vitoria-Gasteiz",
+    "clase": "Desierta",
+    "notas": "Nº16"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "León",
+    "localidad": "Ponferrada",
+    "clase": "Desierta",
+    "notas": "Nº41"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "León",
+    "localidad": "Ponferrada",
+    "clase": "Desierta",
+    "notas": "Nº45"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "León",
+    "localidad": "Fabero",
+    "clase": "Desierta",
+    "notas": "Nº56"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "León",
+    "localidad": "Cistierna",
+    "clase": "Desierta",
+    "notas": "Nº58"
+  },
+  {
+    "comunidad": "Galicia",
+    "provincia": "Lugo",
+    "localidad": "Meira",
+    "clase": "Desierta",
+    "notas": "Nº59"
+  },
+  {
+    "comunidad": "Extremadura",
+    "provincia": "Cáceres",
+    "localidad": "Garrovillas de Alconétar",
+    "clase": "Desierta",
+    "notas": "Nº60"
+  },
+  {
+    "comunidad": "Galicia",
+    "provincia": "Ourense",
+    "localidad": "O Barco de Valdeorras",
+    "clase": "Desierta",
+    "notas": "Nº61"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Salamanca",
+    "localidad": "Ciudad Rodrigo",
+    "clase": "Desierta",
+    "notas": "Nº62"
+  },
+  {
+    "comunidad": "Comunitat Valenciana",
+    "provincia": "Castelló/Castellón",
+    "localidad": "Sant Mateu",
+    "clase": "Desierta",
+    "notas": "Nº63"
+  },
+  {
+    "comunidad": "Galicia",
+    "provincia": "Pontevedra",
+    "localidad": "A Cañiza",
+    "clase": "Desierta",
+    "notas": "Nº77"
+  },
+  {
+    "comunidad": "La Rioja",
+    "provincia": "La Rioja",
+    "localidad": "Arnedo",
+    "clase": "Desierta",
+    "notas": "Nº78"
   },
   {
     "comunidad": "Principado de Asturias",
     "provincia": "Asturias",
-    "distrito": "",
-    "localidad": "Belmonte de Miranda",
-    "clase": "Resulta",
-    "notas": "N.º 83"
-  },
-  {
-    "comunidad": "Principado de Asturias",
-    "provincia": "Asturias",
-    "distrito": "",
     "localidad": "Boal",
     "clase": "Desierta",
-    "notas": "N.º 79"
+    "notas": "Nº79"
   },
   {
-    "comunidad": "Principado de Asturias",
-    "provincia": "Asturias",
-    "distrito": "",
-    "localidad": "Carreño",
-    "clase": "Resulta",
-    "notas": "N.º 53"
-  },
-  {
-    "comunidad": "Principado de Asturias",
-    "provincia": "Asturias",
-    "distrito": "",
-    "localidad": "Castropol",
-    "clase": "Resulta",
-    "notas": "N.º 26"
-  },
-  {
-    "comunidad": "Principado de Asturias",
-    "provincia": "Asturias",
-    "distrito": "",
-    "localidad": "Gijón",
-    "clase": "Resulta",
-    "notas": "N.º 4"
-  },
-  {
-    "comunidad": "Principado de Asturias",
-    "provincia": "Asturias",
-    "distrito": "",
-    "localidad": "Panes",
+    "comunidad": "Castilla y León",
+    "provincia": "Ávila",
+    "localidad": "Fontiveros",
     "clase": "Desierta",
-    "notas": "N.º 97"
+    "notas": "Nº80"
   },
   {
-    "comunidad": "Principado de Asturias",
-    "provincia": "Asturias",
-    "distrito": "",
-    "localidad": "Proaza",
+    "comunidad": "Galicia",
+    "provincia": "Lugo",
+    "localidad": "A Pontenova",
     "clase": "Desierta",
-    "notas": "N.º 100"
+    "notas": "Nº81"
   },
   {
-    "comunidad": "Principado de Asturias",
-    "provincia": "Asturias",
-    "distrito": "",
-    "localidad": "Trevías",
+    "comunidad": "Comunidad Foral de Navarra",
+    "provincia": "Navarra",
+    "localidad": "Ochagavía/Otsagabia",
     "clase": "Desierta",
-    "notas": "N.º 105"
+    "notas": "Nº82"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Palencia",
+    "localidad": "Osorno la Mayor",
+    "clase": "Desierta",
+    "notas": "Nº84"
+  },
+  {
+    "comunidad": "Aragón",
+    "provincia": "Teruel",
+    "localidad": "Mosqueruela",
+    "clase": "Desierta",
+    "notas": "Nº85"
+  },
+  {
+    "comunidad": "Comunidad Foral de Navarra",
+    "provincia": "Navarra",
+    "localidad": "Aoiz/Agoitz",
+    "clase": "Desierta",
+    "notas": "Nº86"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Córdoba",
+    "localidad": "Iznájar",
+    "clase": "Desierta",
+    "notas": "Nº87"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "León",
+    "localidad": "Villamañán",
+    "clase": "Desierta",
+    "notas": "Nº88"
+  },
+  {
+    "comunidad": "Aragón",
+    "provincia": "Huesca",
+    "localidad": "Tamarite de Litera",
+    "clase": "Desierta",
+    "notas": "Nº89"
   },
   {
     "comunidad": "Illes Balears",
     "provincia": "Illes Balears",
-    "distrito": "",
-    "localidad": "Alaró",
-    "clase": "Desierta",
-    "notas": "N.º 128"
-  },
-  {
-    "comunidad": "Illes Balears",
-    "provincia": "Illes Balears",
-    "distrito": "",
     "localidad": "Felanitx",
     "clase": "Desierta",
-    "notas": "N.º 90"
+    "notas": "Nº90"
   },
   {
-    "comunidad": "Illes Balears",
-    "provincia": "Illes Balears",
-    "distrito": "",
-    "localidad": "Petra",
+    "comunidad": "Galicia",
+    "provincia": "Lugo",
+    "localidad": "Castroverde",
     "clase": "Desierta",
-    "notas": "N.º 113"
+    "notas": "Nº92"
   },
   {
-    "comunidad": "Illes Balears",
-    "provincia": "Illes Balears",
-    "distrito": "",
-    "localidad": "Porreres",
-    "clase": "Resulta",
-    "notas": "N.º 35"
+    "comunidad": "La Rioja",
+    "provincia": "La Rioja",
+    "localidad": "Torrecilla en Cameros",
+    "clase": "Desierta",
+    "notas": "Nº93"
   },
   {
-    "comunidad": "Canarias",
-    "provincia": "Las Palmas",
-    "distrito": "",
-    "localidad": "Morro Jable (Sádaba es la resulta obtenida)",
-    "clase": "Resulta",
-    "notas": "N.º 111 (Nota: El municipio de origen del concurso es Morro Jable)."
+    "comunidad": "Galicia",
+    "provincia": "Lugo",
+    "localidad": "Friol",
+    "clase": "Desierta",
+    "notas": "Nº95"
   },
   {
-    "comunidad": "Canarias",
-    "provincia": "Santa Cruz de Tenerife",
-    "distrito": "",
-    "localidad": "Los Realejos",
-    "clase": "Resulta",
-    "notas": "N.º 36"
+    "comunidad": "Principado de Asturias",
+    "provincia": "Asturias",
+    "localidad": "Panes",
+    "clase": "Desierta",
+    "notas": "Nº97"
   },
   {
     "comunidad": "Cantabria",
     "provincia": "Cantabria",
-    "distrito": "",
     "localidad": "Corvera de Toranzo",
     "clase": "Desierta",
-    "notas": "N.º 98"
+    "notas": "Nº98"
   },
   {
-    "comunidad": "Cantabria",
-    "provincia": "Cantabria",
-    "distrito": "",
-    "localidad": "Laredo",
-    "clase": "Resulta",
-    "notas": "N.º 76"
+    "comunidad": "Castilla y León",
+    "provincia": "León",
+    "localidad": "Puente de Domingo Flórez",
+    "clase": "Desierta",
+    "notas": "Nº99"
+  },
+  {
+    "comunidad": "Principado de Asturias",
+    "provincia": "Asturias",
+    "localidad": "Proaza",
+    "clase": "Desierta",
+    "notas": "Nº100"
+  },
+  {
+    "comunidad": "Extremadura",
+    "provincia": "Cáceres",
+    "localidad": "Guadalupe",
+    "clase": "Desierta",
+    "notas": "Nº102"
+  },
+  {
+    "comunidad": "Aragón",
+    "provincia": "Zaragoza",
+    "localidad": "Sos del Rey Católico",
+    "clase": "Desierta",
+    "notas": "Nº104"
+  },
+  {
+    "comunidad": "Principado de Asturias",
+    "provincia": "Asturias",
+    "localidad": "Trevías",
+    "clase": "Desierta",
+    "notas": "Nº105"
+  },
+  {
+    "comunidad": "Aragón",
+    "provincia": "Huesca",
+    "localidad": "Benasque",
+    "clase": "Desierta",
+    "notas": "Nº106"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Soria",
+    "localidad": "Arcos de Jalón",
+    "clase": "Desierta",
+    "notas": "Nº107"
+  },
+  {
+    "comunidad": "Comunidad Foral de Navarra",
+    "provincia": "Navarra",
+    "localidad": "Lekunberri",
+    "clase": "Desierta",
+    "notas": "Nº108"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Salamanca",
+    "localidad": "Tamames",
+    "clase": "Desierta",
+    "notas": "Nº109"
+  },
+  {
+    "comunidad": "Galicia",
+    "provincia": "Ourense",
+    "localidad": "Bande",
+    "clase": "Desierta",
+    "notas": "Nº112"
+  },
+  {
+    "comunidad": "Illes Balears",
+    "provincia": "Illes Balears",
+    "localidad": "Petra",
+    "clase": "Desierta",
+    "notas": "Nº113"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Valladolid",
+    "localidad": "Valoria la Buena",
+    "clase": "Desierta",
+    "notas": "Nº114"
+  },
+  {
+    "comunidad": "Galicia",
+    "provincia": "Lugo",
+    "localidad": "Palas de Rei",
+    "clase": "Desierta",
+    "notas": "Nº115"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Burgos",
+    "localidad": "Roa",
+    "clase": "Desierta",
+    "notas": "Nº116"
+  },
+  {
+    "comunidad": "Comunidad Foral de Navarra",
+    "provincia": "Navarra",
+    "localidad": "Estella-Lizarra",
+    "clase": "Desierta",
+    "notas": "Nº117"
+  },
+  {
+    "comunidad": "País Vasco",
+    "provincia": "Bizkaia/Vizcaya",
+    "localidad": "Areatza",
+    "clase": "Desierta",
+    "notas": "Nº119"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Ávila",
+    "localidad": "El Barco de Ávila",
+    "clase": "Desierta",
+    "notas": "Nº121"
   },
   {
     "comunidad": "Castilla-La Mancha",
     "provincia": "Albacete",
-    "distrito": "",
     "localidad": "Barrax",
     "clase": "Desierta",
-    "notas": "N.º 122"
-  },
-  {
-    "comunidad": "Castilla-La Mancha",
-    "provincia": "Ciudad Real",
-    "distrito": "",
-    "localidad": "Almagro",
-    "clase": "Resulta",
-    "notas": "N.º 103"
-  },
-  {
-    "comunidad": "Castilla-La Mancha",
-    "provincia": "Ciudad Real",
-    "distrito": "",
-    "localidad": "Argamasilla de Alba",
-    "clase": "Resulta",
-    "notas": "N.º 130"
-  },
-  {
-    "comunidad": "Castilla-La Mancha",
-    "provincia": "Ciudad Real",
-    "distrito": "",
-    "localidad": "Campo de Criptana",
-    "clase": "Resulta",
-    "notas": "N.º 29"
-  },
-  {
-    "comunidad": "Castilla-La Mancha",
-    "provincia": "Ciudad Real",
-    "distrito": "",
-    "localidad": "Moral de Calatrava",
-    "clase": "Resulta",
-    "notas": "N.º 96"
-  },
-  {
-    "comunidad": "Castilla-La Mancha",
-    "provincia": "Ciudad Real",
-    "distrito": "",
-    "localidad": "Torralba de Calatrava",
-    "clase": "Resulta",
-    "notas": "N.º 3"
+    "notas": "Nº122"
   },
   {
     "comunidad": "Castilla-La Mancha",
     "provincia": "Guadalajara",
-    "distrito": "",
-    "localidad": "Cifuentes",
-    "clase": "Resulta",
-    "notas": "N.º 131"
-  },
-  {
-    "comunidad": "Castilla-La Mancha",
-    "provincia": "Guadalajara",
-    "distrito": "",
     "localidad": "Sacedón",
     "clase": "Desierta",
-    "notas": "N.º 123"
+    "notas": "Nº123"
   },
   {
-    "comunidad": "Castilla-La Mancha",
-    "provincia": "Guadalajara",
-    "distrito": "",
-    "localidad": "Azuqueca de Henares (Doña Macrina García Moreno)",
-    "clase": "Jubilación voluntaria",
-    "notas": "Vacante"
+    "comunidad": "Illes Balears",
+    "provincia": "Illes Balears",
+    "localidad": "Alaró",
+    "clase": "Desierta",
+    "notas": "Nº128"
+  },
+  {
+    "comunidad": "Aragón",
+    "provincia": "Zaragoza",
+    "localidad": "Maella",
+    "clase": "Desierta",
+    "notas": "Nº132"
+  },
+  {
+    "comunidad": "Aragón",
+    "provincia": "Huesca",
+    "localidad": "Berdún",
+    "clase": "Desierta",
+    "notas": "Nº133"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Palencia",
+    "localidad": "Frechilla",
+    "clase": "Desierta",
+    "notas": "Nº134"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Salamanca",
+    "localidad": "La Vellés",
+    "clase": "Desierta",
+    "notas": "Nº136"
+  },
+  {
+    "comunidad": "País Vasco",
+    "provincia": "Gipuzkoa/Guipúzcoa",
+    "localidad": "Bergara",
+    "clase": "Desierta",
+    "notas": "Nº137"
+  },
+  {
+    "comunidad": "País Vasco",
+    "provincia": "Bizkaia/Vizcaya",
+    "localidad": "Karrantza Harana/Valle de Carranza",
+    "clase": "Desierta",
+    "notas": "Nº138"
+  },
+  {
+    "comunidad": "Aragón",
+    "provincia": "Huesca",
+    "localidad": "Ayerbe",
+    "clase": "Desierta",
+    "notas": "Nº139"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Burgos",
+    "localidad": "Villarcayo de Merindad de Castilla la Vieja",
+    "clase": "Desierta",
+    "notas": "Nº140"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Palencia",
+    "localidad": "Herrera de Pisuerga",
+    "clase": "Desierta",
+    "notas": "Nº141"
+  },
+  {
+    "comunidad": "Galicia",
+    "provincia": "Lugo",
+    "localidad": "Monterroso",
+    "clase": "Desierta",
+    "notas": "Nº142"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Salamanca",
+    "localidad": "Lumbrales",
+    "clase": "Desierta",
+    "notas": "Nº143"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Palencia",
+    "localidad": "Villada",
+    "clase": "Desierta",
+    "notas": "Nº144"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Burgos",
+    "localidad": "Melgar de Fernamental",
+    "clase": "Desierta",
+    "notas": "Nº145"
+  },
+  {
+    "comunidad": "Aragón",
+    "provincia": "Teruel",
+    "localidad": "Albarracín",
+    "clase": "Desierta",
+    "notas": "Nº146"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "León",
+    "localidad": "Valderas",
+    "clase": "Desierta",
+    "notas": "Nº147"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
-    "distrito": "",
-    "localidad": "Cornellà de Llobregat",
-    "clase": "Resulta",
-    "notas": "N.º 40"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "distrito": "",
-    "localidad": "Esparreguera",
-    "clase": "Resulta",
-    "notas": "N.º 64"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Barcelona",
-    "distrito": "",
     "localidad": "Barcelona (Vacante F. Bautista Pérez)",
     "clase": "Desierta",
     "notas": "Concurso autonómico"
@@ -11750,7 +11764,6 @@ const DATA_VACANTES = [
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
-    "distrito": "",
     "localidad": "L'Hospitalet de Llobregat (Vacante M. Sánchez García)",
     "clase": "Desierta",
     "notas": "Concurso autonómico"
@@ -11758,7 +11771,6 @@ const DATA_VACANTES = [
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
-    "distrito": "",
     "localidad": "Barcelona (Vacante J. L. Iribarne Blanco)",
     "clase": "Desierta",
     "notas": "Concurso autonómico"
@@ -11766,7 +11778,6 @@ const DATA_VACANTES = [
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
-    "distrito": "",
     "localidad": "Barcelona (Vacante T. M. Villazán Tovar)",
     "clase": "Desierta",
     "notas": "Concurso autonómico"
@@ -11774,7 +11785,6 @@ const DATA_VACANTES = [
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
-    "distrito": "",
     "localidad": "Esplugues de Llobregat",
     "clase": "Desierta",
     "notas": "Concurso autonómico"
@@ -11782,7 +11792,6 @@ const DATA_VACANTES = [
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
-    "distrito": "",
     "localidad": "Badia del Vallès",
     "clase": "Desierta",
     "notas": "Concurso autonómico"
@@ -11790,7 +11799,6 @@ const DATA_VACANTES = [
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
-    "distrito": "",
     "localidad": "Vilanova del Camí",
     "clase": "Desierta",
     "notas": "Concurso autonómico"
@@ -11798,31 +11806,13 @@ const DATA_VACANTES = [
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
-    "distrito": "",
-    "localidad": "Sant Cugat del Vallès (Don Luis Fort López-Barajas)",
-    "clase": "Jubilación",
-    "notas": "Vacante"
+    "localidad": "Granollers",
+    "clase": "Desierta",
+    "notas": "Concurso autonómico"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
-    "distrito": "",
-    "localidad": "Blanes",
-    "clase": "Resulta",
-    "notas": "N.º 65"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "distrito": "",
-    "localidad": "Cadaqués",
-    "clase": "Resulta",
-    "notas": "N.º 11"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Girona",
-    "distrito": "",
     "localidad": "Palafrugell",
     "clase": "Desierta",
     "notas": "Concurso autonómico"
@@ -11830,7 +11820,6 @@ const DATA_VACANTES = [
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
-    "distrito": "",
     "localidad": "Figueres",
     "clase": "Desierta",
     "notas": "Concurso autonómico"
@@ -11838,7 +11827,6 @@ const DATA_VACANTES = [
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
-    "distrito": "",
     "localidad": "Camprodon",
     "clase": "Desierta",
     "notas": "Concurso autonómico"
@@ -11846,7 +11834,6 @@ const DATA_VACANTES = [
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
-    "distrito": "",
     "localidad": "L'Escala",
     "clase": "Desierta",
     "notas": "Concurso autonómico"
@@ -11854,7 +11841,6 @@ const DATA_VACANTES = [
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
-    "distrito": "",
     "localidad": "Hostalric",
     "clase": "Desierta",
     "notas": "Concurso autonómico"
@@ -11862,7 +11848,6 @@ const DATA_VACANTES = [
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
-    "distrito": "",
     "localidad": "Palamós",
     "clase": "Desierta",
     "notas": "Concurso autonómico"
@@ -11870,7 +11855,6 @@ const DATA_VACANTES = [
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
-    "distrito": "",
     "localidad": "Torroella de Montgrí-Estartit",
     "clase": "Desierta",
     "notas": "Concurso autonómico"
@@ -11878,23 +11862,6 @@ const DATA_VACANTES = [
   {
     "comunidad": "Cataluña",
     "provincia": "Lleida",
-    "distrito": "",
-    "localidad": "Artesa de Segre",
-    "clase": "Resulta",
-    "notas": "N.º 33"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Lleida",
-    "distrito": "",
-    "localidad": "Bellpuig",
-    "clase": "Resulta",
-    "notas": "N.º 69"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Lleida",
-    "distrito": "",
     "localidad": "Lleida (Vacante M. Sansalvado Chalaux)",
     "clase": "Desierta",
     "notas": "Concurso autonómico"
@@ -11902,7 +11869,6 @@ const DATA_VACANTES = [
   {
     "comunidad": "Cataluña",
     "provincia": "Lleida",
-    "distrito": "",
     "localidad": "Sant Joan de Vilatorrada",
     "clase": "Desierta",
     "notas": "Concurso autonómico"
@@ -11910,31 +11876,20 @@ const DATA_VACANTES = [
   {
     "comunidad": "Cataluña",
     "provincia": "Lleida",
-    "distrito": "",
     "localidad": "Sort",
     "clase": "Desierta",
     "notas": "Concurso autonómico"
   },
   {
     "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "distrito": "",
-    "localidad": "Deltebre",
-    "clase": "Resulta",
-    "notas": "N.º 31"
+    "provincia": "Lleida",
+    "localidad": "La Pobla de Segur",
+    "clase": "Desierta",
+    "notas": "Concurso autonómico"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Tarragona",
-    "distrito": "",
-    "localidad": "Santa Coloma de Queralt",
-    "clase": "Resulta",
-    "notas": "N.º 73"
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincia": "Tarragona",
-    "distrito": "",
     "localidad": "Constantí",
     "clase": "Desierta",
     "notas": "Concurso autonómico"
@@ -11942,7 +11897,6 @@ const DATA_VACANTES = [
   {
     "comunidad": "Cataluña",
     "provincia": "Tarragona",
-    "distrito": "",
     "localidad": "Flix",
     "clase": "Desierta",
     "notas": "Concurso autonómico"
@@ -11950,7 +11904,6 @@ const DATA_VACANTES = [
   {
     "comunidad": "Cataluña",
     "provincia": "Tarragona",
-    "distrito": "",
     "localidad": "Xerta",
     "clase": "Desierta",
     "notas": "Concurso autonómico"
@@ -11958,319 +11911,783 @@ const DATA_VACANTES = [
   {
     "comunidad": "Cataluña",
     "provincia": "Tarragona",
-    "distrito": "",
     "localidad": "La Selva del Camp",
     "clase": "Desierta",
     "notas": "Concurso autonómico"
   },
   {
     "comunidad": "Comunitat Valenciana",
-    "provincia": "Alicante/Alacant",
-    "distrito": "",
-    "localidad": "Dolores",
-    "clase": "Resulta",
-    "notas": "N.º 37"
-  },
-  {
-    "comunidad": "Comunitat Valenciana",
-    "provincia": "Alicante/Alacant",
-    "distrito": "",
-    "localidad": "Onil",
-    "clase": "Resulta",
-    "notas": "N.º 68"
-  },
-  {
-    "comunidad": "Comunitat Valenciana",
-    "provincia": "Alicante/Alacant",
-    "distrito": "",
-    "localidad": "Petrer",
-    "clase": "Resulta",
-    "notas": "N.º 38"
-  },
-  {
-    "comunidad": "Comunitat Valenciana",
-    "provincia": "Alicante/Alacant",
-    "distrito": "",
-    "localidad": "Torrevieja",
-    "clase": "Resulta",
-    "notas": "N.º 23"
-  },
-  {
-    "comunidad": "Comunitat Valenciana",
-    "provincia": "Alicante/Alacant",
-    "distrito": "",
-    "localidad": "Xàbia/Jávea",
-    "clase": "Resulta",
-    "notas": "N.º 28"
-  },
-  {
-    "comunidad": "Comunitat Valenciana",
-    "provincia": "Castelló/Castellón",
-    "distrito": "",
-    "localidad": "Albocàsser",
-    "clase": "Resulta",
-    "notas": "N.º 125"
-  },
-  {
-    "comunidad": "Comunitat Valenciana",
-    "provincia": "Castelló/Castellón",
-    "distrito": "",
-    "localidad": "Betxí",
-    "clase": "Resulta",
-    "notas": "N.º 21"
-  },
-  {
-    "comunidad": "Comunitat Valenciana",
-    "provincia": "Castelló/Castellón",
-    "distrito": "",
-    "localidad": "Morella",
-    "clase": "Resulta",
-    "notas": "N.º 44"
-  },
-  {
-    "comunidad": "Comunitat Valenciana",
-    "provincia": "Castelló/Castellón",
-    "distrito": "",
-    "localidad": "Sant Mateu",
-    "clase": "Desierta",
-    "notas": "N.º 63"
-  },
-  {
-    "comunidad": "Comunitat Valenciana",
     "provincia": "València/Valencia",
-    "distrito": "",
-    "localidad": "Alzira",
-    "clase": "Resulta",
-    "notas": "N.º 24"
-  },
-  {
-    "comunidad": "Comunitat Valenciana",
-    "provincia": "València/Valencia",
-    "distrito": "",
-    "localidad": "Benifaió",
-    "clase": "Resulta",
-    "notas": "N.º 118"
-  },
-  {
-    "comunidad": "Comunitat Valenciana",
-    "provincia": "València/Valencia",
-    "distrito": "",
-    "localidad": "Font d'en Carròs, La",
-    "clase": "Resulta",
-    "notas": "N.º 39"
-  },
-  {
-    "comunidad": "Comunitat Valenciana",
-    "provincia": "València/Valencia",
-    "distrito": "",
-    "localidad": "Font de la Figuera, La",
-    "clase": "Resulta",
-    "notas": "N.º 49"
-  },
-  {
-    "comunidad": "Comunitat Valenciana",
-    "provincia": "València/Valencia",
-    "distrito": "",
     "localidad": "Gandía",
     "clase": "Resulta",
-    "notas": "N.º 2"
+    "notas": "Nº2"
   },
   {
-    "comunidad": "Comunitat Valenciana",
-    "provincia": "València/Valencia",
-    "distrito": "",
-    "localidad": "Pobla del Duc, La",
+    "comunidad": "Castilla-La Mancha",
+    "provincia": "Ciudad Real",
+    "localidad": "Torralba de Calatrava",
     "clase": "Resulta",
-    "notas": "N.º 146"
+    "notas": "Nº3"
   },
   {
-    "comunidad": "Comunitat Valenciana",
-    "provincia": "València/Valencia",
-    "distrito": "",
-    "localidad": "Valencia (Don Alfonso Pascual de Miguel)",
-    "clase": "Jubilación",
-    "notas": "Vacante"
-  },
-  {
-    "comunidad": "Extremadura",
-    "provincia": "Badajoz",
-    "distrito": "",
-    "localidad": "Hornachos",
+    "comunidad": "Principado de Asturias",
+    "provincia": "Asturias",
+    "localidad": "Gijón",
     "clase": "Resulta",
-    "notas": "N.º 66"
-  },
-  {
-    "comunidad": "Extremadura",
-    "provincia": "Badajoz",
-    "distrito": "",
-    "localidad": "Monesterio",
-    "clase": "Resulta",
-    "notas": "N.º 50"
+    "notas": "Nº4"
   },
   {
     "comunidad": "Extremadura",
     "provincia": "Cáceres",
-    "distrito": "",
-    "localidad": "Garrovillas de Alconétar",
-    "clase": "Desierta",
-    "notas": "N.º 60"
-  },
-  {
-    "comunidad": "Extremadura",
-    "provincia": "Cáceres",
-    "distrito": "",
-    "localidad": "Guadalupe",
-    "clase": "Desierta",
-    "notas": "N.º 102"
-  },
-  {
-    "comunidad": "Extremadura",
-    "provincia": "Cáceres",
-    "distrito": "",
-    "localidad": "Hoyos",
-    "clase": "Desierta",
-    "notas": "N.º 101"
-  },
-  {
-    "comunidad": "Extremadura",
-    "provincia": "Cáceres",
-    "distrito": "",
     "localidad": "Jarandilla de la Vera",
     "clase": "Resulta",
-    "notas": "N.º 5"
+    "notas": "Nº5"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Sevilla",
+    "localidad": "El Cuervo de Sevilla",
+    "clase": "Resulta",
+    "notas": "Nº6"
+  },
+  {
+    "comunidad": "País Vasco",
+    "provincia": "Bizkaia/Vizcaya",
+    "localidad": "Gernika-Lumo",
+    "clase": "Resulta",
+    "notas": "Nº7"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Córdoba",
+    "localidad": "Peñarroya-Pueblonuevo",
+    "clase": "Resulta",
+    "notas": "Nº8"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Valladolid",
+    "localidad": "Medina de Rioseco",
+    "clase": "Resulta",
+    "notas": "Nº9"
+  },
+  {
+    "comunidad": "País Vasco",
+    "provincia": "Gipuzkoa/Guipúzcoa",
+    "localidad": "Zumarraga",
+    "clase": "Resulta",
+    "notas": "Nº10"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Girona",
+    "localidad": "Cadaqués",
+    "clase": "Resulta",
+    "notas": "Nº11"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Jaén",
+    "localidad": "Bailén",
+    "clase": "Resulta",
+    "notas": "Nº12"
+  },
+  {
+    "comunidad": "Aragón",
+    "provincia": "Zaragoza",
+    "localidad": "Calatayud",
+    "clase": "Resulta",
+    "notas": "Nº13"
+  },
+  {
+    "comunidad": "Galicia",
+    "provincia": "A Coruña",
+    "localidad": "San Sadurniño",
+    "clase": "Resulta",
+    "notas": "Nº14"
+  },
+  {
+    "comunidad": "Castilla-La Mancha",
+    "provincia": "Toledo",
+    "localidad": "Calera y Chozas",
+    "clase": "Resulta",
+    "notas": "Nº17"
+  },
+  {
+    "comunidad": "Aragón",
+    "provincia": "Zaragoza",
+    "localidad": "Zaragoza-Actur",
+    "clase": "Resulta",
+    "notas": "Nº18"
+  },
+  {
+    "comunidad": "País Vasco",
+    "provincia": "Bizkaia/Vizcaya",
+    "localidad": "Elorrio",
+    "clase": "Resulta",
+    "notas": "Nº19"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Segovia",
+    "localidad": "Santa María la Real de Nieva",
+    "clase": "Resulta",
+    "notas": "Nº20"
+  },
+  {
+    "comunidad": "Comunitat Valenciana",
+    "provincia": "Castelló/Castellón",
+    "localidad": "Betxí",
+    "clase": "Resulta",
+    "notas": "Nº21"
+  },
+  {
+    "comunidad": "Galicia",
+    "provincia": "Ourense",
+    "localidad": "Viana do Bolo",
+    "clase": "Resulta",
+    "notas": "Nº22"
+  },
+  {
+    "comunidad": "Comunitat Valenciana",
+    "provincia": "Alicante/Alacant",
+    "localidad": "Torrevieja",
+    "clase": "Resulta",
+    "notas": "Nº23"
+  },
+  {
+    "comunidad": "Comunitat Valenciana",
+    "provincia": "València/Valencia",
+    "localidad": "Alzira",
+    "clase": "Resulta",
+    "notas": "Nº24"
+  },
+  {
+    "comunidad": "Región de Murcia",
+    "provincia": "Murcia",
+    "localidad": "Beniel",
+    "clase": "Resulta",
+    "notas": "Nº25"
+  },
+  {
+    "comunidad": "Principado de Asturias",
+    "provincia": "Asturias",
+    "localidad": "Castropol",
+    "clase": "Resulta",
+    "notas": "Nº26"
+  },
+  {
+    "comunidad": "País Vasco",
+    "provincia": "Bizkaia/Vizcaya",
+    "localidad": "Gernika-Lumo",
+    "clase": "Resulta",
+    "notas": "Nº27"
+  },
+  {
+    "comunidad": "Comunitat Valenciana",
+    "provincia": "Alicante/Alacant",
+    "localidad": "Xàbia/Jávea",
+    "clase": "Resulta",
+    "notas": "Nº28"
+  },
+  {
+    "comunidad": "Castilla-La Mancha",
+    "provincia": "Ciudad Real",
+    "localidad": "Campo de Criptana",
+    "clase": "Resulta",
+    "notas": "Nº29"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Córdoba",
+    "localidad": "Moriles",
+    "clase": "Resulta",
+    "notas": "Nº30"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Tarragona",
+    "localidad": "Deltebre",
+    "clase": "Resulta",
+    "notas": "Nº31"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Córdoba",
+    "localidad": "Cabra",
+    "clase": "Resulta",
+    "notas": "Nº32"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Lleida",
+    "localidad": "Artesa de Segre",
+    "clase": "Resulta",
+    "notas": "Nº33"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Jaén",
+    "localidad": "Alcalá la Real",
+    "clase": "Resulta",
+    "notas": "Nº34"
+  },
+  {
+    "comunidad": "Illes Balears",
+    "provincia": "Illes Balears",
+    "localidad": "Porreres",
+    "clase": "Resulta",
+    "notas": "Nº35"
+  },
+  {
+    "comunidad": "Canarias",
+    "provincia": "Santa Cruz de Tenerife",
+    "localidad": "Los Realejos",
+    "clase": "Resulta",
+    "notas": "Nº36"
+  },
+  {
+    "comunidad": "Comunitat Valenciana",
+    "provincia": "Alicante/Alacant",
+    "localidad": "Dolores",
+    "clase": "Resulta",
+    "notas": "Nº37"
+  },
+  {
+    "comunidad": "Comunitat Valenciana",
+    "provincia": "Alicante/Alacant",
+    "localidad": "Petrer",
+    "clase": "Resulta",
+    "notas": "Nº38"
+  },
+  {
+    "comunidad": "Comunitat Valenciana",
+    "provincia": "València/Valencia",
+    "localidad": "La Font d'en Carròs",
+    "clase": "Resulta",
+    "notas": "Nº39"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Barcelona",
+    "localidad": "Cornellà de Llobregat",
+    "clase": "Resulta",
+    "notas": "Nº40"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Almería",
+    "localidad": "Vélez-Blanco",
+    "clase": "Resulta",
+    "notas": "Nº42"
+  },
+  {
+    "comunidad": "Comunidad de Madrid",
+    "provincia": "Madrid",
+    "localidad": "Arganda del Rey",
+    "clase": "Resulta",
+    "notas": "Nº43"
+  },
+  {
+    "comunidad": "Comunitat Valenciana",
+    "provincia": "Castelló/Castellón",
+    "localidad": "Morella",
+    "clase": "Resulta",
+    "notas": "Nº44"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Soria",
+    "localidad": "San Leonardo de Yagüe",
+    "clase": "Resulta",
+    "notas": "Nº46"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Almería",
+    "localidad": "Ugíjar",
+    "clase": "Resulta",
+    "notas": "Nº47"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Huelva",
+    "localidad": "Bonares",
+    "clase": "Resulta",
+    "notas": "Nº48"
+  },
+  {
+    "comunidad": "Comunitat Valenciana",
+    "provincia": "València/Valencia",
+    "localidad": "La Font de la Figuera",
+    "clase": "Resulta",
+    "notas": "Nº49"
+  },
+  {
+    "comunidad": "Extremadura",
+    "provincia": "Badajoz",
+    "localidad": "Monesterio",
+    "clase": "Resulta",
+    "notas": "Nº50"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Jaén",
+    "localidad": "Lopera",
+    "clase": "Resulta",
+    "notas": "Nº51"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Sevilla",
+    "localidad": "Lora del Río",
+    "clase": "Resulta",
+    "notas": "Nº52"
+  },
+  {
+    "comunidad": "Principado de Asturias",
+    "provincia": "Asturias",
+    "localidad": "Carreño",
+    "clase": "Resulta",
+    "notas": "Nº53"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "León",
+    "localidad": "Astorga",
+    "clase": "Resulta",
+    "notas": "Nº54"
+  },
+  {
+    "comunidad": "Extremadura",
+    "provincia": "Badajoz",
+    "localidad": "Nava",
+    "clase": "Resulta",
+    "notas": "Nº55"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "León",
+    "localidad": "La Robla",
+    "clase": "Resulta",
+    "notas": "Nº57"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Barcelona",
+    "localidad": "Esparreguera",
+    "clase": "Resulta",
+    "notas": "Nº64"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Girona",
+    "localidad": "Blanes",
+    "clase": "Resulta",
+    "notas": "Nº65"
+  },
+  {
+    "comunidad": "Extremadura",
+    "provincia": "Badajoz",
+    "localidad": "Hornachos",
+    "clase": "Resulta",
+    "notas": "Nº66"
+  },
+  {
+    "comunidad": "Galicia",
+    "provincia": "Pontevedra",
+    "localidad": "Ponteareas",
+    "clase": "Resulta",
+    "notas": "Nº67"
+  },
+  {
+    "comunidad": "Comunitat Valenciana",
+    "provincia": "Alicante/Alacant",
+    "localidad": "Onil",
+    "clase": "Resulta",
+    "notas": "Nº68"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Lleida",
+    "localidad": "Bellpuig",
+    "clase": "Resulta",
+    "notas": "Nº69"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Córdoba",
+    "localidad": "Montoro",
+    "clase": "Resulta",
+    "notas": "Nº70"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Palencia",
+    "localidad": "Astudillo",
+    "clase": "Resulta",
+    "notas": "Nº71"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Barcelona",
+    "localidad": "Pineda de Mar",
+    "clase": "Resulta",
+    "notas": "Nº72"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Tarragona",
+    "localidad": "Santa Coloma de Queralt",
+    "clase": "Resulta",
+    "notas": "Nº73"
+  },
+  {
+    "comunidad": "País Vasco",
+    "provincia": "Bizkaia/Vizcaya",
+    "localidad": "Bilbao",
+    "clase": "Resulta",
+    "notas": "Nº74"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Valladolid",
+    "localidad": "Valladolid",
+    "clase": "Resulta",
+    "notas": "Nº75"
+  },
+  {
+    "comunidad": "Cantabria",
+    "provincia": "Cantabria",
+    "localidad": "Laredo",
+    "clase": "Resulta",
+    "notas": "Nº76"
+  },
+  {
+    "comunidad": "Principado de Asturias",
+    "provincia": "Asturias",
+    "localidad": "Belmonte de Miranda",
+    "clase": "Resulta",
+    "notas": "Nº83"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Burgos",
+    "localidad": "Espinosa de los Monteros",
+    "clase": "Resulta",
+    "notas": "Nº91"
+  },
+  {
+    "comunidad": "País Vasco",
+    "provincia": "Bizkaia/Vizcaya",
+    "localidad": "Villahermosa",
+    "clase": "Resulta",
+    "notas": "Nº94"
+  },
+  {
+    "comunidad": "Castilla-La Mancha",
+    "provincia": "Ciudad Real",
+    "localidad": "Moral de Calatrava",
+    "clase": "Resulta",
+    "notas": "Nº96"
   },
   {
     "comunidad": "Extremadura",
     "provincia": "Cáceres",
-    "distrito": "",
     "localidad": "Torrejoncillo",
     "clase": "Resulta",
-    "notas": "N.º 101"
+    "notas": "Nº101"
+  },
+  {
+    "comunidad": "Castilla-La Mancha",
+    "provincia": "Ciudad Real",
+    "localidad": "Almagro",
+    "clase": "Resulta",
+    "notas": "Nº103"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Palencia",
+    "localidad": "Paredes de Nava",
+    "clase": "Resulta",
+    "notas": "Nº110"
+  },
+  {
+    "comunidad": "Aragón",
+    "provincia": "Zaragoza",
+    "localidad": "Sádaba",
+    "clase": "Resulta",
+    "notas": "Nº111"
+  },
+  {
+    "comunidad": "Comunitat Valenciana",
+    "provincia": "València/Valencia",
+    "localidad": "Benifaió",
+    "clase": "Resulta",
+    "notas": "Nº118"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Almería",
+    "localidad": "Purchena",
+    "clase": "Resulta",
+    "notas": "Nº120"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Sevilla",
+    "localidad": "El Castillo de las Guardas",
+    "clase": "Resulta",
+    "notas": "Nº124"
+  },
+  {
+    "comunidad": "Comunitat Valenciana",
+    "provincia": "Castelló/Castellón",
+    "localidad": "Albocàsser",
+    "clase": "Resulta",
+    "notas": "Nº125"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Salamanca",
+    "localidad": "Ledesma",
+    "clase": "Resulta",
+    "notas": "Nº126"
+  },
+  {
+    "comunidad": "Galicia",
+    "provincia": "Lugo",
+    "localidad": "Quiroga",
+    "clase": "Resulta",
+    "notas": "Nº127"
   },
   {
     "comunidad": "Galicia",
     "provincia": "A Coruña",
-    "distrito": "",
     "localidad": "Muxía",
     "clase": "Resulta",
-    "notas": "N.º 129"
+    "notas": "Nº129"
   },
   {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "distrito": "",
-    "localidad": "San Sadurniño",
+    "comunidad": "Castilla-La Mancha",
+    "provincia": "Ciudad Real",
+    "localidad": "Argamasilla de Alba",
     "clase": "Resulta",
-    "notas": "N.º 14"
+    "notas": "Nº130"
   },
   {
-    "comunidad": "Galicia",
-    "provincia": "A Coruña",
-    "distrito": "",
-    "localidad": "A Coruña (Don José Manuel Lois Puente)",
+    "comunidad": "Castilla-La Mancha",
+    "provincia": "Guadalajara",
+    "localidad": "Cifuentes",
+    "clase": "Resulta",
+    "notas": "Nº131"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "León",
+    "localidad": "Villablino",
+    "clase": "Resulta",
+    "notas": "Nº135"
+  },
+  {
+    "comunidad": "Principado de Asturias",
+    "provincia": "Asturias",
+    "localidad": "Colunga",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Girona",
+    "localidad": "Amer",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Principado de Asturias",
+    "provincia": "Asturias",
+    "localidad": "Vegadeo",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Barcelona",
+    "localidad": "Santa Margarida de Montbui",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Barcelona",
+    "localidad": "Calella",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Barcelona",
+    "localidad": "Calella",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Barcelona",
+    "localidad": "Montmeló",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Barcelona",
+    "localidad": "Prats de Lluçanès",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Girona",
+    "localidad": "Arbúcies",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Barcelona",
+    "localidad": "Calaf",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Barcelona",
+    "localidad": "Sant Vicenç dels Horts",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Soria",
+    "localidad": "Berlanga de Duero",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Girona",
+    "localidad": "La Bisbal d'Empordà",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "La Rioja",
+    "provincia": "La Rioja",
+    "localidad": "Cervera del Río Alhama",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Lleida",
+    "localidad": "Almenar",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Castilla-La Mancha",
+    "provincia": "Cuenca",
+    "localidad": "Priego",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Barcelona",
+    "localidad": "Sant Adrià de Besòs",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Tarragona",
+    "localidad": "Móra la Nova",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Lleida",
+    "localidad": "Ponts",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Illes Balears",
+    "provincia": "Illes Balears",
+    "localidad": "Esporles",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Tarragona",
+    "localidad": "L'Espluga de Francolí",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Comunitat Valenciana",
+    "provincia": "Castelló/Castellón",
+    "localidad": "Lucena del Cid",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Castilla y León",
+    "provincia": "Burgos",
+    "localidad": "Valle de Mena",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Córdoba",
+    "localidad": "Espiel",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincia": "Tarragona",
+    "localidad": "L'Arboç",
+    "clase": "Resulta",
+    "notas": "Concurso autonómico"
+  },
+  {
+    "comunidad": "Andalucía",
+    "provincia": "Jaén",
+    "localidad": "Jaén (Don Alfonso Argüelles Luis)",
     "clase": "Jubilación",
     "notas": "Vacante"
   },
   {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "distrito": "",
-    "localidad": "Castroverde",
-    "clase": "Desierta",
-    "notas": "N.º 92"
+    "comunidad": "Andalucía",
+    "provincia": "Málaga",
+    "localidad": "Marbella (Don Miguel Ángel de la Fuente del Real)",
+    "clase": "Jubilación",
+    "notas": "Vacante"
   },
   {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "distrito": "",
-    "localidad": "Friol",
-    "clase": "Desierta",
-    "notas": "N.º 95"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "distrito": "",
-    "localidad": "Meira",
-    "clase": "Desierta",
-    "notas": "N.º 59"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "distrito": "",
-    "localidad": "Monterroso",
-    "clase": "Desierta",
-    "notas": "N.º 142"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "distrito": "",
-    "localidad": "Palas de Rei",
-    "clase": "Desierta",
-    "notas": "N.º 115"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Lugo",
-    "distrito": "",
-    "localidad": "Quiroga",
-    "clase": "Resulta",
-    "notas": "N.º 127"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Ourense",
-    "distrito": "",
-    "localidad": "Bande",
-    "clase": "Desierta",
-    "notas": "N.º 112"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Ourense",
-    "distrito": "",
-    "localidad": "Barco de Valdeorras, O",
-    "clase": "Desierta",
-    "notas": "N.º 61"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Ourense",
-    "distrito": "",
-    "localidad": "Viana do Bolo",
-    "clase": "Resulta",
-    "notas": "N.º 22"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "distrito": "",
-    "localidad": "Cañiza, A.",
-    "clase": "Desierta",
-    "notas": "N.º 77"
-  },
-  {
-    "comunidad": "Galicia",
-    "provincia": "Pontevedra",
-    "distrito": "",
-    "localidad": "Ponteareas",
-    "clase": "Resulta",
-    "notas": "N.º 67"
+    "comunidad": "Castilla-La Mancha",
+    "provincia": "Guadalajara",
+    "localidad": "Azuqueca de Henares (Doña Macrina García Moreno)",
+    "clase": "Jubilación voluntaria",
+    "notas": "Vacante"
   },
   {
     "comunidad": "Comunidad de Madrid",
     "provincia": "Madrid",
-    "distrito": "",
-    "localidad": "Arganda del Rey",
-    "clase": "Resulta",
-    "notas": "N.º 43"
-  },
-  {
-    "comunidad": "Comunidad de Madrid",
-    "provincia": "Madrid",
-    "distrito": "",
     "localidad": "Humanes de Madrid (Don Miguel Enrique Estella Garbayo)",
     "clase": "Jubilación",
     "notas": "Vacante"
@@ -12278,153 +12695,57 @@ const DATA_VACANTES = [
   {
     "comunidad": "Comunidad de Madrid",
     "provincia": "Madrid",
-    "distrito": "",
     "localidad": "Madrid (Don Ricardo Isaías Pérez Ballarín)",
     "clase": "Jubilación",
     "notas": "Vacante"
   },
   {
-    "comunidad": "Región de Murcia",
-    "provincia": "Murcia",
-    "distrito": "",
-    "localidad": "Beniel",
-    "clase": "Resulta",
-    "notas": "N.º 25"
+    "comunidad": "Galicia",
+    "provincia": "A Coruña",
+    "localidad": "A Coruña (Don José Manuel Lois Puente)",
+    "clase": "Jubilación",
+    "notas": "Vacante"
   },
   {
     "comunidad": "Región de Murcia",
     "provincia": "Murcia",
-    "distrito": "",
     "localidad": "San Javier (Don Pedro Facundo Garré Navarro)",
     "clase": "Jubilación",
     "notas": "Vacante"
   },
   {
-    "comunidad": "Comunidad Foral de Navarra",
-    "provincia": "Navarra",
-    "distrito": "",
-    "localidad": "Aoiz/Agoitz",
-    "clase": "Desierta",
-    "notas": "N.º 86"
+    "comunidad": "Comunitat Valenciana",
+    "provincia": "València/Valencia",
+    "localidad": "Valencia (Don Alfonso Pascual de Miguel)",
+    "clase": "Jubilación",
+    "notas": "Vacante"
   },
   {
-    "comunidad": "Comunidad Foral de Navarra",
-    "provincia": "Navarra",
-    "distrito": "",
-    "localidad": "Lekunberri",
-    "clase": "Desierta",
-    "notas": "N.º 108"
+    "comunidad": "Comunitat Valenciana",
+    "provincia": "Alicante/Alacant",
+    "localidad": "Torrevieja (Don José Julio Barrenechea García)",
+    "clase": "Jubilación",
+    "notas": "Vacante"
   },
   {
-    "comunidad": "Comunidad Foral de Navarra",
-    "provincia": "Navarra",
-    "distrito": "",
-    "localidad": "Ochagavía/Otsagabia",
-    "clase": "Desierta",
-    "notas": "N.º 82"
+    "comunidad": "Principado de Asturias",
+    "provincia": "Asturias",
+    "localidad": "Oviedo (Don Juan Antonio Escudero García)",
+    "clase": "Jubilación",
+    "notas": "Vacante"
   },
   {
-    "comunidad": "Comunidad Foral de Navarra",
-    "provincia": "Navarra",
-    "distrito": "",
-    "localidad": "Estella-Lizarra",
-    "clase": "Desierta",
-    "notas": "N.º 117"
+    "comunidad": "Comunidad de Madrid",
+    "provincia": "Madrid",
+    "localidad": "Madrid (Don Juan Manuel Lozano Carreras)",
+    "clase": "Jubilación",
+    "notas": "Vacante"
   },
   {
-    "comunidad": "País Vasco",
-    "provincia": "Araba/Álava",
-    "distrito": "",
-    "localidad": "Vitoria-Gasteiz",
-    "clase": "Desierta",
-    "notas": "N.º 1"
-  },
-  {
-    "comunidad": "País Vasco",
-    "provincia": "Araba/Álava",
-    "distrito": "",
-    "localidad": "Vitoria-Gasteiz",
-    "clase": "Desierta",
-    "notas": "N.º 16"
-  },
-  {
-    "comunidad": "País Vasco",
-    "provincia": "Bizkaia/Vizcaya",
-    "distrito": "",
-    "localidad": "Areatza",
-    "clase": "Desierta",
-    "notas": "N.º 119"
-  },
-  {
-    "comunidad": "País Vasco",
-    "provincia": "Bizkaia/Vizcaya",
-    "distrito": "",
-    "localidad": "Bilbao",
-    "clase": "Resulta",
-    "notas": "N.º 74"
-  },
-  {
-    "comunidad": "País Vasco",
-    "provincia": "Bizkaia/Vizcaya",
-    "distrito": "",
-    "localidad": "Elorrio",
-    "clase": "Resulta",
-    "notas": "N.º 19"
-  },
-  {
-    "comunidad": "País Vasco",
-    "provincia": "Bizkaia/Vizcaya",
-    "distrito": "",
-    "localidad": "Gernika-Lumo",
-    "clase": "Resulta",
-    "notas": "N.º 7"
-  },
-  {
-    "comunidad": "País Vasco",
-    "provincia": "Bizkaia/Vizcaya",
-    "distrito": "",
-    "localidad": "Gernika-Lumo",
-    "clase": "Resulta",
-    "notas": "N.º 27"
-  },
-  {
-    "comunidad": "País Vasco",
-    "provincia": "Bizkaia/Vizcaya",
-    "distrito": "",
-    "localidad": "Karrantza Harana/Valle de Carranza",
-    "clase": "Desierta",
-    "notas": "N.º 138"
-  },
-  {
-    "comunidad": "País Vasco",
-    "provincia": "Gipuzkoa/Guipúzcoa",
-    "distrito": "",
-    "localidad": "Bergara",
-    "clase": "Desierta",
-    "notas": "N.º 137"
-  },
-  {
-    "comunidad": "País Vasco",
-    "provincia": "Gipuzkoa/Guipúzcoa",
-    "distrito": "",
-    "localidad": "Zumarraga",
-    "clase": "Resulta",
-    "notas": "N.º 10"
-  },
-  {
-    "comunidad": "La Rioja",
-    "provincia": "La Rioja",
-    "distrito": "",
-    "localidad": "Arnedo",
-    "clase": "Desierta",
-    "notas": "N.º 78"
-  },
-  {
-    "comunidad": "La Rioja",
-    "provincia": "La Rioja",
-    "distrito": "",
-    "localidad": "Torrecilla en Cameros",
-    "clase": "Desierta",
-    "notas": "N.º 93"
+    "comunidad": "Cataluña",
+    "provincia": "Barcelona",
+    "localidad": "Sant Cugat del Vallès (Don Luis Fort López-Barajas)",
+    "clase": "Jubilación",
+    "notas": "Vacante"
   }
 ];
