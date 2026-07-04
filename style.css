@@ -562,7 +562,20 @@ mark {
   }
   
   /* Compact Table for Mobile */
+  .mobile-only {
+    display: block;
+    font-size: 11px;
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+  .loc-main {
+    font-weight: 600;
+  }
   .col-comunidad, .col-provincia {
     display: none !important;
   }
+}
+
+.mobile-only {
+  display: none;
 }

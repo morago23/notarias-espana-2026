@@ -65,15 +65,16 @@ function renderPreferencias() {
       const badgeClass = v.clase.startsWith('Jubilación') ? 'badge-jubilacion' : v.clase === 'Resulta' ? 'badge-resulta' : 'badge-desierta';
       const badgeCat = v.categoria === 'Primera' ? 'badge-primera' : v.categoria === 'Segunda' ? 'badge-segunda' : v.categoria === 'Tercera' ? 'badge-tercera' : '';
       
-      let locHtml = `<strong>${escapeHTML(v.localidad.replace(/\s*\([^)]+\)/, '').trim())}</strong>`;
+      let locHtml = `<div class="loc-main">${escapeHTML(v.localidad.replace(/\s*\([^)]+\)/, '').trim())}</div>`;
       if (v.anteriorNotario) {
-        locHtml += `<br><small style="color:#6c757d">Notario anterior: ${escapeHTML(v.anteriorNotario)}</small>`;
+        locHtml += `<small style="color:var(--color-text-muted)">Notario anterior: ${escapeHTML(v.anteriorNotario)}</small>`;
       } else {
         const notarioMatch = v.localidad.match(/\((Don|Doña)[^)]+\)/);
         if (notarioMatch) {
-          locHtml += `<br><small style="color:#6c757d">Notario anterior: ${escapeHTML(notarioMatch[0].replace(/[()]/g, ''))}</small>`;
+          locHtml += `<small style="color:var(--color-text-muted)">Notario anterior: ${escapeHTML(notarioMatch[0].replace(/[()]/g, ''))}</small>`;
         }
       }
+      locHtml += `<div class="mobile-only loc-sub" style="margin-top: 4px;">${escapeHTML(v.comunidad)} - ${escapeHTML(v.provincia)}</div>`;
 
       html += `
         <tr data-id="${id}" class="pref-item">
@@ -85,10 +86,10 @@ function renderPreferencias() {
           <td data-label="Localidad / Plaza">${locHtml}</td>
           <td data-label="Motivo" class="center"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
           <td data-label="Categoría" class="center"><span class="badge ${badgeCat}">${escapeHTML(v.categoria)}</span></td>
-          ${state.userCoords ? `<td data-label="Distancia y Tiempo" class="center">
+          ${state.userCoords ? `<td data-label="Tiempo y Distancia" class="center">
             <strong>${v.distancia !== null ? v.distancia.toFixed(1) + ' km' : '-'}</strong>
             ${v.duration ? `<br><small style="color:#6c757d">🚗 ${formatDuration(v.duration)}</small>` : ''}
-          </td>` : '<td data-label="Distancia y Tiempo" class="center" style="display:none;"></td>'}
+          </td>` : '<td data-label="Tiempo y Distancia" class="center" style="display:none;"></td>'}
           <td data-label="Borrar" class="center">
             <button class="pref-remove" data-id="${id}">❌</button>
           </td>
@@ -381,8 +382,9 @@ function renderNotarias() {
         <td class="col-provincia">${escapeHTML(n.provincia)}</td>
         <td>${escapeHTML(n.distrito)}</td>
         <td>
-          <strong>${highlightText(n.localidad, query)}</strong>
-          ${n.notas ? `<br><small style="color:#6c757d">${escapeHTML(n.notas)}</small>` : ''}
+          <div class="loc-main">${highlightText(n.localidad, query)}</div>
+          ${n.notas ? `<small style="color:var(--color-text-muted)">${escapeHTML(n.notas)}</small>` : ''}
+          <div class="mobile-only loc-sub" style="margin-top: 4px;">${escapeHTML(cName)} - ${escapeHTML(n.provincia)}</div>
         </td>
         <td class="center">${escapeHTML(n.numero)}</td>
         <td class="center"><span class="badge ${claseBadge}">${escapeHTML(n.clase)}</span></td>
@@ -508,8 +510,8 @@ function filterVacantes() {
   if (state.vacantesSortCol) {
     filtered.sort((a, b) => {
       if (state.vacantesSortCol === 'distancia') {
-        let vA = a.distancia !== null ? a.distancia : 999999;
-        let vB = b.distancia !== null ? b.distancia : 999999;
+        let vA = a.duration !== null && a.duration !== undefined ? a.duration : 99999999;
+        let vB = b.duration !== null && b.duration !== undefined ? b.duration : 99999999;
         return state.vacantesSortDir === 'asc' ? vA - vB : vB - vA;
       }
       let vA = a[state.vacantesSortCol] || '';
@@ -543,13 +545,14 @@ function renderVacantes() {
     // Extract notario if Jubilación or anteriorNotario is present
     let locHtml = `<strong>${highlightText(v.localidad.replace(/\s*\([^)]+\)/, '').trim(), query)}</strong>`;
     if (v.anteriorNotario) {
-      locHtml += `<br><small style="color:#6c757d">Notario anterior: ${escapeHTML(v.anteriorNotario)}</small>`;
+      locHtml += `<br><small style="color:var(--color-text-muted)">Notario anterior: ${escapeHTML(v.anteriorNotario)}</small>`;
     } else {
       const notarioMatch = v.localidad.match(/\((Don|Doña)[^)]+\)/);
       if (notarioMatch) {
-        locHtml += `<br><small style="color:#6c757d">Notario anterior: ${escapeHTML(notarioMatch[0].replace(/[()]/g, ''))}</small>`;
+        locHtml += `<br><small style="color:var(--color-text-muted)">Notario anterior: ${escapeHTML(notarioMatch[0].replace(/[()]/g, ''))}</small>`;
       }
     }
+    locHtml += `<div class="mobile-only loc-sub" style="margin-top: 4px;">${escapeHTML(v.comunidad)} - ${escapeHTML(v.provincia)}</div>`;
 
     const isFav = favVacantes.has(v._id);
     const favStar = isFav ? '⭐' : '☆';
