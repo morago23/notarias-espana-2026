@@ -71,7 +71,6 @@ function renderPreferencias() {
         if (notarioMatch) notarioAnt = notarioMatch[0].replace(/[()]/g, '');
       }
       if (!notarioAnt) notarioAnt = "-";
-      else notarioAnt = "Notario anterior: " + notarioAnt;
 
       html += `
         <tr data-id="${id}" class="pref-item">
@@ -547,7 +546,6 @@ function renderVacantes() {
       if (notarioMatch) notarioAnt = notarioMatch[0].replace(/[()]/g, '');
     }
     if (!notarioAnt) notarioAnt = "-";
-    else notarioAnt = "Notario anterior: " + notarioAnt;
 
     const isFav = favVacantes.has(v._id);
     const favStar = isFav ? '⭐' : '☆';
