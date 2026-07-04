@@ -9,7 +9,11 @@ const state = {
   vacantesFiltered: [...DATA_VACANTES],
   vacantesSortCol: null,
   vacantesSortDir: 'asc',
+  vacantesOnlyFavs: false,
+  userCoords: null
 };
+
+const favVacantes = new Set(JSON.parse(localStorage.getItem('favVacantes') || '[]'));
 
 // Utilities
 function normalize(str) {
@@ -109,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTabs();
   initNotarias();
   initVacantes();
+  initCharts();
 });
 
 // Tabs
@@ -247,6 +252,45 @@ function initVacantes() {
   document.getElementById('filter-vacante-comunidad').addEventListener('change', filterVacantes);
   document.getElementById('filter-vacante-tipo').addEventListener('change', filterVacantes);
 
+  const btnFavs = document.getElementById('filter-favoritos');
+  btnFavs.addEventListener('click', () => {
+    state.vacantesOnlyFavs = !state.vacantesOnlyFavs;
+    btnFavs.classList.toggle('active', state.vacantesOnlyFavs);
+    filterVacantes();
+  });
+
+  document.getElementById('vacantes-table').addEventListener('click', e => {
+    if (e.target.classList.contains('fav-btn')) {
+      const id = e.target.getAttribute('data-id');
+      if (favVacantes.has(id)) {
+        favVacantes.delete(id);
+        e.target.classList.remove('active');
+        e.target.textContent = '☆';
+      } else {
+        favVacantes.add(id);
+        e.target.classList.add('active');
+        e.target.textContent = '⭐';
+      }
+      localStorage.setItem('favVacantes', JSON.stringify([...favVacantes]));
+      if (state.vacantesOnlyFavs) filterVacantes();
+    }
+  });
+
+  // Distances
+  document.getElementById('distance-btn').addEventListener('click', calculateDistances);
+  document.getElementById('distance-clear').addEventListener('click', () => {
+    state.userCoords = null;
+    document.getElementById('distance-input').value = '';
+    document.getElementById('distance-status').textContent = '';
+    document.getElementById('distance-clear').style.display = 'none';
+    document.getElementById('th-distancia').style.display = 'none';
+    DATA_VACANTES.forEach(v => v.distancia = null);
+    if (state.vacantesSortCol === 'distancia') {
+      state.vacantesSortCol = null;
+    }
+    filterVacantes();
+  });
+
   document.querySelectorAll('#vacantes-table th.sortable').forEach(th => {
     th.addEventListener('click', () => {
       const col = th.getAttribute('data-col');
@@ -271,6 +315,11 @@ function filterVacantes() {
   const tipoF = document.getElementById('filter-vacante-tipo').value;
 
   let filtered = DATA_VACANTES.filter(v => {
+    const locClean = v.localidad.replace(/\s*\([^)]*\)/g, '').trim();
+    const id = normalize(locClean) + '|' + normalize(v.provincia);
+    v._id = id;
+
+    if (state.vacantesOnlyFavs && !favVacantes.has(id)) return false;
     if (comF && v.comunidad !== comF) return false;
     if (tipoF) {
       if (tipoF === 'Jubilación' && !v.clase.startsWith('Jubilación')) return false;
@@ -302,7 +351,7 @@ function renderVacantes() {
   const page = state.vacantesFiltered; // Show all vacantes, it's max 141
 
   if (page.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="5" class="center">No hay vacantes encontradas.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="${state.userCoords ? 7 : 6}" class="center">No hay vacantes encontradas.</td></tr>`;
     return;
   }
 
@@ -320,13 +369,19 @@ function renderVacantes() {
       locHtml += `<br><small style="color:#6c757d">Sustituye a: ${escapeHTML(notarioMatch[0].replace(/[()]/g, ''))}</small>`;
     }
 
+    const isFav = favVacantes.has(v._id);
+    const favStar = isFav ? '⭐' : '☆';
+    const favClass = isFav ? 'active' : '';
+
     return `
       <tr>
+        <td class="center"><button class="fav-btn ${favClass}" data-id="${escapeHTML(v._id)}">${favStar}</button></td>
         <td>${escapeHTML(v.comunidad)}</td>
         <td>${escapeHTML(v.provincia)}</td>
         <td>${locHtml}</td>
         <td class="center"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
         <td class="center"><span class="badge ${badgeCat}">${escapeHTML(v.categoria)}</span></td>
+        ${state.userCoords ? `<td class="center"><strong>${v.distancia !== null ? v.distancia.toFixed(1) + ' km' : '-'}</strong></td>` : ''}
       </tr>
     `;
   }).join('');
@@ -369,5 +424,134 @@ function renderPagination(containerId, totalItems, perPage, currentPage, onPageC
     if (btn.textContent !== '…' && !btn.classList.contains('active')) {
       btn.addEventListener('click', () => onPageChange(parseInt(btn.getAttribute('data-page'))));
     }
+  });
+}
+
+// Distance calculation
+async function calculateDistances() {
+  const query = document.getElementById('distance-input').value.trim();
+  const status = document.getElementById('distance-status');
+  if (!query) return;
+
+  status.textContent = 'Buscando tu ubicación...';
+  try {
+    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}, Spain&format=json&limit=1`;
+    const res = await fetch(url);
+    const data = await res.json();
+    if (!data || data.length === 0) {
+      status.textContent = 'No se encontró la ubicación. Prueba escribiendo la provincia o "Madrid".';
+      return;
+    }
+
+    state.userCoords = { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) };
+    status.textContent = `Ubicación encontrada: ${data[0].display_name}`;
+    document.getElementById('distance-clear').style.display = 'inline-block';
+    document.getElementById('th-distancia').style.display = 'table-cell';
+
+    // Calculate distance for all vacantes using precalculated DATA_COORDS
+    if (typeof DATA_COORDS === 'undefined') {
+      status.textContent = 'Error: No se ha cargado la base de datos de coordenadas.';
+      return;
+    }
+
+    DATA_VACANTES.forEach(v => {
+      const locClean = v.localidad.replace(/\s*\([^)]*\)/g, '').trim();
+      const key = normalize(locClean) + '|' + normalize(v.provincia);
+      const c = DATA_COORDS[key];
+      if (c) {
+        v.distancia = haversine(state.userCoords.lat, state.userCoords.lon, c.lat, c.lon);
+      } else {
+        v.distancia = null;
+      }
+    });
+
+    // Auto sort by distance
+    state.vacantesSortCol = 'distancia';
+    state.vacantesSortDir = 'asc';
+    document.querySelectorAll('#vacantes-table th').forEach(t => t.className = t.className.replace(/sorted-(asc|desc)/, '').trim());
+    document.getElementById('th-distancia').classList.add('sorted-asc');
+    
+    filterVacantes();
+  } catch (err) {
+    status.textContent = 'Error al conectar con el servidor de mapas.';
+  }
+}
+
+function haversine(lat1, lon1, lat2, lon2) {
+  const R = 6371; // km
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  return R * c;
+}
+
+// Charts
+function initCharts() {
+  if (typeof Chart === 'undefined') return;
+
+  const getColors = (count) => {
+    const pal = ['#0056b3', '#dc3545', '#198754', '#ffc107', '#6f42c1', '#17a2b8', '#fd7e14', '#20c997', '#e83e8c', '#6c757d'];
+    return Array.from({length: count}, (_, i) => pal[i % pal.length]);
+  };
+
+  // Motivo
+  const motivosCount = DATA_VACANTES.reduce((acc, v) => {
+    const m = v.clase.includes('Jubilación') ? 'Jubilación' : v.clase;
+    acc[m] = (acc[m] || 0) + 1;
+    return acc;
+  }, {});
+  
+  new Chart(document.getElementById('chart-motivo'), {
+    type: 'pie',
+    data: {
+      labels: Object.keys(motivosCount),
+      datasets: [{
+        data: Object.values(motivosCount),
+        backgroundColor: ['#198754', '#dc3545', '#6f42c1']
+      }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+  });
+
+  // Comunidades (Top 10)
+  const comCount = DATA_VACANTES.reduce((acc, v) => {
+    acc[v.comunidad] = (acc[v.comunidad] || 0) + 1;
+    return acc;
+  }, {});
+  const sortedCom = Object.entries(comCount).sort((a,b) => b[1]-a[1]).slice(0, 10);
+
+  new Chart(document.getElementById('chart-comunidades'), {
+    type: 'bar',
+    data: {
+      labels: sortedCom.map(x => x[0]),
+      datasets: [{
+        label: 'Plazas',
+        data: sortedCom.map(x => x[1]),
+        backgroundColor: '#0056b3'
+      }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+  });
+
+  // Categorías
+  const catCount = DATA_VACANTES.reduce((acc, v) => {
+    acc[v.categoria] = (acc[v.categoria] || 0) + 1;
+    return acc;
+  }, {});
+
+  new Chart(document.getElementById('chart-categoria'), {
+    type: 'doughnut',
+    data: {
+      labels: Object.keys(catCount),
+      datasets: [{
+        data: Object.values(catCount),
+        backgroundColor: ['#ffc107', '#0dcaf0', '#adb5bd']
+      }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
   });
 }

@@ -36,6 +36,7 @@
     <div class="tabs">
       <button class="tab-btn active" data-target="tab-notarias">Directorio de Notarías</button>
       <button class="tab-btn" data-target="tab-vacantes">Plazas Vacantes (Concurso)</button>
+      <button class="tab-btn" data-target="tab-estadisticas">Estadísticas y Gráficos</button>
     </div>
 
     <!-- DIRECTORIO DE NOTARIAS -->
@@ -82,6 +83,17 @@
 
     <!-- PLAZAS VACANTES -->
     <section id="tab-vacantes" class="tab-content">
+      
+      <div class="distance-box">
+        <h4>📍 Calcula la distancia a las plazas vacantes</h4>
+        <div class="distance-controls">
+          <input type="text" id="distance-input" class="search-input" placeholder="Escribe tu ciudad o código postal (ej: Madrid)">
+          <button id="distance-btn" class="action-btn">Calcular Distancias</button>
+          <button id="distance-clear" class="action-btn-secondary" style="display:none;">Limpiar</button>
+        </div>
+        <p id="distance-status" class="distance-status"></p>
+      </div>
+
       <div class="controls">
         <input type="text" id="search-vacantes" class="search-input" placeholder="Buscar vacante por plaza o provincia...">
         <select id="filter-vacante-comunidad" class="filter-select">
@@ -93,6 +105,7 @@
           <option value="Desierta">Desierta</option>
           <option value="Jubilación">Jubilación</option>
         </select>
+        <button id="filter-favoritos" class="action-btn-secondary">⭐ Ver Favoritos</button>
       </div>
 
       <div class="results-info">
@@ -103,16 +116,42 @@
         <table class="table table-vacantes" id="vacantes-table">
           <thead>
             <tr>
+              <th class="center" title="Añadir a favoritos">⭐</th>
               <th class="sortable" data-col="comunidad">Comunidad <span>↕</span></th>
               <th class="sortable" data-col="provincia">Provincia <span>↕</span></th>
               <th class="sortable" data-col="localidad">Localidad / Plaza <span>↕</span></th>
               <th class="sortable center" data-col="clase">Motivo <span>↕</span></th>
               <th class="sortable center" data-col="categoria">Categoría <span>↕</span></th>
+              <th class="sortable center" data-col="distancia" id="th-distancia" style="display:none;">Distancia <span>↕</span></th>
             </tr>
           </thead>
           <tbody id="vacantes-tbody">
           </tbody>
         </table>
+      </div>
+    </section>
+
+    <!-- ESTADISTICAS -->
+    <section id="tab-estadisticas" class="tab-content">
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>Plazas por Motivo</h3>
+          <div class="chart-container">
+            <canvas id="chart-motivo"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3>Top 10 Comunidades con más Vacantes</h3>
+          <div class="chart-container">
+            <canvas id="chart-comunidades"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3>Plazas por Categoría</h3>
+          <div class="chart-container">
+            <canvas id="chart-categoria"></canvas>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -124,6 +163,8 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="coords.js"></script>
   <script src="data.js"></script>
   <script src="app.js"></script>
 </body>
