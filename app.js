@@ -59,7 +59,43 @@ DATA_VACANTES.forEach(v => {
   vacantesSet.add(key);
 
   // Cruzar datos para obtener la categoría (clase de la notaría)
-  const nMatch = DATA_NOTARIAS.find(n => normalize(n.localidad) === normalize(locClean) && normalize(n.provincia) === normalize(v.provincia));
+  let nMatch = DATA_NOTARIAS.find(n => normalize(n.localidad) === normalize(locClean) && normalize(n.provincia) === normalize(v.provincia));
+  
+  if (!nMatch) {
+    const provV = normalize(v.provincia);
+    const locV = normalize(locClean).replace(/'/g, '').replace(/’/g, '').replace(/, el$/, '').replace(/, la$/, '').replace(/^el /, '').replace(/^la /, '').replace(/, l$/, '').replace(/^l /, '');
+    
+    // Diccionario para casos excepcionales (cambios de idioma oficial vs listado)
+    const aliases = {
+      'sant mateu': 'san mateo',
+      'font de la figuera': 'fuente la higuera',
+      'caniza, a.': 'a caniza',
+      'areatza': 'villaro',
+      'bergara': 'vergara',
+      'sant joan de vilatorrada': 'sant joan de vilatorrada' // El error es de la provincia en vacantes (dice Lleida, es Barcelona)
+    };
+    
+    const aliasLoc = aliases[locV] || locV;
+
+    nMatch = DATA_NOTARIAS.find(n => {
+      const provN = normalize(n.provincia);
+      const locN = normalize(n.localidad).replace(/'/g, '').replace(/’/g, '').replace(/, el$/, '').replace(/, la$/, '').replace(/^el /, '').replace(/^la /, '').replace(/, l$/, '').replace(/^l /, '');
+      
+      const provMatch = provV.includes(provN) || provN.includes(provV) || 
+                        (provV === 'almeria' && locV === 'ugijar' && provN === 'granada') ||
+                        (provV === 'lleida' && locV === 'sant joan de vilatorrada' && provN === 'barcelona');
+      
+      let locMatch = aliasLoc === locN;
+      if (!locMatch) {
+         if (aliasLoc.includes('-')) locMatch = aliasLoc.split('-').some(part => part === locN || locN.includes(part));
+         if (aliasLoc.includes('/')) locMatch = aliasLoc.split('/').some(part => part === locN || locN.includes(part));
+         if (locN.includes('/')) locMatch = locMatch || locN.split('/').some(part => part === aliasLoc || aliasLoc.includes(part));
+         if (aliasLoc.includes(locN) || locN.includes(aliasLoc)) locMatch = true;
+      }
+      return provMatch && locMatch;
+    });
+  }
+
   v.categoria = nMatch ? nMatch.clase : '-';
 });
 
@@ -289,8 +325,8 @@ function renderVacantes() {
         <td>${escapeHTML(v.comunidad)}</td>
         <td>${escapeHTML(v.provincia)}</td>
         <td>${locHtml}</td>
-        <td class="center"><span class="badge ${badgeCat}">${escapeHTML(v.categoria)}</span></td>
         <td class="center"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
+        <td class="center"><span class="badge ${badgeCat}">${escapeHTML(v.categoria)}</span></td>
       </tr>
     `;
   }).join('');
