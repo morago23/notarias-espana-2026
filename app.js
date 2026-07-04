@@ -80,8 +80,8 @@ function renderPreferencias() {
           <td class="center pref-handle" style="font-weight:bold; color:var(--accent-color); font-size:1.1rem; cursor:grab;">
             ☰ ${index + 1}
           </td>
-          <td data-label="Comunidad">${escapeHTML(v.comunidad)}</td>
-          <td data-label="Provincia">${escapeHTML(v.provincia)}</td>
+          <td class="col-comunidad" data-label="Comunidad">${escapeHTML(v.comunidad)}</td>
+          <td class="col-provincia" data-label="Provincia">${escapeHTML(v.provincia)}</td>
           <td data-label="Localidad / Plaza">${locHtml}</td>
           <td data-label="Motivo" class="center"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
           <td data-label="Categoría" class="center"><span class="badge ${badgeCat}">${escapeHTML(v.categoria)}</span></td>
@@ -254,6 +254,21 @@ document.addEventListener('DOMContentLoaded', () => {
   initVacantes();
   initPreferencias();
   initCharts();
+
+  // Auto-load distance
+  const savedDist = localStorage.getItem('userDistData');
+  if (savedDist) {
+    try {
+      const parsed = JSON.parse(savedDist);
+      if (parsed.coords && parsed.input) {
+        document.getElementById('distance-input').value = parsed.input;
+        document.getElementById('distance-input-pref').value = parsed.input;
+        state.userCoords = parsed.coords;
+        calculateDistances(true); // pass true to skip geocode
+      }
+    } catch(e) {}
+  }
+
 });
 
 // Tabs
@@ -424,6 +439,7 @@ function initVacantes() {
   document.getElementById('distance-btn').addEventListener('click', calculateDistances);
   document.getElementById('distance-clear').addEventListener('click', () => {
     state.userCoords = null;
+    localStorage.removeItem('userDistData');
     document.getElementById('distance-input').value = '';
     document.getElementById('distance-status').textContent = '';
     document.getElementById('distance-clear').style.display = 'none';
@@ -596,7 +612,7 @@ function renderPagination(containerId, totalItems, perPage, currentPage, onPageC
 }
 
 // Distance and driving time calculation
-async function calculateDistances() {
+async function calculateDistances(skipGeocode = false) {
   const query = document.getElementById('distance-input').value.trim();
   const status = document.getElementById('distance-status');
   if (!query) return;
@@ -688,6 +704,15 @@ async function calculateDistances() {
     if(document.getElementById('th-distancia-pref')) document.getElementById('th-distancia-pref').style.display = 'table-cell';
 
     // Auto sort by distance
+    
+    // Save to localStorage
+    if (state.userCoords) {
+      localStorage.setItem('userDistData', JSON.stringify({
+        input: document.getElementById('distance-input').value,
+        coords: state.userCoords
+      }));
+    }
+
     state.vacantesSortCol = 'distancia';
     state.vacantesSortDir = 'asc';
     document.querySelectorAll('#vacantes-table th').forEach(t => t.className = t.className.replace(/sorted-(asc|desc)/, '').trim());

@@ -614,64 +614,21 @@ body.dark-mode .theme-toggle-btn {
   border-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Responsive Table Cards for Mobile */
+/* Compact Table for Mobile */
 @media (max-width: 768px) {
-  /* Hide standard table header */
-  .table thead {
-    display: none;
+  .col-comunidad, .col-provincia {
+    display: none !important;
   }
-  
-  .table, .table tbody, .table tr, .table td {
-    display: block;
-    width: 100%;
+  .table th, .table td {
+    padding: 8px 4px;
+    font-size: 0.85rem;
   }
-  
-  .table tr {
-    margin-bottom: 15px;
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    box-shadow: var(--box-shadow);
-    padding: 10px;
-    background: var(--color-surface);
+  .badge {
+    padding: 2px 4px;
+    font-size: 0.75rem;
   }
-  
-  .table td {
-    border: none;
-    border-bottom: 1px solid var(--color-border);
-    padding: 10px 5px;
-    position: relative;
-    padding-left: 40%;
-    text-align: right !important;
-  }
-  
-  .table td:last-child {
-    border-bottom: none;
-  }
-  
-  .table td::before {
-    content: attr(data-label);
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    width: 35%;
-    white-space: nowrap;
-    text-align: left;
-    font-weight: bold;
-    color: var(--color-text-muted);
-  }
-
-  /* Specific fix for Sortable row in preferences */
-  #prefs-table tr {
-    position: relative;
-  }
-  
-  #prefs-table td.pref-handle {
-    padding-left: 10px;
-    text-align: center !important;
-    border-bottom: 1px solid var(--color-border);
-  }
-  
-  #prefs-table td.pref-handle::before {
-    display: none;
+  /* Stick first column on scroll if needed */
+  .table-responsive {
+    overflow-x: auto;
   }
 }
