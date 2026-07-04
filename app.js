@@ -77,7 +77,7 @@ function renderPreferencias() {
 
       html += `
         <tr data-id="${id}" class="pref-item">
-          <td class="center pref-handle" style="font-weight:bold; color:var(--accent-color); font-size:1.1rem; cursor:grab;">
+          <td class="center pref-handle" style="font-weight:bold; color:var(--color-primary); font-size:1.1rem; cursor:grab;">
             ☰ ${index + 1}
           </td>
           <td class="col-comunidad" data-label="Comunidad">${escapeHTML(v.comunidad)}</td>
@@ -376,8 +376,8 @@ function renderNotarias() {
 
     return `
       <tr>
-        <td>${escapeHTML(cName)}</td>
-        <td>${escapeHTML(n.provincia)}</td>
+        <td class="col-comunidad">${escapeHTML(cName)}</td>
+        <td class="col-provincia">${escapeHTML(n.provincia)}</td>
         <td>${escapeHTML(n.distrito)}</td>
         <td>
           <strong>${highlightText(n.localidad, query)}</strong>
@@ -557,8 +557,8 @@ function renderVacantes() {
     return `
       <tr>
         <td class="center"><button class="fav-btn ${favClass}" data-id="${escapeHTML(v._id)}">${favStar}</button></td>
-        <td>${escapeHTML(v.comunidad)}</td>
-        <td>${escapeHTML(v.provincia)}</td>
+        <td class="col-comunidad">${escapeHTML(v.comunidad)}</td>
+        <td class="col-provincia">${escapeHTML(v.provincia)}</td>
         <td>${locHtml}</td>
         <td class="center"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
         <td class="center"><span class="badge ${badgeCat}">${escapeHTML(v.categoria)}</span></td>
@@ -719,6 +719,7 @@ async function calculateDistances(skipGeocode = false) {
     document.getElementById('th-distancia').classList.add('sorted-asc');
     
     filterVacantes();
+    renderPreferencias();
   } catch (err) {
     status.textContent = 'Error al conectar con los servidores de mapas/rutas.';
   }
