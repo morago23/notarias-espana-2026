@@ -74,7 +74,6 @@ function renderPreferencias() {
           locHtml += `<small style="color:var(--color-text-muted)">Notario anterior: ${escapeHTML(notarioMatch[0].replace(/[()]/g, ''))}</small>`;
         }
       }
-      locHtml += `<div class="mobile-only loc-sub" style="margin-top: 4px;">${escapeHTML(v.comunidad)} - ${escapeHTML(v.provincia)}</div>`;
 
       html += `
         <tr data-id="${id}" class="pref-item">
@@ -378,17 +377,16 @@ function renderNotarias() {
 
     return `
       <tr>
-        <td class="col-comunidad">${escapeHTML(cName)}</td>
-        <td class="col-provincia">${escapeHTML(n.provincia)}</td>
-        <td>${escapeHTML(n.distrito)}</td>
-        <td>
+        <td class="col-comunidad" data-label="Comunidad">${escapeHTML(cName)}</td>
+        <td class="col-provincia" data-label="Provincia">${escapeHTML(n.provincia)}</td>
+        <td data-label="Distrito">${escapeHTML(n.distrito)}</td>
+        <td data-label="Localidad / Plaza">
           <div class="loc-main">${highlightText(n.localidad, query)}</div>
           ${n.notas ? `<small style="color:var(--color-text-muted)">${escapeHTML(n.notas)}</small>` : ''}
-          <div class="mobile-only loc-sub" style="margin-top: 4px;">${escapeHTML(cName)} - ${escapeHTML(n.provincia)}</div>
         </td>
-        <td class="center">${escapeHTML(n.numero)}</td>
-        <td class="center"><span class="badge ${claseBadge}">${escapeHTML(n.clase)}</span></td>
-        <td class="center">${isV ? '<span class="vacante-si" title="Plaza vacante">✓</span>' : ''}</td>
+        <td class="center" data-label="Número">${escapeHTML(n.numero)}</td>
+        <td class="center" data-label="Clase"><span class="badge ${claseBadge}">${escapeHTML(n.clase)}</span></td>
+        <td class="center" data-label="Vacante">${isV ? '<span class="vacante-si" title="Plaza vacante">✓</span>' : ''}</td>
       </tr>
     `;
   }).join('');
@@ -552,7 +550,6 @@ function renderVacantes() {
         locHtml += `<br><small style="color:var(--color-text-muted)">Notario anterior: ${escapeHTML(notarioMatch[0].replace(/[()]/g, ''))}</small>`;
       }
     }
-    locHtml += `<div class="mobile-only loc-sub" style="margin-top: 4px;">${escapeHTML(v.comunidad)} - ${escapeHTML(v.provincia)}</div>`;
 
     const isFav = favVacantes.has(v._id);
     const favStar = isFav ? '⭐' : '☆';
@@ -560,13 +557,13 @@ function renderVacantes() {
 
     return `
       <tr>
-        <td class="center"><button class="fav-btn ${favClass}" data-id="${escapeHTML(v._id)}">${favStar}</button></td>
-        <td class="col-comunidad">${escapeHTML(v.comunidad)}</td>
-        <td class="col-provincia">${escapeHTML(v.provincia)}</td>
-        <td>${locHtml}</td>
-        <td class="center"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
-        <td class="center"><span class="badge ${badgeCat}">${escapeHTML(v.categoria)}</span></td>
-        ${state.userCoords ? `<td class="center">
+        <td class="center" data-label="Favorito"><button class="fav-btn ${favClass}" data-id="${escapeHTML(v._id)}">${favStar}</button></td>
+        <td class="col-comunidad" data-label="Comunidad">${escapeHTML(v.comunidad)}</td>
+        <td class="col-provincia" data-label="Provincia">${escapeHTML(v.provincia)}</td>
+        <td data-label="Localidad / Plaza">${locHtml}</td>
+        <td class="center" data-label="Motivo"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
+        <td class="center" data-label="Categoría"><span class="badge ${badgeCat}">${escapeHTML(v.categoria)}</span></td>
+        ${state.userCoords ? `<td class="center" data-label="Tiempo y Distancia">
           <strong>${v.distancia !== null ? v.distancia.toFixed(1) + ' km' : '-'}</strong>
           ${v.duration ? `<br><small style="color:#6c757d">🚗 ${formatDuration(v.duration)}</small>` : ''}
         </td>` : ''}
