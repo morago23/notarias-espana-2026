@@ -70,7 +70,7 @@ function renderPreferencias() {
         const notarioMatch = v.localidad.match(/\((Don|Doña)[^)]+\)/);
         if (notarioMatch) notarioAnt = notarioMatch[0].replace(/[()]/g, '');
       }
-      if (notarioAnt) notarioAnt = "Notario anterior: " + notarioAnt;
+       
       else notarioAnt = "-";
 
       html += `
@@ -81,7 +81,7 @@ function renderPreferencias() {
           <td class="col-comunidad" data-label="Comunidad">${escapeHTML(v.comunidad)}</td>
           <td class="col-provincia" data-label="Provincia">${escapeHTML(v.provincia)}</td>
           <td data-label="Localidad"><div class="loc-main">${escapeHTML(v.localidad.replace(/\s*\([^)]+\)/, '').trim())}</div></td>
-          <td data-label="Plaza"><small style="color:var(--color-text-muted)">${notarioAnt}</small></td>
+          <td data-label="Notario anterior"><small style="color:var(--color-text-muted)">${notarioAnt}</small></td>
           <td data-label="Motivo" class="center"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
           <td data-label="Categoría" class="center"><span class="badge ${badgeCat}">${escapeHTML(v.categoria)}</span></td>
           ${state.userCoords ? `<td data-label="Tiempo y Distancia" class="center">
@@ -382,7 +382,7 @@ function renderNotarias() {
         <td data-label="Localidad">
           <div class="loc-main">${highlightText(n.localidad, query)}</div>
         </td>
-        <td data-label="Plaza">
+        <td data-label="Notario anterior">
           <small style="color:var(--color-text-muted)">${n.notas ? escapeHTML(n.notas) : '-'}</small>
         </td>
         <td class="center" data-label="Número">${escapeHTML(n.numero)}</td>
@@ -546,7 +546,7 @@ function renderVacantes() {
       const notarioMatch = v.localidad.match(/\((Don|Doña)[^)]+\)/);
       if (notarioMatch) notarioAnt = notarioMatch[0].replace(/[()]/g, '');
     }
-    if (notarioAnt) notarioAnt = "Notario anterior: " + notarioAnt;
+     
     else notarioAnt = "-";
 
     const isFav = favVacantes.has(v._id);
@@ -559,7 +559,7 @@ function renderVacantes() {
         <td class="col-comunidad" data-label="Comunidad">${escapeHTML(v.comunidad)}</td>
         <td class="col-provincia" data-label="Provincia">${escapeHTML(v.provincia)}</td>
         <td data-label="Localidad"><div class="loc-main">${highlightText(v.localidad.replace(/\s*\([^)]+\)/, '').trim(), query)}</div></td>
-        <td data-label="Plaza"><small style="color:var(--color-text-muted)">${notarioAnt}</small></td>
+        <td data-label="Notario anterior"><small style="color:var(--color-text-muted)">${notarioAnt}</small></td>
         <td class="center" data-label="Motivo"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
         <td class="center" data-label="Categoría"><span class="badge ${badgeCat}">${escapeHTML(v.categoria)}</span></td>
         ${state.userCoords ? `<td class="center" data-label="Tiempo y Distancia">
