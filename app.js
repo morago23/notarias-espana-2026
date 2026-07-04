@@ -70,8 +70,8 @@ function renderPreferencias() {
         const notarioMatch = v.localidad.match(/\((Don|Doña)[^)]+\)/);
         if (notarioMatch) notarioAnt = notarioMatch[0].replace(/[()]/g, '');
       }
-       
-      else notarioAnt = "-";
+      if (!notarioAnt) notarioAnt = "-";
+      else notarioAnt = "Notario anterior: " + notarioAnt;
 
       html += `
         <tr data-id="${id}" class="pref-item">
@@ -546,8 +546,8 @@ function renderVacantes() {
       const notarioMatch = v.localidad.match(/\((Don|Doña)[^)]+\)/);
       if (notarioMatch) notarioAnt = notarioMatch[0].replace(/[()]/g, '');
     }
-     
-    else notarioAnt = "-";
+    if (!notarioAnt) notarioAnt = "-";
+    else notarioAnt = "Notario anterior: " + notarioAnt;
 
     const isFav = favVacantes.has(v._id);
     const favStar = isFav ? '⭐' : '☆';
