@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Concurso de Notarías España 2026 – Guía Oficial de Plazas</title>
+  <meta name="description" content="Consulta todas las notarías de España, plazas vacantes y motivos del concurso notarial 2026. Datos actualizados por colegio notarial, provincia y clase." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <span class="logo-icon">⚖️</span>
+        <div>
+          <span class="logo-main">NotariasES</span>
+          <span class="logo-sub">Concurso 2026</span>
+        </div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+        <li><a href="#notarias" class="nav-link">Notarías</a></li>
+        <li><a href="#vacantes" class="nav-link">Vacantes</a></li>
+        <li><a href="#colegios" class="nav-link">Colegios</a></li>
+      </ul>
+      <div class="nav-badge">
+        <span class="badge-dot"></span>
+        <span id="nav-vacantes-count">0</span> vacantes activas
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="inicio">
+    <div class="hero-bg">
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+      <div class="hero-orb hero-orb-3"></div>
+      <div class="hero-grid"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-chip">
+        <span class="chip-dot"></span>
+        Actualizado 16 junio 2026
+      </div>
+      <h1 class="hero-title">
+        Concurso de<br />
+        <span class="hero-title-accent">Notarías España</span>
+      </h1>
+      <p class="hero-subtitle">
+        Consulta el directorio completo de notarías, plazas vacantes y motivos<br />del concurso notarial en una sola plataforma.
+      </p>
+      <div class="hero-stats">
+        <div class="stat-card" id="stat-total">
+          <div class="stat-number" data-target="2854">0</div>
+          <div class="stat-label">Total notarías</div>
+        </div>
+        <div class="stat-card" id="stat-colegios">
+          <div class="stat-number" data-target="18">0</div>
+          <div class="stat-label">Colegios notariales</div>
+        </div>
+        <div class="stat-card" id="stat-vacantes">
+          <div class="stat-number" data-target="0" id="stat-vacantes-num">0</div>
+          <div class="stat-label">Plazas vacantes</div>
+        </div>
+        <div class="stat-card" id="stat-desierta">
+          <div class="stat-number" data-target="0" id="stat-desierta-num">0</div>
+          <div class="stat-label">Desiertas</div>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="#vacantes" class="btn btn-primary">
+          <span>Ver Vacantes</span>
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#notarias" class="btn btn-secondary">Explorar Notarías</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+      <span>Desplaza para explorar</span>
+    </div>
+  </section>
+
+  <!-- ========== COLEGIOS OVERVIEW ========== -->
+  <section class="section" id="colegios">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-chip">Distribución territorial</div>
+        <h2 class="section-title">Colegios Notariales</h2>
+        <p class="section-subtitle">18 colegios notariales distribuidos por toda España con un total de 2.854 plazas</p>
+      </div>
+      <div class="colegios-grid" id="colegios-grid">
+        <!-- JS rendered -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== NOTARÍAS EXPLORER ========== -->
+  <section class="section section-dark" id="notarias">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-chip">Directorio completo</div>
+        <h2 class="section-title">Explorador de Notarías</h2>
+        <p class="section-subtitle">Busca y filtra entre todas las notarías de España</p>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters-bar">
+        <div class="search-wrapper">
+          <svg class="search-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" id="search-notarias" class="search-input" placeholder="Buscar por localidad, provincia..." />
+        </div>
+        <div class="filter-group">
+          <select id="filter-colegio" class="filter-select">
+            <option value="">Todos los colegios</option>
+          </select>
+          <select id="filter-provincia" class="filter-select">
+            <option value="">Todas las provincias</option>
+          </select>
+          <select id="filter-clase" class="filter-select">
+            <option value="">Todas las clases</option>
+            <option value="Primera">Primera</option>
+            <option value="Segunda">Segunda</option>
+            <option value="Tercera">Tercera</option>
+          </select>
+        </div>
+        <div class="results-count">
+          Mostrando <strong id="notarias-count">0</strong> notarías
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="table-wrapper">
+        <table class="data-table" id="notarias-table">
+          <thead>
+            <tr>
+              <th data-col="colegio" class="sortable">Colegio <span class="sort-icon">↕</span></th>
+              <th data-col="provincia" class="sortable">Provincia <span class="sort-icon">↕</span></th>
+              <th data-col="distrito" class="sortable">Distrito <span class="sort-icon">↕</span></th>
+              <th data-col="localidad" class="sortable">Localidad / Plaza <span class="sort-icon">↕</span></th>
+              <th data-col="numero" class="sortable th-center">Nº <span class="sort-icon">↕</span></th>
+              <th data-col="clase" class="sortable th-center">Clase <span class="sort-icon">↕</span></th>
+              <th class="th-center">Vacante</th>
+            </tr>
+          </thead>
+          <tbody id="notarias-tbody">
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination" id="notarias-pagination"></div>
+    </div>
+  </section>
+
+  <!-- ========== VACANTES ========== -->
+  <section class="section" id="vacantes">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-chip section-chip-alert">⚡ Concurso activo</div>
+        <h2 class="section-title">Plazas Vacantes</h2>
+        <p class="section-subtitle">Listado actualizado a 16 de junio de 2026</p>
+      </div>
+
+      <!-- Vacantes summary chips -->
+      <div class="vacantes-summary" id="vacantes-summary"></div>
+
+      <!-- Vacantes filters -->
+      <div class="filters-bar">
+        <div class="search-wrapper">
+          <svg class="search-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" id="search-vacantes" class="search-input" placeholder="Buscar plaza, provincia..." />
+        </div>
+        <div class="filter-group">
+          <select id="filter-vacante-comunidad" class="filter-select">
+            <option value="">Todas las comunidades</option>
+          </select>
+          <select id="filter-vacante-tipo" class="filter-select">
+            <option value="">Todos los motivos</option>
+            <option value="Resulta">Resulta</option>
+            <option value="Desierta">Desierta</option>
+            <option value="Jubilación">Jubilación</option>
+            <option value="Jubilación voluntaria">Jubilación voluntaria</option>
+          </select>
+        </div>
+        <div class="results-count">
+          <strong id="vacantes-count">0</strong> plazas vacantes
+        </div>
+      </div>
+
+      <!-- Vacantes cards grid -->
+      <div class="vacantes-grid" id="vacantes-grid">
+        <!-- JS rendered -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="logo-icon">⚖️</span>
+          <div>
+            <div class="logo-main">NotariasES</div>
+            <div class="footer-copy">Datos extraídos de los ficheros oficiales del Colegio Notarial. Información con fines informativos.</div>
+          </div>
+        </div>
+        <div class="footer-stats">
+          <div class="footer-stat">
+            <span class="footer-stat-num">2.854</span>
+            <span class="footer-stat-label">Notarías</span>
+          </div>
+          <div class="footer-stat">
+            <span class="footer-stat-num" id="footer-vacantes">—</span>
+            <span class="footer-stat-label">Vacantes</span>
+          </div>
+          <div class="footer-stat">
+            <span class="footer-stat-num">18</span>
+            <span class="footer-stat-label">Colegios</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
