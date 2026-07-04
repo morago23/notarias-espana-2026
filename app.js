@@ -381,7 +381,10 @@ function renderVacantes() {
         <td>${locHtml}</td>
         <td class="center"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
         <td class="center"><span class="badge ${badgeCat}">${escapeHTML(v.categoria)}</span></td>
-        ${state.userCoords ? `<td class="center"><strong>${v.distancia !== null ? v.distancia.toFixed(1) + ' km' : '-'}</strong></td>` : ''}
+        ${state.userCoords ? `<td class="center">
+          <strong>${v.distancia !== null ? v.distancia.toFixed(1) + ' km' : '-'}</strong>
+          ${v.duration ? `<br><small style="color:#6c757d">🚗 ${formatDuration(v.duration)}</small>` : ''}
+        </td>` : ''}
       </tr>
     `;
   }).join('');
@@ -427,7 +430,7 @@ function renderPagination(containerId, totalItems, perPage, currentPage, onPageC
   });
 }
 
-// Distance calculation
+// Distance and driving time calculation
 async function calculateDistances() {
   const query = document.getElementById('distance-input').value.trim();
   const status = document.getElementById('distance-status');
@@ -444,26 +447,66 @@ async function calculateDistances() {
     }
 
     state.userCoords = { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) };
-    status.textContent = `Ubicación encontrada: ${data[0].display_name}`;
-    document.getElementById('distance-clear').style.display = 'inline-block';
-    document.getElementById('th-distancia').style.display = 'table-cell';
-
-    // Calculate distance for all vacantes using precalculated DATA_COORDS
+    status.textContent = `Ubicación encontrada: ${data[0].display_name}. Calculando rutas en coche...`;
+    
     if (typeof DATA_COORDS === 'undefined') {
       status.textContent = 'Error: No se ha cargado la base de datos de coordenadas.';
       return;
     }
 
+    // Preparar lista de vacantes válidas y sus coordenadas
+    const validVacantes = [];
     DATA_VACANTES.forEach(v => {
       const locClean = v.localidad.replace(/\s*\([^)]*\)/g, '').trim();
       const key = normalize(locClean) + '|' + normalize(v.provincia);
       const c = DATA_COORDS[key];
       if (c) {
-        v.distancia = haversine(state.userCoords.lat, state.userCoords.lon, c.lat, c.lon);
+        validVacantes.push({ v: v, c: c });
       } else {
         v.distancia = null;
+        v.duration = null;
       }
     });
+
+    // OSRM permite 100 coordenadas maximo (1 origen + 99 destinos). Dividimos en lotes.
+    const batchSize = 90;
+    for (let i = 0; i < validVacantes.length; i += batchSize) {
+      const batch = validVacantes.slice(i, i + batchSize);
+      
+      let coordStr = `${state.userCoords.lon},${state.userCoords.lat}`;
+      batch.forEach(item => {
+        coordStr += `;${item.c.lon},${item.c.lat}`;
+      });
+      
+      const osrmUrl = `https://router.project-osrm.org/table/v1/driving/${coordStr}?sources=0&annotations=duration,distance`;
+      
+      const osrmRes = await fetch(osrmUrl);
+      const osrmData = await osrmRes.json();
+      
+      if (osrmData.code === 'Ok') {
+        const distances = osrmData.distances[0]; // array of distances from source 0
+        const durations = osrmData.durations[0]; // array of durations from source 0
+        
+        batch.forEach((item, index) => {
+          // index + 1 porque el indice 0 es el propio origen
+          item.v.distancia = distances[index + 1] / 1000; // km
+          item.v.duration = durations[index + 1]; // seconds
+        });
+      } else {
+        // Fallback a haversine si falla el enrutamiento para este lote
+        batch.forEach(item => {
+          item.v.distancia = haversine(state.userCoords.lat, state.userCoords.lon, item.c.lat, item.c.lon);
+          item.v.duration = null;
+        });
+      }
+      
+      // Pequeña pausa para no saturar la API publica de OSRM
+      await new Promise(r => setTimeout(r, 300));
+    }
+
+    status.textContent = `Rutas calculadas desde ${data[0].display_name.split(',')[0]}`;
+    document.getElementById('distance-clear').style.display = 'inline-block';
+    document.getElementById('th-distancia').style.display = 'table-cell';
 
     // Auto sort by distance
     state.vacantesSortCol = 'distancia';
@@ -473,8 +516,16 @@ async function calculateDistances() {
     
     filterVacantes();
   } catch (err) {
-    status.textContent = 'Error al conectar con el servidor de mapas.';
+    status.textContent = 'Error al conectar con los servidores de mapas/rutas.';
   }
+}
+
+function formatDuration(secs) {
+  if (secs == null || isNaN(secs)) return '';
+  const h = Math.floor(secs / 3600);
+  const m = Math.floor((secs % 3600) / 60);
+  if (h > 0) return `${h}h ${m}m`;
+  return `${m}m`;
 }
 
 function haversine(lat1, lon1, lat2, lon2) {
