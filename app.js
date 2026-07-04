@@ -1,212 +1,117 @@
-/* ===================================================
-   NOTARÍAS ES — app.js
-   Main application logic
-   =================================================== */
-
-// ===== COLEGIO METADATA =====
-const COLEGIO_META = {
-  'Colegio Notarial de Andalucía': { flag: '🏖️', region: 'Andalucía' },
-  'Colegio Notarial de Aragón': { flag: '🏰', region: 'Aragón' },
-  'Colegio Notarial de Asturias': { flag: '🌿', region: 'Asturias' },
-  'Colegio Notarial de Cantabria': { flag: '🌊', region: 'Cantabria' },
-  'Colegio Notarial de Castilla-La Mancha': { flag: '🌾', region: 'Castilla-La Mancha' },
-  'Colegio Notarial de Castilla y León': { flag: '🏯', region: 'Castilla y León' },
-  'Colegio Notarial de Cataluña': { flag: '🦅', region: 'Cataluña' },
-  'Colegio Notarial de Extremadura': { flag: '🦌', region: 'Extremadura' },
-  'Colegio Notarial de Galicia': { flag: '🐚', region: 'Galicia' },
-  'Colegio Notarial de La Rioja': { flag: '🍇', region: 'La Rioja' },
-  'Colegio Notarial de las Illes Balears': { flag: '🏝️', region: 'Illes Balears' },
-  'Colegio Notarial de las Islas Canarias': { flag: '🌋', region: 'Islas Canarias' },
-  'Colegio Notarial de Madrid': { flag: '🏙️', region: 'Comunidad de Madrid' },
-  'Colegio Notarial de Murcia': { flag: '🌞', region: 'Región de Murcia' },
-  'Colegio Notarial de Navarra': { flag: '🐂', region: 'Comunidad Foral de Navarra' },
-  'Colegio Notarial del País Vasco': { flag: '⛰️', region: 'País Vasco' },
-  'Colegio Notarial de Valencia': { flag: '🍊', region: 'Comunitat Valenciana' },
-};
-
-// ===== STATE =====
+// State
 const state = {
-  notariasSorted: [...DATA_NOTARIAS],
   notariasFiltered: [...DATA_NOTARIAS],
   notariasPage: 1,
-  notariasPerPage: 25,
-  sortCol: null,
-  sortDir: 'asc',
+  notariasPerPage: 50,
+  notariasSortCol: null,
+  notariasSortDir: 'asc',
 
   vacantesFiltered: [...DATA_VACANTES],
+  vacantesSortCol: null,
+  vacantesSortDir: 'asc',
 };
 
-// Build vacantes lookup for table
+// Utilities
+function normalize(str) {
+  if (!str) return '';
+  return str.toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+}
+
+function escapeHTML(str) {
+  if (!str) return '';
+  return str.toString()
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+function highlightText(text, query) {
+  if (!query) return escapeHTML(text);
+  const escapedText = escapeHTML(text);
+  const q = normalize(query);
+  const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+  // Simple highlight (might highlight inside words)
+  // To be safe with html entities, better to highlight before escape or just be careful.
+  // Given simplicity, we apply regex carefully.
+  return escapedText.replace(new RegExp(q, 'gi'), match => `<mark>${match}</mark>`);
+}
+
+// Vacantes matching
 const vacantesSet = new Set();
 DATA_VACANTES.forEach(v => {
-  const key = normalize(v.localidad.replace(/\s*\(.*\)/, '').trim()) + '|' + normalize(v.provincia);
+  const locRaw = v.localidad || '';
+  const locClean = locRaw.replace(/\s*\([^)]*\)/g, '').trim();
+  const key = normalize(locClean) + '|' + normalize(v.provincia);
   vacantesSet.add(key);
 });
 
-function normalize(str) {
-  return str.toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .trim();
-}
-
 function isVacante(notaria) {
-  const keyLoc = normalize(notaria.localidad) + '|' + normalize(notaria.provincia);
-  return vacantesSet.has(keyLoc);
+  const key = normalize(notaria.localidad) + '|' + normalize(notaria.provincia);
+  return vacantesSet.has(key);
 }
 
-// ===== INIT =====
+// Init
 document.addEventListener('DOMContentLoaded', () => {
-  initNavbar();
-  initStats();
-  initColegios();
-  initNotariasTable();
-  initVacantesSection();
-  initScrollSpy();
+  initTabs();
+  initNotarias();
+  initVacantes();
 });
 
-// ===== NAVBAR =====
-function initNavbar() {
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 60);
-  }, { passive: true });
-}
-
-// ===== SCROLL SPY =====
-function initScrollSpy() {
-  const sections = ['inicio', 'notarias', 'vacantes', 'colegios'];
-  const links = document.querySelectorAll('.nav-link');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        links.forEach(l => l.classList.remove('active'));
-        const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
-        if (active) active.classList.add('active');
-      }
+// Tabs
+function initTabs() {
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      
+      btn.classList.add('active');
+      document.getElementById(btn.getAttribute('data-target')).classList.add('active');
     });
-  }, { threshold: 0.3 });
-
-  sections.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) observer.observe(el);
   });
 }
 
-// ===== STATS COUNTER =====
-function initStats() {
-  // Count vacantes by type
-  const tipoCount = { Resulta: 0, Desierta: 0, Jubilación: 0 };
-  DATA_VACANTES.forEach(v => {
-    if (v.clase === 'Resulta') tipoCount.Resulta++;
-    else if (v.clase === 'Desierta') tipoCount.Desierta++;
-    else tipoCount.Jubilación++;
-  });
-
-  const total = DATA_VACANTES.length;
-  const desierta = tipoCount.Desierta;
-
-  document.getElementById('stat-vacantes-num').setAttribute('data-target', total);
-  document.getElementById('stat-desierta-num').setAttribute('data-target', desierta);
-  document.getElementById('nav-vacantes-count').textContent = total;
-  document.getElementById('footer-vacantes').textContent = total;
-
-  // Animate all counters
-  document.querySelectorAll('.stat-number[data-target]').forEach(el => {
-    const target = parseInt(el.getAttribute('data-target'));
-    animateCounter(el, 0, target, 1800);
-  });
-}
-
-function animateCounter(el, from, to, duration) {
-  const startTime = performance.now();
-  function update(currentTime) {
-    const elapsed = currentTime - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3);
-    el.textContent = Math.round(from + (to - from) * eased).toLocaleString('es-ES');
-    if (progress < 1) requestAnimationFrame(update);
-  }
-  requestAnimationFrame(update);
-}
-
-// ===== COLEGIOS GRID =====
-function initColegios() {
-  const grid = document.getElementById('colegios-grid');
-
-  // Count vacantes per colegio region
-  const vacantesPerRegion = {};
-  DATA_VACANTES.forEach(v => {
-    const r = v.comunidad;
-    vacantesPerRegion[r] = (vacantesPerRegion[r] || 0) + 1;
-  });
-
-  grid.innerHTML = DATA_RESUMEN.map(item => {
-    const shortName = item.colegio.replace('Colegio Notarial de ', '').replace('Colegio Notarial del ', '');
-    const meta = COLEGIO_META[item.colegio] || { flag: '📋', region: shortName };
-    const totalNotarias = parseInt(item.total);
-
-    // Count notarías for this colegio in data
-    const colegioNotarias = DATA_NOTARIAS.filter(n => n.colegio === item.colegio);
-    const primeraCount = colegioNotarias.filter(n => n.clase === 'Primera').length;
-
-    return `
-      <div class="colegio-card">
-        <div class="colegio-flag">${meta.flag}</div>
-        <div class="colegio-name">${item.colegio.replace('Colegio Notarial ', '')}</div>
-        <div class="colegio-region">${meta.region}</div>
-        <div class="colegio-stats">
-          <div class="colegio-stat">
-            <span class="colegio-stat-num">${parseInt(item.total).toLocaleString('es-ES')}</span>
-            <span class="colegio-stat-label">Notarías</span>
-          </div>
-          <div class="colegio-stat">
-            <span class="colegio-stat-num">${primeraCount}</span>
-            <span class="colegio-stat-label">De 1ª</span>
-          </div>
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
-// ===== NOTARÍAS TABLE =====
-function initNotariasTable() {
+// Notarias
+function initNotarias() {
   // Populate filters
   const colegios = [...new Set(DATA_NOTARIAS.map(n => n.colegio))].sort();
-  const provincias = [...new Set(DATA_NOTARIAS.map(n => n.provincia))].sort();
-
   const filterColegio = document.getElementById('filter-colegio');
-  colegios.forEach(c => {
-    filterColegio.innerHTML += `<option value="${c}">${c.replace('Colegio Notarial ', '')}</option>`;
-  });
+  colegios.forEach(c => filterColegio.innerHTML += `<option value="${escapeHTML(c)}">${escapeHTML(c.replace('Colegio Notarial ', ''))}</option>`);
 
-  const filterProv = document.getElementById('filter-provincia');
-  provincias.forEach(p => {
-    filterProv.innerHTML += `<option value="${p}">${p}</option>`;
-  });
+  const provincias = [...new Set(DATA_NOTARIAS.map(n => n.provincia))].sort();
+  const filterProvincia = document.getElementById('filter-provincia');
+  provincias.forEach(p => filterProvincia.innerHTML += `<option value="${escapeHTML(p)}">${escapeHTML(p)}</option>`);
 
-  // Event listeners
-  document.getElementById('search-notarias').addEventListener('input', debounce(filterNotarias, 250));
+  // Events
+  document.getElementById('search-notarias').addEventListener('input', debounce(filterNotarias, 300));
   document.getElementById('filter-colegio').addEventListener('change', filterNotarias);
   document.getElementById('filter-provincia').addEventListener('change', filterNotarias);
   document.getElementById('filter-clase').addEventListener('change', filterNotarias);
 
-  // Sorting
   document.querySelectorAll('#notarias-table th.sortable').forEach(th => {
     th.addEventListener('click', () => {
       const col = th.getAttribute('data-col');
-      if (state.sortCol === col) {
-        state.sortDir = state.sortDir === 'asc' ? 'desc' : 'asc';
+      if (state.notariasSortCol === col) {
+        state.notariasSortDir = state.notariasSortDir === 'asc' ? 'desc' : 'asc';
       } else {
-        state.sortCol = col;
-        state.sortDir = 'asc';
+        state.notariasSortCol = col;
+        state.notariasSortDir = 'asc';
       }
-      document.querySelectorAll('#notarias-table th').forEach(t => {
-        t.classList.remove('sorted-asc', 'sorted-desc');
-      });
-      th.classList.add(state.sortDir === 'asc' ? 'sorted-asc' : 'sorted-desc');
+      document.querySelectorAll('#notarias-table th').forEach(t => t.className = t.className.replace(/sorted-(asc|desc)/, '').trim());
+      th.classList.add(`sorted-${state.notariasSortDir}`);
       filterNotarias();
     });
   });
@@ -216,270 +121,212 @@ function initNotariasTable() {
 
 function filterNotarias() {
   const search = normalize(document.getElementById('search-notarias').value);
-  const colegioFilter = document.getElementById('filter-colegio').value;
-  const provFilter = document.getElementById('filter-provincia').value;
-  const claseFilter = document.getElementById('filter-clase').value;
+  const colF = document.getElementById('filter-colegio').value;
+  const provF = document.getElementById('filter-provincia').value;
+  const clasF = document.getElementById('filter-clase').value;
 
   let filtered = DATA_NOTARIAS.filter(n => {
-    if (colegioFilter && n.colegio !== colegioFilter) return false;
-    if (provFilter && n.provincia !== provFilter) return false;
-    if (claseFilter && n.clase !== claseFilter) return false;
+    if (colF && n.colegio !== colF) return false;
+    if (provF && n.provincia !== provF) return false;
+    if (clasF && n.clase !== clasF) return false;
     if (search) {
-      const haystack = normalize([n.localidad, n.provincia, n.distrito, n.colegio].join(' '));
-      if (!haystack.includes(search)) return false;
+      const txt = normalize(`${n.localidad} ${n.provincia} ${n.distrito} ${n.colegio}`);
+      if (!txt.includes(search)) return false;
     }
     return true;
   });
 
-  // Sort
-  if (state.sortCol) {
+  if (state.notariasSortCol) {
     filtered.sort((a, b) => {
-      let aVal = a[state.sortCol] || '';
-      let bVal = b[state.sortCol] || '';
-      if (state.sortCol === 'numero') {
-        aVal = parseInt(aVal) || 0;
-        bVal = parseInt(bVal) || 0;
-        return state.sortDir === 'asc' ? aVal - bVal : bVal - aVal;
+      let vA = a[state.notariasSortCol] || '';
+      let vB = b[state.notariasSortCol] || '';
+      if (state.notariasSortCol === 'numero') {
+        vA = parseInt(vA) || 0;
+        vB = parseInt(vB) || 0;
+        return state.notariasSortDir === 'asc' ? vA - vB : vB - vA;
       }
-      const cmp = aVal.localeCompare(bVal, 'es');
-      return state.sortDir === 'asc' ? cmp : -cmp;
+      const cmp = String(vA).localeCompare(String(vB), 'es');
+      return state.notariasSortDir === 'asc' ? cmp : -cmp;
     });
   }
 
   state.notariasFiltered = filtered;
   state.notariasPage = 1;
   document.getElementById('notarias-count').textContent = filtered.length.toLocaleString('es-ES');
-  renderNotariasTable();
+  renderNotarias();
 }
 
-function renderNotariasTable() {
-  const { notariasFiltered, notariasPage, notariasPerPage } = state;
-  const search = document.getElementById('search-notarias').value;
+function renderNotarias() {
   const tbody = document.getElementById('notarias-tbody');
-  const start = (notariasPage - 1) * notariasPerPage;
-  const page = notariasFiltered.slice(start, start + notariasPerPage);
+  const start = (state.notariasPage - 1) * state.notariasPerPage;
+  const page = state.notariasFiltered.slice(start, start + state.notariasPerPage);
 
   if (page.length === 0) {
-    tbody.innerHTML = `<tr class="no-results-row"><td colspan="7">No se encontraron notarías con los filtros aplicados.</td></tr>`;
-    renderPagination();
+    tbody.innerHTML = `<tr><td colspan="7" class="center">No hay resultados.</td></tr>`;
+    document.getElementById('notarias-pagination').innerHTML = '';
     return;
   }
 
+  const query = document.getElementById('search-notarias').value;
+
   tbody.innerHTML = page.map(n => {
     const isV = isVacante(n);
-    const claseClass = {
-      'Primera': 'clase-primera',
-      'Segunda': 'clase-segunda',
-      'Tercera': 'clase-tercera'
-    }[n.clase] || '';
-
-    const shortColegio = n.colegio
-      .replace('Colegio Notarial de las ', '')
-      .replace('Colegio Notarial de la ', '')
-      .replace('Colegio Notarial del ', '')
-      .replace('Colegio Notarial de ', '');
-
-    const localidadHighlighted = search
-      ? highlightText(n.localidad, search)
-      : n.localidad;
+    const claseBadge = n.clase === 'Primera' ? 'badge-primera' : n.clase === 'Segunda' ? 'badge-segunda' : 'badge-tercera';
+    const cName = n.colegio.replace('Colegio Notarial de las ', '').replace('Colegio Notarial de la ', '').replace('Colegio Notarial del ', '').replace('Colegio Notarial de ', '');
 
     return `
       <tr>
-        <td title="${n.colegio}">${shortColegio}</td>
-        <td>${n.provincia}</td>
-        <td>${n.distrito}</td>
-        <td class="td-localidad">${localidadHighlighted}${n.notas ? `<span class="vacante-nota" title="${n.notas}"> ⓘ</span>` : ''}</td>
-        <td class="td-center"><strong>${n.numero}</strong></td>
-        <td class="td-center"><span class="clase-badge ${claseClass}">${n.clase}</span></td>
-        <td class="td-center">${isV ? '<span class="vacante-indicator vacante-si" title="Plaza vacante">✓</span>' : ''}</td>
+        <td>${escapeHTML(cName)}</td>
+        <td>${escapeHTML(n.provincia)}</td>
+        <td>${escapeHTML(n.distrito)}</td>
+        <td>
+          <strong>${highlightText(n.localidad, query)}</strong>
+          ${n.notas ? `<br><small style="color:#6c757d">${escapeHTML(n.notas)}</small>` : ''}
+        </td>
+        <td class="center">${escapeHTML(n.numero)}</td>
+        <td class="center"><span class="badge ${claseBadge}">${escapeHTML(n.clase)}</span></td>
+        <td class="center">${isV ? '<span class="vacante-si" title="Plaza vacante">✓</span>' : ''}</td>
       </tr>
     `;
   }).join('');
 
-  renderPagination();
+  renderPagination('notarias-pagination', state.notariasFiltered.length, state.notariasPerPage, state.notariasPage, (p) => {
+    state.notariasPage = p;
+    renderNotarias();
+    document.getElementById('tab-notarias').scrollIntoView({ behavior: 'smooth' });
+  });
 }
 
-function renderPagination() {
-  const { notariasFiltered, notariasPage, notariasPerPage } = state;
-  const totalPages = Math.ceil(notariasFiltered.length / notariasPerPage);
-  const container = document.getElementById('notarias-pagination');
+// Vacantes
+function initVacantes() {
+  const coms = [...new Set(DATA_VACANTES.map(v => v.comunidad).filter(Boolean))].sort();
+  const filterCom = document.getElementById('filter-vacante-comunidad');
+  coms.forEach(c => filterCom.innerHTML += `<option value="${escapeHTML(c)}">${escapeHTML(c)}</option>`);
 
+  document.getElementById('search-vacantes').addEventListener('input', debounce(filterVacantes, 300));
+  document.getElementById('filter-vacante-comunidad').addEventListener('change', filterVacantes);
+  document.getElementById('filter-vacante-tipo').addEventListener('change', filterVacantes);
+
+  document.querySelectorAll('#vacantes-table th.sortable').forEach(th => {
+    th.addEventListener('click', () => {
+      const col = th.getAttribute('data-col');
+      if (state.vacantesSortCol === col) {
+        state.vacantesSortDir = state.vacantesSortDir === 'asc' ? 'desc' : 'asc';
+      } else {
+        state.vacantesSortCol = col;
+        state.vacantesSortDir = 'asc';
+      }
+      document.querySelectorAll('#vacantes-table th').forEach(t => t.className = t.className.replace(/sorted-(asc|desc)/, '').trim());
+      th.classList.add(`sorted-${state.vacantesSortDir}`);
+      filterVacantes();
+    });
+  });
+
+  filterVacantes();
+}
+
+function filterVacantes() {
+  const search = normalize(document.getElementById('search-vacantes').value);
+  const comF = document.getElementById('filter-vacante-comunidad').value;
+  const tipoF = document.getElementById('filter-vacante-tipo').value;
+
+  let filtered = DATA_VACANTES.filter(v => {
+    if (comF && v.comunidad !== comF) return false;
+    if (tipoF) {
+      if (tipoF === 'Jubilación' && !v.clase.startsWith('Jubilación')) return false;
+      if (tipoF !== 'Jubilación' && v.clase !== tipoF) return false;
+    }
+    if (search) {
+      const txt = normalize(`${v.localidad} ${v.provincia} ${v.comunidad} ${v.notas}`);
+      if (!txt.includes(search)) return false;
+    }
+    return true;
+  });
+
+  if (state.vacantesSortCol) {
+    filtered.sort((a, b) => {
+      let vA = a[state.vacantesSortCol] || '';
+      let vB = b[state.vacantesSortCol] || '';
+      const cmp = String(vA).localeCompare(String(vB), 'es');
+      return state.vacantesSortDir === 'asc' ? cmp : -cmp;
+    });
+  }
+
+  state.vacantesFiltered = filtered;
+  document.getElementById('vacantes-count-text').textContent = filtered.length;
+  renderVacantes();
+}
+
+function renderVacantes() {
+  const tbody = document.getElementById('vacantes-tbody');
+  const page = state.vacantesFiltered; // Show all vacantes, it's max 141
+
+  if (page.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="5" class="center">No hay vacantes encontradas.</td></tr>`;
+    return;
+  }
+
+  const query = document.getElementById('search-vacantes').value;
+
+  tbody.innerHTML = page.map(v => {
+    const isJubilacion = v.clase.includes('Jubilación');
+    const badgeClass = isJubilacion ? 'badge-jubilacion' : v.clase === 'Resulta' ? 'badge-resulta' : 'badge-desierta';
+    
+    // Extract notario if Jubilación
+    let locHtml = `<strong>${highlightText(v.localidad.replace(/\s*\([^)]+\)/, '').trim(), query)}</strong>`;
+    const notarioMatch = v.localidad.match(/\((Don|Doña)[^)]+\)/);
+    if (notarioMatch) {
+      locHtml += `<br><small style="color:#6c757d">Sustituye a: ${escapeHTML(notarioMatch[0].replace(/[()]/g, ''))}</small>`;
+    }
+
+    return `
+      <tr>
+        <td>${escapeHTML(v.comunidad)}</td>
+        <td>${escapeHTML(v.provincia)}</td>
+        <td>${locHtml}</td>
+        <td><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
+        <td>${escapeHTML(v.notas)}</td>
+      </tr>
+    `;
+  }).join('');
+}
+
+// Pagination Builder
+function renderPagination(containerId, totalItems, perPage, currentPage, onPageChange) {
+  const container = document.getElementById(containerId);
+  const totalPages = Math.ceil(totalItems / perPage);
   if (totalPages <= 1) {
     container.innerHTML = '';
     return;
   }
 
+  let html = `<button class="page-btn" ${currentPage === 1 ? 'disabled' : ''} data-page="${currentPage - 1}">Anterior</button>`;
+  
   let pages = [];
   const delta = 2;
-
   for (let i = 1; i <= totalPages; i++) {
-    if (i === 1 || i === totalPages || (i >= notariasPage - delta && i <= notariasPage + delta)) {
+    if (i === 1 || i === totalPages || (i >= currentPage - delta && i <= currentPage + delta)) {
       pages.push(i);
     } else if (pages[pages.length - 1] !== '…') {
       pages.push('…');
     }
   }
 
-  container.innerHTML = `
-    <button class="page-btn" onclick="goToPage(${notariasPage - 1})" ${notariasPage === 1 ? 'disabled' : ''}>←</button>
-    ${pages.map(p =>
-      p === '…'
-        ? `<span class="page-btn" style="cursor:default">…</span>`
-        : `<button class="page-btn ${p === notariasPage ? 'active' : ''}" onclick="goToPage(${p})">${p}</button>`
-    ).join('')}
-    <button class="page-btn" onclick="goToPage(${notariasPage + 1})" ${notariasPage === totalPages ? 'disabled' : ''}>→</button>
-  `;
-}
-
-function goToPage(page) {
-  const totalPages = Math.ceil(state.notariasFiltered.length / state.notariasPerPage);
-  if (page < 1 || page > totalPages) return;
-  state.notariasPage = page;
-  renderNotariasTable();
-  document.getElementById('notarias').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function highlightText(text, query) {
-  if (!query) return text;
-  const q = normalize(query);
-  const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
-  return text.replace(re, match => `<mark>${match}</mark>`);
-}
-
-// ===== VACANTES SECTION =====
-function initVacantesSection() {
-  // Count by type
-  const counts = {};
-  DATA_VACANTES.forEach(v => {
-    const tipo = v.clase;
-    counts[tipo] = (counts[tipo] || 0) + 1;
-  });
-
-  const resulta = counts['Resulta'] || 0;
-  const desierta = counts['Desierta'] || 0;
-  const jubilacion = (counts['Jubilación'] || 0) + (counts['Jubilación voluntaria'] || 0);
-
-  const summary = document.getElementById('vacantes-summary');
-  summary.innerHTML = `
-    <div class="summary-chip summary-chip-resulta" onclick="filterVacantesByTipo('Resulta')">
-      📋 Resulta <span class="chip-count">${resulta}</span>
-    </div>
-    <div class="summary-chip summary-chip-desierta" onclick="filterVacantesByTipo('Desierta')">
-      🔴 Desierta <span class="chip-count">${desierta}</span>
-    </div>
-    <div class="summary-chip summary-chip-jubilacion" onclick="filterVacantesByTipo('Jubilación')">
-      👤 Jubilación <span class="chip-count">${jubilacion}</span>
-    </div>
-    <div class="summary-chip" style="background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text-secondary)" onclick="filterVacantesByTipo('')">
-      🔍 Todas <span class="chip-count" style="background:rgba(255,255,255,0.1)">${DATA_VACANTES.length}</span>
-    </div>
-  `;
-
-  // Populate communities filter
-  const comunidades = [...new Set(DATA_VACANTES.map(v => v.comunidad))].sort();
-  const filterCom = document.getElementById('filter-vacante-comunidad');
-  comunidades.forEach(c => {
-    filterCom.innerHTML += `<option value="${c}">${c}</option>`;
-  });
-
-  document.getElementById('search-vacantes').addEventListener('input', debounce(filterVacantes, 250));
-  document.getElementById('filter-vacante-comunidad').addEventListener('change', filterVacantes);
-  document.getElementById('filter-vacante-tipo').addEventListener('change', filterVacantes);
-
-  renderVacantes(DATA_VACANTES);
-}
-
-function filterVacantesByTipo(tipo) {
-  const select = document.getElementById('filter-vacante-tipo');
-  select.value = tipo;
-  filterVacantes();
-  document.getElementById('vacantes').scrollIntoView({ behavior: 'smooth' });
-}
-
-function filterVacantes() {
-  const search = normalize(document.getElementById('search-vacantes').value);
-  const comunidadFilter = document.getElementById('filter-vacante-comunidad').value;
-  const tipoFilter = document.getElementById('filter-vacante-tipo').value;
-
-  let filtered = DATA_VACANTES.filter(v => {
-    if (comunidadFilter && v.comunidad !== comunidadFilter) return false;
-    if (tipoFilter) {
-      if (tipoFilter === 'Jubilación') {
-        if (!v.clase.startsWith('Jubilación')) return false;
-      } else {
-        if (v.clase !== tipoFilter) return false;
-      }
+  pages.forEach(p => {
+    if (p === '…') {
+      html += `<button class="page-btn" disabled>…</button>`;
+    } else {
+      html += `<button class="page-btn ${p === currentPage ? 'active' : ''}" data-page="${p}">${p}</button>`;
     }
-    if (search) {
-      const haystack = normalize([v.localidad, v.provincia, v.comunidad, v.notas].join(' '));
-      if (!haystack.includes(search)) return false;
-    }
-    return true;
   });
 
-  document.getElementById('vacantes-count').textContent = filtered.length;
-  renderVacantes(filtered);
-}
+  html += `<button class="page-btn" ${currentPage === totalPages ? 'disabled' : ''} data-page="${currentPage + 1}">Siguiente</button>`;
+  
+  container.innerHTML = html;
 
-function renderVacantes(vacantes) {
-  const grid = document.getElementById('vacantes-grid');
-  const search = document.getElementById('search-vacantes').value;
-
-  if (vacantes.length === 0) {
-    grid.innerHTML = `
-      <div class="empty-state" style="grid-column:1/-1">
-        <div class="empty-state-icon">🔍</div>
-        <div class="empty-state-title">No se encontraron vacantes</div>
-        <div class="empty-state-text">Intenta modificar los filtros de búsqueda</div>
-      </div>
-    `;
-    return;
-  }
-
-  grid.innerHTML = vacantes.map(v => {
-    const tipo = v.clase || 'Resulta';
-    const tipoClass = tipo.toLowerCase().replace(/\s+/g, '-').replace('ó', 'o').replace('ú', 'u');
-    const badgeClass = `tipo-${tipoClass}-badge`;
-
-    // Clean localidad
-    const localidadRaw = v.localidad;
-    const notario = localidadRaw.match(/\((Don|Doña)\s[^)]+\)/);
-    const localidadClean = localidadRaw.replace(/\s*\((Don|Doña)[^)]+\)/, '').trim();
-
-    const localidadHL = search ? highlightText(localidadClean, search) : localidadClean;
-
-    return `
-      <div class="vacante-card tipo-${tipoClass}">
-        <div class="vacante-header">
-          <div class="vacante-localidad">${localidadHL}</div>
-          <span class="tipo-badge ${badgeClass}">${tipo}</span>
-        </div>
-        <div class="vacante-meta">
-          <div class="vacante-meta-item">
-            <span class="vacante-meta-icon">📍</span>
-            <span>${v.provincia}${v.comunidad ? ` · ${v.comunidad}` : ''}</span>
-          </div>
-          ${v.notas && v.notas !== 'Vacante' ? `
-          <div class="vacante-meta-item">
-            <span class="vacante-meta-icon">📄</span>
-            <span>${v.notas}</span>
-          </div>` : ''}
-          ${notario ? `
-          <div class="vacante-meta-item">
-            <span class="vacante-meta-icon">👤</span>
-            <span>${notario[0].replace('(', '').replace(')', '')}</span>
-          </div>` : ''}
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
-// ===== UTILITIES =====
-function debounce(fn, delay) {
-  let timer;
-  return (...args) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => fn(...args), delay);
-  };
+  container.querySelectorAll('.page-btn:not([disabled])').forEach(btn => {
+    if (btn.textContent !== '…' && !btn.classList.contains('active')) {
+      btn.addEventListener('click', () => onPageChange(parseInt(btn.getAttribute('data-page'))));
+    }
+  });
 }
