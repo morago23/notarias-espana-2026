@@ -533,6 +533,20 @@ mark {
 
 /* Mobile Adjustments */
 @media (max-width: 768px) {
+  .tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-bottom: 16px;
+  }
+  .tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .tab-btn {
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
   .header-inner {
     flex-direction: column;
     align-items: flex-start;
