@@ -623,6 +623,7 @@ body.dark-mode .fav-btn.active {
 
 @media (max-width: 768px) {
   .header {
+    position: static !important;
     padding: 15px 0;
   }
   .header-inner {
