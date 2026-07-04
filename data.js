@@ -11304,1448 +11304,1655 @@ const DATA_VACANTES = [
     "provincia": "Araba/Álava",
     "localidad": "Vitoria-Gasteiz",
     "clase": "Desierta",
-    "notas": "Nº1"
+    "notas": "Nº1",
+    "anteriorNotario": "Sofía Trapote González"
   },
   {
     "comunidad": "Principado de Asturias",
     "provincia": "Asturias",
     "localidad": "Avilés",
     "clase": "Desierta",
-    "notas": "Nº15"
+    "notas": "Nº15",
+    "anteriorNotario": "Luis Sobrino González"
   },
   {
     "comunidad": "País Vasco",
     "provincia": "Araba/Álava",
     "localidad": "Vitoria-Gasteiz",
     "clase": "Desierta",
-    "notas": "Nº16"
+    "notas": "Nº16",
+    "anteriorNotario": "María del Camino López de Heredia San Julián"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "León",
     "localidad": "Ponferrada",
     "clase": "Desierta",
-    "notas": "Nº41"
+    "notas": "Nº41",
+    "anteriorNotario": "Bernardo Martínez López"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "León",
     "localidad": "Ponferrada",
     "clase": "Desierta",
-    "notas": "Nº45"
+    "notas": "Nº45",
+    "anteriorNotario": "Jorge Luis Sánchez Carballo"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "León",
     "localidad": "Fabero",
     "clase": "Desierta",
-    "notas": "Nº56"
+    "notas": "Nº56",
+    "anteriorNotario": "José Rodrigo Nieto Basarán"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "León",
     "localidad": "Cistierna",
     "clase": "Desierta",
-    "notas": "Nº58"
+    "notas": "Nº58",
+    "anteriorNotario": "Jesús Sen Salles"
   },
   {
     "comunidad": "Galicia",
     "provincia": "Lugo",
     "localidad": "Meira",
     "clase": "Desierta",
-    "notas": "Nº59"
+    "notas": "Nº59",
+    "anteriorNotario": "Ignacio Garrido García"
   },
   {
     "comunidad": "Extremadura",
     "provincia": "Cáceres",
     "localidad": "Garrovillas de Alconétar",
     "clase": "Desierta",
-    "notas": "Nº60"
+    "notas": "Nº60",
+    "anteriorNotario": "Ignacio Capitán Sierra"
   },
   {
     "comunidad": "Galicia",
     "provincia": "Ourense",
     "localidad": "O Barco de Valdeorras",
     "clase": "Desierta",
-    "notas": "Nº61"
+    "notas": "Nº61",
+    "anteriorNotario": "Gabriela Victoria Marqués Mosquera"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Salamanca",
     "localidad": "Ciudad Rodrigo",
     "clase": "Desierta",
-    "notas": "Nº62"
+    "notas": "Nº62",
+    "anteriorNotario": "Francisco Echávarri López"
   },
   {
     "comunidad": "Comunitat Valenciana",
     "provincia": "Castelló/Castellón",
     "localidad": "Sant Mateu",
     "clase": "Desierta",
-    "notas": "Nº63"
+    "notas": "Nº63",
+    "anteriorNotario": "Elena Dacal Rodríguez"
   },
   {
     "comunidad": "Galicia",
     "provincia": "Pontevedra",
     "localidad": "A Cañiza",
     "clase": "Desierta",
-    "notas": "Nº77"
+    "notas": "Nº77",
+    "anteriorNotario": "Tamara Casal Esperanza"
   },
   {
     "comunidad": "La Rioja",
     "provincia": "La Rioja",
     "localidad": "Arnedo",
     "clase": "Desierta",
-    "notas": "Nº78"
+    "notas": "Nº78",
+    "anteriorNotario": "Susana Garzón Echevarría"
   },
   {
     "comunidad": "Principado de Asturias",
     "provincia": "Asturias",
     "localidad": "Boal",
     "clase": "Desierta",
-    "notas": "Nº79"
+    "notas": "Nº79",
+    "anteriorNotario": "Sergio Cardona Costa"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Ávila",
     "localidad": "Fontiveros",
     "clase": "Desierta",
-    "notas": "Nº80"
+    "notas": "Nº80",
+    "anteriorNotario": "Sara Riesco Gacho"
   },
   {
     "comunidad": "Galicia",
     "provincia": "Lugo",
     "localidad": "A Pontenova",
     "clase": "Desierta",
-    "notas": "Nº81"
+    "notas": "Nº81",
+    "anteriorNotario": "Rosalía Priego Sancho"
   },
   {
     "comunidad": "Comunidad Foral de Navarra",
     "provincia": "Navarra",
     "localidad": "Ochagavía/Otsagabia",
     "clase": "Desierta",
-    "notas": "Nº82"
+    "notas": "Nº82",
+    "anteriorNotario": "Rita Mercedes Martínez Pérez"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Palencia",
     "localidad": "Osorno la Mayor",
     "clase": "Desierta",
-    "notas": "Nº84"
+    "notas": "Nº84",
+    "anteriorNotario": "Patricia Olivencia Cerezo"
   },
   {
     "comunidad": "Aragón",
     "provincia": "Teruel",
     "localidad": "Mosqueruela",
     "clase": "Desierta",
-    "notas": "Nº85"
+    "notas": "Nº85",
+    "anteriorNotario": "Patricia Martínez Calderón"
   },
   {
     "comunidad": "Comunidad Foral de Navarra",
     "provincia": "Navarra",
     "localidad": "Aoiz/Agoitz",
     "clase": "Desierta",
-    "notas": "Nº86"
+    "notas": "Nº86",
+    "anteriorNotario": "Paloma López de Uralde Alcoba"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Córdoba",
     "localidad": "Iznájar",
     "clase": "Desierta",
-    "notas": "Nº87"
+    "notas": "Nº87",
+    "anteriorNotario": "Marta Muñagorri Eceiza"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "León",
     "localidad": "Villamañán",
     "clase": "Desierta",
-    "notas": "Nº88"
+    "notas": "Nº88",
+    "anteriorNotario": "María Teresa Pérez Dapena"
   },
   {
     "comunidad": "Aragón",
     "provincia": "Huesca",
     "localidad": "Tamarite de Litera",
     "clase": "Desierta",
-    "notas": "Nº89"
+    "notas": "Nº89",
+    "anteriorNotario": "María Teresa García Ludefa"
   },
   {
     "comunidad": "Illes Balears",
     "provincia": "Illes Balears",
     "localidad": "Felanitx",
     "clase": "Desierta",
-    "notas": "Nº90"
+    "notas": "Nº90",
+    "anteriorNotario": "María Magdalena Sans Gelabert"
   },
   {
     "comunidad": "Galicia",
     "provincia": "Lugo",
     "localidad": "Castroverde",
     "clase": "Desierta",
-    "notas": "Nº92"
+    "notas": "Nº92",
+    "anteriorNotario": "Manuel Pulgar Malo de Molina"
   },
   {
     "comunidad": "La Rioja",
     "provincia": "La Rioja",
     "localidad": "Torrecilla en Cameros",
     "clase": "Desierta",
-    "notas": "Nº93"
+    "notas": "Nº93",
+    "anteriorNotario": "Macarena Riquelme Sánchez de la Viña"
   },
   {
     "comunidad": "Galicia",
     "provincia": "Lugo",
     "localidad": "Friol",
     "clase": "Desierta",
-    "notas": "Nº95"
+    "notas": "Nº95",
+    "anteriorNotario": "Lucas Braquehais Conesa"
   },
   {
     "comunidad": "Principado de Asturias",
     "provincia": "Asturias",
     "localidad": "Panes",
     "clase": "Desierta",
-    "notas": "Nº97"
+    "notas": "Nº97",
+    "anteriorNotario": "José Luis Meana Valdés"
   },
   {
     "comunidad": "Cantabria",
     "provincia": "Cantabria",
     "localidad": "Corvera de Toranzo",
     "clase": "Desierta",
-    "notas": "Nº98"
+    "notas": "Nº98",
+    "anteriorNotario": "José Ignacio de Solas Rodríguez-Hermida"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "León",
     "localidad": "Puente de Domingo Flórez",
     "clase": "Desierta",
-    "notas": "Nº99"
+    "notas": "Nº99",
+    "anteriorNotario": "Jorge Ron Latas"
   },
   {
     "comunidad": "Principado de Asturias",
     "provincia": "Asturias",
     "localidad": "Proaza",
     "clase": "Desierta",
-    "notas": "Nº100"
+    "notas": "Nº100",
+    "anteriorNotario": "Javier Valverde Cuevas"
   },
   {
     "comunidad": "Extremadura",
     "provincia": "Cáceres",
     "localidad": "Guadalupe",
     "clase": "Desierta",
-    "notas": "Nº102"
+    "notas": "Nº102",
+    "anteriorNotario": "Fernando Martínez Segura"
   },
   {
     "comunidad": "Aragón",
     "provincia": "Zaragoza",
     "localidad": "Sos del Rey Católico",
     "clase": "Desierta",
-    "notas": "Nº104"
+    "notas": "Nº104",
+    "anteriorNotario": "Eva María Esteras Aure"
   },
   {
     "comunidad": "Principado de Asturias",
     "provincia": "Asturias",
     "localidad": "Trevías",
     "clase": "Desierta",
-    "notas": "Nº105"
+    "notas": "Nº105",
+    "anteriorNotario": "Diego Aparicio Mourelo"
   },
   {
     "comunidad": "Aragón",
     "provincia": "Huesca",
     "localidad": "Benasque",
     "clase": "Desierta",
-    "notas": "Nº106"
+    "notas": "Nº106",
+    "anteriorNotario": "Clara Castillón Porqueras"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Soria",
     "localidad": "Arcos de Jalón",
     "clase": "Desierta",
-    "notas": "Nº107"
+    "notas": "Nº107",
+    "anteriorNotario": "Carmen Alicia Graiño Calaza"
   },
   {
     "comunidad": "Comunidad Foral de Navarra",
     "provincia": "Navarra",
     "localidad": "Lekunberri",
     "clase": "Desierta",
-    "notas": "Nº108"
+    "notas": "Nº108",
+    "anteriorNotario": "Carlos Ibáñez López"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Salamanca",
     "localidad": "Tamames",
     "clase": "Desierta",
-    "notas": "Nº109"
+    "notas": "Nº109",
+    "anteriorNotario": "Ariel Sultán Benguigui"
   },
   {
     "comunidad": "Galicia",
     "provincia": "Ourense",
     "localidad": "Bande",
     "clase": "Desierta",
-    "notas": "Nº112"
+    "notas": "Nº112",
+    "anteriorNotario": "Álvaro Romero García"
   },
   {
     "comunidad": "Illes Balears",
     "provincia": "Illes Balears",
     "localidad": "Petra",
     "clase": "Desierta",
-    "notas": "Nº113"
+    "notas": "Nº113",
+    "anteriorNotario": "Álvaro Obando Viada"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Valladolid",
     "localidad": "Valoria la Buena",
     "clase": "Desierta",
-    "notas": "Nº114"
+    "notas": "Nº114",
+    "anteriorNotario": "Álvaro Cordero Taborda"
   },
   {
     "comunidad": "Galicia",
     "provincia": "Lugo",
     "localidad": "Palas de Rei",
     "clase": "Desierta",
-    "notas": "Nº115"
+    "notas": "Nº115",
+    "anteriorNotario": "Alejandro Jaime Sauca Núñez de Prado"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Burgos",
     "localidad": "Roa",
     "clase": "Desierta",
-    "notas": "Nº116"
+    "notas": "Nº116",
+    "anteriorNotario": "Adela María Solís García"
   },
   {
     "comunidad": "Comunidad Foral de Navarra",
     "provincia": "Navarra",
     "localidad": "Estella-Lizarra",
     "clase": "Desierta",
-    "notas": "Nº117"
+    "notas": "Nº117",
+    "anteriorNotario": "Ricardo Viana Ruiz"
   },
   {
     "comunidad": "País Vasco",
     "provincia": "Bizkaia/Vizcaya",
     "localidad": "Areatza",
     "clase": "Desierta",
-    "notas": "Nº119"
+    "notas": "Nº119",
+    "anteriorNotario": "Pedro Álvarez Blanco"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Ávila",
     "localidad": "El Barco de Ávila",
     "clase": "Desierta",
-    "notas": "Nº121"
+    "notas": "Nº121",
+    "anteriorNotario": "Marta Domínguez Merino"
   },
   {
     "comunidad": "Castilla-La Mancha",
     "provincia": "Albacete",
     "localidad": "Barrax",
     "clase": "Desierta",
-    "notas": "Nº122"
+    "notas": "Nº122",
+    "anteriorNotario": "María Victoria Huertas Martín del Olmo"
   },
   {
     "comunidad": "Castilla-La Mancha",
     "provincia": "Guadalajara",
     "localidad": "Sacedón",
     "clase": "Desierta",
-    "notas": "Nº123"
+    "notas": "Nº123",
+    "anteriorNotario": "María de La O del Río Aguiar"
   },
   {
     "comunidad": "Illes Balears",
     "provincia": "Illes Balears",
     "localidad": "Alaró",
     "clase": "Desierta",
-    "notas": "Nº128"
+    "notas": "Nº128",
+    "anteriorNotario": "David Fiol Busquets"
   },
   {
     "comunidad": "Aragón",
     "provincia": "Zaragoza",
     "localidad": "Maella",
     "clase": "Desierta",
-    "notas": "Nº132"
+    "notas": "Nº132",
+    "anteriorNotario": "Víctor Gas Ferrer"
   },
   {
     "comunidad": "Aragón",
     "provincia": "Huesca",
     "localidad": "Berdún",
     "clase": "Desierta",
-    "notas": "Nº133"
+    "notas": "Nº133",
+    "anteriorNotario": "Rebeca Pueyo Cajal"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Palencia",
     "localidad": "Frechilla",
     "clase": "Desierta",
-    "notas": "Nº134"
+    "notas": "Nº134",
+    "anteriorNotario": "Mónica María Jurjo García"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Salamanca",
     "localidad": "La Vellés",
     "clase": "Desierta",
-    "notas": "Nº136"
+    "notas": "Nº136",
+    "anteriorNotario": "María Ruiz Aldanondo"
   },
   {
     "comunidad": "País Vasco",
     "provincia": "Gipuzkoa/Guipúzcoa",
     "localidad": "Bergara",
     "clase": "Desierta",
-    "notas": "Nº137"
+    "notas": "Nº137",
+    "anteriorNotario": "María Longarte Ulacia"
   },
   {
     "comunidad": "País Vasco",
     "provincia": "Bizkaia/Vizcaya",
     "localidad": "Karrantza Harana/Valle de Carranza",
     "clase": "Desierta",
-    "notas": "Nº138"
+    "notas": "Nº138",
+    "anteriorNotario": "María del Carmen Retamar García"
   },
   {
     "comunidad": "Aragón",
     "provincia": "Huesca",
     "localidad": "Ayerbe",
     "clase": "Desierta",
-    "notas": "Nº139"
+    "notas": "Nº139",
+    "anteriorNotario": "María Concepción Granado Fernández de la Pradilla"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Burgos",
     "localidad": "Villarcayo de Merindad de Castilla la Vieja",
     "clase": "Desierta",
-    "notas": "Nº140"
+    "notas": "Nº140",
+    "anteriorNotario": "José Millaruelo Frontela"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Palencia",
     "localidad": "Herrera de Pisuerga",
     "clase": "Desierta",
-    "notas": "Nº141"
+    "notas": "Nº141",
+    "anteriorNotario": "José Ángel Ramírez Díaz"
   },
   {
     "comunidad": "Galicia",
     "provincia": "Lugo",
     "localidad": "Monterroso",
     "clase": "Desierta",
-    "notas": "Nº142"
+    "notas": "Nº142",
+    "anteriorNotario": "Faustino Rodríguez-Segade Vázquez"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Salamanca",
     "localidad": "Lumbrales",
     "clase": "Desierta",
-    "notas": "Nº143"
+    "notas": "Nº143",
+    "anteriorNotario": "Encarnación García Campos"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Palencia",
     "localidad": "Villada",
     "clase": "Desierta",
-    "notas": "Nº144"
+    "notas": "Nº144",
+    "anteriorNotario": "Daniel Villagrá Morán"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Burgos",
     "localidad": "Melgar de Fernamental",
     "clase": "Desierta",
-    "notas": "Nº145"
+    "notas": "Nº145",
+    "anteriorNotario": "Carmen Solís Pino"
   },
   {
     "comunidad": "Aragón",
     "provincia": "Teruel",
     "localidad": "Albarracín",
     "clase": "Desierta",
-    "notas": "Nº146"
+    "notas": "Nº146",
+    "anteriorNotario": "Antonio Méndez Lindo"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "León",
     "localidad": "Valderas",
     "clase": "Desierta",
-    "notas": "Nº147"
+    "notas": "Nº147",
+    "anteriorNotario": "Ana Sulleiro Avendaño"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
     "localidad": "Barcelona (Vacante F. Bautista Pérez)",
     "clase": "Desierta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Fernando Bautista Pérez"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
     "localidad": "L'Hospitalet de Llobregat (Vacante M. Sánchez García)",
     "clase": "Desierta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "María Sánchez García"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
     "localidad": "Barcelona (Vacante J. L. Iribarne Blanco)",
     "clase": "Desierta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "José Lorenzo Iribarne Blanco"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
     "localidad": "Barcelona (Vacante T. M. Villazán Tovar)",
     "clase": "Desierta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Teresa María Villazán Tovar"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
     "localidad": "Esplugues de Llobregat",
     "clase": "Desierta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "María Gracia Criado Fernández"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
     "localidad": "Badia del Vallès",
     "clase": "Desierta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Sara Indurain Tornos"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
     "localidad": "Vilanova del Camí",
     "clase": "Desierta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Fernando Pascual González Barranca"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
     "localidad": "Granollers",
     "clase": "Desierta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "José Poyatos Díaz"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
     "localidad": "Palafrugell",
     "clase": "Desierta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Jaime Fernández Tussy"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
     "localidad": "Figueres",
     "clase": "Desierta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Juan Fortaner Torrent"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
     "localidad": "Camprodon",
     "clase": "Desierta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Guillermo Martín-Riva Ruiz"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
     "localidad": "L'Escala",
     "clase": "Desierta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "María José Solís de la Fuente"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
     "localidad": "Hostalric",
     "clase": "Desierta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Juan Fortaner Torrent"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
     "localidad": "Palamós",
     "clase": "Desierta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Juan Ignacio Sorigue Abel"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
     "localidad": "Torroella de Montgrí-Estartit",
     "clase": "Desierta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Rocío Ramírez López-Frías"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Lleida",
     "localidad": "Lleida (Vacante M. Sansalvado Chalaux)",
     "clase": "Desierta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Marcos Sansalvado Chalaux"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Lleida",
     "localidad": "Sant Joan de Vilatorrada",
     "clase": "Desierta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Pedro Pablo Albiol Ballesteros"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Lleida",
     "localidad": "Sort",
     "clase": "Desierta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Santiago Javier Castillo Gutiérrez"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Lleida",
     "localidad": "La Pobla de Segur",
     "clase": "Desierta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "María del Pilar Navarro Fraile"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Tarragona",
     "localidad": "Constantí",
     "clase": "Desierta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Dulce María Pascual Pardo"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Tarragona",
     "localidad": "Flix",
     "clase": "Desierta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Nueva creación"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Tarragona",
     "localidad": "Xerta",
     "clase": "Desierta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Jezabel Rodríguez Jato"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Tarragona",
     "localidad": "La Selva del Camp",
     "clase": "Desierta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "María de los Ángeles Picado Moreno"
   },
   {
     "comunidad": "Comunitat Valenciana",
     "provincia": "València/Valencia",
     "localidad": "Gandía",
     "clase": "Resulta",
-    "notas": "Nº2"
+    "notas": "Nº2",
+    "anteriorNotario": "María José Perelló Agustina"
   },
   {
     "comunidad": "Castilla-La Mancha",
     "provincia": "Ciudad Real",
     "localidad": "Torralba de Calatrava",
     "clase": "Resulta",
-    "notas": "Nº3"
+    "notas": "Nº3",
+    "anteriorNotario": "María Isabel Díaz Plaza"
   },
   {
     "comunidad": "Principado de Asturias",
     "provincia": "Asturias",
     "localidad": "Gijón",
     "clase": "Resulta",
-    "notas": "Nº4"
+    "notas": "Nº4",
+    "anteriorNotario": "Sara Jimena Unceta de la Cruz"
   },
   {
     "comunidad": "Extremadura",
     "provincia": "Cáceres",
     "localidad": "Jarandilla de la Vera",
     "clase": "Resulta",
-    "notas": "Nº5"
+    "notas": "Nº5",
+    "anteriorNotario": "Daniel Alonso Carrasco"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Sevilla",
     "localidad": "El Cuervo de Sevilla",
     "clase": "Resulta",
-    "notas": "Nº6"
+    "notas": "Nº6",
+    "anteriorNotario": "Carlos Giovanni Collados Serrano"
   },
   {
     "comunidad": "País Vasco",
     "provincia": "Bizkaia/Vizcaya",
     "localidad": "Gernika-Lumo",
     "clase": "Resulta",
-    "notas": "Nº7"
+    "notas": "Nº7",
+    "anteriorNotario": "Igor Ispizua Omar"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Córdoba",
     "localidad": "Peñarroya-Pueblonuevo",
     "clase": "Resulta",
-    "notas": "Nº8"
+    "notas": "Nº8",
+    "anteriorNotario": "Juan José Pedraza Guerrero"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Valladolid",
     "localidad": "Medina de Rioseco",
     "clase": "Resulta",
-    "notas": "Nº9"
+    "notas": "Nº9",
+    "anteriorNotario": "José María Botella Pedraza"
   },
   {
     "comunidad": "País Vasco",
     "provincia": "Gipuzkoa/Guipúzcoa",
     "localidad": "Zumarraga",
     "clase": "Resulta",
-    "notas": "Nº10"
+    "notas": "Nº10",
+    "anteriorNotario": "Marta García-Jalón Luzuriaga"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
     "localidad": "Cadaqués",
     "clase": "Resulta",
-    "notas": "Nº11"
+    "notas": "Nº11",
+    "anteriorNotario": "Pedro Luis García de los Huertos Sánchez"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Jaén",
     "localidad": "Bailén",
     "clase": "Resulta",
-    "notas": "Nº12"
+    "notas": "Nº12",
+    "anteriorNotario": "Alfonso García-Perrote Latorre"
   },
   {
     "comunidad": "Aragón",
     "provincia": "Zaragoza",
     "localidad": "Calatayud",
     "clase": "Resulta",
-    "notas": "Nº13"
+    "notas": "Nº13",
+    "anteriorNotario": "Fernando Agustín Bonaga"
   },
   {
     "comunidad": "Galicia",
     "provincia": "A Coruña",
     "localidad": "San Sadurniño",
     "clase": "Resulta",
-    "notas": "Nº14"
+    "notas": "Nº14",
+    "anteriorNotario": "José Francisco Bódalo Lorente"
   },
   {
     "comunidad": "Castilla-La Mancha",
     "provincia": "Toledo",
     "localidad": "Calera y Chozas",
     "clase": "Resulta",
-    "notas": "Nº17"
+    "notas": "Nº17",
+    "anteriorNotario": "María Teresa de Almansa Garrido"
   },
   {
     "comunidad": "Aragón",
     "provincia": "Zaragoza",
     "localidad": "Zaragoza-Actur",
     "clase": "Resulta",
-    "notas": "Nº18"
+    "notas": "Nº18",
+    "anteriorNotario": "Fermín Moreno Ayyuadé"
   },
   {
     "comunidad": "País Vasco",
     "provincia": "Bizkaia/Vizcaya",
     "localidad": "Elorrio",
     "clase": "Resulta",
-    "notas": "Nº19"
+    "notas": "Nº19",
+    "anteriorNotario": "Ana Santamarina Martínez"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Segovia",
     "localidad": "Santa María la Real de Nieva",
     "clase": "Resulta",
-    "notas": "Nº20"
+    "notas": "Nº20",
+    "anteriorNotario": "Ana María Gómez Alonso"
   },
   {
     "comunidad": "Comunitat Valenciana",
     "provincia": "Castelló/Castellón",
     "localidad": "Betxí",
     "clase": "Resulta",
-    "notas": "Nº21"
+    "notas": "Nº21",
+    "anteriorNotario": "Paula Breva Calatayud"
   },
   {
     "comunidad": "Galicia",
     "provincia": "Ourense",
     "localidad": "Viana do Bolo",
     "clase": "Resulta",
-    "notas": "Nº22"
+    "notas": "Nº22",
+    "anteriorNotario": "Álvaro Álvarez Guerra"
   },
   {
     "comunidad": "Comunitat Valenciana",
     "provincia": "Alicante/Alacant",
     "localidad": "Torrevieja",
     "clase": "Resulta",
-    "notas": "Nº23"
+    "notas": "Nº23",
+    "anteriorNotario": "José Antonio Pérez Álvarez"
   },
   {
     "comunidad": "Comunitat Valenciana",
     "provincia": "València/Valencia",
     "localidad": "Alzira",
     "clase": "Resulta",
-    "notas": "Nº24"
+    "notas": "Nº24",
+    "anteriorNotario": "Miguel Ildefonso Gallut Ortega"
   },
   {
     "comunidad": "Región de Murcia",
     "provincia": "Murcia",
     "localidad": "Beniel",
     "clase": "Resulta",
-    "notas": "Nº25"
+    "notas": "Nº25",
+    "anteriorNotario": "Fernando Viguria Alday"
   },
   {
     "comunidad": "Principado de Asturias",
     "provincia": "Asturias",
     "localidad": "Castropol",
     "clase": "Resulta",
-    "notas": "Nº26"
+    "notas": "Nº26",
+    "anteriorNotario": "Mireya Cristina Martínez Badás"
   },
   {
     "comunidad": "País Vasco",
     "provincia": "Bizkaia/Vizcaya",
     "localidad": "Gernika-Lumo",
     "clase": "Resulta",
-    "notas": "Nº27"
+    "notas": "Nº27",
+    "anteriorNotario": "Alfonso Ansola Horcajo"
   },
   {
     "comunidad": "Comunitat Valenciana",
     "provincia": "Alicante/Alacant",
     "localidad": "Xàbia/Jávea",
     "clase": "Resulta",
-    "notas": "Nº28"
+    "notas": "Nº28",
+    "anteriorNotario": "Juan Luis Millet Sancho"
   },
   {
     "comunidad": "Castilla-La Mancha",
     "provincia": "Ciudad Real",
     "localidad": "Campo de Criptana",
     "clase": "Resulta",
-    "notas": "Nº29"
+    "notas": "Nº29",
+    "anteriorNotario": "Ana Sulleiro Avendaño"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Córdoba",
     "localidad": "Moriles",
     "clase": "Resulta",
-    "notas": "Nº30"
+    "notas": "Nº30",
+    "anteriorNotario": "Eduardo Anaya Echevarría"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Tarragona",
     "localidad": "Deltebre",
     "clase": "Resulta",
-    "notas": "Nº31"
+    "notas": "Nº31",
+    "anteriorNotario": "Juan Sánchez Oriola"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Córdoba",
     "localidad": "Cabra",
     "clase": "Resulta",
-    "notas": "Nº32"
+    "notas": "Nº32",
+    "anteriorNotario": "Manuel Pozuelo Vázquez de Agredos"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Lleida",
     "localidad": "Artesa de Segre",
     "clase": "Resulta",
-    "notas": "Nº33"
+    "notas": "Nº33",
+    "anteriorNotario": "Andrés García Molina"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Jaén",
     "localidad": "Alcalá la Real",
     "clase": "Resulta",
-    "notas": "Nº34"
+    "notas": "Nº34",
+    "anteriorNotario": "María Isabel Martí del Moral"
   },
   {
     "comunidad": "Illes Balears",
     "provincia": "Illes Balears",
     "localidad": "Porreres",
     "clase": "Resulta",
-    "notas": "Nº35"
+    "notas": "Nº35",
+    "anteriorNotario": "Paula Llompart Riutort"
   },
   {
     "comunidad": "Canarias",
     "provincia": "Santa Cruz de Tenerife",
     "localidad": "Los Realejos",
     "clase": "Resulta",
-    "notas": "Nº36"
+    "notas": "Nº36",
+    "anteriorNotario": "Javier Pichel Pichel"
   },
   {
     "comunidad": "Comunitat Valenciana",
     "provincia": "Alicante/Alacant",
     "localidad": "Dolores",
     "clase": "Resulta",
-    "notas": "Nº37"
+    "notas": "Nº37",
+    "anteriorNotario": "Jorge Pérez Álvarez"
   },
   {
     "comunidad": "Comunitat Valenciana",
     "provincia": "Alicante/Alacant",
     "localidad": "Petrer",
     "clase": "Resulta",
-    "notas": "Nº38"
+    "notas": "Nº38",
+    "anteriorNotario": "María Ángeles Santamaría Juan"
   },
   {
     "comunidad": "Comunitat Valenciana",
     "provincia": "València/Valencia",
     "localidad": "La Font d'en Carròs",
     "clase": "Resulta",
-    "notas": "Nº39"
+    "notas": "Nº39",
+    "anteriorNotario": "Blanca Sapena Gotor"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
     "localidad": "Cornellà de Llobregat",
     "clase": "Resulta",
-    "notas": "Nº40"
+    "notas": "Nº40",
+    "anteriorNotario": "Carlos Manuel Parejo-Merino Parejo"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Almería",
     "localidad": "Vélez-Blanco",
     "clase": "Resulta",
-    "notas": "Nº42"
+    "notas": "Nº42",
+    "anteriorNotario": "María del Pilar Baraza Domene"
   },
   {
     "comunidad": "Comunidad de Madrid",
     "provincia": "Madrid",
     "localidad": "Arganda del Rey",
     "clase": "Resulta",
-    "notas": "Nº43"
+    "notas": "Nº43",
+    "anteriorNotario": "Pedro Horcajada Fernández-Quero"
   },
   {
     "comunidad": "Comunitat Valenciana",
     "provincia": "Castelló/Castellón",
     "localidad": "Morella",
     "clase": "Resulta",
-    "notas": "Nº44"
+    "notas": "Nº44",
+    "anteriorNotario": "Lirios Gisbert Cantó"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Soria",
     "localidad": "San Leonardo de Yagüe",
     "clase": "Resulta",
-    "notas": "Nº46"
+    "notas": "Nº46",
+    "anteriorNotario": "Fermín Madrid Pelegrí"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Almería",
     "localidad": "Ugíjar",
     "clase": "Resulta",
-    "notas": "Nº47"
+    "notas": "Nº47",
+    "anteriorNotario": "María Isabel Viruel León"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Huelva",
     "localidad": "Bonares",
     "clase": "Resulta",
-    "notas": "Nº48"
+    "notas": "Nº48",
+    "anteriorNotario": "María Angélica Delgado Majada"
   },
   {
     "comunidad": "Comunitat Valenciana",
     "provincia": "València/Valencia",
     "localidad": "La Font de la Figuera",
     "clase": "Resulta",
-    "notas": "Nº49"
+    "notas": "Nº49",
+    "anteriorNotario": "Begoña Lozano Vera"
   },
   {
     "comunidad": "Extremadura",
     "provincia": "Badajoz",
     "localidad": "Monesterio",
     "clase": "Resulta",
-    "notas": "Nº50"
+    "notas": "Nº50",
+    "anteriorNotario": "María Enriqueta Saucedo García"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Jaén",
     "localidad": "Lopera",
     "clase": "Resulta",
-    "notas": "Nº51"
+    "notas": "Nº51",
+    "anteriorNotario": "Héctor Alonso González"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Sevilla",
     "localidad": "Lora del Río",
     "clase": "Resulta",
-    "notas": "Nº52"
+    "notas": "Nº52",
+    "anteriorNotario": "María Aránzazu Amorós Buqueras"
   },
   {
     "comunidad": "Principado de Asturias",
     "provincia": "Asturias",
     "localidad": "Carreño",
     "clase": "Resulta",
-    "notas": "Nº53"
+    "notas": "Nº53",
+    "anteriorNotario": "Juan José Álvarez Álvarez"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "León",
     "localidad": "Astorga",
     "clase": "Resulta",
-    "notas": "Nº54"
+    "notas": "Nº54",
+    "anteriorNotario": "Marta Rovira Fernández-Arche"
   },
   {
     "comunidad": "Extremadura",
     "provincia": "Badajoz",
     "localidad": "Nava",
     "clase": "Resulta",
-    "notas": "Nº55"
+    "notas": "Nº55",
+    "anteriorNotario": "María Elena Muñoz Molinero"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "León",
     "localidad": "La Robla",
     "clase": "Resulta",
-    "notas": "Nº57"
+    "notas": "Nº57",
+    "anteriorNotario": "María del Pilar Portellano Salamanca"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
     "localidad": "Esparreguera",
     "clase": "Resulta",
-    "notas": "Nº64"
+    "notas": "Nº64",
+    "anteriorNotario": "Gonzalo Quiralte Moreno"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
     "localidad": "Blanes",
     "clase": "Resulta",
-    "notas": "Nº65"
+    "notas": "Nº65",
+    "anteriorNotario": "Javier Salas Ramos"
   },
   {
     "comunidad": "Extremadura",
     "provincia": "Badajoz",
     "localidad": "Hornachos",
     "clase": "Resulta",
-    "notas": "Nº66"
+    "notas": "Nº66",
+    "anteriorNotario": "María Encarnación Cáliz Talavera"
   },
   {
     "comunidad": "Galicia",
     "provincia": "Pontevedra",
     "localidad": "Ponteareas",
     "clase": "Resulta",
-    "notas": "Nº67"
+    "notas": "Nº67",
+    "anteriorNotario": "Alma María Carbajal de la Iglesia"
   },
   {
     "comunidad": "Comunitat Valenciana",
     "provincia": "Alicante/Alacant",
     "localidad": "Onil",
     "clase": "Resulta",
-    "notas": "Nº68"
+    "notas": "Nº68",
+    "anteriorNotario": "Ignacio Martínez de la Torre"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Lleida",
     "localidad": "Bellpuig",
     "clase": "Resulta",
-    "notas": "Nº69"
+    "notas": "Nº69",
+    "anteriorNotario": "Jessica Castro Salguero"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Córdoba",
     "localidad": "Montoro",
     "clase": "Resulta",
-    "notas": "Nº70"
+    "notas": "Nº70",
+    "anteriorNotario": "Rosalía Priego Sancho"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Palencia",
     "localidad": "Astudillo",
     "clase": "Resulta",
-    "notas": "Nº71"
+    "notas": "Nº71",
+    "anteriorNotario": "Carlos Nadal Pérez-Marsá"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
     "localidad": "Pineda de Mar",
     "clase": "Resulta",
-    "notas": "Nº72"
+    "notas": "Nº72",
+    "anteriorNotario": "Sonia Sánchez Ruiz"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Tarragona",
     "localidad": "Santa Coloma de Queralt",
     "clase": "Resulta",
-    "notas": "Nº73"
+    "notas": "Nº73",
+    "anteriorNotario": "Raquel Doval Ganuza"
   },
   {
     "comunidad": "País Vasco",
     "provincia": "Bizkaia/Vizcaya",
     "localidad": "Bilbao",
     "clase": "Resulta",
-    "notas": "Nº74"
+    "notas": "Nº74",
+    "anteriorNotario": "Francisco Antonio Arriola Garrote"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Valladolid",
     "localidad": "Valladolid",
     "clase": "Resulta",
-    "notas": "Nº75"
+    "notas": "Nº75",
+    "anteriorNotario": "Carlos León Matorras"
   },
   {
     "comunidad": "Cantabria",
     "provincia": "Cantabria",
     "localidad": "Laredo",
     "clase": "Resulta",
-    "notas": "Nº76"
+    "notas": "Nº76",
+    "anteriorNotario": "Roberto Follía Martínez"
   },
   {
     "comunidad": "Principado de Asturias",
     "provincia": "Asturias",
     "localidad": "Belmonte de Miranda",
     "clase": "Resulta",
-    "notas": "Nº83"
+    "notas": "Nº83",
+    "anteriorNotario": "Enrique Moreno González"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Burgos",
     "localidad": "Espinosa de los Monteros",
     "clase": "Resulta",
-    "notas": "Nº91"
+    "notas": "Nº91",
+    "anteriorNotario": "Iago Alciturri Sexto"
   },
   {
     "comunidad": "País Vasco",
     "provincia": "Bizkaia/Vizcaya",
     "localidad": "Villahermosa",
     "clase": "Resulta",
-    "notas": "Nº94"
+    "notas": "Nº94",
+    "anteriorNotario": "Itziar Celestino Esteban"
   },
   {
     "comunidad": "Castilla-La Mancha",
     "provincia": "Ciudad Real",
     "localidad": "Moral de Calatrava",
     "clase": "Resulta",
-    "notas": "Nº96"
+    "notas": "Nº96",
+    "anteriorNotario": "María Socias Alemany"
   },
   {
     "comunidad": "Extremadura",
     "provincia": "Cáceres",
     "localidad": "Torrejoncillo",
     "clase": "Resulta",
-    "notas": "Nº101"
+    "notas": "Nº101",
+    "anteriorNotario": "José Ángel Soto Pérez-Cortés"
   },
   {
     "comunidad": "Castilla-La Mancha",
     "provincia": "Ciudad Real",
     "localidad": "Almagro",
     "clase": "Resulta",
-    "notas": "Nº103"
+    "notas": "Nº103",
+    "anteriorNotario": "María Begoña Vallejo Catalina"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Palencia",
     "localidad": "Paredes de Nava",
     "clase": "Resulta",
-    "notas": "Nº110"
+    "notas": "Nº110",
+    "anteriorNotario": "Jesús Carlos Pérez Pericacho"
   },
   {
     "comunidad": "Aragón",
     "provincia": "Zaragoza",
     "localidad": "Sádaba",
     "clase": "Resulta",
-    "notas": "Nº111"
+    "notas": "Nº111",
+    "anteriorNotario": "Arantxa Campillo Guillén"
   },
   {
     "comunidad": "Comunitat Valenciana",
     "provincia": "València/Valencia",
     "localidad": "Benifaió",
     "clase": "Resulta",
-    "notas": "Nº118"
+    "notas": "Nº118",
+    "anteriorNotario": "Lorenzo Talens Grau"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Almería",
     "localidad": "Purchena",
     "clase": "Resulta",
-    "notas": "Nº120"
+    "notas": "Nº120",
+    "anteriorNotario": "Marta García Zorrilla"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Sevilla",
     "localidad": "El Castillo de las Guardas",
     "clase": "Resulta",
-    "notas": "Nº124"
+    "notas": "Nº124",
+    "anteriorNotario": "María Pizarro Caballero"
   },
   {
     "comunidad": "Comunitat Valenciana",
     "provincia": "Castelló/Castellón",
     "localidad": "Albocàsser",
     "clase": "Resulta",
-    "notas": "Nº125"
+    "notas": "Nº125",
+    "anteriorNotario": "Lucía Latorre Navarro"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Salamanca",
     "localidad": "Ledesma",
     "clase": "Resulta",
-    "notas": "Nº126"
+    "notas": "Nº126",
+    "anteriorNotario": "Sara Pedrero Muñoz"
   },
   {
     "comunidad": "Galicia",
     "provincia": "Lugo",
     "localidad": "Quiroga",
     "clase": "Resulta",
-    "notas": "Nº127"
+    "notas": "Nº127",
+    "anteriorNotario": "John Pérez Sánchez"
   },
   {
     "comunidad": "Galicia",
     "provincia": "A Coruña",
     "localidad": "Muxía",
     "clase": "Resulta",
-    "notas": "Nº129"
+    "notas": "Nº129",
+    "anteriorNotario": "Andrés García-Bengochea Hernández"
   },
   {
     "comunidad": "Castilla-La Mancha",
     "provincia": "Ciudad Real",
     "localidad": "Argamasilla de Alba",
     "clase": "Resulta",
-    "notas": "Nº130"
+    "notas": "Nº130",
+    "anteriorNotario": "Natalia García-Lozano Olmedo"
   },
   {
     "comunidad": "Castilla-La Mancha",
     "provincia": "Guadalajara",
     "localidad": "Cifuentes",
     "clase": "Resulta",
-    "notas": "Nº131"
+    "notas": "Nº131",
+    "anteriorNotario": "Manuel Tejuca González"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "León",
     "localidad": "Villablino",
     "clase": "Resulta",
-    "notas": "Nº135"
+    "notas": "Nº135",
+    "anteriorNotario": "Manuel Barrera Sierra"
   },
   {
     "comunidad": "Principado de Asturias",
     "provincia": "Asturias",
     "localidad": "Colunga",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Ignacio García Viciana"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
     "localidad": "Amer",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Carola Irene Sevilla Pitarch"
   },
   {
     "comunidad": "Principado de Asturias",
     "provincia": "Asturias",
     "localidad": "Vegadeo",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Coral González García"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
     "localidad": "Santa Margarida de Montbui",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Luis Felipe Álvarez de Sotomayor Rodríguez"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
     "localidad": "Calella",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Mónica de Blas Esteban"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
     "localidad": "Calella",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "José Luis Ballestín González"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
     "localidad": "Montmeló",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Hans-Alexander Braunschweig Leotte"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
     "localidad": "Prats de Lluçanès",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Lluis Colomé Serra"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
     "localidad": "Arbúcies",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Marta Alcover Delgado"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
     "localidad": "Calaf",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Blanca Camacho López-Barajas"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
     "localidad": "Sant Vicenç dels Horts",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "María del Carmen Parra Martínez"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Soria",
     "localidad": "Berlanga de Duero",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Cristina Rocío Lleonart Castro"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Girona",
     "localidad": "La Bisbal d'Empordà",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Marco Ciani García"
   },
   {
     "comunidad": "La Rioja",
     "provincia": "La Rioja",
     "localidad": "Cervera del Río Alhama",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Carmen Estevan Cuenca"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Lleida",
     "localidad": "Almenar",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Clara Castillón Porqueras"
   },
   {
     "comunidad": "Castilla-La Mancha",
     "provincia": "Cuenca",
     "localidad": "Priego",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Paloma Gemma Benito Orduña"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
     "localidad": "Sant Adrià de Besòs",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Victor Mateu Prades"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Tarragona",
     "localidad": "Móra la Nova",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "María Cotillas Funes"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Lleida",
     "localidad": "Ponts",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Jorge Fort Canals"
   },
   {
     "comunidad": "Illes Balears",
     "provincia": "Illes Balears",
     "localidad": "Esporles",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Pedro José López-Amo Saus"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Tarragona",
     "localidad": "L'Espluga de Francolí",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Alexandre Lafarga Mas"
   },
   {
     "comunidad": "Comunitat Valenciana",
     "provincia": "Castelló/Castellón",
     "localidad": "Lucena del Cid",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Claudia Navarro Pascual"
   },
   {
     "comunidad": "Castilla y León",
     "provincia": "Burgos",
     "localidad": "Valle de Mena",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Macarena Placed Lerma"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Córdoba",
     "localidad": "Espiel",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Laura Trescolí Valls"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Tarragona",
     "localidad": "L'Arboç",
     "clase": "Resulta",
-    "notas": "Concurso autonómico"
+    "notas": "Concurso autonómico",
+    "anteriorNotario": "Laura Blázquez Blázquez"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Jaén",
     "localidad": "Jaén (Don Alfonso Argüelles Luis)",
     "clase": "Jubilación",
-    "notas": "Vacante"
+    "notas": "Vacante",
+    "anteriorNotario": "Alfonso Argüelles Luis"
   },
   {
     "comunidad": "Andalucía",
     "provincia": "Málaga",
     "localidad": "Marbella (Don Miguel Ángel de la Fuente del Real)",
     "clase": "Jubilación",
-    "notas": "Vacante"
+    "notas": "Vacante",
+    "anteriorNotario": "Miguel Ángel de la Fuente del Real"
   },
   {
     "comunidad": "Castilla-La Mancha",
     "provincia": "Guadalajara",
     "localidad": "Azuqueca de Henares (Doña Macrina García Moreno)",
     "clase": "Jubilación voluntaria",
-    "notas": "Vacante"
+    "notas": "Vacante",
+    "anteriorNotario": "Macrina García Moreno"
   },
   {
     "comunidad": "Comunidad de Madrid",
     "provincia": "Madrid",
     "localidad": "Humanes de Madrid (Don Miguel Enrique Estella Garbayo)",
     "clase": "Jubilación",
-    "notas": "Vacante"
+    "notas": "Vacante",
+    "anteriorNotario": "Miguel Enrique Estella Garbayo"
   },
   {
     "comunidad": "Comunidad de Madrid",
     "provincia": "Madrid",
     "localidad": "Madrid (Don Ricardo Isaías Pérez Ballarín)",
     "clase": "Jubilación",
-    "notas": "Vacante"
+    "notas": "Vacante",
+    "anteriorNotario": "Ricardo Isaías Pérez Ballarín"
   },
   {
     "comunidad": "Galicia",
     "provincia": "A Coruña",
     "localidad": "A Coruña (Don José Manuel Lois Puente)",
     "clase": "Jubilación",
-    "notas": "Vacante"
+    "notas": "Vacante",
+    "anteriorNotario": "José Manuel Lois Puente"
   },
   {
     "comunidad": "Región de Murcia",
     "provincia": "Murcia",
     "localidad": "San Javier (Don Pedro Facundo Garré Navarro)",
     "clase": "Jubilación",
-    "notas": "Vacante"
+    "notas": "Vacante",
+    "anteriorNotario": "Pedro Facundo Garré Navarro"
   },
   {
     "comunidad": "Comunitat Valenciana",
     "provincia": "València/Valencia",
     "localidad": "Valencia (Don Alfonso Pascual de Miguel)",
     "clase": "Jubilación",
-    "notas": "Vacante"
+    "notas": "Vacante",
+    "anteriorNotario": "Alfonso Pascual de Miguel"
   },
   {
     "comunidad": "Comunitat Valenciana",
     "provincia": "Alicante/Alacant",
     "localidad": "Torrevieja (Don José Julio Barrenechea García)",
     "clase": "Jubilación",
-    "notas": "Vacante"
+    "notas": "Vacante",
+    "anteriorNotario": "José Julio Barrenechea García"
   },
   {
     "comunidad": "Principado de Asturias",
     "provincia": "Asturias",
     "localidad": "Oviedo (Don Juan Antonio Escudero García)",
     "clase": "Jubilación",
-    "notas": "Vacante"
+    "notas": "Vacante",
+    "anteriorNotario": "Juan Antonio Escudero García"
   },
   {
     "comunidad": "Comunidad de Madrid",
     "provincia": "Madrid",
     "localidad": "Madrid (Don Juan Manuel Lozano Carreras)",
     "clase": "Jubilación",
-    "notas": "Vacante"
+    "notas": "Vacante",
+    "anteriorNotario": "Juan Manuel Lozano Carreras"
   },
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
     "localidad": "Sant Cugat del Vallès (Don Luis Fort López-Barajas)",
     "clase": "Jubilación",
-    "notas": "Vacante"
+    "notas": "Vacante",
+    "anteriorNotario": "Luis Fort López-Barajas"
   }
 ];

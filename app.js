@@ -371,11 +371,15 @@ function renderVacantes() {
     const badgeClass = isJubilacion ? 'badge-jubilacion' : v.clase === 'Resulta' ? 'badge-resulta' : 'badge-desierta';
     const badgeCat = v.categoria === 'Primera' ? 'badge-primera' : v.categoria === 'Segunda' ? 'badge-segunda' : v.categoria === 'Tercera' ? 'badge-tercera' : '';
     
-    // Extract notario if Jubilación
+    // Extract notario if Jubilación or anteriorNotario is present
     let locHtml = `<strong>${highlightText(v.localidad.replace(/\s*\([^)]+\)/, '').trim(), query)}</strong>`;
-    const notarioMatch = v.localidad.match(/\((Don|Doña)[^)]+\)/);
-    if (notarioMatch) {
-      locHtml += `<br><small style="color:#6c757d">Sustituye a: ${escapeHTML(notarioMatch[0].replace(/[()]/g, ''))}</small>`;
+    if (v.anteriorNotario) {
+      locHtml += `<br><small style="color:#6c757d">Sustituye a: ${escapeHTML(v.anteriorNotario)}</small>`;
+    } else {
+      const notarioMatch = v.localidad.match(/\((Don|Doña)[^)]+\)/);
+      if (notarioMatch) {
+        locHtml += `<br><small style="color:#6c757d">Sustituye a: ${escapeHTML(notarioMatch[0].replace(/[()]/g, ''))}</small>`;
+      }
     }
 
     const isFav = favVacantes.has(v._id);
