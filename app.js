@@ -278,7 +278,12 @@ function initTabs() {
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
       
       btn.classList.add('active');
-      document.getElementById(btn.getAttribute('data-target')).classList.add('active');
+      const targetId = btn.getAttribute('data-target');
+      document.getElementById(targetId).classList.add('active');
+      
+      if (targetId === 'tab-mapa') {
+        initMap();
+      }
     });
   });
 }
@@ -522,6 +527,9 @@ function filterVacantes() {
   state.vacantesFiltered = filtered;
   document.getElementById('vacantes-count-text').textContent = filtered.length;
   renderVacantes();
+  if (typeof mapInstance !== 'undefined' && mapInstance) {
+    renderMapMarkers();
+  }
 }
 
 function renderVacantes() {
@@ -860,3 +868,157 @@ function initCharts() {
     options: { responsive: true, maintainAspectRatio: false }
   });
 }
+
+// ================= MAPA =================
+let mapInstance = null;
+let markersLayer = null;
+
+function initMap() {
+  if (!mapInstance) {
+    mapInstance = L.map('map').setView([40.4168, -3.7038], 6); // Centro de España
+    
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; OpenStreetMap &copy; CARTO',
+      subdomains: 'abcd',
+      maxZoom: 20
+    }).addTo(mapInstance);
+    
+    markersLayer = L.layerGroup().addTo(mapInstance);
+  } else {
+    // Redimensionar al cambiar de pestaña
+    setTimeout(() => mapInstance.invalidateSize(), 100);
+  }
+  
+  renderMapMarkers();
+}
+
+function renderMapMarkers() {
+  if (!mapInstance || !markersLayer) return;
+  
+  markersLayer.clearLayers();
+  
+  // Agrupar vacantes por Localidad|Provincia
+  const grouped = {};
+  let totalShown = 0;
+  let totalMissing = 0;
+  
+  state.vacantesFiltered.forEach(v => {
+    // Coordenadas key: "Localidad limpia|Provincia"
+    const locClean = v.localidad.replace(/\s*\([^)]*\)/g, '').trim();
+    const key = `${locClean}|${v.provincia}`;
+    
+    // Fallback: Si no existe, probamos solo con la localidad en DATA_COORDS
+    let coords = DATA_COORDS[key];
+    if (!coords) {
+      // Intentar buscar alguna key que empiece por Loc|
+      const altKey = Object.keys(DATA_COORDS).find(k => k.startsWith(locClean + '|'));
+      if (altKey) coords = DATA_COORDS[altKey];
+    }
+    
+    if (coords) {
+      if (!grouped[key]) {
+        grouped[key] = { coords, plazas: [] };
+      }
+      grouped[key].plazas.push(v);
+      totalShown++;
+    } else {
+      totalMissing++;
+    }
+  });
+  
+  // Actualizar contadores
+  document.getElementById('map-showing-count').textContent = totalShown;
+  document.getElementById('map-missing-count').textContent = totalMissing;
+  document.getElementById('map-warning').style.display = totalMissing > 0 ? 'block' : 'none';
+  
+  // Pintar marcadores
+  Object.keys(grouped).forEach(key => {
+    const group = grouped[key];
+    const plazas = group.plazas;
+    const isMultiple = plazas.length > 1;
+    
+    // Determinar color dominante
+    const hasJubilacion = plazas.some(p => p.clase.includes('Jubilación'));
+    const hasResulta = plazas.some(p => p.clase === 'Resulta');
+    const hasDesierta = plazas.some(p => p.clase === 'Desierta');
+    
+    let colorClass = 'marker-mixed';
+    if (hasJubilacion && !hasResulta && !hasDesierta) colorClass = 'marker-jubilacion';
+    else if (!hasJubilacion && hasResulta && !hasDesierta) colorClass = 'marker-resulta';
+    else if (!hasJubilacion && !hasResulta && hasDesierta) colorClass = 'marker-desierta';
+    
+    const iconHtml = `<div class="custom-marker ${colorClass}" style="width: 30px; height: 30px;">${isMultiple ? plazas.length : ''}</div>`;
+    
+    const customIcon = L.divIcon({
+      html: iconHtml,
+      className: '',
+      iconSize: [30, 30],
+      iconAnchor: [15, 15],
+      popupAnchor: [0, -15]
+    });
+    
+    const marker = L.marker([group.coords.lat, group.coords.lon], { icon: customIcon });
+    
+    // Construir contenido del popup
+    const header = `<div class="map-popup-header">${escapeHTML(plazas[0].localidad.replace(/\s*\([^)]*\)/g, '').trim())} <span style="font-size:12px; font-weight:normal; color:var(--color-text-muted)">(${plazas.length})</span></div>`;
+    
+    const listHtml = plazas.map(v => {
+      const badgeClass = v.clase.includes('Jubilación') ? 'badge-jubilacion' : v.clase === 'Resulta' ? 'badge-resulta' : 'badge-desierta';
+      const isFav = favVacantes.has(v._id);
+      const favStar = isFav ? '⭐' : '☆';
+      const favClass = isFav ? 'active' : '';
+      
+      let notarioAnt = v.anteriorNotario || "";
+      if (!notarioAnt) {
+        const notarioMatch = v.localidad.match(/\((Don|Doña)[^)]+\)/);
+        if (notarioMatch) notarioAnt = notarioMatch[0].replace(/[()]/g, '');
+      }
+      if (!notarioAnt) notarioAnt = "-";
+      
+      return `
+        <div class="map-popup-item">
+          <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+            <span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span>
+            <strong>${v.categoria}</strong>
+          </div>
+          <div style="font-size:13px; margin-bottom:4px; color:var(--color-text-muted);">
+            Notario ant: ${escapeHTML(notarioAnt)}
+          </div>
+          <div class="map-popup-actions">
+            <div>
+              ${state.userCoords && v.distancia !== null ? `<span style="font-size:12px;">🚗 ${v.distancia.toFixed(1)} km</span>` : ''}
+            </div>
+            <button class="fav-btn ${favClass}" data-id="${escapeHTML(v._id)}" onclick="toggleFavMap(this)">${favStar}</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+    
+    const popupContent = `${header}<div class="map-popup-list">${listHtml}</div>`;
+    marker.bindPopup(popupContent);
+    marker.addTo(markersLayer);
+  });
+}
+
+// Función global para que funcione el onclick dentro del popup
+window.toggleFavMap = function(btn) {
+  const id = btn.getAttribute('data-id');
+  
+  if (favVacantes.has(id)) {
+    favVacantes.delete(id);
+    const index = favOrder.indexOf(id);
+    if (index > -1) favOrder.splice(index, 1);
+    btn.textContent = '☆';
+    btn.classList.remove('active');
+  } else {
+    favVacantes.add(id);
+    favOrder.push(id);
+    btn.textContent = '⭐';
+    btn.classList.add('active');
+  }
+  
+  localStorage.setItem('favVacantes', JSON.stringify(favOrder));
+  if (state.vacantesOnlyFavs) filterVacantes();
+  renderPreferencias();
+  renderVacantes(); // Update table view if it's visible
+};
