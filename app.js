@@ -84,25 +84,31 @@ function renderPreferencias() {
           <td class="col-comunidad" data-label="Comunidad">${escapeHTML(v.comunidad)}</td>
           <td class="col-provincia" data-label="Provincia">${escapeHTML(v.provincia)}</td>
           <td data-label="Localidad">
-            <div class="loc-main">${escapeHTML(v.localidad.replace(/\s*\([^)]+\)/, '').trim())}${noteIndicator}
-              <button onclick="openTownModal('${escapeHTML(v.localidad.replace(/'/g, "\\'"))}', '${escapeHTML(v.provincia.replace(/'/g, "\\'"))}')" class="btn" style="padding: 2px 6px; font-size: 11px; margin-left: 6px; background-color: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-primary);" title="Ver ficha del pueblo">ℹ️</button>
+            <div class="loc-wrapper" style="display: flex; flex-direction: column; align-items: flex-start;">
+              <div class="loc-main">${escapeHTML(v.localidad.replace(/\s*\([^)]+\)/, '').trim())}${noteIndicator}
+                <button onclick="openTownModal('${escapeHTML(v.localidad.replace(/'/g, "\\'"))}', '${escapeHTML(v.provincia.replace(/'/g, "\\'"))}')" class="btn" style="padding: 2px 6px; font-size: 11px; margin-left: 6px; background-color: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-primary);" title="Ver ficha del pueblo">ℹ️</button>
+              </div>
+              ${noteText ? `<div style="font-size:11px; color:var(--color-primary); margin-top:2px; font-style:italic;">📝 ${escapeHTML(noteText.length > 50 ? noteText.substring(0, 50) + '...' : noteText)}</div>` : ''}
             </div>
-            ${noteText ? `<div style="font-size:11px; color:var(--color-primary); margin-top:2px; font-style:italic;">📝 ${escapeHTML(noteText.length > 50 ? noteText.substring(0, 50) + '...' : noteText)}</div>` : ''}
           </td>
-          <td data-label="Hab./Notario" style="white-space:nowrap;">
-            ${v.poblacion ? `<div style="font-size:13px;" title="Población total">👥 ${formatPoblacion(v.poblacion)}</div>` : '<div style="font-size:13px; color:#999;">-</div>'}
-            ${typeof DATA_RENTA !== 'undefined' && DATA_RENTA[v.unnormId] ? `<div style="font-size:13px; margin-top:2px; color:#1b5e20;" title="Renta Media Neta por Persona">💰 ${DATA_RENTA[v.unnormId].toLocaleString('es-ES')} €</div>` : ''}
-            <div style="font-size:12px; color:var(--color-text-muted);" title="Notarios en la localidad">🏛️ ${v.numNotarias} notario${v.numNotarias !== 1 ? 's' : ''}</div>
-            ${v.poblacion ? `<div style="font-size:11px; color:var(--color-primary); margin-top:2px;" title="Ratio habitantes por notario">📊 ${formatPoblacion(v.ratioPobNot).replace(' hab.', '')}/not.</div>` : ''}
-          ${v.distCosta !== null ? `<div style="font-size:11px; color:#0277bd; margin-top:2px;" title="Distancia a la playa">🏖️ ${v.distCosta} km</div>` : ''}
-          ${v.distAero !== null ? `<div style="font-size:11px; color:#546e7a; margin-top:2px;" title="Distancia al aeropuerto">✈️ ${v.distAero} km</div>` : ''}
+          <td data-label="Datos / Geo" style="white-space:nowrap;">
+            <div class="geo-wrapper" style="display: flex; flex-direction: column; align-items: flex-end;">
+              ${v.poblacion ? `<div style="font-size:13px;" title="Población total">👥 ${formatPoblacion(v.poblacion)}</div>` : '<div style="font-size:13px; color:#999;">-</div>'}
+              ${typeof DATA_RENTA !== 'undefined' && DATA_RENTA[v.unnormId] ? `<div style="font-size:13px; margin-top:2px; color:#1b5e20;" title="Renta Media Neta por Persona">💰 ${DATA_RENTA[v.unnormId].toLocaleString('es-ES')} €</div>` : ''}
+              <div style="font-size:12px; color:var(--color-text-muted);" title="Notarios en la localidad">🏛️ ${v.numNotarias} notario${v.numNotarias !== 1 ? 's' : ''}</div>
+              ${v.poblacion ? `<div style="font-size:11px; color:var(--color-primary); margin-top:2px;" title="Ratio habitantes por notario">📊 ${formatPoblacion(v.ratioPobNot).replace(' hab.', '')}/not.</div>` : ''}
+              ${v.distCosta !== null ? `<div style="font-size:11px; color:#0277bd; margin-top:2px;" title="Distancia a la playa">🏖️ ${v.distCosta} km</div>` : ''}
+              ${v.distAero !== null ? `<div style="font-size:11px; color:#546e7a; margin-top:2px;" title="Distancia al aeropuerto">✈️ ${v.distAero} km</div>` : ''}
+            </div>
           </td>
           <td data-label="Notario anterior"><small style="color:var(--color-text-muted)">${notarioAnt}</small></td>
           <td data-label="Motivo" class="center"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
           <td data-label="Categoría" class="center"><span class="badge ${badgeCat}">${escapeHTML(v.categoria)}</span></td>
           ${state.userCoords ? `<td data-label="Tiempo y Distancia" class="center">
-            <strong>${v.distancia !== null ? v.distancia.toFixed(1) + ' km' : '-'}</strong>
-            ${v.duration ? `<br><small style="color:#6c757d">🚗 ${formatDuration(v.duration)}</small>` : ''}
+            <div style="display:flex; flex-direction:column; align-items:flex-end;">
+              <strong>${v.distancia !== null ? v.distancia.toFixed(1) + ' km' : '-'}</strong>
+              ${v.duration ? `<small style="color:#6c757d; margin-top:2px;">🚗 ${formatDuration(v.duration)}</small>` : ''}
+            </div>
           </td>` : '<td data-label="Tiempo y Distancia" class="center" style="display:none;"></td>'}
           <td data-label="Borrar" class="center">
             <button onclick="openNoteModal('${escapeHTML(id)}', '${escapeHTML(v.localidad.replace(/'/g, "\\'"))}')" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Notas personales">${noteText ? '📝' : '🗒️'}</button>
@@ -647,7 +653,7 @@ function renderVacantes() {
   tbody.innerHTML = page.map(v => {
     const isJubilacion = v.clase.includes('Jubilación');
     const badgeClass = isJubilacion ? 'badge-jubilacion' : v.clase === 'Resulta' ? 'badge-resulta' : 'badge-desierta';
-    const badgeCat = v.categoria === 'Primera' ? 'badge-primera' : v.categoria === 'Segunda' ? 'badge-segunda' : v.categoria === 'Tercera' ? 'badge-tercera' : '';
+    const badgeCat = v.categoria === 'Primera' ? 'badge-primera' : v.categoria === 'Segunda' ? 'badge-segunda' : 'badge-tercera';
     
     let notarioAnt = v.anteriorNotario || "";
     if (!notarioAnt) {
@@ -666,30 +672,38 @@ function renderVacantes() {
     return `
       <tr>
         <td class="center" data-label="Favorito">
-          <button class="fav-btn ${favClass}" data-id="${escapeHTML(v._id)}">${favStar}</button>
-          <button onclick="openNoteModal('${escapeHTML(v._id)}', '${escapeHTML(v.localidad.replace(/'/g, "\\'"))}')" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Notas personales">${noteText ? '📝' : '🗒️'}</button>
+          <div>
+            <button class="fav-btn ${favClass}" data-id="${escapeHTML(v._id)}">${favStar}</button>
+            <button onclick="openNoteModal('${escapeHTML(v._id)}', '${escapeHTML(v.localidad.replace(/'/g, "\\'"))}')" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Notas personales">${noteText ? '📝' : '🗒️'}</button>
+          </div>
         </td>
         <td class="col-comunidad" data-label="Comunidad">${escapeHTML(v.comunidad)}</td>
         <td class="col-provincia" data-label="Provincia">${escapeHTML(v.provincia)}</td>
         <td data-label="Localidad">
-          <div class="loc-main">${highlightText(v.localidad.replace(/\s*\([^)]+\)/, '').trim(), query)}${noteIndicator}
-            <button onclick="openTownModal('${escapeHTML(v.localidad.replace(/'/g, "\\'"))}', '${escapeHTML(v.provincia.replace(/'/g, "\\'"))}')" class="btn" style="padding: 2px 6px; font-size: 11px; margin-left: 6px; background-color: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-primary);" title="Ver ficha del pueblo">ℹ️</button>
+          <div class="loc-wrapper" style="display: flex; flex-direction: column; align-items: flex-start;">
+            <div class="loc-main">${highlightText(v.localidad.replace(/\s*\([^)]+\)/, '').trim(), query)}${noteIndicator}
+              <button onclick="openTownModal('${escapeHTML(v.localidad.replace(/'/g, "\\'"))}', '${escapeHTML(v.provincia.replace(/'/g, "\\'"))}')" class="btn" style="padding: 2px 6px; font-size: 11px; margin-left: 6px; background-color: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-primary);" title="Ver ficha del pueblo">ℹ️</button>
+            </div>
           </div>
         </td>
-        <td data-label="Hab./Notario" style="white-space:nowrap;">
-          ${v.poblacion ? `<div style="font-size:13px;" title="Población total">👥 ${formatPoblacion(v.poblacion)}</div>` : '<div style="font-size:13px; color:#999;">-</div>'}
-          ${typeof DATA_RENTA !== 'undefined' && DATA_RENTA[v.unnormId] ? `<div style="font-size:13px; margin-top:2px; color:#1b5e20;" title="Renta Media Neta por Persona">💰 ${DATA_RENTA[v.unnormId].toLocaleString('es-ES')} €</div>` : ''}
-          <div style="font-size:12px; color:var(--color-text-muted);" title="Notarios en la localidad">🏛️ ${v.numNotarias} notario${v.numNotarias !== 1 ? 's' : ''}</div>
-          ${v.poblacion ? `<div style="font-size:11px; color:var(--color-primary); margin-top:2px;" title="Ratio habitantes por notario">📊 ${formatPoblacion(v.ratioPobNot).replace(' hab.', '')}/not.</div>` : ''}
-          ${v.distCosta !== null ? `<div style="font-size:11px; color:#0277bd; margin-top:2px;" title="Distancia a la playa">🏖️ ${v.distCosta} km</div>` : ''}
-          ${v.distAero !== null ? `<div style="font-size:11px; color:#546e7a; margin-top:2px;" title="Distancia al aeropuerto">✈️ ${v.distAero} km</div>` : ''}
+        <td data-label="Datos / Geo" style="white-space:nowrap;">
+          <div class="geo-wrapper" style="display: flex; flex-direction: column; align-items: flex-end;">
+            ${v.poblacion ? `<div style="font-size:13px;" title="Población total">👥 ${formatPoblacion(v.poblacion)}</div>` : '<div style="font-size:13px; color:#999;">-</div>'}
+            ${typeof DATA_RENTA !== 'undefined' && DATA_RENTA[v.unnormId] ? `<div style="font-size:13px; margin-top:2px; color:#1b5e20;" title="Renta Media Neta por Persona">💰 ${DATA_RENTA[v.unnormId].toLocaleString('es-ES')} €</div>` : ''}
+            <div style="font-size:12px; color:var(--color-text-muted);" title="Notarios en la localidad">🏛️ ${v.numNotarias} notario${v.numNotarias !== 1 ? 's' : ''}</div>
+            ${v.poblacion ? `<div style="font-size:11px; color:var(--color-primary); margin-top:2px;" title="Ratio habitantes por notario">📊 ${formatPoblacion(v.ratioPobNot).replace(' hab.', '')}/not.</div>` : ''}
+            ${v.distCosta !== null ? `<div style="font-size:11px; color:#0277bd; margin-top:2px;" title="Distancia a la playa">🏖️ ${v.distCosta} km</div>` : ''}
+            ${v.distAero !== null ? `<div style="font-size:11px; color:#546e7a; margin-top:2px;" title="Distancia al aeropuerto">✈️ ${v.distAero} km</div>` : ''}
+          </div>
         </td>
         <td data-label="Notario anterior"><small style="color:var(--color-text-muted)">${notarioAnt}</small></td>
         <td class="center" data-label="Motivo"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
         <td class="center" data-label="Categoría"><span class="badge ${badgeCat}">${escapeHTML(v.categoria)}</span></td>
         ${state.userCoords ? `<td class="center" data-label="Tiempo y Distancia">
-          <strong>${v.distancia !== null ? v.distancia.toFixed(1) + ' km' : '-'}</strong>
-          ${v.duration ? `<br><small style="color:#6c757d">🚗 ${formatDuration(v.duration)}</small>` : ''}
+          <div style="display:flex; flex-direction:column; align-items:flex-end;">
+            <strong>${v.distancia !== null ? v.distancia.toFixed(1) + ' km' : '-'}</strong>
+            ${v.duration ? `<small style="color:#6c757d; margin-top:2px;">🚗 ${formatDuration(v.duration)}</small>` : ''}
+          </div>
         </td>` : ''}
       </tr>
     `;
