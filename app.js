@@ -1294,12 +1294,15 @@ function getNotariasCount(localidad, provincia) {
   const nLoc = normalize(locClean);
   const nProv = normalize(provincia);
   
-  const match = DATA_NOTARIAS.find(n => {
+  let total = 0;
+  DATA_NOTARIAS.forEach(n => {
     const nn = normalize(n.localidad);
     const np = normalize(n.provincia);
-    return (nn === nLoc || nn.includes(nLoc) || nLoc.includes(nn)) && 
-           (np.includes(nProv) || nProv.includes(np));
+    if ((nn === nLoc || nn.includes(nLoc) || nLoc.includes(nn)) && 
+        (np.includes(nProv) || nProv.includes(np))) {
+      total += parseInt(n.numero) || 1;
+    }
   });
   
-  return match ? parseInt(match.numero) || 1 : 0;
+  return total;
 }
