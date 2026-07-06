@@ -960,7 +960,11 @@ function renderMapMarkers() {
     const marker = L.marker([group.coords.lat, group.coords.lon], { icon: customIcon });
     
     // Construir contenido del popup
-    const header = `<div class="map-popup-header">${escapeHTML(plazas[0].localidad.replace(/\s*\([^)]*\)/g, '').trim())} <span style="font-size:12px; font-weight:normal; color:var(--color-text-muted)">(${plazas.length})</span></div>`;
+    const cleanLoc = plazas[0].localidad.replace(/\s*\([^)]*\)/g, '').trim();
+    const header = `<div class="map-popup-header" style="display:flex; justify-content:space-between; align-items:center;">
+      <div>${escapeHTML(cleanLoc)} <span style="font-size:12px; font-weight:normal; color:var(--color-text-muted)">(${plazas.length})</span></div>
+      <button onclick="openTownModal('${escapeHTML(cleanLoc.replace(/'/g, "\'"))}', '${escapeHTML(plazas[0].provincia.replace(/'/g, "\'"))}')" class="btn" style="padding: 2px 6px; font-size: 11px; background-color: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-primary);">ℹ️ Info</button>
+    </div>`;
     
     const listHtml = plazas.map(v => {
       const badgeClass = v.clase.includes('Jubilación') ? 'badge-jubilacion' : v.clase === 'Resulta' ? 'badge-resulta' : 'badge-desierta';
@@ -1021,4 +1025,60 @@ window.toggleFavMap = function(btn) {
   if (state.vacantesOnlyFavs) filterVacantes();
   renderPreferencias();
   renderVacantes(); // Update table view if it's visible
+};
+
+// ================= TOWN MODAL (WIKIPEDIA) =================
+document.getElementById('close-town-modal').addEventListener('click', () => {
+  document.getElementById('town-modal').style.display = 'none';
+});
+
+// Close modal when clicking outside
+document.getElementById('town-modal').addEventListener('click', (e) => {
+  if (e.target.id === 'town-modal') {
+    document.getElementById('town-modal').style.display = 'none';
+  }
+});
+
+window.openTownModal = async function(localidad, provincia) {
+  const modal = document.getElementById('town-modal');
+  const title = document.getElementById('town-modal-title');
+  const subtitle = document.getElementById('town-modal-subtitle');
+  const imgContainer = document.getElementById('town-modal-image-container');
+  const img = document.getElementById('town-modal-image');
+  const loading = document.getElementById('town-modal-loading');
+  const desc = document.getElementById('town-modal-description');
+  const err = document.getElementById('town-modal-error');
+  const mapsBtn = document.getElementById('town-modal-maps-btn');
+  
+  // Clean locality for better search (remove text in parentheses)
+  const locClean = localidad.replace(/\s*\([^)]*\)/g, '').trim();
+  
+  title.textContent = locClean;
+  subtitle.textContent = provincia;
+  imgContainer.style.display = 'none';
+  desc.style.display = 'none';
+  err.style.display = 'none';
+  loading.style.display = 'block';
+  mapsBtn.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locClean + ', ' + provincia + ', España')}`;
+  
+  modal.style.display = 'flex';
+  
+  try {
+    const response = await fetch(`https://es.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(locClean)}`);
+    if (!response.ok) throw new Error('Not found');
+    
+    const data = await response.json();
+    
+    loading.style.display = 'none';
+    desc.innerHTML = data.extract_html || data.extract;
+    desc.style.display = 'block';
+    
+    if (data.thumbnail && data.thumbnail.source) {
+      img.src = data.thumbnail.source;
+      imgContainer.style.display = 'block';
+    }
+  } catch (error) {
+    loading.style.display = 'none';
+    err.style.display = 'block';
+  }
 };
