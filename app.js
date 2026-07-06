@@ -75,7 +75,7 @@ function renderPreferencias() {
        const noteText = typeof getNoteForId === 'function' ? getNoteForId(id) : '';
        const noteIndicator = noteText ? `<span title="${escapeHTML(noteText)}" style="cursor:help; font-size:11px; color:var(--color-primary);"> 📝</span>` : '';
        const pob = typeof getPoblacion === 'function' ? getPoblacion(v.localidad, v.provincia) : null;
-       const pobHtml = pob ? `<div style="font-size:11px; color:var(--color-text-muted);">👥 ${typeof formatPoblacion === 'function' ? formatPoblacion(pob) : pob}</div>` : '';
+       const pobHtml = pob || getNotariasCount(v.localidad, v.provincia) ? `<div style="font-size:11px; color:var(--color-text-muted);">${pob ? '👥 ' + (typeof formatPoblacion === 'function' ? formatPoblacion(pob) : pob) : ''}${pob && getNotariasCount(v.localidad, v.provincia) ? ' · ' : ''}${getNotariasCount(v.localidad, v.provincia) ? '🏛️ ' + getNotariasCount(v.localidad, v.provincia) + ' notaría' + (getNotariasCount(v.localidad, v.provincia) > 1 ? 's' : '') : ''}</div>` : '';
 
        html += `
         <tr data-id="${id}" class="pref-item">
@@ -608,7 +608,8 @@ function renderVacantes() {
     const noteText = getNoteForId(v._id);
     const noteIndicator = noteText ? `<span title="${escapeHTML(noteText)}" style="cursor:help; font-size:11px; color:var(--color-primary);"> 📝</span>` : '';
     const pob = getPoblacion(v.localidad, v.provincia);
-    const pobHtml = pob ? `<div style="font-size:11px; color:var(--color-text-muted);">👥 ${formatPoblacion(pob)}</div>` : '';
+    const numNot = getNotariasCount(v.localidad, v.provincia);
+    const pobHtml = pob || numNot ? `<div style="font-size:11px; color:var(--color-text-muted);">${pob ? '👥 ' + formatPoblacion(pob) : ''}${pob && numNot ? ' · ' : ''}${numNot ? '🏛️ ' + numNot + ' notaría' + (numNot > 1 ? 's' : '') : ''}</div>` : '';
 
     return `
       <tr>
@@ -1286,4 +1287,19 @@ function getPoblacion(localidad, provincia) {
 function formatPoblacion(num) {
   if (!num) return '';
   return num.toLocaleString('es-ES') + ' hab.';
+}
+
+function getNotariasCount(localidad, provincia) {
+  const locClean = localidad.replace(/\s*\([^)]*\)/g, '').trim();
+  const nLoc = normalize(locClean);
+  const nProv = normalize(provincia);
+  
+  const match = DATA_NOTARIAS.find(n => {
+    const nn = normalize(n.localidad);
+    const np = normalize(n.provincia);
+    return (nn === nLoc || nn.includes(nLoc) || nLoc.includes(nn)) && 
+           (np.includes(nProv) || nProv.includes(np));
+  });
+  
+  return match ? parseInt(match.numero) || 1 : 0;
 }
