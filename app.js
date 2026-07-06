@@ -442,9 +442,6 @@ function renderNotarias() {
         <td data-label="Localidad">
           <div class="loc-main">${highlightText(n.localidad, query)}</div>
         </td>
-        <td data-label="Notario anterior">
-          <small style="color:var(--color-text-muted)">${n.notas ? escapeHTML(n.notas) : '-'}</small>
-        </td>
         <td class="center" data-label="Número">${escapeHTML(n.numero)}</td>
         <td class="center" data-label="Clase"><span class="badge ${claseBadge}">${escapeHTML(n.clase)}</span></td>
         <td class="center" data-label="Vacante">${isV ? '<span class="vacante-si" title="Plaza vacante">✓</span>' : ''}</td>
