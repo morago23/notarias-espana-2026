@@ -91,7 +91,7 @@ function renderPreferencias() {
           </td>
           <td data-label="Hab./Notario" style="white-space:nowrap;">
             ${v.poblacion ? `<div style="font-size:13px;" title="Población total">👥 ${formatPoblacion(v.poblacion)}</div>` : '<div style="font-size:13px; color:#999;">-</div>'}
-            ${typeof DATA_RENTA !== 'undefined' && DATA_RENTA[v._id] ? `<div style="font-size:13px; margin-top:2px; color:#1b5e20;" title="Renta Media Neta por Persona">💰 ${DATA_RENTA[v._id].toLocaleString('es-ES')} €</div>` : ''}
+            ${typeof DATA_RENTA !== 'undefined' && DATA_RENTA[v.unnormId] ? `<div style="font-size:13px; margin-top:2px; color:#1b5e20;" title="Renta Media Neta por Persona">💰 ${DATA_RENTA[v.unnormId].toLocaleString('es-ES')} €</div>` : ''}
             <div style="font-size:12px; color:var(--color-text-muted);" title="Notarios en la localidad">🏛️ ${v.numNotarias} notario${v.numNotarias !== 1 ? 's' : ''}</div>
             ${v.poblacion ? `<div style="font-size:11px; color:var(--color-primary); margin-top:2px;" title="Ratio habitantes por notario">📊 ${formatPoblacion(v.ratioPobNot).replace(' hab.', '')}/not.</div>` : ''}
           ${v.distCosta !== null ? `<div style="font-size:11px; color:#0277bd; margin-top:2px;" title="Distancia a la playa">🏖️ ${v.distCosta} km</div>` : ''}
@@ -239,10 +239,12 @@ DATA_VACANTES.forEach(v => {
   v.poblacion = pob;
   v.ratioPobNot = pob ? Math.round(pob / v.numNotarias) : 0;
 
-  const id = normalize(v.localidad.replace(/\s*\([^)]*\)/g, '').trim()) + '|' + normalize(v.provincia);
-  const coords = DATA_COORDS[id];
+  const unnormId = v.localidad.replace(/\s*\([^)]*\)/g, '').trim() + '|' + v.provincia;
+  v.unnormId = unnormId;
+  const coords = typeof DATA_COORDS !== 'undefined' ? DATA_COORDS[unnormId] : null;
   if (coords) {
-    const [lat, lon] = coords.split(',').map(Number);
+    const lat = coords.lat;
+    const lon = coords.lon;
     let minAero = Infinity;
     if (typeof AEROPUERTOS !== 'undefined') {
       AEROPUERTOS.forEach(a => {
@@ -676,7 +678,7 @@ function renderVacantes() {
         </td>
         <td data-label="Hab./Notario" style="white-space:nowrap;">
           ${v.poblacion ? `<div style="font-size:13px;" title="Población total">👥 ${formatPoblacion(v.poblacion)}</div>` : '<div style="font-size:13px; color:#999;">-</div>'}
-          ${typeof DATA_RENTA !== 'undefined' && DATA_RENTA[v._id] ? `<div style="font-size:13px; margin-top:2px; color:#1b5e20;" title="Renta Media Neta por Persona">💰 ${DATA_RENTA[v._id].toLocaleString('es-ES')} €</div>` : ''}
+          ${typeof DATA_RENTA !== 'undefined' && DATA_RENTA[v.unnormId] ? `<div style="font-size:13px; margin-top:2px; color:#1b5e20;" title="Renta Media Neta por Persona">💰 ${DATA_RENTA[v.unnormId].toLocaleString('es-ES')} €</div>` : ''}
           <div style="font-size:12px; color:var(--color-text-muted);" title="Notarios en la localidad">🏛️ ${v.numNotarias} notario${v.numNotarias !== 1 ? 's' : ''}</div>
           ${v.poblacion ? `<div style="font-size:11px; color:var(--color-primary); margin-top:2px;" title="Ratio habitantes por notario">📊 ${formatPoblacion(v.ratioPobNot).replace(' hab.', '')}/not.</div>` : ''}
           ${v.distCosta !== null ? `<div style="font-size:11px; color:#0277bd; margin-top:2px;" title="Distancia a la playa">🏖️ ${v.distCosta} km</div>` : ''}
@@ -1180,7 +1182,7 @@ window.openTownModal = async function(localidad, provincia) {
 
   // Clean locality for better search (remove text in parentheses)
   const locClean = localidad.replace(/\s*\([^)]*\)/g, '').trim();
-  const id = normalize(locClean) + '|' + normalize(provincia);
+  const unnormId = locClean + '|' + provincia;
 
   title.textContent = locClean;
   subtitle.textContent = provincia;
@@ -1196,10 +1198,11 @@ window.openTownModal = async function(localidad, provincia) {
   const gmapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locClean + ', ' + provincia + ', España')}`;
   mapsBtn.href = gmapsUrl;
 
-  const coord = DATA_COORDS[id];
+  const coord = typeof DATA_COORDS !== 'undefined' ? DATA_COORDS[unnormId] : null;
   let lat = null, lon = null;
   if (coord) {
-    [lat, lon] = coord.split(',').map(Number);
+    lat = coord.lat;
+    lon = coord.lon;
     mapIframe.src = `https://www.openstreetmap.org/export/embed.html?bbox=${lon-0.03},${lat-0.03},${lon+0.03},${lat+0.03}&layer=mapnik&marker=${lat},${lon}`;
   } else {
     mapIframe.src = '';
@@ -1208,8 +1211,8 @@ window.openTownModal = async function(localidad, provincia) {
   const pob = typeof getPoblacion === 'function' ? getPoblacion(localidad, provincia) : null;
   popBadge.textContent = pob ? `👥 ${formatPoblacion(pob)}` : '👥 -- hab.';
   
-  if (typeof DATA_RENTA !== 'undefined' && DATA_RENTA[id]) {
-    rentaBadge.textContent = `💰 ${DATA_RENTA[id].toLocaleString('es-ES')} €`;
+  if (typeof DATA_RENTA !== 'undefined' && DATA_RENTA[unnormId]) {
+    rentaBadge.textContent = `💰 ${DATA_RENTA[unnormId].toLocaleString('es-ES')} €`;
     rentaBadge.style.display = 'inline-block';
   } else {
     rentaBadge.style.display = 'none';
