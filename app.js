@@ -467,6 +467,12 @@ function initVacantes() {
     document.getElementById('distance-status').textContent = '';
     document.getElementById('distance-clear').style.display = 'none';
     document.getElementById('th-distancia').style.display = 'none';
+    document.getElementById('filter-vacante-tiempo').disabled = true;
+    document.getElementById('filter-vacante-distancia').disabled = true;
+    document.getElementById('filter-vacante-tiempo').title = 'Introduce tu Código Postal en Mis Preferencias para usar este filtro';
+    document.getElementById('filter-vacante-distancia').title = 'Introduce tu Código Postal en Mis Preferencias para usar este filtro';
+    document.getElementById('filter-vacante-tiempo').value = '';
+    document.getElementById('filter-vacante-distancia').value = '';
     
     // Also clear prefs
     document.getElementById('distance-input-pref').value = '';
@@ -525,12 +531,12 @@ function filterVacantes() {
       if (tipoF !== 'Jubilación' && v.clase !== tipoF) return false;
     }
     
-    if (timeF && v.duration !== null && v.duration !== undefined) {
-      if (v.duration > parseInt(timeF)) return false;
+    if (timeF) {
+      if (v.duration === null || v.duration === undefined || v.duration > parseInt(timeF)) return false;
     }
     
-    if (distF && v.distancia !== null && v.distancia !== undefined) {
-      if (v.distancia > parseInt(distF)) return false;
+    if (distF) {
+      if (v.distancia === null || v.distancia === undefined || v.distancia > parseInt(distF)) return false;
     }
 
     if (search) {
@@ -749,6 +755,10 @@ async function calculateDistances(skipGeocode = false) {
       }));
     }
 
+    document.getElementById('filter-vacante-tiempo').disabled = false;
+    document.getElementById('filter-vacante-distancia').disabled = false;
+    document.getElementById('filter-vacante-tiempo').title = '';
+    document.getElementById('filter-vacante-distancia').title = '';
     state.vacantesSortCol = 'distancia';
     state.vacantesSortDir = 'asc';
     document.querySelectorAll('#vacantes-table th').forEach(t => t.className = t.className.replace(/sorted-(asc|desc)/, '').trim());
