@@ -624,6 +624,11 @@ function filterVacantes() {
         let vB = b.ratioPobNot || 0;
         return state.vacantesSortDir === 'asc' ? vA - vB : vB - vA;
       }
+      if (state.vacantesSortCol === 'match') {
+        let vA = a.matchScore || 0;
+        let vB = b.matchScore || 0;
+        return state.vacantesSortDir === 'asc' ? vA - vB : vB - vA;
+      }
       let vA = a[state.vacantesSortCol] || '';
       let vB = b[state.vacantesSortCol] || '';
       const cmp = String(vA).localeCompare(String(vB), 'es');
@@ -677,6 +682,7 @@ function renderVacantes() {
             <button onclick="openNoteModal('${escapeHTML(v._id)}', '${escapeHTML(v.localidad.replace(/'/g, "\\'"))}')" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Notas personales">${noteText ? '📝' : '🗒️'}</button>
           </div>
         </td>
+        ${state.matchCalculated ? `<td class="center" data-label="Match" style="color: #ec4899; font-weight: bold; font-size: 16px;">${v.matchScore}%</td>` : ''}
         <td class="col-comunidad" data-label="Comunidad">${escapeHTML(v.comunidad)}</td>
         <td class="col-provincia" data-label="Provincia">${escapeHTML(v.provincia)}</td>
         <td data-label="Localidad">
@@ -1425,4 +1431,65 @@ function getPoblacion(localidad, provincia) {
 function formatPoblacion(num) {
   if (!num) return '';
   return num.toLocaleString('es-ES') + ' hab.';
+}
+
+function calculateMatchScores() {
+  const wAmbicion = parseInt(document.getElementById('match-ambicion').value) / 100;
+  const wCosta = parseInt(document.getElementById('match-costa').value) / 100;
+  const wUrba = parseInt(document.getElementById('match-urba').value) / 100;
+  const wMorrina = parseInt(document.getElementById('match-morrina').value) / 100;
+
+  // Find max values for normalization
+  let maxRenta = 0, maxPob = 0, maxCosta = 0, maxDist = 0;
+  
+  DATA_VACANTES.forEach(v => {
+    const renta = (typeof DATA_RENTA !== 'undefined' && DATA_RENTA[v.unnormId]) ? DATA_RENTA[v.unnormId] : 0;
+    if (renta > maxRenta) maxRenta = renta;
+    if (v.poblacion && v.poblacion > maxPob) maxPob = v.poblacion;
+    if (v.distCosta && v.distCosta > maxCosta) maxCosta = v.distCosta;
+    if (v.distancia && v.distancia > maxDist) maxDist = v.distancia;
+  });
+
+  // Calculate scores
+  DATA_VACANTES.forEach(v => {
+    const renta = (typeof DATA_RENTA !== 'undefined' && DATA_RENTA[v.unnormId]) ? DATA_RENTA[v.unnormId] : 0;
+    
+    const normRenta = maxRenta ? (renta / maxRenta) : 0;
+    const normRatio = v.ratioPobNot ? Math.min(v.ratioPobNot / 10000, 1) : 0; 
+    
+    // Score Ambicion (High renta and High ratio)
+    const sAmbicion = (normRenta + normRatio) / 2;
+    
+    // Score Costa (closer is better, up to maxCosta)
+    const sCosta = (v.distCosta !== null && maxCosta > 0) ? (1 - (v.distCosta / maxCosta)) : 0.5;
+    
+    // Score Urbanita (user wants big city if 100%, small town if 0%)
+    const normPob = maxPob ? Math.min(v.poblacion / 50000, 1) : 0; // Cap at 50k for normalization
+    const sUrba = wUrba * normPob + (1 - wUrba) * (1 - normPob);
+    
+    // Score Morriña (closer is better)
+    const sMorrina = (v.distancia !== null && maxDist > 0) ? (1 - (v.distancia / maxDist)) : 0;
+
+    let totalScore = 0;
+    let totalWeights = wAmbicion + wCosta + 1 + (state.userCoords ? wMorrina : 0); // Urba always counts as 1 weight
+    
+    totalScore += wAmbicion * sAmbicion;
+    totalScore += wCosta * sCosta;
+    totalScore += 1 * sUrba;
+    if (state.userCoords) {
+      totalScore += wMorrina * sMorrina;
+    }
+
+    const finalPercent = (totalWeights > 0) ? (totalScore / totalWeights) * 100 : 0;
+    v.matchScore = Math.round(finalPercent);
+  });
+
+  state.matchCalculated = true;
+  document.getElementById('th-match').style.display = 'table-cell';
+  
+  // Sort by match score automatically
+  state.vacantesSortCol = 'match';
+  state.vacantesSortDir = 'desc';
+  
+  filterVacantes();
 }

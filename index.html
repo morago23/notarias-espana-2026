@@ -116,6 +116,7 @@
         </select>
         <button id="filter-favoritos" class="action-btn-secondary">⭐ Ver Favoritos</button>
         <button id="toggle-advanced-filters" class="action-btn-secondary" style="background-color: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text);">⚙️ Filtros Avanzados</button>
+        <button id="toggle-match-panel" class="action-btn" style="background-color: #ec4899; border-color: #ec4899; color: white;">❤️ Match Score</button>
       </div>
 
       <!-- Advanced Filters (Hidden by default) -->
@@ -153,6 +154,49 @@
         </select>
       </div>
 
+      <!-- Match Score Panel (Hidden by default) -->
+      <div id="match-panel" style="display: none; margin-top: 16px; background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(244, 63, 94, 0.05)); padding: 20px; border-radius: var(--border-radius); border: 1px solid rgba(236, 72, 153, 0.3);">
+        <h3 style="margin: 0 0 16px 0; color: #be185d; display: flex; align-items: center; gap: 8px;">
+          ❤️ Descubre tu plaza ideal
+        </h3>
+        <p style="font-size: 13px; color: var(--color-text-muted); margin-top: -10px; margin-bottom: 16px;">
+          Ajusta los controles según tu personalidad. El algoritmo calculará tu % de afinidad con cada una de las 199 plazas.
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+          <div class="match-slider-container">
+            <label style="font-size: 13px; font-weight: 600; display: flex; justify-content: space-between;">
+              <span>💰 Ambición Económica</span> <span id="match-val-ambicion">50%</span>
+            </label>
+            <input type="range" id="match-ambicion" min="0" max="100" value="50" style="width: 100%; accent-color: #be185d; margin-top: 8px;">
+            <div style="display: flex; justify-content: space-between; font-size: 11px; color: #666; margin-top: 4px;"><span>Me da igual</span><span>Quiero facturar mucho</span></div>
+          </div>
+          <div class="match-slider-container">
+            <label style="font-size: 13px; font-weight: 600; display: flex; justify-content: space-between;">
+              <span>🏖️ Estilo de Vida (Playa)</span> <span id="match-val-costa">50%</span>
+            </label>
+            <input type="range" id="match-costa" min="0" max="100" value="50" style="width: 100%; accent-color: #be185d; margin-top: 8px;">
+            <div style="display: flex; justify-content: space-between; font-size: 11px; color: #666; margin-top: 4px;"><span>No me importa</span><span>Necesito el mar</span></div>
+          </div>
+          <div class="match-slider-container">
+            <label style="font-size: 13px; font-weight: 600; display: flex; justify-content: space-between;">
+              <span>🏙️ Entorno (Pueblo vs Ciudad)</span> <span id="match-val-urba">50%</span>
+            </label>
+            <input type="range" id="match-urba" min="0" max="100" value="50" style="width: 100%; accent-color: #be185d; margin-top: 8px;">
+            <div style="display: flex; justify-content: space-between; font-size: 11px; color: #666; margin-top: 4px;"><span>Pueblo tranquilo</span><span>Ciudad viva</span></div>
+          </div>
+          <div class="match-slider-container">
+            <label style="font-size: 13px; font-weight: 600; display: flex; justify-content: space-between;">
+              <span>🚗 Morriña (Distancia a Casa)</span> <span id="match-val-morrina">50%</span>
+            </label>
+            <input type="range" id="match-morrina" min="0" max="100" value="50" style="width: 100%; accent-color: #be185d; margin-top: 8px;">
+            <div style="display: flex; justify-content: space-between; font-size: 11px; color: #666; margin-top: 4px;"><span>A la aventura</span><span>Cerca de mi C.P.</span></div>
+          </div>
+        </div>
+        <div style="margin-top: 20px; text-align: right;">
+          <button id="btn-calc-match" class="action-btn" style="background-color: #ec4899; border-color: #ec4899; color: white;">✨ Calcular Match</button>
+        </div>
+      </div>
+
       <div class="results-info">
         Encontradas <strong id="vacantes-count-text">0</strong> plazas vacantes
       </div>
@@ -162,6 +206,7 @@
           <thead>
             <tr>
               <th class="center" title="Añadir a favoritos">⭐</th>
+              <th class="sortable center" data-col="match" id="th-match" style="display:none; color: #ec4899;">Match <span>↕</span></th>
               <th class="sortable col-comunidad" data-col="comunidad">Comunidad <span>↕</span></th>
               <th class="sortable col-provincia" data-col="provincia">Provincia <span>↕</span></th>
               <th class="sortable" data-col="localidad">Localidad <span>↕</span></th>
@@ -337,6 +382,7 @@
         <div style="display: flex; flex-direction: column;">
           <iframe id="town-modal-map" width="100%" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="border: 1px solid var(--color-border); border-radius: var(--border-radius); flex-grow: 1;"></iframe>
           <a id="town-modal-maps-btn" href="#" target="_blank" class="btn" style="display: flex; justify-content: center; align-items: center; text-decoration: none; font-size: 14px; margin-top: 12px; padding: 10px;">📍 Abrir en Google Maps</a>
+          <a id="town-modal-street-btn" href="#" target="_blank" class="btn" style="display: flex; justify-content: center; align-items: center; text-decoration: none; font-size: 14px; margin-top: 8px; padding: 10px; background-color: #ec4899; border-color: #ec4899; color: white;">🚶 Paseo Virtual (Street View)</a>
         </div>
         
       </div>
