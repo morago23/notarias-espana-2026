@@ -33,7 +33,7 @@ function initPreferencias() {
   // Distances for Prefs tab
   document.getElementById('distance-btn-pref').addEventListener('click', () => {
     document.getElementById('distance-input').value = document.getElementById('distance-input-pref').value;
-    calculateDistances();
+    haversines();
   });
   
   document.getElementById('distance-clear-pref').addEventListener('click', () => {
@@ -84,13 +84,18 @@ function renderPreferencias() {
           <td class="col-comunidad" data-label="Comunidad">${escapeHTML(v.comunidad)}</td>
           <td class="col-provincia" data-label="Provincia">${escapeHTML(v.provincia)}</td>
           <td data-label="Localidad">
-            <div class="loc-main">${escapeHTML(v.localidad.replace(/\s*\([^)]+\)/, '').trim())}${noteIndicator}</div>
+            <div class="loc-main">${escapeHTML(v.localidad.replace(/\s*\([^)]+\)/, '').trim())}${noteIndicator}
+              <button onclick="openTownModal('${escapeHTML(v.localidad.replace(/'/g, "\\'"))}', '${escapeHTML(v.provincia.replace(/'/g, "\\'"))}')" class="btn" style="padding: 2px 6px; font-size: 11px; margin-left: 6px; background-color: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-primary);" title="Ver ficha del pueblo">ℹ️</button>
+            </div>
             ${noteText ? `<div style="font-size:11px; color:var(--color-primary); margin-top:2px; font-style:italic;">📝 ${escapeHTML(noteText.length > 50 ? noteText.substring(0, 50) + '...' : noteText)}</div>` : ''}
           </td>
           <td data-label="Hab./Notario" style="white-space:nowrap;">
             ${v.poblacion ? `<div style="font-size:13px;" title="Población total">👥 ${formatPoblacion(v.poblacion)}</div>` : '<div style="font-size:13px; color:#999;">-</div>'}
+            ${typeof DATA_RENTA !== 'undefined' && DATA_RENTA[v._id] ? `<div style="font-size:13px; margin-top:2px; color:#1b5e20;" title="Renta Media Neta por Persona">💰 ${DATA_RENTA[v._id].toLocaleString('es-ES')} €</div>` : ''}
             <div style="font-size:12px; color:var(--color-text-muted);" title="Notarios en la localidad">🏛️ ${v.numNotarias} notario${v.numNotarias !== 1 ? 's' : ''}</div>
             ${v.poblacion ? `<div style="font-size:11px; color:var(--color-primary); margin-top:2px;" title="Ratio habitantes por notario">📊 ${formatPoblacion(v.ratioPobNot).replace(' hab.', '')}/not.</div>` : ''}
+          ${v.distCosta !== null ? `<div style="font-size:11px; color:#0277bd; margin-top:2px;" title="Distancia a la playa">🏖️ ${v.distCosta} km</div>` : ''}
+          ${v.distAero !== null ? `<div style="font-size:11px; color:#546e7a; margin-top:2px;" title="Distancia al aeropuerto">✈️ ${v.distAero} km</div>` : ''}
           </td>
           <td data-label="Notario anterior"><small style="color:var(--color-text-muted)">${notarioAnt}</small></td>
           <td data-label="Motivo" class="center"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
@@ -233,6 +238,32 @@ DATA_VACANTES.forEach(v => {
   const pob = typeof getPoblacion === 'function' ? getPoblacion(v.localidad, v.provincia) : null;
   v.poblacion = pob;
   v.ratioPobNot = pob ? Math.round(pob / v.numNotarias) : 0;
+
+  const id = normalize(v.localidad.replace(/\s*\([^)]*\)/g, '').trim()) + '|' + normalize(v.provincia);
+  const coords = DATA_COORDS[id];
+  if (coords) {
+    const [lat, lon] = coords.split(',').map(Number);
+    let minAero = Infinity;
+    if (typeof AEROPUERTOS !== 'undefined') {
+      AEROPUERTOS.forEach(a => {
+        const d = haversine(lat, lon, a.lat, a.lon);
+        if (d < minAero) minAero = d;
+      });
+    }
+    let minCosta = Infinity;
+    if (typeof PUNTOS_COSTA !== 'undefined') {
+      PUNTOS_COSTA.forEach(c => {
+        const d = haversine(lat, lon, c.lat, c.lon);
+        if (d < minCosta) minCosta = d;
+      });
+    }
+    v.distAero = minAero !== Infinity ? Math.round(minAero) : null;
+    v.distCosta = minCosta !== Infinity ? Math.round(minCosta) : null;
+  } else {
+    v.distAero = null;
+    v.distCosta = null;
+  }
+
 });
 
 function isVacante(notaria) {
@@ -280,7 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('distance-input').value = parsed.input;
         document.getElementById('distance-input-pref').value = parsed.input;
         state.userCoords = parsed.coords;
-        calculateDistances(true); // pass true to skip geocode
+        haversines(true); // pass true to skip geocode
       }
     } catch(e) {}
   }
@@ -446,6 +477,8 @@ function initVacantes() {
   document.getElementById('filter-vacante-categoria').addEventListener('change', filterVacantes);
   document.getElementById('filter-vacante-tiempo').addEventListener('change', filterVacantes);
   document.getElementById('filter-vacante-distancia').addEventListener('change', filterVacantes);
+  document.getElementById('filter-vacante-aeropuerto').addEventListener('change', filterVacantes);
+  document.getElementById('filter-vacante-costa').addEventListener('change', filterVacantes);
 
   const btnFavs = document.getElementById('filter-favoritos');
   btnFavs.addEventListener('click', () => {
@@ -476,14 +509,14 @@ function initVacantes() {
   });
 
   // Distances
-  document.getElementById('distance-btn').addEventListener('click', calculateDistances);
+  document.getElementById('distance-btn').addEventListener('click', haversines);
   document.getElementById('distance-clear').addEventListener('click', () => {
     state.userCoords = null;
     localStorage.removeItem('userDistData');
     document.getElementById('distance-input').value = '';
     document.getElementById('distance-status').textContent = '';
     document.getElementById('distance-clear').style.display = 'none';
-    document.getElementById('th-distancia').style.display = 'none';
+    // removed th-distancia none;
     document.getElementById('filter-vacante-tiempo').disabled = true;
     document.getElementById('filter-vacante-distancia').disabled = true;
     document.getElementById('filter-vacante-tiempo').title = 'Introduce tu Código Postal en Mis Preferencias para usar este filtro';
@@ -534,6 +567,8 @@ function filterVacantes() {
   const catF = document.getElementById('filter-vacante-categoria').value;
   const timeF = document.getElementById('filter-vacante-tiempo').value;
   const distF = document.getElementById('filter-vacante-distancia').value;
+  const aeroF = document.getElementById('filter-vacante-aeropuerto').value;
+  const costaF = document.getElementById('filter-vacante-costa').value;
 
   let filtered = DATA_VACANTES.filter(v => {
     const locClean = v.localidad.replace(/\s*\([^)]*\)/g, '').trim();
@@ -554,6 +589,12 @@ function filterVacantes() {
     
     if (distF) {
       if (v.distancia === null || v.distancia === undefined || v.distancia > parseInt(distF)) return false;
+    }
+    if (aeroF) {
+      if (v.distAero === null || v.distAero > parseInt(aeroF)) return false;
+    }
+    if (costaF) {
+      if (v.distCosta === null || v.distCosta > parseInt(costaF)) return false;
     }
 
     if (search) {
@@ -629,12 +670,17 @@ function renderVacantes() {
         <td class="col-comunidad" data-label="Comunidad">${escapeHTML(v.comunidad)}</td>
         <td class="col-provincia" data-label="Provincia">${escapeHTML(v.provincia)}</td>
         <td data-label="Localidad">
-          <div class="loc-main">${highlightText(v.localidad.replace(/\s*\([^)]+\)/, '').trim(), query)}${noteIndicator}</div>
+          <div class="loc-main">${highlightText(v.localidad.replace(/\s*\([^)]+\)/, '').trim(), query)}${noteIndicator}
+            <button onclick="openTownModal('${escapeHTML(v.localidad.replace(/'/g, "\\'"))}', '${escapeHTML(v.provincia.replace(/'/g, "\\'"))}')" class="btn" style="padding: 2px 6px; font-size: 11px; margin-left: 6px; background-color: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-primary);" title="Ver ficha del pueblo">ℹ️</button>
+          </div>
         </td>
         <td data-label="Hab./Notario" style="white-space:nowrap;">
           ${v.poblacion ? `<div style="font-size:13px;" title="Población total">👥 ${formatPoblacion(v.poblacion)}</div>` : '<div style="font-size:13px; color:#999;">-</div>'}
+          ${typeof DATA_RENTA !== 'undefined' && DATA_RENTA[v._id] ? `<div style="font-size:13px; margin-top:2px; color:#1b5e20;" title="Renta Media Neta por Persona">💰 ${DATA_RENTA[v._id].toLocaleString('es-ES')} €</div>` : ''}
           <div style="font-size:12px; color:var(--color-text-muted);" title="Notarios en la localidad">🏛️ ${v.numNotarias} notario${v.numNotarias !== 1 ? 's' : ''}</div>
           ${v.poblacion ? `<div style="font-size:11px; color:var(--color-primary); margin-top:2px;" title="Ratio habitantes por notario">📊 ${formatPoblacion(v.ratioPobNot).replace(' hab.', '')}/not.</div>` : ''}
+          ${v.distCosta !== null ? `<div style="font-size:11px; color:#0277bd; margin-top:2px;" title="Distancia a la playa">🏖️ ${v.distCosta} km</div>` : ''}
+          ${v.distAero !== null ? `<div style="font-size:11px; color:#546e7a; margin-top:2px;" title="Distancia al aeropuerto">✈️ ${v.distAero} km</div>` : ''}
         </td>
         <td data-label="Notario anterior"><small style="color:var(--color-text-muted)">${notarioAnt}</small></td>
         <td class="center" data-label="Motivo"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
@@ -689,7 +735,7 @@ function renderPagination(containerId, totalItems, perPage, currentPage, onPageC
 }
 
 // Distance and driving time calculation
-async function calculateDistances(skipGeocode = false) {
+async function haversines(skipGeocode = false) {
   const query = document.getElementById('distance-input').value.trim();
   const status = document.getElementById('distance-status');
   if (!query) return;
@@ -773,7 +819,7 @@ async function calculateDistances(skipGeocode = false) {
 
     status.textContent = `Rutas calculadas desde ${data[0].display_name.split(',')[0]}`;
     document.getElementById('distance-clear').style.display = 'inline-block';
-    document.getElementById('th-distancia').style.display = 'table-cell';
+    // removed th-distancia display;
 
     // Also update prefs distance UI
     document.getElementById('distance-status-pref').textContent = status.textContent;
@@ -1118,39 +1164,101 @@ window.openTownModal = async function(localidad, provincia) {
   const modal = document.getElementById('town-modal');
   const title = document.getElementById('town-modal-title');
   const subtitle = document.getElementById('town-modal-subtitle');
+  const titleAlt = document.getElementById('town-modal-title-alt');
+  const subtitleAlt = document.getElementById('town-modal-subtitle-alt');
   const imgContainer = document.getElementById('town-modal-image-container');
   const img = document.getElementById('town-modal-image');
+  const headerAlt = document.getElementById('town-modal-noimage-header');
   const loading = document.getElementById('town-modal-loading');
   const desc = document.getElementById('town-modal-description');
   const err = document.getElementById('town-modal-error');
   const mapsBtn = document.getElementById('town-modal-maps-btn');
-  
+  const mapIframe = document.getElementById('town-modal-map');
+  const popBadge = document.getElementById('town-modal-pop');
+  const rentaBadge = document.getElementById('town-modal-renta');
+  const weatherBadge = document.getElementById('town-modal-weather');
+
   // Clean locality for better search (remove text in parentheses)
   const locClean = localidad.replace(/\s*\([^)]*\)/g, '').trim();
-  
+  const id = normalize(locClean) + '|' + normalize(provincia);
+
   title.textContent = locClean;
   subtitle.textContent = provincia;
+  titleAlt.textContent = locClean;
+  subtitleAlt.textContent = provincia;
+  
   imgContainer.style.display = 'none';
+  headerAlt.style.display = 'block';
   desc.style.display = 'none';
   err.style.display = 'none';
   loading.style.display = 'block';
-  mapsBtn.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locClean + ', ' + provincia + ', España')}`;
   
+  const gmapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locClean + ', ' + provincia + ', España')}`;
+  mapsBtn.href = gmapsUrl;
+
+  const coord = DATA_COORDS[id];
+  let lat = null, lon = null;
+  if (coord) {
+    [lat, lon] = coord.split(',').map(Number);
+    mapIframe.src = `https://www.openstreetmap.org/export/embed.html?bbox=${lon-0.03},${lat-0.03},${lon+0.03},${lat+0.03}&layer=mapnik&marker=${lat},${lon}`;
+  } else {
+    mapIframe.src = '';
+  }
+
+  const pob = typeof getPoblacion === 'function' ? getPoblacion(localidad, provincia) : null;
+  popBadge.textContent = pob ? `👥 ${formatPoblacion(pob)}` : '👥 -- hab.';
+  
+  if (typeof DATA_RENTA !== 'undefined' && DATA_RENTA[id]) {
+    rentaBadge.textContent = `💰 ${DATA_RENTA[id].toLocaleString('es-ES')} €`;
+    rentaBadge.style.display = 'inline-block';
+  } else {
+    rentaBadge.style.display = 'none';
+  }
+
+  weatherBadge.textContent = '⛅ -- °C';
+
   modal.style.display = 'flex';
-  
+
+  if (lat !== null && lon !== null) {
+    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`)
+      .then(res => res.json())
+      .then(d => {
+        if (d.current_weather) {
+          const w = d.current_weather;
+          let icon = '⛅';
+          if (w.weathercode === 0) icon = '☀️';
+          else if (w.weathercode <= 3) icon = '⛅';
+          else if (w.weathercode <= 67) icon = '🌧️';
+          else if (w.weathercode <= 77) icon = '❄️';
+          else if (w.weathercode <= 99) icon = '⛈️';
+          weatherBadge.textContent = `${icon} ${w.temperature}°C`;
+        }
+      }).catch(e => console.error(e));
+  }
+
   try {
-    const response = await fetch(`https://es.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(locClean)}`);
+    let wikiTitle = encodeURIComponent(locClean);
+    if (lat !== null && lon !== null) {
+      const geoRes = await fetch(`https://es.wikipedia.org/w/api.php?action=query&list=geosearch&gscoord=${lat}|${lon}&gsradius=10000&gslimit=1&format=json&origin=*`);
+      const geoData = await geoRes.json();
+      if (geoData.query && geoData.query.geosearch && geoData.query.geosearch.length > 0) {
+        wikiTitle = encodeURIComponent(geoData.query.geosearch[0].title);
+      }
+    }
+    
+    const response = await fetch(`https://es.wikipedia.org/api/rest_v1/page/summary/${wikiTitle}`);
     if (!response.ok) throw new Error('Not found');
-    
+
     const data = await response.json();
-    
+
     loading.style.display = 'none';
     desc.innerHTML = data.extract_html || data.extract;
     desc.style.display = 'block';
-    
+
     if (data.thumbnail && data.thumbnail.source) {
       img.src = data.thumbnail.source;
       imgContainer.style.display = 'block';
+      headerAlt.style.display = 'none';
     }
   } catch (error) {
     loading.style.display = 'none';
