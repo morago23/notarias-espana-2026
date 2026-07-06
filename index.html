@@ -170,6 +170,7 @@
       <div class="controls" style="justify-content:space-between; align-items:center;">
         <h2 style="margin:0; font-size:1.5rem; color:var(--color-text);">Ordena tus Plazas</h2>
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button id="share-profile-btn" class="action-btn-secondary" title="Compartir favoritos entre dispositivos">🔗 Compartir Perfil</button>
           <button id="export-prefs-btn" class="action-btn-secondary">🖨️ Imprimir / Guardar PDF</button>
           <button id="export-csv-btn" class="action-btn">⬇️ Descargar Excel</button>
         </div>
@@ -255,6 +256,36 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
   
+  <!-- NOTE MODAL -->
+  <div id="note-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-content" style="max-width: 450px;">
+      <button id="close-note-modal" class="modal-close">&times;</button>
+      <div class="modal-body" style="padding: 24px;">
+        <h2 id="note-modal-title" style="margin-top: 0; margin-bottom: 4px; color: var(--color-primary); font-size: 20px;">📝 Notas personales</h2>
+        <p id="note-modal-subtitle" style="color: var(--color-text-muted); font-size: 13px; margin-top: 0; margin-bottom: 16px;"></p>
+        <textarea id="note-modal-textarea" rows="5" style="width: 100%; padding: 12px; border: 1px solid var(--color-border); border-radius: var(--border-radius); font-family: 'Inter', sans-serif; font-size: 14px; resize: vertical; background: var(--color-surface); color: var(--color-text);" placeholder="Escribe tus notas sobre esta plaza (ej: cerca de casa de mis padres, buen colegio para los niños...)"></textarea>
+        <div style="display: flex; gap: 10px; margin-top: 12px;">
+          <button id="note-modal-save" class="action-btn" style="flex:1;">💾 Guardar</button>
+          <button id="note-modal-delete" class="action-btn-secondary" style="flex:0;">🗑️</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHARE MODAL -->
+  <div id="share-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-content" style="max-width: 500px;">
+      <button id="close-share-modal" class="modal-close">&times;</button>
+      <div class="modal-body" style="padding: 24px;">
+        <h2 style="margin-top: 0; margin-bottom: 8px; color: var(--color-primary); font-size: 20px;">🔗 Compartir Perfil</h2>
+        <p style="color: var(--color-text-muted); font-size: 13px; margin-top: 0; margin-bottom: 16px;">Copia este enlace y ábrelo en otro dispositivo para sincronizar tus favoritos, orden y notas. No se necesita cuenta ni servidor.</p>
+        <textarea id="share-url-output" rows="3" readonly style="width: 100%; padding: 12px; border: 1px solid var(--color-border); border-radius: var(--border-radius); font-family: monospace; font-size: 12px; resize: none; background: var(--color-surface-alt); color: var(--color-text); word-break: break-all;"></textarea>
+        <button id="share-copy-btn" class="action-btn" style="width: 100%; margin-top: 12px;">📋 Copiar al Portapapeles</button>
+        <p id="share-copy-status" style="text-align: center; color: var(--color-primary); font-size: 13px; margin-top: 8px;"></p>
+      </div>
+    </div>
+  </div>
+
   <!-- TOWN INFO MODAL -->
   <div id="town-modal" class="modal-overlay" style="display:none;">
     <div class="modal-content">
@@ -278,6 +309,7 @@
   </div>
 
   <script src="coords.js"></script>
+  <script src="poblacion.js"></script>
   <script src="data.js"></script>
   <script src="app.js"></script>
 </body>

@@ -72,14 +72,23 @@ function renderPreferencias() {
       }
       if (!notarioAnt) notarioAnt = "-";
 
-      html += `
+       const noteText = typeof getNoteForId === 'function' ? getNoteForId(id) : '';
+       const noteIndicator = noteText ? `<span title="${escapeHTML(noteText)}" style="cursor:help; font-size:11px; color:var(--color-primary);"> 📝</span>` : '';
+       const pob = typeof getPoblacion === 'function' ? getPoblacion(v.localidad, v.provincia) : null;
+       const pobHtml = pob ? `<div style="font-size:11px; color:var(--color-text-muted);">👥 ${typeof formatPoblacion === 'function' ? formatPoblacion(pob) : pob}</div>` : '';
+
+       html += `
         <tr data-id="${id}" class="pref-item">
           <td class="center pref-handle" style="font-weight:bold; color:var(--color-primary); font-size:1.1rem; cursor:grab;">
             ☰ ${index + 1}
           </td>
           <td class="col-comunidad" data-label="Comunidad">${escapeHTML(v.comunidad)}</td>
           <td class="col-provincia" data-label="Provincia">${escapeHTML(v.provincia)}</td>
-          <td data-label="Localidad"><div class="loc-main">${escapeHTML(v.localidad.replace(/\s*\([^)]+\)/, '').trim())}</div></td>
+          <td data-label="Localidad">
+            <div class="loc-main">${escapeHTML(v.localidad.replace(/\s*\([^)]+\)/, '').trim())}${noteIndicator}</div>
+            ${pobHtml}
+            ${noteText ? `<div style="font-size:11px; color:var(--color-primary); margin-top:2px; font-style:italic;">📝 ${escapeHTML(noteText.length > 50 ? noteText.substring(0, 50) + '...' : noteText)}</div>` : ''}
+          </td>
           <td data-label="Notario anterior"><small style="color:var(--color-text-muted)">${notarioAnt}</small></td>
           <td data-label="Motivo" class="center"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
           <td data-label="Categoría" class="center"><span class="badge ${badgeCat}">${escapeHTML(v.categoria)}</span></td>
@@ -88,6 +97,7 @@ function renderPreferencias() {
             ${v.duration ? `<br><small style="color:#6c757d">🚗 ${formatDuration(v.duration)}</small>` : ''}
           </td>` : '<td data-label="Tiempo y Distancia" class="center" style="display:none;"></td>'}
           <td data-label="Borrar" class="center">
+            <button onclick="openNoteModal('${escapeHTML(id)}', '${escapeHTML(v.localidad.replace(/'/g, "\\'"))}')" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Notas personales">${noteText ? '📝' : '🗒️'}</button>
             <button class="pref-remove" data-id="${id}">❌</button>
           </td>
         </tr>
@@ -595,12 +605,23 @@ function renderVacantes() {
     const favStar = isFav ? '⭐' : '☆';
     const favClass = isFav ? 'active' : '';
 
+    const noteText = getNoteForId(v._id);
+    const noteIndicator = noteText ? `<span title="${escapeHTML(noteText)}" style="cursor:help; font-size:11px; color:var(--color-primary);"> 📝</span>` : '';
+    const pob = getPoblacion(v.localidad, v.provincia);
+    const pobHtml = pob ? `<div style="font-size:11px; color:var(--color-text-muted);">👥 ${formatPoblacion(pob)}</div>` : '';
+
     return `
       <tr>
-        <td class="center" data-label="Favorito"><button class="fav-btn ${favClass}" data-id="${escapeHTML(v._id)}">${favStar}</button></td>
+        <td class="center" data-label="Favorito">
+          <button class="fav-btn ${favClass}" data-id="${escapeHTML(v._id)}">${favStar}</button>
+          <button onclick="openNoteModal('${escapeHTML(v._id)}', '${escapeHTML(v.localidad.replace(/'/g, "\\'"))}')" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Notas personales">${noteText ? '📝' : '🗒️'}</button>
+        </td>
         <td class="col-comunidad" data-label="Comunidad">${escapeHTML(v.comunidad)}</td>
         <td class="col-provincia" data-label="Provincia">${escapeHTML(v.provincia)}</td>
-        <td data-label="Localidad"><div class="loc-main">${highlightText(v.localidad.replace(/\s*\([^)]+\)/, '').trim(), query)}</div></td>
+        <td data-label="Localidad">
+          <div class="loc-main">${highlightText(v.localidad.replace(/\s*\([^)]+\)/, '').trim(), query)}${noteIndicator}</div>
+          ${pobHtml}
+        </td>
         <td data-label="Notario anterior"><small style="color:var(--color-text-muted)">${notarioAnt}</small></td>
         <td class="center" data-label="Motivo"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
         <td class="center" data-label="Categoría"><span class="badge ${badgeCat}">${escapeHTML(v.categoria)}</span></td>
@@ -1122,3 +1143,147 @@ window.openTownModal = async function(localidad, provincia) {
     err.style.display = 'block';
   }
 };
+
+// ================= NOTAS PERSONALES =================
+const userNotes = JSON.parse(localStorage.getItem('userNotes') || '{}');
+let currentNoteId = null;
+
+function getNoteForId(id) {
+  return userNotes[id] || '';
+}
+
+window.openNoteModal = function(plazaId, localidad) {
+  currentNoteId = plazaId;
+  const locClean = localidad.replace(/\s*\([^)]*\)/g, '').trim();
+  document.getElementById('note-modal-subtitle').textContent = locClean;
+  document.getElementById('note-modal-textarea').value = getNoteForId(plazaId);
+  document.getElementById('note-modal').style.display = 'flex';
+  document.getElementById('note-modal-textarea').focus();
+};
+
+document.getElementById('close-note-modal').addEventListener('click', () => {
+  document.getElementById('note-modal').style.display = 'none';
+});
+document.getElementById('note-modal').addEventListener('click', (e) => {
+  if (e.target.id === 'note-modal') document.getElementById('note-modal').style.display = 'none';
+});
+
+document.getElementById('note-modal-save').addEventListener('click', () => {
+  if (!currentNoteId) return;
+  const text = document.getElementById('note-modal-textarea').value.trim();
+  if (text) {
+    userNotes[currentNoteId] = text;
+  } else {
+    delete userNotes[currentNoteId];
+  }
+  localStorage.setItem('userNotes', JSON.stringify(userNotes));
+  document.getElementById('note-modal').style.display = 'none';
+  renderVacantes();
+  renderPreferencias();
+});
+
+document.getElementById('note-modal-delete').addEventListener('click', () => {
+  if (!currentNoteId) return;
+  delete userNotes[currentNoteId];
+  localStorage.setItem('userNotes', JSON.stringify(userNotes));
+  document.getElementById('note-modal').style.display = 'none';
+  renderVacantes();
+  renderPreferencias();
+});
+
+// ================= COMPARTIR PERFIL =================
+document.getElementById('share-profile-btn').addEventListener('click', () => {
+  const profileData = {
+    f: favOrder, // favorites order
+    n: userNotes  // notes
+  };
+  const json = JSON.stringify(profileData);
+  const encoded = btoa(unescape(encodeURIComponent(json)));
+  const shareUrl = window.location.origin + window.location.pathname + '#profile=' + encoded;
+  
+  document.getElementById('share-url-output').value = shareUrl;
+  document.getElementById('share-copy-status').textContent = '';
+  document.getElementById('share-modal').style.display = 'flex';
+});
+
+document.getElementById('share-copy-btn').addEventListener('click', () => {
+  const textarea = document.getElementById('share-url-output');
+  textarea.select();
+  navigator.clipboard.writeText(textarea.value).then(() => {
+    document.getElementById('share-copy-status').textContent = '✅ ¡Enlace copiado! Pégalo en tu otro dispositivo.';
+  }).catch(() => {
+    document.getElementById('share-copy-status').textContent = '⚠️ No se pudo copiar. Selecciona el texto manualmente.';
+  });
+});
+
+document.getElementById('close-share-modal').addEventListener('click', () => {
+  document.getElementById('share-modal').style.display = 'none';
+});
+document.getElementById('share-modal').addEventListener('click', (e) => {
+  if (e.target.id === 'share-modal') document.getElementById('share-modal').style.display = 'none';
+});
+
+// Import profile from URL hash on page load
+(function importProfileFromHash() {
+  const hash = window.location.hash;
+  if (!hash.startsWith('#profile=')) return;
+  
+  try {
+    const encoded = hash.replace('#profile=', '');
+    const json = decodeURIComponent(escape(atob(encoded)));
+    const profileData = JSON.parse(json);
+    
+    if (profileData.f && Array.isArray(profileData.f)) {
+      // Ask user before overwriting
+      const count = profileData.f.length;
+      const noteCount = profileData.n ? Object.keys(profileData.n).length : 0;
+      if (confirm(`Se ha detectado un perfil compartido con ${count} plaza(s) favorita(s)${noteCount > 0 ? ` y ${noteCount} nota(s)` : ''}.\n\n¿Quieres importarlo? Esto reemplazará tus favoritos y notas actuales.`)) {
+        // Import favorites
+        favOrder.length = 0;
+        favVacantes.clear();
+        profileData.f.forEach(id => {
+          favOrder.push(id);
+          favVacantes.add(id);
+        });
+        localStorage.setItem('favVacantes', JSON.stringify(favOrder));
+        
+        // Import notes
+        if (profileData.n) {
+          Object.keys(userNotes).forEach(k => delete userNotes[k]);
+          Object.assign(userNotes, profileData.n);
+          localStorage.setItem('userNotes', JSON.stringify(userNotes));
+        }
+        
+        // Clean URL
+        history.replaceState(null, '', window.location.pathname);
+        
+        // Refresh UI
+        if (typeof filterVacantes === 'function') filterVacantes();
+        if (typeof renderPreferencias === 'function') renderPreferencias();
+        
+        alert('✅ Perfil importado correctamente. Tus favoritos y notas se han sincronizado.');
+      }
+    }
+    
+    // Clean URL regardless
+    history.replaceState(null, '', window.location.pathname);
+  } catch(e) {
+    console.error('Error importing profile:', e);
+  }
+})();
+
+// ================= POBLACIÓN =================
+function getPoblacion(localidad, provincia) {
+  if (typeof DATA_POBLACION === 'undefined') return null;
+  const locClean = localidad.replace(/\s*\([^)]*\)/g, '').trim();
+  const key = `${locClean}|${provincia}`;
+  if (DATA_POBLACION[key]) return DATA_POBLACION[key];
+  // Fallback: search by locality only
+  const altKey = Object.keys(DATA_POBLACION).find(k => k.startsWith(locClean + '|'));
+  return altKey ? DATA_POBLACION[altKey] : null;
+}
+
+function formatPoblacion(num) {
+  if (!num) return '';
+  return num.toLocaleString('es-ES') + ' hab.';
+}
