@@ -48,7 +48,7 @@ function renderPreferencias() {
   if (!listEl) return;
   
   if (favOrder.length === 0) {
-    listEl.innerHTML = '<tr><td colspan="8" class="empty-state">No tienes ninguna plaza guardada en favoritos. Ve a "Plazas Vacantes" y marca la estrella en las notarías que te interesen.</td></tr>';
+    listEl.innerHTML = '<tr><td colspan="9" class="empty-state">No tienes ninguna plaza guardada en favoritos. Ve a "Plazas Vacantes" y marca la estrella en las notarías que te interesen.</td></tr>';
     return;
   }
   
@@ -74,9 +74,7 @@ function renderPreferencias() {
 
        const noteText = typeof getNoteForId === 'function' ? getNoteForId(id) : '';
        const noteIndicator = noteText ? `<span title="${escapeHTML(noteText)}" style="cursor:help; font-size:11px; color:var(--color-primary);"> 📝</span>` : '';
-       const pob = typeof getPoblacion === 'function' ? getPoblacion(v.localidad, v.provincia) : null;
        const numNot = v.numNotarias;
-       const pobHtml = pob || numNot ? `<div style="font-size:11px; color:var(--color-text-muted);">${pob ? '👥 ' + (typeof formatPoblacion === 'function' ? formatPoblacion(pob) : pob) : ''}${pob && numNot ? ' · ' : ''}${numNot ? '🏛️ ' + numNot + ' notaría' + (numNot > 1 ? 's' : '') : ''}</div>` : '';
 
        html += `
         <tr data-id="${id}" class="pref-item">
@@ -87,8 +85,12 @@ function renderPreferencias() {
           <td class="col-provincia" data-label="Provincia">${escapeHTML(v.provincia)}</td>
           <td data-label="Localidad">
             <div class="loc-main">${escapeHTML(v.localidad.replace(/\s*\([^)]+\)/, '').trim())}${noteIndicator}</div>
-            ${pobHtml}
             ${noteText ? `<div style="font-size:11px; color:var(--color-primary); margin-top:2px; font-style:italic;">📝 ${escapeHTML(noteText.length > 50 ? noteText.substring(0, 50) + '...' : noteText)}</div>` : ''}
+          </td>
+          <td data-label="Hab./Notario" style="white-space:nowrap;">
+            ${v.poblacion ? `<div style="font-size:13px;" title="Población total">👥 ${formatPoblacion(v.poblacion)}</div>` : '<div style="font-size:13px; color:#999;">-</div>'}
+            <div style="font-size:12px; color:var(--color-text-muted);" title="Notarios en la localidad">🏛️ ${v.numNotarias} notario${v.numNotarias !== 1 ? 's' : ''}</div>
+            ${v.poblacion ? `<div style="font-size:11px; color:var(--color-primary); margin-top:2px;" title="Ratio habitantes por notario">📊 ${formatPoblacion(v.ratioPobNot).replace(' hab.', '')}/not.</div>` : ''}
           </td>
           <td data-label="Notario anterior"><small style="color:var(--color-text-muted)">${notarioAnt}</small></td>
           <td data-label="Motivo" class="center"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
@@ -228,6 +230,9 @@ DATA_VACANTES.forEach(v => {
 
   v.categoria = nMatch ? nMatch.clase : '-';
   v.numNotarias = nMatch ? parseInt(nMatch.numero) || 1 : 1;
+  const pob = typeof getPoblacion === 'function' ? getPoblacion(v.localidad, v.provincia) : null;
+  v.poblacion = pob;
+  v.ratioPobNot = pob ? Math.round(pob / v.numNotarias) : 0;
 });
 
 function isVacante(notaria) {
@@ -565,6 +570,11 @@ function filterVacantes() {
         let vB = b.duration !== null && b.duration !== undefined ? b.duration : 99999999;
         return state.vacantesSortDir === 'asc' ? vA - vB : vB - vA;
       }
+      if (state.vacantesSortCol === 'ratio') {
+        let vA = a.ratioPobNot || 0;
+        let vB = b.ratioPobNot || 0;
+        return state.vacantesSortDir === 'asc' ? vA - vB : vB - vA;
+      }
       let vA = a[state.vacantesSortCol] || '';
       let vB = b[state.vacantesSortCol] || '';
       const cmp = String(vA).localeCompare(String(vB), 'es');
@@ -609,9 +619,6 @@ function renderVacantes() {
 
     const noteText = getNoteForId(v._id);
     const noteIndicator = noteText ? `<span title="${escapeHTML(noteText)}" style="cursor:help; font-size:11px; color:var(--color-primary);"> 📝</span>` : '';
-    const pob = getPoblacion(v.localidad, v.provincia);
-    const numNot = v.numNotarias;
-    const pobHtml = pob || numNot ? `<div style="font-size:11px; color:var(--color-text-muted);">${pob ? '👥 ' + formatPoblacion(pob) : ''}${pob && numNot ? ' · ' : ''}${numNot ? '🏛️ ' + numNot + ' notaría' + (numNot > 1 ? 's' : '') : ''}</div>` : '';
 
     return `
       <tr>
@@ -623,7 +630,11 @@ function renderVacantes() {
         <td class="col-provincia" data-label="Provincia">${escapeHTML(v.provincia)}</td>
         <td data-label="Localidad">
           <div class="loc-main">${highlightText(v.localidad.replace(/\s*\([^)]+\)/, '').trim(), query)}${noteIndicator}</div>
-          ${pobHtml}
+        </td>
+        <td data-label="Hab./Notario" style="white-space:nowrap;">
+          ${v.poblacion ? `<div style="font-size:13px;" title="Población total">👥 ${formatPoblacion(v.poblacion)}</div>` : '<div style="font-size:13px; color:#999;">-</div>'}
+          <div style="font-size:12px; color:var(--color-text-muted);" title="Notarios en la localidad">🏛️ ${v.numNotarias} notario${v.numNotarias !== 1 ? 's' : ''}</div>
+          ${v.poblacion ? `<div style="font-size:11px; color:var(--color-primary); margin-top:2px;" title="Ratio habitantes por notario">📊 ${formatPoblacion(v.ratioPobNot).replace(' hab.', '')}/not.</div>` : ''}
         </td>
         <td data-label="Notario anterior"><small style="color:var(--color-text-muted)">${notarioAnt}</small></td>
         <td class="center" data-label="Motivo"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
