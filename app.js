@@ -478,6 +478,39 @@ function initVacantes() {
     }
   });
   
+  // Match panel toggle and logic
+  const matchPanel = document.getElementById('match-panel');
+  if (document.getElementById('toggle-match-panel')) {
+    document.getElementById('toggle-match-panel').addEventListener('click', () => {
+      matchPanel.style.display = matchPanel.style.display === 'none' ? 'block' : 'none';
+      if(matchPanel.style.display === 'block') {
+        const morrinaInput = document.getElementById('match-morrina');
+        if (!state.userCoords) {
+          morrinaInput.disabled = true;
+          morrinaInput.title = "Introduce tu Código Postal en Preferencias para habilitar";
+        } else {
+          morrinaInput.disabled = false;
+          morrinaInput.title = "";
+        }
+      }
+    });
+  }
+
+  ['ambicion', 'costa', 'urba', 'morrina'].forEach(id => {
+    const el = document.getElementById('match-' + id);
+    if (el) {
+      const valEl = document.getElementById('match-val-' + id);
+      el.addEventListener('input', e => {
+        valEl.textContent = e.target.value + '%';
+      });
+    }
+  });
+
+  if (document.getElementById('btn-calc-match')) {
+    document.getElementById('btn-calc-match').addEventListener('click', calculateMatchScores);
+  }
+
+  
   // Advanced filters listeners
   document.getElementById('filter-vacante-categoria').addEventListener('change', filterVacantes);
   document.getElementById('filter-vacante-tiempo').addEventListener('change', filterVacantes);
