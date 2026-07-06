@@ -823,4 +823,9 @@ const DATA_COORDS = {
     "lat": 43.3533452,
     "lon": -5.8795096
   }
+,
+  "Villahermosa|Ciudad Real": {
+    "lat": 38.7490059,
+    "lon": -2.8712398
+  }
 };

@@ -12532,8 +12532,8 @@ const DATA_VACANTES = [
     "anteriorNotario": "Iago Alciturri Sexto"
   },
   {
-    "comunidad": "País Vasco",
-    "provincia": "Bizkaia/Vizcaya",
+    "comunidad": "Castilla-La Mancha",
+    "provincia": "Ciudad Real",
     "localidad": "Villahermosa",
     "clase": "Resulta",
     "notas": "Nº94",
