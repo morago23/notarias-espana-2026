@@ -413,6 +413,23 @@ function initVacantes() {
   document.getElementById('filter-vacante-comunidad').addEventListener('change', filterVacantes);
   document.getElementById('filter-vacante-tipo').addEventListener('change', filterVacantes);
 
+  // Advanced filters toggle
+  document.getElementById('toggle-advanced-filters').addEventListener('click', (e) => {
+    const advFilters = document.getElementById('advanced-filters');
+    if (advFilters.style.display === 'none') {
+      advFilters.style.display = 'flex';
+      e.target.style.backgroundColor = 'var(--color-surface-alt)';
+    } else {
+      advFilters.style.display = 'none';
+      e.target.style.backgroundColor = 'var(--color-surface)';
+    }
+  });
+  
+  // Advanced filters listeners
+  document.getElementById('filter-vacante-categoria').addEventListener('change', filterVacantes);
+  document.getElementById('filter-vacante-tiempo').addEventListener('change', filterVacantes);
+  document.getElementById('filter-vacante-distancia').addEventListener('change', filterVacantes);
+
   const btnFavs = document.getElementById('filter-favoritos');
   btnFavs.addEventListener('click', () => {
     state.vacantesOnlyFavs = !state.vacantesOnlyFavs;
@@ -491,6 +508,9 @@ function filterVacantes() {
   const search = normalize(document.getElementById('search-vacantes').value);
   const comF = document.getElementById('filter-vacante-comunidad').value;
   const tipoF = document.getElementById('filter-vacante-tipo').value;
+  const catF = document.getElementById('filter-vacante-categoria').value;
+  const timeF = document.getElementById('filter-vacante-tiempo').value;
+  const distF = document.getElementById('filter-vacante-distancia').value;
 
   let filtered = DATA_VACANTES.filter(v => {
     const locClean = v.localidad.replace(/\s*\([^)]*\)/g, '').trim();
@@ -499,10 +519,20 @@ function filterVacantes() {
 
     if (state.vacantesOnlyFavs && !favVacantes.has(id)) return false;
     if (comF && v.comunidad !== comF) return false;
+    if (catF && v.categoria !== catF) return false;
     if (tipoF) {
       if (tipoF === 'Jubilación' && !v.clase.startsWith('Jubilación')) return false;
       if (tipoF !== 'Jubilación' && v.clase !== tipoF) return false;
     }
+    
+    if (timeF && v.duration !== null && v.duration !== undefined) {
+      if (v.duration > parseInt(timeF)) return false;
+    }
+    
+    if (distF && v.distancia !== null && v.distancia !== undefined) {
+      if (v.distancia > parseInt(distF)) return false;
+    }
+
     if (search) {
       const txt = normalize(`${v.localidad} ${v.provincia} ${v.comunidad} ${v.categoria}`);
       if (!txt.includes(search)) return false;
