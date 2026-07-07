@@ -48,7 +48,7 @@ function renderPreferencias() {
   if (!listEl) return;
   
   if (favOrder.length === 0) {
-    listEl.innerHTML = '<tr><td colspan="9" class="empty-state">No tienes ninguna plaza guardada en favoritos. Ve a "Plazas Vacantes" y marca la estrella en las notarías que te interesen.</td></tr>';
+    listEl.innerHTML = '<tr><td colspan="10" class="empty-state">No tienes ninguna plaza guardada en favoritos. Ve a "Plazas Vacantes" y marca la estrella en las notarías que te interesen.</td></tr>';
     return;
   }
   
@@ -183,14 +183,33 @@ function debounce(func, wait) {
 }
 
 function highlightText(text, query) {
-  if (!query) return escapeHTML(text);
-  const escapedText = escapeHTML(text);
+  const original = text == null ? '' : text.toString();
   const q = normalize(query);
-  const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
-  // Simple highlight (might highlight inside words)
-  // To be safe with html entities, better to highlight before escape or just be careful.
-  // Given simplicity, we apply regex carefully.
-  return escapedText.replace(new RegExp(q, 'gi'), match => `<mark>${match}</mark>`);
+  if (!q) return escapeHTML(original);
+
+  // Normalizamos el texto carácter a carácter (sin trim, para conservar los espacios)
+  // y guardamos un mapa posición-normalizada -> posición-original. Así podemos buscar
+  // ignorando tildes/mayúsculas ("leon" resalta "León") y resaltar el texto original.
+  const strip = c => c.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  let normStr = '';
+  const map = [];
+  for (let i = 0; i < original.length; i++) {
+    const n = strip(original[i]);
+    for (let j = 0; j < n.length; j++) map.push(i);
+    normStr += n;
+  }
+
+  let out = '', last = 0, from = 0, found;
+  while ((found = normStr.indexOf(q, from)) !== -1) {
+    const start = map[found];
+    const end = map[found + q.length - 1] + 1;
+    out += escapeHTML(original.slice(last, start)) +
+           '<mark>' + escapeHTML(original.slice(start, end)) + '</mark>';
+    last = end;
+    from = found + q.length;
+  }
+  out += escapeHTML(original.slice(last));
+  return out;
 }
 
 // Vacantes matching
@@ -292,6 +311,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark-mode');
     themeToggle.querySelector('.icon').textContent = '☀️';
+  } else {
+    themeToggle.querySelector('.icon').textContent = '🌙';
   }
   themeToggle.addEventListener('click', () => {
     document.body.classList.toggle('dark-mode');
@@ -679,7 +700,7 @@ function renderVacantes() {
   const page = state.vacantesFiltered; // Show all vacantes, it's max 141
 
   if (page.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="${state.userCoords ? 7 : 6}" class="center">No hay vacantes encontradas.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="10" class="center">No hay vacantes encontradas.</td></tr>`;
     return;
   }
 
