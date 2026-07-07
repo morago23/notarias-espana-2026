@@ -704,6 +704,17 @@ function renderVacantes() {
     const noteText = getNoteForId(v._id);
     const noteIndicator = noteText ? `<span title="${escapeHTML(noteText)}" style="cursor:help; font-size:11px; color:var(--color-primary);"> 📝</span>` : '';
 
+    let matchDisplay = '';
+    if (state.matchCalculated) {
+      let matchColor = '#9ca3af'; // Gray
+      let matchIcon = '';
+      if (v.matchScore >= 90) { matchColor = '#10b981'; matchIcon = '🔥'; } // Green
+      else if (v.matchScore >= 75) { matchColor = '#3b82f6'; } // Blue
+      else if (v.matchScore >= 50) { matchColor = '#f59e0b'; } // Orange
+      
+      matchDisplay = `<td class="center" data-label="Match" style="color: ${matchColor}; font-weight: bold; font-size: 16px;">${v.matchScore}% ${matchIcon}</td>`;
+    }
+
     return `
       <tr>
         <td class="center" data-label="Favorito">
@@ -712,7 +723,7 @@ function renderVacantes() {
             <button onclick="openNoteModal('${escapeHTML(v._id)}', '${escapeHTML(v.localidad.replace(/'/g, "\\'"))}')" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Notas personales">${noteText ? '📝' : '🗒️'}</button>
           </div>
         </td>
-        ${state.matchCalculated ? `<td class="center" data-label="Match" style="color: #ec4899; font-weight: bold; font-size: 16px;">${v.matchScore}%</td>` : ''}
+        ${matchDisplay}
         <td class="col-comunidad" data-label="Comunidad">${escapeHTML(v.comunidad)}</td>
         <td class="col-provincia" data-label="Provincia">${escapeHTML(v.provincia)}</td>
         <td data-label="Localidad">
@@ -1522,4 +1533,5 @@ function calculateMatchScores() {
   state.vacantesSortDir = 'desc';
   
   filterVacantes();
+  window.scrollTo({ top: document.querySelector('.table-vacantes').offsetTop - 20, behavior: 'smooth' });
 }
