@@ -229,3 +229,26 @@ const PUNTOS_COSTA = [
   {lat: 41.4304832, lon: 2.2182775, label: 'Sant Adrià de Besòs|Barcelona'},
   {lat: 41.3825802, lon: 2.177073, label: 'Barcelona|Barcelona'},
 ];
+
+const PUNTOS_MONTANA = [
+  {lat: 42.6319, lon: 0.6577, label: 'Pirineos (Aneto)'},
+  {lat: 42.6611, lon: -0.0632, label: 'Pirineos (Ordesa)'},
+  {lat: 42.5768, lon: 0.9416, label: 'Pirineos (Aigüestortes)'},
+  {lat: 43.1843, lon: -4.8322, label: 'Picos de Europa'},
+  {lat: 37.0531, lon: -3.3114, label: 'Sierra Nevada (Mulhacén)'},
+  {lat: 40.2917, lon: -5.2891, label: 'Sierra de Gredos'},
+  {lat: 40.8522, lon: -3.9538, label: 'Sierra de Guadarrama'},
+  {lat: 41.7891, lon: -1.8361, label: 'Moncayo (Sistema Ibérico)'},
+  {lat: 42.0163, lon: -2.8711, label: 'Picos de Urbión'},
+  {lat: 28.2723, lon: -16.6425, label: 'Teide (Tenerife)'},
+  {lat: 28.7523, lon: -17.8826, label: 'Roque de los Muchachos (La Palma)'},
+  {lat: 37.9545, lon: -2.9669, label: 'Sierra de Cazorla'},
+  {lat: 36.7644, lon: -5.3672, label: 'Sierra de Grazalema'},
+  {lat: 37.8911, lon: -6.5606, label: 'Sierra Morena (Aracena)'},
+  {lat: 42.2536, lon: -7.2914, label: 'Macizo Galaico (Cabeza de Manzaneda)'},
+  {lat: 42.8466, lon: -6.8272, label: 'Os Ancares'},
+  {lat: 39.8, lon: 2.7833, label: 'Sierra de Tramuntana (Mallorca)'},
+  {lat: 39.7042, lon: -0.4497, label: 'Sierra Calderona (Valencia)'},
+  {lat: 38.6477, lon: -0.2642, label: 'Sierra de Aitana (Alicante)'},
+  {lat: 41.5932, lon: 1.8281, label: 'Macizo de Montserrat (Cataluña)'},
+];

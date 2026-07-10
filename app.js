@@ -98,6 +98,7 @@ function renderPreferencias() {
               <div style="font-size:12px; color:var(--color-text-muted);" title="Notarios en la localidad">🏛️ ${v.numNotarias} notario${v.numNotarias !== 1 ? 's' : ''}</div>
               ${v.poblacion ? `<div style="font-size:11px; color:var(--color-primary); margin-top:2px;" title="Ratio habitantes por notario">📊 ${formatPoblacion(v.ratioPobNot).replace(' hab.', '')}/not.</div>` : ''}
               ${v.distCosta !== null ? `<div style="font-size:11px; color:#0277bd; margin-top:2px;" title="Distancia a la playa">🏖️ ${v.distCosta} km</div>` : ''}
+              ${v.distMontana !== null ? `<div style="font-size:11px; color:#388e3c; margin-top:2px;" title="Distancia a la montaña">🏔️ ${v.distMontana} km</div>` : ''}
               ${v.distAero !== null ? `<div style="font-size:11px; color:#546e7a; margin-top:2px;" title="Distancia al aeropuerto">✈️ ${v.distAero} km</div>` : ''}
             </div>
           </td>
@@ -284,11 +285,20 @@ DATA_VACANTES.forEach(v => {
         if (d < minCosta) minCosta = d;
       });
     }
+    let minMontana = Infinity;
+    if (typeof PUNTOS_MONTANA !== 'undefined') {
+      PUNTOS_MONTANA.forEach(m => {
+        const d = haversine(lat, lon, m.lat, m.lon);
+        if (d < minMontana) minMontana = d;
+      });
+    }
     v.distAero = minAero !== Infinity ? Math.round(minAero) : null;
     v.distCosta = minCosta !== Infinity ? Math.round(minCosta) : null;
+    v.distMontana = minMontana !== Infinity ? Math.round(minMontana) : null;
   } else {
     v.distAero = null;
     v.distCosta = null;
+    v.distMontana = null;
   }
 
 });
@@ -517,7 +527,7 @@ function initVacantes() {
     });
   }
 
-  ['ambicion', 'costa', 'urba', 'morrina'].forEach(id => {
+  ['ambicion', 'costa', 'montana', 'urba', 'morrina'].forEach(id => {
     const el = document.getElementById('match-' + id);
     if (el) {
       const valEl = document.getElementById('match-val-' + id);
@@ -761,6 +771,7 @@ function renderVacantes() {
             <div style="font-size:12px; color:var(--color-text-muted);" title="Notarios en la localidad">🏛️ ${v.numNotarias} notario${v.numNotarias !== 1 ? 's' : ''}</div>
             ${v.poblacion ? `<div style="font-size:11px; color:var(--color-primary); margin-top:2px;" title="Ratio habitantes por notario">📊 ${formatPoblacion(v.ratioPobNot).replace(' hab.', '')}/not.</div>` : ''}
             ${v.distCosta !== null ? `<div style="font-size:11px; color:#0277bd; margin-top:2px;" title="Distancia a la playa">🏖️ ${v.distCosta} km</div>` : ''}
+            ${v.distMontana !== null ? `<div style="font-size:11px; color:#388e3c; margin-top:2px;" title="Distancia a la montaña">🏔️ ${v.distMontana} km</div>` : ''}
             ${v.distAero !== null ? `<div style="font-size:11px; color:#546e7a; margin-top:2px;" title="Distancia al aeropuerto">✈️ ${v.distAero} km</div>` : ''}
           </div>
         </td>
@@ -1498,17 +1509,19 @@ function formatPoblacion(num) {
 function calculateMatchScores() {
   const wAmbicion = parseInt(document.getElementById('match-ambicion').value) / 100;
   const wCosta = parseInt(document.getElementById('match-costa').value) / 100;
+  const wMontana = parseInt(document.getElementById('match-montana').value) / 100;
   const wUrba = parseInt(document.getElementById('match-urba').value) / 100;
   const wMorrina = parseInt(document.getElementById('match-morrina').value) / 100;
 
   // Find max values for normalization
-  let maxRenta = 0, maxPob = 0, maxCosta = 0, maxDist = 0;
+  let maxRenta = 0, maxPob = 0, maxCosta = 0, maxMontana = 0, maxDist = 0;
   
   DATA_VACANTES.forEach(v => {
     const renta = (typeof DATA_RENTA !== 'undefined' && DATA_RENTA[v.unnormId]) ? DATA_RENTA[v.unnormId] : 0;
     if (renta > maxRenta) maxRenta = renta;
     if (v.poblacion && v.poblacion > maxPob) maxPob = v.poblacion;
     if (v.distCosta && v.distCosta > maxCosta) maxCosta = v.distCosta;
+    if (v.distMontana && v.distMontana > maxMontana) maxMontana = v.distMontana;
     if (v.distancia && v.distancia > maxDist) maxDist = v.distancia;
   });
 
@@ -1524,6 +1537,9 @@ function calculateMatchScores() {
     
     // Score Costa (closer is better, up to maxCosta)
     const sCosta = (v.distCosta !== null && maxCosta > 0) ? (1 - (v.distCosta / maxCosta)) : 0.5;
+
+    // Score Montana (closer is better, up to maxMontana)
+    const sMontana = (v.distMontana !== null && maxMontana > 0) ? (1 - (v.distMontana / maxMontana)) : 0.5;
     
     // Score Urbanita (user wants big city if 100%, small town if 0%)
     const normPob = maxPob ? Math.min(v.poblacion / 50000, 1) : 0; // Cap at 50k for normalization
@@ -1533,10 +1549,11 @@ function calculateMatchScores() {
     const sMorrina = (v.distancia !== null && maxDist > 0) ? (1 - (v.distancia / maxDist)) : 0;
 
     let totalScore = 0;
-    let totalWeights = wAmbicion + wCosta + 1 + (state.userCoords ? wMorrina : 0); // Urba always counts as 1 weight
+    let totalWeights = wAmbicion + wCosta + wMontana + 1 + (state.userCoords ? wMorrina : 0); // Urba always counts as 1 weight
     
     totalScore += wAmbicion * sAmbicion;
     totalScore += wCosta * sCosta;
+    totalScore += wMontana * sMontana;
     totalScore += 1 * sUrba;
     if (state.userCoords) {
       totalScore += wMorrina * sMorrina;
