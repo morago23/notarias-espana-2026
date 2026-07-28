@@ -10,7 +10,8 @@ const state = {
   vacantesSortCol: null,
   vacantesSortDir: 'asc',
   vacantesOnlyFavs: false,
-  userCoords: null
+  userCoords: null,
+  aiMatches: null
 };
 
 const favOrder = (() => { try { return JSON.parse(localStorage.getItem('favVacantes') || '[]'); } catch(e) { return []; } })();
@@ -645,6 +646,7 @@ function filterVacantes() {
     v._id = id;
 
     if (state.vacantesOnlyFavs && !favVacantes.has(id)) return false;
+    if (state.aiMatches && !state.aiMatches.includes(id)) return false;
     if (comF && v.comunidad !== comF) return false;
     if (catF && v.categoria !== catF) return false;
     if (tipoF) {
@@ -1605,5 +1607,75 @@ document.addEventListener('click', (e) => {
     const loc = noteBtn.getAttribute('data-localidad');
     if (typeof openNoteModal === 'function') openNoteModal(id, loc);
     return;
+  }
+});
+
+// ================= BÚSQUEDA CON IA =================
+document.getElementById('ai-search-btn')?.addEventListener('click', async () => {
+  const input = document.getElementById('ai-search-input');
+  const query = input.value.trim();
+  if (!query) return;
+
+  const btn = document.getElementById('ai-search-btn');
+  const resultBox = document.getElementById('ai-search-result');
+  const resultText = document.getElementById('ai-search-text');
+  
+  // Loading state
+  btn.disabled = true;
+  input.disabled = true;
+  btn.textContent = '✨ Pensando...';
+  
+  try {
+    // Preparar array ligero
+    const vacantesLigero = DATA_VACANTES.map(v => {
+      const locClean = v.localidad.replace(/\s*\([^)]*\)/g, '').trim();
+      const id = normalize(locClean) + '|' + normalize(v.provincia);
+      return {
+        _id: id,
+        l: v.localidad,
+        p: v.provincia,
+        c: v.comunidad,
+        pob: v.poblacion,
+        dCosta: v.distCosta,
+        dMont: v.distMontana,
+        renta: getRenta(v.localidad, v.provincia)
+      };
+    });
+
+    const res = await fetch('/api/ai-search', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query, vacantes: vacantesLigero })
+    });
+    
+    if (!res.ok) throw new Error('Error en la API');
+    
+    const data = await res.json();
+    if (data.matches && Array.isArray(data.matches)) {
+      state.aiMatches = data.matches;
+      resultText.textContent = `🤖 IA: ${data.explicacion}`;
+      resultBox.style.display = 'flex';
+      filterVacantes();
+    }
+  } catch (error) {
+    console.error(error);
+    alert('Oops! Hubo un problema contactando con la IA.');
+  } finally {
+    btn.disabled = false;
+    input.disabled = false;
+    btn.textContent = '✨ Buscar';
+  }
+});
+
+document.getElementById('ai-search-clear')?.addEventListener('click', () => {
+  state.aiMatches = null;
+  document.getElementById('ai-search-result').style.display = 'none';
+  document.getElementById('ai-search-input').value = '';
+  filterVacantes();
+});
+
+document.getElementById('ai-search-input')?.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    document.getElementById('ai-search-btn').click();
   }
 });

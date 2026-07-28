@@ -101,6 +101,17 @@
         </div>
         <p id="distance-status" class="distance-status"></p>
       </div>
+      <!-- AI Search Box -->
+      <div class="ai-search-container" style="margin-bottom: 16px;">
+        <div style="display: flex; gap: 8px;">
+          <input type="text" id="ai-search-input" class="search-input" style="flex:1; border: 2px solid #a855f7;" placeholder="✨ IA: Ej. 'Un pueblo costero en el norte, verde y de menos de 10.000 hab...'">
+          <button id="ai-search-btn" class="action-btn" style="background-color: #a855f7; border-color: #a855f7; color: white;">✨ Buscar</button>
+        </div>
+        <div id="ai-search-result" style="display: none; margin-top: 12px; padding: 12px; background: rgba(168, 85, 247, 0.1); border-left: 4px solid #a855f7; border-radius: 4px; font-size: 13px; flex-direction: column; gap: 8px;">
+          <div id="ai-search-text" style="color: var(--color-text);"></div>
+          <button id="ai-search-clear" style="align-self: flex-start; background: none; border: none; color: #a855f7; font-weight: bold; cursor: pointer; padding: 0;">❌ Quitar filtro IA</button>
+        </div>
+      </div>
 
       <div class="controls">
         <input type="text" id="search-vacantes" class="search-input" placeholder="Buscar vacante por plaza o provincia...">
