@@ -1266,7 +1266,7 @@ window.openTownModal = async function(localidad, provincia) {
   const mapsBtn = document.getElementById('town-modal-maps-btn');
   const streetBtn = document.getElementById('town-modal-street-btn');
   const notariaBtn = document.getElementById('town-modal-notaria-btn');
-  const fotocasaBtn = document.getElementById('town-modal-fotocasa-btn');
+  const idealistaBtn = document.getElementById('town-modal-fotocasa-btn');
   const mapIframe = document.getElementById('town-modal-map');
   const popBadge = document.getElementById('town-modal-pop');
   const rentaBadge = document.getElementById('town-modal-renta');
@@ -1290,8 +1290,11 @@ window.openTownModal = async function(localidad, provincia) {
   const gmapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locClean + ', ' + provincia + ', España')}`;
   if (mapsBtn) mapsBtn.href = gmapsUrl;
 
-  const fotocasaUrl = `https://www.fotocasa.es/es/comprar/viviendas/espana/todas-las-zonas/l?text=${encodeURIComponent(locClean)}`;
-  if (fotocasaBtn) fotocasaBtn.href = fotocasaUrl;
+  // Genera el slug tipo Idealista: "alhama de almería" -> "alhama-de-almeria"
+  const toSlug = str => normalize(str).replace(/\s+/g, '-');
+  const idealistaSlug = `${toSlug(locClean)}-${toSlug(provincia)}`;
+  const idealistaUrl = `https://www.idealista.com/venta-viviendas/${idealistaSlug}/`;
+  if (idealistaBtn) idealistaBtn.href = idealistaUrl;
 
   const coord = getCoords(localidad, provincia);
   let lat = null, lon = null;
