@@ -13,7 +13,7 @@ const state = {
   userCoords: null
 };
 
-const favOrder = JSON.parse(localStorage.getItem('favVacantes') || '[]');
+const favOrder = (() => { try { return JSON.parse(localStorage.getItem('favVacantes') || '[]'); } catch(e) { return []; } })();
 const favVacantes = new Set(favOrder);
 
 // Utilities
@@ -86,7 +86,7 @@ function renderPreferencias() {
           <td data-label="Localidad">
             <div class="loc-wrapper" style="display: flex; flex-direction: column; align-items: flex-start;">
               <div class="loc-main">${escapeHTML(v.localidad.replace(/\s*\([^)]+\)/, '').trim())}${noteIndicator}
-                <button onclick="openTownModal('${escapeHTML(v.localidad.replace(/'/g, "\\'"))}', '${escapeHTML(v.provincia.replace(/'/g, "\\'"))}')" class="btn" style="padding: 2px 6px; font-size: 11px; margin-left: 6px; background-color: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-primary);" title="Ver ficha del pueblo">ℹ️</button>
+                <button data-action="openTownModal" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="btn" style="padding: 2px 6px; font-size: 11px; margin-left: 6px; background-color: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-primary);" title="Ver ficha del pueblo">ℹ️</button>
               </div>
               ${noteText ? `<div style="font-size:11px; color:var(--color-primary); margin-top:2px; font-style:italic;">📝 ${escapeHTML(noteText.length > 50 ? noteText.substring(0, 50) + '...' : noteText)}</div>` : ''}
             </div>
@@ -94,7 +94,7 @@ function renderPreferencias() {
           <td data-label="Datos / Geo" style="white-space:nowrap;">
             <div class="geo-wrapper" style="display: flex; flex-direction: column; align-items: flex-end;">
               ${v.poblacion ? `<div style="font-size:13px;" title="Población total">👥 ${formatPoblacion(v.poblacion)}</div>` : '<div style="font-size:13px; color:#999;">-</div>'}
-              ${typeof DATA_RENTA !== 'undefined' && DATA_RENTA[v.unnormId] ? `<div style="font-size:13px; margin-top:2px; color:#1b5e20;" title="Renta Media Neta por Persona">💰 ${DATA_RENTA[v.unnormId].toLocaleString('es-ES')} €</div>` : ''}
+              ${getRenta(v.localidad, v.provincia) ? `<div style="font-size:13px; margin-top:2px; color:#1b5e20;" title="Renta Media Neta por Persona">💰 ${getRenta(v.localidad, v.provincia).toLocaleString('es-ES')} €</div>` : ''}
               <div style="font-size:12px; color:var(--color-text-muted);" title="Notarios en la localidad">🏛️ ${v.numNotarias} notario${v.numNotarias !== 1 ? 's' : ''}</div>
               ${v.poblacion ? `<div style="font-size:11px; color:var(--color-primary); margin-top:2px;" title="Ratio habitantes por notario">📊 ${formatPoblacion(v.ratioPobNot).replace(' hab.', '')}/not.</div>` : ''}
               ${v.distCosta !== null ? `<div style="font-size:11px; color:#0277bd; margin-top:2px;" title="Distancia a la playa">🏖️ ${v.distCosta} km</div>` : ''}
@@ -112,7 +112,7 @@ function renderPreferencias() {
             </div>
           </td>` : '<td data-label="Tiempo y Distancia" class="center" style="display:none;"></td>'}
           <td data-label="Borrar" class="center">
-            <button onclick="openNoteModal('${escapeHTML(id)}', '${escapeHTML(v.localidad.replace(/'/g, "\\'"))}')" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Notas personales">${noteText ? '📝' : '🗒️'}</button>
+            <button data-action="openNoteModal" data-id="${escapeHTML(id)}" data-localidad="${escapeHTML(v.localidad)}" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Notas personales">${noteText ? '📝' : '🗒️'}</button>
             <button class="pref-remove" data-id="${id}">❌</button>
           </td>
         </tr>
@@ -267,7 +267,7 @@ DATA_VACANTES.forEach(v => {
 
   const unnormId = v.localidad.replace(/\s*\([^)]*\)/g, '').trim() + '|' + v.provincia;
   v.unnormId = unnormId;
-  const coords = typeof DATA_COORDS !== 'undefined' ? DATA_COORDS[unnormId] : null;
+  const coords = getCoords(v.localidad, v.provincia);
   if (coords) {
     const lat = coords.lat;
     const lon = coords.lon;
@@ -676,8 +676,8 @@ function filterVacantes() {
   if (state.vacantesSortCol) {
     filtered.sort((a, b) => {
       if (state.vacantesSortCol === 'distancia') {
-        let vA = a.duration !== null && a.duration !== undefined ? a.duration : 99999999;
-        let vB = b.duration !== null && b.duration !== undefined ? b.duration : 99999999;
+        let vA = a.distancia !== null && a.distancia !== undefined ? a.distancia : 99999999;
+        let vB = b.distancia !== null && b.distancia !== undefined ? b.distancia : 99999999;
         return state.vacantesSortDir === 'asc' ? vA - vB : vB - vA;
       }
       if (state.vacantesSortCol === 'ratio') {
@@ -751,7 +751,7 @@ function renderVacantes() {
         <td class="center" data-label="Favorito">
           <div>
             <button class="fav-btn ${favClass}" data-id="${escapeHTML(v._id)}">${favStar}</button>
-            <button onclick="openNoteModal('${escapeHTML(v._id)}', '${escapeHTML(v.localidad.replace(/'/g, "\\'"))}')" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Notas personales">${noteText ? '📝' : '🗒️'}</button>
+            <button data-action="openNoteModal" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Notas personales">${noteText ? '📝' : '🗒️'}</button>
           </div>
         </td>
         ${matchDisplay}
@@ -760,14 +760,14 @@ function renderVacantes() {
         <td data-label="Localidad">
           <div class="loc-wrapper" style="display: flex; flex-direction: column; align-items: flex-start;">
             <div class="loc-main">${highlightText(v.localidad.replace(/\s*\([^)]+\)/, '').trim(), query)}${noteIndicator}
-              <button onclick="openTownModal('${escapeHTML(v.localidad.replace(/'/g, "\\'"))}', '${escapeHTML(v.provincia.replace(/'/g, "\\'"))}')" class="btn" style="padding: 2px 6px; font-size: 11px; margin-left: 6px; background-color: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-primary);" title="Ver ficha del pueblo">ℹ️</button>
+              <button data-action="openTownModal" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="btn" style="padding: 2px 6px; font-size: 11px; margin-left: 6px; background-color: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-primary);" title="Ver ficha del pueblo">ℹ️</button>
             </div>
           </div>
         </td>
         <td data-label="Datos / Geo" style="white-space:nowrap;">
           <div class="geo-wrapper" style="display: flex; flex-direction: column; align-items: flex-end;">
             ${v.poblacion ? `<div style="font-size:13px;" title="Población total">👥 ${formatPoblacion(v.poblacion)}</div>` : '<div style="font-size:13px; color:#999;">-</div>'}
-            ${typeof DATA_RENTA !== 'undefined' && DATA_RENTA[v.unnormId] ? `<div style="font-size:13px; margin-top:2px; color:#1b5e20;" title="Renta Media Neta por Persona">💰 ${DATA_RENTA[v.unnormId].toLocaleString('es-ES')} €</div>` : ''}
+            ${getRenta(v.localidad, v.provincia) ? `<div style="font-size:13px; margin-top:2px; color:#1b5e20;" title="Renta Media Neta por Persona">💰 ${getRenta(v.localidad, v.provincia).toLocaleString('es-ES')} €</div>` : ''}
             <div style="font-size:12px; color:var(--color-text-muted);" title="Notarios en la localidad">🏛️ ${v.numNotarias} notario${v.numNotarias !== 1 ? 's' : ''}</div>
             ${v.poblacion ? `<div style="font-size:11px; color:var(--color-primary); margin-top:2px;" title="Ratio habitantes por notario">📊 ${formatPoblacion(v.ratioPobNot).replace(' hab.', '')}/not.</div>` : ''}
             ${v.distCosta !== null ? `<div style="font-size:11px; color:#0277bd; margin-top:2px;" title="Distancia a la playa">🏖️ ${v.distCosta} km</div>` : ''}
@@ -1123,13 +1123,7 @@ function renderMapMarkers() {
     const locClean = v.localidad.replace(/\s*\([^)]*\)/g, '').trim();
     const key = `${locClean}|${v.provincia}`;
     
-    // Fallback: Si no existe, probamos solo con la localidad en DATA_COORDS
-    let coords = DATA_COORDS[key];
-    if (!coords) {
-      // Intentar buscar alguna key que empiece por Loc|
-      const altKey = Object.keys(DATA_COORDS).find(k => k.startsWith(locClean + '|'));
-      if (altKey) coords = DATA_COORDS[altKey];
-    }
+    let coords = getCoords(v.localidad, v.provincia);
     
     if (coords) {
       if (!grouped[key]) {
@@ -1179,7 +1173,7 @@ function renderMapMarkers() {
     const cleanLoc = plazas[0].localidad.replace(/\s*\([^)]*\)/g, '').trim();
     const header = `<div class="map-popup-header" style="display:flex; justify-content:space-between; align-items:center;">
       <div>${escapeHTML(cleanLoc)} <span style="font-size:12px; font-weight:normal; color:var(--color-text-muted)">(${plazas.length})</span></div>
-      <button onclick="openTownModal('${escapeHTML(cleanLoc.replace(/'/g, "\'"))}', '${escapeHTML(plazas[0].provincia.replace(/'/g, "\'"))}')" class="btn" style="padding: 2px 6px; font-size: 11px; background-color: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-primary);">ℹ️ Info</button>
+      <button data-action="openTownModal" data-localidad="${escapeHTML(cleanLoc)}" data-provincia="${escapeHTML(plazas[0].provincia)}" class="btn" style="padding: 2px 6px; font-size: 11px; background-color: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-primary);">ℹ️ Info</button>
     </div>`;
     
     const listHtml = plazas.map(v => {
@@ -1291,7 +1285,7 @@ window.openTownModal = async function(localidad, provincia) {
   const gmapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locClean + ', ' + provincia + ', España')}`;
   mapsBtn.href = gmapsUrl;
 
-  const coord = typeof DATA_COORDS !== 'undefined' ? DATA_COORDS[unnormId] : null;
+  const coord = getCoords(localidad, provincia);
   let lat = null, lon = null;
   if (coord) {
     lat = coord.lat;
@@ -1304,8 +1298,8 @@ window.openTownModal = async function(localidad, provincia) {
   const pob = typeof getPoblacion === 'function' ? getPoblacion(localidad, provincia) : null;
   popBadge.textContent = pob ? `👥 ${formatPoblacion(pob)}` : '👥 -- hab.';
   
-  if (typeof DATA_RENTA !== 'undefined' && DATA_RENTA[unnormId]) {
-    rentaBadge.textContent = `💰 ${DATA_RENTA[unnormId].toLocaleString('es-ES')} €`;
+  if (getRenta(localidad, provincia)) {
+    rentaBadge.textContent = `💰 ${getRenta(localidad, provincia).toLocaleString('es-ES')} €`;
     rentaBadge.style.display = 'inline-block';
   } else {
     rentaBadge.style.display = 'none';
@@ -1348,7 +1342,7 @@ window.openTownModal = async function(localidad, provincia) {
     const data = await response.json();
 
     loading.style.display = 'none';
-    desc.innerHTML = data.extract_html || data.extract;
+    desc.textContent = data.extract;
     desc.style.display = 'block';
 
     if (data.thumbnail && data.thumbnail.source) {
@@ -1363,7 +1357,7 @@ window.openTownModal = async function(localidad, provincia) {
 };
 
 // ================= NOTAS PERSONALES =================
-const userNotes = JSON.parse(localStorage.getItem('userNotes') || '{}');
+const userNotes = (() => { try { return JSON.parse(localStorage.getItem('userNotes') || '{}'); } catch(e) { return {}; } })();
 let currentNoteId = null;
 
 function getNoteForId(id) {
@@ -1490,6 +1484,25 @@ document.getElementById('share-modal').addEventListener('click', (e) => {
   }
 })();
 
+// ================= RENTA =================
+function getRenta(localidad, provincia) {
+  if (typeof DATA_RENTA === 'undefined') return null;
+  const locClean = localidad.replace(/\s*\([^)]*\)/g, '').trim();
+  const key = `${locClean}|${provincia}`;
+  if (DATA_RENTA[key]) return DATA_RENTA[key];
+  const altKey = Object.keys(DATA_RENTA).find(k => k.startsWith(locClean + '|'));
+  return altKey ? DATA_RENTA[altKey] : null;
+}
+
+// ================= COORDS =================
+function getCoords(localidad, provincia) {
+  if (typeof DATA_COORDS === 'undefined') return null;
+  const locClean = localidad.replace(/\s*\([^)]*\)/g, '').trim();
+  const key = `${locClean}|${provincia}`;
+  if (DATA_COORDS[key]) return DATA_COORDS[key];
+  const altKey = Object.keys(DATA_COORDS).find(k => k.startsWith(locClean + '|'));
+  return altKey ? DATA_COORDS[altKey] : null;
+}
 // ================= POBLACIÓN =================
 function getPoblacion(localidad, provincia) {
   if (typeof DATA_POBLACION === 'undefined') return null;
@@ -1517,7 +1530,7 @@ function calculateMatchScores() {
   let maxRenta = 0, maxPob = 0, maxCosta = 0, maxMontana = 0, maxDist = 0;
   
   DATA_VACANTES.forEach(v => {
-    const renta = (typeof DATA_RENTA !== 'undefined' && DATA_RENTA[v.unnormId]) ? DATA_RENTA[v.unnormId] : 0;
+    const renta = (getRenta(v.localidad, v.provincia)) ? getRenta(v.localidad, v.provincia) : 0;
     if (renta > maxRenta) maxRenta = renta;
     if (v.poblacion && v.poblacion > maxPob) maxPob = v.poblacion;
     if (v.distCosta && v.distCosta > maxCosta) maxCosta = v.distCosta;
@@ -1527,7 +1540,7 @@ function calculateMatchScores() {
 
   // Calculate scores
   DATA_VACANTES.forEach(v => {
-    const renta = (typeof DATA_RENTA !== 'undefined' && DATA_RENTA[v.unnormId]) ? DATA_RENTA[v.unnormId] : 0;
+    const renta = (getRenta(v.localidad, v.provincia)) ? getRenta(v.localidad, v.provincia) : 0;
     
     const normRenta = maxRenta ? (renta / maxRenta) : 0;
     const normRatio = v.ratioPobNot ? Math.min(v.ratioPobNot / 10000, 1) : 0; 
@@ -1541,20 +1554,21 @@ function calculateMatchScores() {
     // Score Montana (closer is better, up to maxMontana)
     const sMontana = (v.distMontana !== null && maxMontana > 0) ? (1 - (v.distMontana / maxMontana)) : 0.5;
     
-    // Score Urbanita (user wants big city if 100%, small town if 0%)
-    const normPob = maxPob ? Math.min(v.poblacion / 50000, 1) : 0; // Cap at 50k for normalization
-    const sUrba = wUrba * normPob + (1 - wUrba) * (1 - normPob);
+    // Score Urbanita: preference strength (0 when wUrba is 0.5, 1 when wUrba is 0 or 1)
+    const normPob = maxPob ? Math.min(v.poblacion / 50000, 1) : 0;
+    const sUrba = wUrba >= 0.5 ? normPob : (1 - normPob);
+    const urbaWeight = Math.abs(wUrba - 0.5) * 2;
     
     // Score Morriña (closer is better)
     const sMorrina = (v.distancia !== null && maxDist > 0) ? (1 - (v.distancia / maxDist)) : 0;
 
     let totalScore = 0;
-    let totalWeights = wAmbicion + wCosta + wMontana + 1 + (state.userCoords ? wMorrina : 0); // Urba always counts as 1 weight
+    let totalWeights = wAmbicion + wCosta + wMontana + urbaWeight + (state.userCoords ? wMorrina : 0);
     
     totalScore += wAmbicion * sAmbicion;
     totalScore += wCosta * sCosta;
     totalScore += wMontana * sMontana;
-    totalScore += 1 * sUrba;
+    totalScore += urbaWeight * sUrba;
     if (state.userCoords) {
       totalScore += wMorrina * sMorrina;
     }
@@ -1573,3 +1587,23 @@ function calculateMatchScores() {
   filterVacantes();
   window.scrollTo({ top: document.querySelector('.table-vacantes').offsetTop - 20, behavior: 'smooth' });
 }
+
+// Global Event Delegation for Modals
+document.addEventListener('click', (e) => {
+  const townBtn = e.target.closest('[data-action="openTownModal"]');
+  if (townBtn) {
+    e.preventDefault();
+    const loc = townBtn.getAttribute('data-localidad');
+    const prov = townBtn.getAttribute('data-provincia');
+    if (typeof openTownModal === 'function') openTownModal(loc, prov);
+    return;
+  }
+  const noteBtn = e.target.closest('[data-action="openNoteModal"]');
+  if (noteBtn) {
+    e.preventDefault();
+    const id = noteBtn.getAttribute('data-id');
+    const loc = noteBtn.getAttribute('data-localidad');
+    if (typeof openNoteModal === 'function') openNoteModal(id, loc);
+    return;
+  }
+});

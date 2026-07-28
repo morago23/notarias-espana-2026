@@ -9,6 +9,7 @@
   
   --color-bg: #f1f5f9; /* Slate 100 - Base background */
   --color-surface: #ffffff; /* White - Cards and containers */
+  --color-surface-alt: #f8fafc; /* Lighter surface for alternates */
   --color-text: #334155; /* Slate 700 */
   --color-text-muted: #64748b; /* Slate 500 */
   --color-border: #e2e8f0; /* Slate 200 */
@@ -32,6 +33,7 @@
 body.dark-mode {
   --color-bg: #0f172a; /* Slate 900 */
   --color-surface: #1e293b; /* Slate 800 */
+  --color-surface-alt: #0f172a; /* Darker surface for alternates */
   --color-text: #f8fafc;
   --color-text-muted: #94a3b8;
   --color-border: #334155;
@@ -81,7 +83,9 @@ body {
   color: var(--color-text);
   padding: 24px 0;
   border-bottom: 1px solid var(--color-border);
-  position: static; /* NO STICKY */
+  position: sticky;
+  top: 0;
+  z-index: 500;
   box-shadow: var(--box-shadow);
 }
 
@@ -649,16 +653,16 @@ mark {
   z-index: 1000 !important;
 }
 .marker-jubilacion {
-  border-color: #3b82f6;
-  color: #3b82f6;
+  border-color: var(--color-jubilacion);
+  color: var(--color-jubilacion);
 }
 .marker-resulta {
-  border-color: #f59e0b;
-  color: #f59e0b;
+  border-color: var(--color-resulta);
+  color: var(--color-resulta);
 }
 .marker-desierta {
-  border-color: #ef4444;
-  color: #ef4444;
+  border-color: var(--color-desierta);
+  color: var(--color-desierta);
 }
 .marker-mixed {
   border-color: var(--color-primary);
