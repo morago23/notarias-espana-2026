@@ -37,7 +37,7 @@ RESPONDE EXCLUSIVAMENTE EN FORMATO JSON EXACTO:
 }
 NO añadas comillas invertidas (\`\`\`) ni markdown, SOLO devuelve el JSON válido.`;
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
