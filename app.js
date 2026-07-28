@@ -1264,6 +1264,7 @@ window.openTownModal = async function(localidad, provincia) {
   const desc = document.getElementById('town-modal-description');
   const err = document.getElementById('town-modal-error');
   const mapsBtn = document.getElementById('town-modal-maps-btn');
+  const streetBtn = document.getElementById('town-modal-street-btn');
   const mapIframe = document.getElementById('town-modal-map');
   const popBadge = document.getElementById('town-modal-pop');
   const rentaBadge = document.getElementById('town-modal-renta');
@@ -1293,8 +1294,15 @@ window.openTownModal = async function(localidad, provincia) {
     lat = coord.lat;
     lon = coord.lon;
     mapIframe.src = `https://www.openstreetmap.org/export/embed.html?bbox=${lon-0.03},${lat-0.03},${lon+0.03},${lat+0.03}&layer=mapnik&marker=${lat},${lon}`;
+    if (streetBtn) {
+      streetBtn.href = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lon}`;
+      streetBtn.style.display = 'flex';
+    }
   } else {
     mapIframe.src = '';
+    if (streetBtn) {
+      streetBtn.style.display = 'none';
+    }
   }
 
   const pob = typeof getPoblacion === 'function' ? getPoblacion(localidad, provincia) : null;
