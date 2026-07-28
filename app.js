@@ -1265,6 +1265,8 @@ window.openTownModal = async function(localidad, provincia) {
   const err = document.getElementById('town-modal-error');
   const mapsBtn = document.getElementById('town-modal-maps-btn');
   const streetBtn = document.getElementById('town-modal-street-btn');
+  const notariaBtn = document.getElementById('town-modal-notaria-btn');
+  const idealistaBtn = document.getElementById('town-modal-idealista-btn');
   const mapIframe = document.getElementById('town-modal-map');
   const popBadge = document.getElementById('town-modal-pop');
   const rentaBadge = document.getElementById('town-modal-renta');
@@ -1286,7 +1288,13 @@ window.openTownModal = async function(localidad, provincia) {
   loading.style.display = 'block';
   
   const gmapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locClean + ', ' + provincia + ', España')}`;
-  mapsBtn.href = gmapsUrl;
+  if (mapsBtn) mapsBtn.href = gmapsUrl;
+
+  const notariaUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Notaría en ' + locClean + ', ' + provincia + ', España')}`;
+  if (notariaBtn) notariaBtn.href = notariaUrl;
+
+  const idealistaUrl = `https://www.google.com/search?q=${encodeURIComponent('site:idealista.com alquiler o venta vivienda ' + locClean + ' ' + provincia)}`;
+  if (idealistaBtn) idealistaBtn.href = idealistaUrl;
 
   const coord = getCoords(localidad, provincia);
   let lat = null, lon = null;
