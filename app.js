@@ -1266,7 +1266,7 @@ window.openTownModal = async function(localidad, provincia) {
   const mapsBtn = document.getElementById('town-modal-maps-btn');
   const streetBtn = document.getElementById('town-modal-street-btn');
   const notariaBtn = document.getElementById('town-modal-notaria-btn');
-  const idealistaBtn = document.getElementById('town-modal-idealista-btn');
+  const fotocasaBtn = document.getElementById('town-modal-fotocasa-btn');
   const mapIframe = document.getElementById('town-modal-map');
   const popBadge = document.getElementById('town-modal-pop');
   const rentaBadge = document.getElementById('town-modal-renta');
@@ -1290,23 +1290,30 @@ window.openTownModal = async function(localidad, provincia) {
   const gmapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locClean + ', ' + provincia + ', España')}`;
   if (mapsBtn) mapsBtn.href = gmapsUrl;
 
-  const notariaUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Notaría en ' + locClean + ', ' + provincia + ', España')}`;
-  if (notariaBtn) notariaBtn.href = notariaUrl;
-
-  const idealistaUrl = `https://www.google.com/search?q=${encodeURIComponent('site:idealista.com alquiler o venta vivienda ' + locClean + ' ' + provincia)}`;
-  if (idealistaBtn) idealistaBtn.href = idealistaUrl;
+  const fotocasaUrl = `https://www.fotocasa.es/es/comprar/viviendas/espana/todas-las-zonas/l?text=${encodeURIComponent(locClean)}`;
+  if (fotocasaBtn) fotocasaBtn.href = fotocasaUrl;
 
   const coord = getCoords(localidad, provincia);
   let lat = null, lon = null;
   if (coord) {
     lat = coord.lat;
     lon = coord.lon;
+    
+    // Precise Notaría Search using Coordinates
+    if (notariaBtn) {
+      notariaBtn.href = `https://www.google.com/maps/search/Notar%C3%ADa/@${lat},${lon},15z/data=!3m1!4b1`;
+    }
+    
     mapIframe.src = `https://www.openstreetmap.org/export/embed.html?bbox=${lon-0.03},${lat-0.03},${lon+0.03},${lat+0.03}&layer=mapnik&marker=${lat},${lon}`;
     if (streetBtn) {
       streetBtn.href = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lon}`;
       streetBtn.style.display = 'flex';
     }
   } else {
+    // Fallback if no coordinates
+    if (notariaBtn) {
+      notariaBtn.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Notaría en ' + locClean + ', ' + provincia + ', España')}`;
+    }
     mapIframe.src = '';
     if (streetBtn) {
       streetBtn.style.display = 'none';
