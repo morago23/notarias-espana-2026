@@ -1372,10 +1372,29 @@ window.openTownModal = async function(localidad, provincia) {
     desc.textContent = data.extract;
     desc.style.display = 'block';
 
+    // Start with Wikipedia thumbnail as fallback
     if (data.thumbnail && data.thumbnail.source) {
       img.src = data.thumbnail.source;
       imgContainer.style.display = 'block';
       headerAlt.style.display = 'none';
+    }
+
+    // Try to get a high-quality photo from Wikidata (P18) to avoid maps and crests
+    if (data.wikibase_item) {
+      try {
+        const wdRes = await fetch(`https://www.wikidata.org/w/api.php?action=wbgetclaims&entity=${data.wikibase_item}&property=P18&format=json&origin=*`);
+        if (wdRes.ok) {
+          const wdData = await wdRes.json();
+          if (wdData.claims && wdData.claims.P18 && wdData.claims.P18.length > 0) {
+            const imageName = wdData.claims.P18[0].mainsnak.datavalue.value;
+            img.src = `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(imageName)}?width=800`;
+            imgContainer.style.display = 'block';
+            headerAlt.style.display = 'none';
+          }
+        }
+      } catch (e) {
+        console.error('Error fetching Wikidata image', e);
+      }
     }
   } catch (error) {
     loading.style.display = 'none';
