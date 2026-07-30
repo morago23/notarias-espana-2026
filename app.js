@@ -1735,10 +1735,14 @@ document.getElementById('ai-search-btn')?.addEventListener('click', async () => 
         l: v.localidad,
         p: v.provincia,
         c: v.comunidad,
+        clase: v.clase,
+        categoria: v.categoria,
         pob: v.poblacion,
         dCosta: v.distCosta,
         dMont: v.distMontana,
-        renta: getRenta(v.localidad, v.provincia)
+        renta: getRenta(v.localidad, v.provincia),
+        distancia: v.distancia !== null && v.distancia !== undefined ? parseFloat(v.distancia.toFixed(1)) : null,
+        minutosCoche: v.duration ? Math.round(v.duration / 60) : null
       };
     });
 
