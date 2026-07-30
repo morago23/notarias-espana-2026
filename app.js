@@ -955,10 +955,11 @@ function exportToCSV() {
     alert("No tienes plazas en favoritos para exportar.");
     return;
   }
-  
-  let csvContent = "\uFEFF"; // BOM for Excel compatibility
-  csvContent += "Orden;Comunidad;Provincia;Localidad / Plaza;Motivo;Categoría;Notario Anterior;Distancia (km);Tiempo (min)\n";
-  
+
+  const rows = [
+    ["Orden", "Comunidad", "Provincia", "Localidad / Plaza", "Motivo", "Categoría", "Notario Anterior", "Distancia (km)", "Tiempo (min)"]
+  ];
+
   favOrder.forEach((id, index) => {
     const v = DATA_VACANTES.find(vac => {
        const locClean = vac.localidad.replace(/\s*\([^)]*\)/g, '').trim();
@@ -971,34 +972,29 @@ function exportToCSV() {
         const notarioMatch = v.localidad.match(/\((Don|Doña)[^)]+\)/);
         if (notarioMatch) notarioAnt = notarioMatch[0].replace(/[()]/g, '');
       }
-      
+
       const loc = v.localidad.replace(/\s*\([^)]+\)/, '').trim();
-      const dist = v.distancia !== null && v.distancia !== undefined ? v.distancia.toFixed(1).replace('.', ',') : "";
+      const dist = v.distancia !== null && v.distancia !== undefined ? parseFloat(v.distancia.toFixed(1)) : "";
       const mins = v.duration !== null && v.duration !== undefined ? Math.round(v.duration / 60) : "";
-      
-      const row = [
+
+      rows.push([
         index + 1,
-        `"${v.comunidad}"`,
-        `"${v.provincia}"`,
-        `"${loc}"`,
-        `"${v.clase}"`,
-        `"${v.categoria}"`,
-        `"${notarioAnt}"`,
-        `"${dist}"`,
-        `"${mins}"`
-      ];
-      csvContent += row.join(";") + "\n";
+        v.comunidad,
+        v.provincia,
+        loc,
+        v.clase,
+        v.categoria,
+        notarioAnt,
+        dist,
+        mins
+      ]);
     }
   });
-  
-  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.setAttribute("href", url);
-  link.setAttribute("download", "mis_preferencias_notarias.csv");
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.aoa_to_sheet(rows);
+  XLSX.utils.book_append_sheet(wb, ws, "Favoritos");
+  XLSX.writeFile(wb, "mis_preferencias_notarias.xlsx");
 }
 
 function formatDuration(secs) {
@@ -1730,8 +1726,9 @@ function exportFilteredVacantesCSV() {
     return;
   }
 
-  let csvContent = "\uFEFF"; // BOM for Excel compatibility
-  csvContent += "Comunidad;Provincia;Localidad / Plaza;Motivo;Categoría;Notario Anterior;Distancia (km);Match Score\n";
+  const rows = [
+    ["Comunidad", "Provincia", "Localidad / Plaza", "Motivo", "Categoría", "Notario Anterior", "Distancia (km)", "Match Score"]
+  ];
 
   state.vacantesFiltered.forEach((v) => {
     let notarioAnt = v.anteriorNotario || "";
@@ -1741,28 +1738,23 @@ function exportFilteredVacantesCSV() {
     }
 
     const loc = v.localidad.replace(/\s*\([^)]+\)/, '').trim();
-    const dist = v.distancia !== null && v.distancia !== undefined ? v.distancia.toFixed(1).replace('.', ',') : "";
+    const dist = v.distancia !== null && v.distancia !== undefined ? parseFloat(v.distancia.toFixed(1)) : "";
     const match = v.matchScore !== undefined ? v.matchScore : "";
 
-    const row = [
-      `"${v.comunidad}"`,
-      `"${v.provincia}"`,
-      `"${loc}"`,
-      `"${v.clase}"`,
-      `"${v.categoria}"`,
-      `"${notarioAnt}"`,
-      `"${dist}"`,
-      `"${match}"`
-    ];
-    csvContent += row.join(";") + "\n";
+    rows.push([
+      v.comunidad,
+      v.provincia,
+      loc,
+      v.clase,
+      v.categoria,
+      notarioAnt,
+      dist,
+      match
+    ]);
   });
 
-  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.setAttribute("href", url);
-  link.setAttribute("download", "plazas_filtradas.csv");
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.aoa_to_sheet(rows);
+  XLSX.utils.book_append_sheet(wb, ws, "Plazas Filtradas");
+  XLSX.writeFile(wb, "plazas_filtradas.xlsx");
 }
