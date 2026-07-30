@@ -398,7 +398,9 @@
 
         <!-- COLUMNA DERECHA: Mapa OSM -->
         <div style="display: flex; flex-direction: column;">
-          <iframe id="town-modal-map" width="100%" height="220" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="border: 1px solid var(--color-border); border-radius: var(--border-radius);"></iframe>
+          <div style="height: 220px; overflow: hidden; border: 1px solid var(--color-border); border-radius: var(--border-radius); position: relative;">
+            <iframe id="town-modal-map" width="100%" height="270" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="border: none;"></iframe>
+          </div>
           <a id="town-modal-maps-btn" href="#" target="_blank" class="btn" style="display: flex; justify-content: center; align-items: center; text-decoration: none; font-size: 14px; margin-top: 12px; padding: 10px;">📍 Abrir en Google Maps</a>
           <a id="town-modal-street-btn" href="#" target="_blank" class="btn" style="display: flex; justify-content: center; align-items: center; text-decoration: none; font-size: 14px; margin-top: 8px; padding: 10px; background-color: #ec4899; border-color: #ec4899; color: white;">🚶 Paseo Virtual (Street View)</a>
           <a id="town-modal-idealista-alquiler-btn" href="#" target="_blank" class="btn" style="display: flex; justify-content: center; align-items: center; text-decoration: none; font-size: 14px; margin-top: 8px; padding: 10px; background-color: #0d9488; border-color: #0d9488; color: white;">🔑 Alquiler en Idealista</a>
