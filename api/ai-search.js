@@ -52,7 +52,7 @@ RESPONDE EXCLUSIVAMENTE EN FORMATO JSON EXACTO:
 }
 NO añadas markdown (\`\`\`), SOLO devuelve el JSON válido.`;
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${apiKey}`, {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
