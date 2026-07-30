@@ -112,14 +112,10 @@ function renderPreferencias() {
             ${v.duration ? `<small style="color:#6c757d;">🚗 ${formatDuration(v.duration)}</small>` : '-'}
           </td>` : '<td data-label="Distancia" class="center" style="display:none;"></td><td data-label="Tiempo" class="center" style="display:none;"></td>'}
           <td data-label="Acciones" class="center">
-            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
-              <div style="display:flex; gap:4px; align-items:center;">
-                <button data-action="openNoteModal" data-id="${escapeHTML(id)}" data-localidad="${escapeHTML(v.localidad)}" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Notas personales">${noteText ? '📝' : '🗒️'}</button>
-                <button class="pref-remove" data-id="${id}">❌</button>
-              </div>
-              <div style="display:flex; gap:4px; align-items:center;">
-                <button data-action="addToDuel" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="icon-btn icon-btn-duel" title="Añadir a Modo Duelo" style="margin-left:0;">⚔️</button>
-              </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+              <button data-action="openNoteModal" data-id="${escapeHTML(id)}" data-localidad="${escapeHTML(v.localidad)}" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Notas personales">${noteText ? '📝' : '🗒️'}</button>
+              <button data-action="addToDuel" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="icon-btn icon-btn-duel" title="Añadir a Modo Duelo" style="margin-left:0;">⚔️</button>
+              <button class="pref-remove" data-id="${id}" title="Eliminar de preferencias" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;">❌</button>
             </div>
           </td>
         </tr>
@@ -765,14 +761,10 @@ function renderVacantes() {
     return `
       <tr>
         <td class="center" data-label="Favorito / Notas">
-          <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
-            <div style="display:flex; gap:4px; align-items:center;">
-              <button class="fav-btn ${favClass}" data-id="${escapeHTML(v._id)}">${favStar}</button>
-              <button data-action="openNoteModal" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Notas personales">${noteText ? '📝' : '🗒️'}</button>
-            </div>
-            <div style="display:flex; gap:4px; align-items:center;">
-              <button data-action="addToDuel" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="icon-btn icon-btn-duel" title="Añadir a Modo Duelo" style="margin-left:0;">⚔️</button>
-            </div>
+          <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+            <button class="fav-btn ${favClass}" data-id="${escapeHTML(v._id)}" title="Añadir a favoritos">${favStar}</button>
+            <button data-action="openNoteModal" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Notas personales">${noteText ? '📝' : '🗒️'}</button>
+            <button data-action="addToDuel" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="icon-btn icon-btn-duel" title="Añadir a Modo Duelo" style="margin-left:0;">⚔️</button>
           </div>
         </td>
         ${matchDisplay}
