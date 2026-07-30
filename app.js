@@ -1751,7 +1751,10 @@ document.getElementById('ai-search-btn')?.addEventListener('click', async () => 
       body: JSON.stringify({ query, vacantes: vacantesLigero })
     });
     
-    if (!res.ok) throw new Error('Error en la API');
+    if (!res.ok) {
+      const errText = await res.text();
+      throw new Error(`Error ${res.status}: ${errText}`);
+    }
     
     const data = await res.json();
     if (data.matches && Array.isArray(data.matches)) {
@@ -1762,7 +1765,11 @@ document.getElementById('ai-search-btn')?.addEventListener('click', async () => 
     }
   } catch (error) {
     console.error(error);
-    alert('Oops! Hubo un problema contactando con la IA.');
+    if (error.message.includes('Failed to fetch') && window.location.protocol === 'file:') {
+      alert('Oops! La búsqueda por IA requiere un servidor (ej. Vercel) para funcionar. No puede ejecutarse abriendo el archivo localmente con doble clic.');
+    } else {
+      alert('Oops! Hubo un problema contactando con la IA: ' + error.message);
+    }
   } finally {
     btn.disabled = false;
     input.disabled = false;

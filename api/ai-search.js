@@ -58,7 +58,11 @@ NO añadas comillas invertidas (\`\`\`) ni markdown, SOLO devuelve el JSON váli
       return res.status(500).json({ error: 'Error comunicando con Gemini', details: data });
     }
 
-    const resultText = data.candidates[0].content.parts[0].text;
+    let resultText = data.candidates[0].content.parts[0].text.trim();
+    // Remover backticks de markdown si la IA los incluye
+    if (resultText.startsWith('```')) {
+      resultText = resultText.replace(/^```(?:json)?\n?/i, '').replace(/\n?```$/, '');
+    }
     const resultJson = JSON.parse(resultText);
 
     return res.status(200).json(resultJson);
