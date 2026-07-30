@@ -1321,7 +1321,8 @@ window.openTownModal = async function(localidad, provincia) {
     const ev = DATA_EVOLUCION_POB[unnormId];
     const icon = ev.crecimiento >= 0 ? '📈' : '📉';
     const sign = ev.crecimiento > 0 ? '+' : '';
-    evolBadge.textContent = `${icon} ${sign}${ev.crecimiento}% (10 años)`;
+    const labelText = ev.crecimiento >= 0 ? 'Gana población:' : 'Pierde población:';
+    evolBadge.textContent = `${icon} ${labelText} ${sign}${ev.crecimiento}% (10 años)`;
     evolBadge.style.display = 'inline-block';
     // Colores dinámicos
     if (ev.crecimiento > 5) {
