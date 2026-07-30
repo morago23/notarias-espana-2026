@@ -764,3 +764,59 @@ mark {
   }
 }
 
+
+/* IMPRESIÓN (PDF) */
+@media print {
+  /* Ocultar elementos innecesarios */
+  header, .tab-nav, .controls, .map-container, #duel-bar, .modal-overlay, #duel-page {
+    display: none !important;
+  }
+  
+  /* Ajustar la página */
+  body {
+    background: white;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #app {
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  /* Mostrar solo la pestaña de Preferencias al imprimir (o la activa) */
+  .tab-content {
+    display: block !important;
+  }
+  #tab-mapa, #tab-vacantes {
+    display: none !important;
+  }
+
+  /* Ajustar tabla para que entre bien */
+  .styled-table {
+    width: 100%;
+    font-size: 10px;
+    border-collapse: collapse;
+  }
+  .styled-table th, .styled-table td {
+    padding: 6px;
+    border: 1px solid #ddd;
+  }
+  
+  /* Ocultar botones de acción en las filas */
+  .btn, .action-btn, .action-btn-secondary {
+    display: none !important;
+  }
+  
+  /* Evitar saltos de página dentro de una fila */
+  tr {
+    page-break-inside: avoid;
+  }
+  
+  /* Ocultar iconos que no aportan en papel */
+  .geo-wrapper, .note-icon {
+    display: none !important;
+  }
+}
