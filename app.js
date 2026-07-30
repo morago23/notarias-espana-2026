@@ -1265,7 +1265,7 @@ window.openTownModal = async function(localidad, provincia) {
   const err = document.getElementById('town-modal-error');
   const mapsBtn = document.getElementById('town-modal-maps-btn');
   const streetBtn = document.getElementById('town-modal-street-btn');
-  const notariaBtn = document.getElementById('town-modal-notaria-btn');
+  const idealistaAlquilerBtn = document.getElementById('town-modal-idealista-alquiler-btn');
   const idealistaBtn = document.getElementById('town-modal-fotocasa-btn');
   const mapIframe = document.getElementById('town-modal-map');
   const popBadge = document.getElementById('town-modal-pop');
@@ -1295,6 +1295,9 @@ window.openTownModal = async function(localidad, provincia) {
   const idealistaSlug = `${toSlug(locClean)}-${toSlug(provincia)}`;
   const idealistaUrl = `https://www.idealista.com/venta-viviendas/${idealistaSlug}/`;
   if (idealistaBtn) idealistaBtn.href = idealistaUrl;
+  
+  const idealistaAlquilerUrl = `https://www.idealista.com/alquiler-viviendas/${idealistaSlug}/`;
+  if (idealistaAlquilerBtn) idealistaAlquilerBtn.href = idealistaAlquilerUrl;
 
   const coord = getCoords(localidad, provincia);
   let lat = null, lon = null;
@@ -1302,21 +1305,12 @@ window.openTownModal = async function(localidad, provincia) {
     lat = coord.lat;
     lon = coord.lon;
     
-    // Precise Notaría Search using Coordinates
-    if (notariaBtn) {
-      notariaBtn.href = `https://www.google.com/maps/search/Notar%C3%ADa/@${lat},${lon},15z/data=!3m1!4b1`;
-    }
-    
     mapIframe.src = `https://www.openstreetmap.org/export/embed.html?bbox=${lon-0.03},${lat-0.03},${lon+0.03},${lat+0.03}&layer=mapnik&marker=${lat},${lon}`;
     if (streetBtn) {
       streetBtn.href = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lon}`;
       streetBtn.style.display = 'flex';
     }
   } else {
-    // Fallback if no coordinates
-    if (notariaBtn) {
-      notariaBtn.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Notaría en ' + locClean + ', ' + provincia + ', España')}`;
-    }
     mapIframe.src = '';
     if (streetBtn) {
       streetBtn.style.display = 'none';
