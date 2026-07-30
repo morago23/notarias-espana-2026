@@ -89,6 +89,7 @@ function renderPreferencias() {
             <div class="loc-wrapper" style="display: flex; flex-direction: column; align-items: flex-start;">
               <div class="loc-main">${escapeHTML(v.localidad.replace(/\s*\([^)]+\)/, '').trim())}${noteIndicator}
                 <button data-action="openTownModal" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="btn" style="padding: 2px 6px; font-size: 11px; margin-left: 6px; background-color: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-primary);" title="Ver ficha del pueblo">ℹ️</button>
+                <button data-action="addToDuel" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="btn" style="padding: 2px 6px; font-size: 11px; margin-left: 2px; background-color: #fff1f2; color: #be185d; border: 1px solid #be185d;" title="Añadir a Modo Duelo">⚔️</button>
               </div>
               ${noteText ? `<div style="font-size:11px; color:var(--color-primary); margin-top:2px; font-style:italic;">📝 ${escapeHTML(noteText.length > 50 ? noteText.substring(0, 50) + '...' : noteText)}</div>` : ''}
             </div>
@@ -764,6 +765,7 @@ function renderVacantes() {
           <div class="loc-wrapper" style="display: flex; flex-direction: column; align-items: flex-start;">
             <div class="loc-main">${highlightText(v.localidad.replace(/\s*\([^)]+\)/, '').trim(), query)}${noteIndicator}
               <button data-action="openTownModal" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="btn" style="padding: 2px 6px; font-size: 11px; margin-left: 6px; background-color: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-primary);" title="Ver ficha del pueblo">ℹ️</button>
+              <button data-action="addToDuel" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="btn" style="padding: 2px 6px; font-size: 11px; margin-left: 2px; background-color: #fff1f2; color: #be185d; border: 1px solid #be185d;" title="Añadir a Modo Duelo">⚔️</button>
             </div>
           </div>
         </td>
@@ -1372,12 +1374,7 @@ window.openTownModal = async function(localidad, provincia) {
     desc.textContent = data.extract;
     desc.style.display = 'block';
 
-    // Start with Wikipedia thumbnail as fallback
-    if (data.thumbnail && data.thumbnail.source) {
-      img.src = data.thumbnail.source;
-      imgContainer.style.display = 'block';
-      headerAlt.style.display = 'none';
-    }
+    let foundImage = false;
 
     // Try to get a high-quality photo from Wikidata (P18) to avoid maps and crests
     if (data.wikibase_item) {
@@ -1390,11 +1387,19 @@ window.openTownModal = async function(localidad, provincia) {
             img.src = `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(imageName)}?width=800`;
             imgContainer.style.display = 'block';
             headerAlt.style.display = 'none';
+            foundImage = true;
           }
         }
       } catch (e) {
         console.error('Error fetching Wikidata image', e);
       }
+    }
+
+    // Fallback to Wikipedia thumbnail
+    if (!foundImage && data.thumbnail && data.thumbnail.source) {
+      img.src = data.thumbnail.source;
+      imgContainer.style.display = 'block';
+      headerAlt.style.display = 'none';
     }
   } catch (error) {
     loading.style.display = 'none';
@@ -1649,6 +1654,15 @@ document.addEventListener('click', (e) => {
     if (typeof openTownModal === 'function') openTownModal(loc, prov);
     return;
   }
+  const duelBtn = e.target.closest('[data-action="addToDuel"]');
+  if (duelBtn) {
+    e.preventDefault();
+    const id = duelBtn.getAttribute('data-id');
+    const loc = duelBtn.getAttribute('data-localidad');
+    const prov = duelBtn.getAttribute('data-provincia');
+    if (typeof addToDuel === 'function') addToDuel(id, loc, prov);
+    return;
+  }
   const noteBtn = e.target.closest('[data-action="openNoteModal"]');
   if (noteBtn) {
     e.preventDefault();
@@ -1766,4 +1780,142 @@ function exportFilteredVacantesCSV() {
   const ws = XLSX.utils.aoa_to_sheet(rows);
   XLSX.utils.book_append_sheet(wb, ws, "Plazas Filtradas");
   XLSX.writeFile(wb, "plazas_filtradas.xlsx");
+}
+
+// ================= MODO DUELO =================
+state.duelPlazas = [];
+
+window.addToDuel = function(id, loc, prov) {
+  if (state.duelPlazas.find(p => p.id === id)) return; // ya está
+  if (state.duelPlazas.length >= 2) {
+    state.duelPlazas.shift(); // Quita el primero
+  }
+  
+  const fullData = DATA_VACANTES.find(v => v._id === id);
+  if (!fullData) return;
+  
+  state.duelPlazas.push({ id, loc, prov, data: fullData });
+  updateDuelBar();
+  
+  if (state.duelPlazas.length === 2) {
+    openDuelModal();
+  }
+};
+
+function updateDuelBar() {
+  const bar = document.getElementById('duel-bar');
+  if (state.duelPlazas.length === 0) {
+    bar.style.display = 'none';
+    return;
+  }
+  
+  bar.style.display = 'flex';
+  
+  const s1 = document.getElementById('duel-slot-1');
+  if (state.duelPlazas[0]) {
+    s1.textContent = state.duelPlazas[0].loc.replace(/\s*\([^)]*\)/g, '').trim();
+    s1.style.borderColor = 'var(--color-primary)';
+    s1.onclick = () => { state.duelPlazas.splice(0, 1); updateDuelBar(); };
+  } else {
+    s1.textContent = 'Selecciona plaza 1...';
+    s1.style.borderColor = 'var(--color-border)';
+    s1.onclick = null;
+  }
+  
+  const s2 = document.getElementById('duel-slot-2');
+  if (state.duelPlazas[1]) {
+    s2.textContent = state.duelPlazas[1].loc.replace(/\s*\([^)]*\)/g, '').trim();
+    s2.style.borderColor = 'var(--color-primary)';
+    s2.onclick = () => { state.duelPlazas.splice(1, 1); updateDuelBar(); };
+  } else {
+    s2.textContent = 'Selecciona plaza 2...';
+    s2.style.borderColor = 'var(--color-border)';
+    s2.onclick = null;
+  }
+}
+
+document.getElementById('duel-cancel-btn').addEventListener('click', () => {
+  state.duelPlazas = [];
+  updateDuelBar();
+});
+
+document.getElementById('close-duel-modal').addEventListener('click', () => {
+  document.getElementById('duel-modal').style.display = 'none';
+});
+
+// Close duel modal if clicking outside content
+document.getElementById('duel-modal').addEventListener('click', (e) => {
+  if (e.target.id === 'duel-modal') document.getElementById('duel-modal').style.display = 'none';
+});
+
+function openDuelModal() {
+  if (state.duelPlazas.length < 2) return;
+  
+  const [p1, p2] = state.duelPlazas;
+  const d1 = p1.data;
+  const d2 = p2.data;
+  
+  const c1Loc = d1.localidad.replace(/\s*\([^)]*\)/g, '').trim();
+  const c2Loc = d2.localidad.replace(/\s*\([^)]*\)/g, '').trim();
+  
+  document.getElementById('duel-title-1').textContent = c1Loc;
+  document.getElementById('duel-sub-1').textContent = d1.provincia;
+  
+  document.getElementById('duel-title-2').textContent = c2Loc;
+  document.getElementById('duel-sub-2').textContent = d2.provincia;
+  
+  let html1 = '';
+  let html2 = '';
+  
+  const addStatRow = (label, val1, val2, formatFn, bestIsHighest = true, raw1, raw2) => {
+    let w1 = false, w2 = false;
+    let r1 = raw1 !== undefined ? raw1 : val1;
+    let r2 = raw2 !== undefined ? raw2 : val2;
+    
+    if (r1 !== r2 && r1 !== 0 && r2 !== 0 && r1 !== 99999 && r2 !== 99999) {
+      if (bestIsHighest) {
+        if (r1 > r2) w1 = true; else w2 = true;
+      } else {
+        if (r1 < r2) w1 = true; else w2 = true;
+      }
+    }
+    
+    const style1 = w1 ? 'background:#dcfce7; color:#166534; border:1px solid #166534;' : 'background:#f3f4f6; color:#374151; border:1px solid transparent;';
+    const style2 = w2 ? 'background:#dcfce7; color:#166534; border:1px solid #166534;' : 'background:#f3f4f6; color:#374151; border:1px solid transparent;';
+    const check1 = w1 ? ' 🏆' : '';
+    const check2 = w2 ? ' 🏆' : '';
+    
+    html1 += `<div style="padding:10px; border-radius:6px; text-align:center; ${style1}"><div style="font-size:11px; opacity:0.8; margin-bottom:4px;">${label}</div><div style="font-size:15px; font-weight:bold;">${formatFn(val1)}${check1}</div></div>`;
+    html2 += `<div style="padding:10px; border-radius:6px; text-align:center; ${style2}"><div style="font-size:11px; opacity:0.8; margin-bottom:4px;">${label}</div><div style="font-size:15px; font-weight:bold;">${formatFn(val2)}${check2}</div></div>`;
+  };
+  
+  const r1 = getRenta(c1Loc, d1.provincia) || 0;
+  const r2 = getRenta(c2Loc, d2.provincia) || 0;
+  addStatRow('💰 Renta Media', r1, r2, (v) => v ? v.toLocaleString('es-ES') + ' €' : '--');
+  
+  const pob1 = getPoblacion(c1Loc, d1.provincia) || 0;
+  const pob2 = getPoblacion(c2Loc, d2.provincia) || 0;
+  addStatRow('👥 Población', pob1, pob2, (v) => v ? formatPoblacion(v) : '--');
+  
+  const ev1 = typeof DATA_EVOLUCION_POB !== 'undefined' && DATA_EVOLUCION_POB[c1Loc.toLowerCase() + '|' + d1.provincia.toLowerCase()] ? DATA_EVOLUCION_POB[c1Loc.toLowerCase() + '|' + d1.provincia.toLowerCase()].crecimiento : 0;
+  const ev2 = typeof DATA_EVOLUCION_POB !== 'undefined' && DATA_EVOLUCION_POB[c2Loc.toLowerCase() + '|' + d2.provincia.toLowerCase()] ? DATA_EVOLUCION_POB[c2Loc.toLowerCase() + '|' + d2.provincia.toLowerCase()].crecimiento : 0;
+  addStatRow('📈 Evolución Población (10 años)', ev1, ev2, (v) => v ? (v > 0 ? '+' : '') + v + '%' : '--');
+  
+  addStatRow('🚗 Distancia a casa', d1.distancia || 99999, d2.distancia || 99999, (v) => v === 99999 ? '--' : v.toFixed(1) + ' km', false);
+  
+  const time1 = d1.duration ? Math.round(d1.duration / 60) : 99999;
+  const time2 = d2.duration ? Math.round(d2.duration / 60) : 99999;
+  addStatRow('⏱️ Tiempo a casa', time1, time2, (v) => v === 99999 ? '--' : formatDuration(v * 60), false);
+  
+  addStatRow('📊 Habitantes / Notario', d1.ratioPobNot || 0, d2.ratioPobNot || 0, (v) => v ? Math.round(v).toLocaleString('es-ES') : '--');
+  
+  addStatRow('🏖️ A la playa', d1.distCosta || 99999, d2.distCosta || 99999, (v) => v === 99999 ? '--' : v.toFixed(1) + ' km', false);
+  addStatRow('⛰️ A la montaña', d1.distMontana || 99999, d2.distMontana || 99999, (v) => v === 99999 ? '--' : v.toFixed(1) + ' km', false);
+  
+  addStatRow('⭐ Match Score', d1.matchScore || 0, d2.matchScore || 0, (v) => v ? Math.round(v) + ' pts' : '--');
+  
+  document.getElementById('duel-stats-1').innerHTML = html1;
+  document.getElementById('duel-stats-2').innerHTML = html2;
+  
+  document.getElementById('duel-modal').style.display = 'flex';
 }

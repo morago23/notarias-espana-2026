@@ -411,6 +411,41 @@
     </div>
   </div>
 
+  <!-- MODO DUELO BAR -->
+  <div id="duel-bar" style="display:none; position:fixed; bottom:0; left:0; right:0; background:var(--color-surface); border-top:2px solid var(--color-accent); padding:16px; z-index:100; box-shadow:0 -4px 10px rgba(0,0,0,0.1); justify-content:center; align-items:center; gap:16px; flex-wrap:wrap;">
+    <span style="font-weight:bold; color:var(--color-primary); font-size:16px;">⚔️ MODO DUELO:</span>
+    <div id="duel-slot-1" style="padding:8px 16px; background:var(--color-bg); border:1px dashed var(--color-border); border-radius:4px; font-size:14px; min-width:180px; text-align:center; cursor:pointer;" title="Haz clic para quitar">Selecciona plaza 1...</div>
+    <span style="font-weight:bold; color:var(--color-text-muted);">VS</span>
+    <div id="duel-slot-2" style="padding:8px 16px; background:var(--color-bg); border:1px dashed var(--color-border); border-radius:4px; font-size:14px; min-width:180px; text-align:center; cursor:pointer;" title="Haz clic para quitar">Selecciona plaza 2...</div>
+    <button id="duel-cancel-btn" class="action-btn-secondary" style="padding:6px 12px; font-size:12px; margin-left:10px;">Cancelar</button>
+  </div>
+
+  <!-- MODO DUELO MODAL -->
+  <div id="duel-modal" class="modal-overlay" style="display:none; z-index:200;">
+    <div class="modal-content" style="max-width: 900px; width: 95%; max-height: 90vh; overflow-y: auto;">
+      <button id="close-duel-modal" class="modal-close">&times;</button>
+      <div style="padding: 24px;">
+        <h2 style="text-align:center; color:var(--color-primary); margin-top:0;">⚔️ Duelo de Plazas</h2>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px;" id="duel-grid">
+          <!-- Plaza 1 -->
+          <div id="duel-col-1" style="background:var(--color-bg); padding:16px; border-radius:8px; border:2px solid transparent;">
+            <h3 id="duel-title-1" style="text-align:center; margin-top:0; color:var(--color-primary);"></h3>
+            <p id="duel-sub-1" style="text-align:center; font-size:13px; color:var(--color-text-muted); margin-bottom:16px; margin-top:0;"></p>
+            <div id="duel-stats-1" style="display:flex; flex-direction:column; gap:12px;"></div>
+          </div>
+          
+          <!-- Plaza 2 -->
+          <div id="duel-col-2" style="background:var(--color-bg); padding:16px; border-radius:8px; border:2px solid transparent;">
+            <h3 id="duel-title-2" style="text-align:center; margin-top:0; color:var(--color-primary);"></h3>
+            <p id="duel-sub-2" style="text-align:center; font-size:13px; color:var(--color-text-muted); margin-bottom:16px; margin-top:0;"></p>
+            <div id="duel-stats-2" style="display:flex; flex-direction:column; gap:12px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
   <script src="geo_poi.js"></script>
   <script src="renta.js"></script>
