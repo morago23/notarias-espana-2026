@@ -1899,7 +1899,7 @@ function openDuelModal() {
   
   const getEvol = (loc, prov) => {
     if (typeof DATA_EVOLUCION_POB === 'undefined') return null;
-    const data = DATA_EVOLUCION_POB[loc.toLowerCase() + '|' + prov.toLowerCase()];
+    const data = DATA_EVOLUCION_POB[`${loc}|${prov}`];
     return data && data.crecimiento !== undefined ? data.crecimiento : null;
   };
   const ev1 = getEvol(c1Loc, d1.provincia);
