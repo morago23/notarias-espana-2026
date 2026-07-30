@@ -50,7 +50,7 @@ function renderPreferencias() {
   if (!listEl) return;
   
   if (favOrder.length === 0) {
-    listEl.innerHTML = '<tr><td colspan="10" class="empty-state">No tienes ninguna plaza guardada en favoritos. Ve a "Plazas Vacantes" y marca la estrella en las notarías que te interesen.</td></tr>';
+    listEl.innerHTML = '<tr><td colspan="20" class="empty-state">No tienes ninguna plaza guardada en favoritos. Ve a "Plazas Vacantes" y marca la estrella en las notarías que te interesen.</td></tr>';
     return;
   }
   
@@ -80,7 +80,7 @@ function renderPreferencias() {
 
        html += `
         <tr data-id="${id}" class="pref-item">
-          <td class="center pref-handle" style="font-weight:bold; color:var(--color-primary); font-size:1.1rem; cursor:grab;">
+          <td class="center pref-handle" data-label="Orden" style="font-weight:bold; color:var(--color-primary); font-size:1.1rem; cursor:grab;">
             ☰ ${index + 1}
           </td>
           <td class="col-comunidad" data-label="Comunidad">${escapeHTML(v.comunidad)}</td>
@@ -722,7 +722,7 @@ function renderVacantes() {
   const page = state.vacantesFiltered; // Show all vacantes, it's max 141
 
   if (page.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="10" class="center">No hay vacantes encontradas.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="20" class="center">No hay vacantes encontradas.</td></tr>`;
     return;
   }
 
@@ -914,7 +914,9 @@ async function haversines(skipGeocode = false) {
           const osrmDur = durations[index + 1] || 0;
           const havDist = haversine(state.userCoords.lat, state.userCoords.lon, item.c.lat, item.c.lon);
           
-          const destIsOffMainland = item.v.comunidad && ['Canarias', 'Baleares', 'Ceuta', 'Melilla'].some(c => item.v.comunidad.includes(c));
+          const destIsOffMainland = (item.v.comunidad && (item.v.comunidad.includes('Canarias') || item.v.comunidad.includes('Balears'))) ||
+            (item.v.provincia && (item.v.provincia === 'Ceuta' || item.v.provincia === 'Melilla')) ||
+            (item.v.localidad && (item.v.localidad.includes('Ceuta') || item.v.localidad.includes('Melilla')));
           
           // Si OSRM no encuentra ruta (osrmDur == 0), o es una ruta larguísima (> 14 horas),
           // o es hacia/desde una isla/enclave y la distancia en línea recta es mayor a 150km (implicando avión/barco)
@@ -1345,8 +1347,9 @@ window.openTownModal = async function(localidad, provincia) {
   const pob = typeof getPoblacion === 'function' ? getPoblacion(localidad, provincia) : null;
   popBadge.textContent = pob ? `👥 ${formatPoblacion(pob)}` : '👥 -- hab.';
 
-  if (typeof DATA_EVOLUCION_POB !== 'undefined' && DATA_EVOLUCION_POB[unnormId]) {
-    const ev = DATA_EVOLUCION_POB[unnormId];
+  const evolData = getEvol(localidad, provincia);
+  if (evolData) {
+    const ev = evolData;
     const icon = ev.crecimiento >= 0 ? '📈' : '📉';
     const sign = ev.crecimiento > 0 ? '+' : '';
     const labelText = ev.crecimiento >= 0 ? 'Gana población:' : 'Pierde población:';
@@ -1594,6 +1597,17 @@ function getPoblacion(localidad, provincia) {
 function formatPoblacion(num) {
   if (!num) return '';
   return num.toLocaleString('es-ES') + ' hab.';
+}
+
+// ================= EVOLUCIÓN POBLACIÓN =================
+function getEvol(localidad, provincia) {
+  if (typeof DATA_EVOLUCION_POB === 'undefined') return null;
+  const locClean = localidad.replace(/\s*\([^)]*\)/g, '').trim();
+  const key = `${locClean}|${provincia}`;
+  if (DATA_EVOLUCION_POB[key]) return DATA_EVOLUCION_POB[key];
+  // Fallback: search by locality only
+  const altKey = Object.keys(DATA_EVOLUCION_POB).find(k => k.startsWith(locClean + '|'));
+  return altKey ? DATA_EVOLUCION_POB[altKey] : null;
 }
 
 function calculateMatchScores() {
@@ -1934,13 +1948,10 @@ function openDuelModal() {
   const pob2 = getPoblacion(c2Loc, d2.provincia) || 0;
   addStatRow('👥 Población', pob1, pob2, (v) => v ? formatPoblacion(v) : '--', true, pob1 === 0 ? null : pob1, pob2 === 0 ? null : pob2);
   
-  const getEvol = (loc, prov) => {
-    if (typeof DATA_EVOLUCION_POB === 'undefined') return null;
-    const data = DATA_EVOLUCION_POB[`${loc}|${prov}`];
-    return data && data.crecimiento !== undefined ? data.crecimiento : null;
-  };
-  const ev1 = getEvol(c1Loc, d1.provincia);
-  const ev2 = getEvol(c2Loc, d2.provincia);
+  const ev1Data = getEvol(c1Loc, d1.provincia);
+  const ev2Data = getEvol(c2Loc, d2.provincia);
+  const ev1 = ev1Data ? ev1Data.crecimiento : null;
+  const ev2 = ev2Data ? ev2Data.crecimiento : null;
   addStatRow('📈 Evolución Población (10 años)', ev1, ev2, (v) => v !== null ? (v > 0 ? '+' : '') + v + '%' : '--');
   
   const dist1 = d1.distancia !== undefined && d1.distancia !== null ? d1.distancia : 99999;

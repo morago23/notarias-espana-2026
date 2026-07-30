@@ -768,7 +768,7 @@ mark {
 /* IMPRESIÓN (PDF) */
 @media print {
   /* Ocultar elementos innecesarios */
-  header, .tab-nav, .controls, .map-container, #duel-bar, .modal-overlay, #duel-page {
+  header, .tabs, .controls, #tab-mapa, #duel-bar, .modal-overlay, #duel-page, .distance-box {
     display: none !important;
   }
   
@@ -779,11 +779,12 @@ mark {
     margin: 0;
   }
   
-  #app {
+  .main-content {
     padding: 0;
     margin: 0;
     box-shadow: none;
     border-radius: 0;
+    border: none;
   }
 
   /* Mostrar solo la pestaña de Preferencias al imprimir (o la activa) */
@@ -795,12 +796,12 @@ mark {
   }
 
   /* Ajustar tabla para que entre bien */
-  .styled-table {
+  .table {
     width: 100%;
     font-size: 10px;
     border-collapse: collapse;
   }
-  .styled-table th, .styled-table td {
+  .table th, .table td {
     padding: 6px;
     border: 1px solid #ddd;
   }
@@ -821,64 +822,3 @@ mark {
   }
 }
 
-/* RESPONSIVE TABLE FOR MOBILE (CARDS) */
-@media (max-width: 768px) {
-  .styled-table thead {
-    display: none;
-  }
-  
-  .styled-table, .styled-table tbody, .styled-table tr, .styled-table td {
-    display: block;
-    width: 100%;
-  }
-  
-  .styled-table tr {
-    margin-bottom: 16px;
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    background: var(--color-surface);
-    overflow: hidden;
-    padding: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  }
-  
-  .styled-table td {
-    text-align: right;
-    padding-left: 45%;
-    position: relative;
-    border: none;
-    border-bottom: 1px solid var(--color-border);
-    min-height: 40px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-  
-  .styled-table td:last-child {
-    border-bottom: none;
-  }
-  
-  .styled-table td::before {
-    content: attr(data-label);
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40%;
-    padding-right: 10px;
-    text-align: left;
-    font-weight: bold;
-    color: var(--color-text-muted);
-    font-size: 13px;
-  }
-  
-  /* Ajustar wrappers para el layout de tarjeta */
-  .styled-table .loc-wrapper, .styled-table .geo-wrapper {
-    align-items: flex-end !important;
-  }
-  
-  /* Asegurar que las celdas con flex/center sigan funcionando */
-  .styled-table td.center {
-    justify-content: flex-end;
-  }
-}
