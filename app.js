@@ -108,12 +108,12 @@ function renderPreferencias() {
           <td data-label="Notario anterior"><small style="color:var(--color-text-muted)">${notarioAnt}</small></td>
           <td data-label="Motivo" class="center"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
           <td data-label="Categoría" class="center"><span class="badge ${badgeCat}">${escapeHTML(v.categoria)}</span></td>
-          ${state.userCoords ? `<td data-label="Tiempo y Distancia" class="center">
-            <div style="display:flex; flex-direction:column; align-items:flex-end;">
-              <strong>${v.distancia !== null ? v.distancia.toFixed(1) + ' km' : '-'}</strong>
-              ${v.duration ? `<small style="color:#6c757d; margin-top:2px;">🚗 ${formatDuration(v.duration)}</small>` : ''}
-            </div>
-          </td>` : '<td data-label="Tiempo y Distancia" class="center" style="display:none;"></td>'}
+          ${state.userCoords ? `<td data-label="Distancia" class="center">
+            <strong>${v.distancia !== null ? v.distancia.toFixed(1) + ' km' : '-'}</strong>
+          </td>
+          <td data-label="Tiempo" class="center">
+            ${v.duration ? `<small style="color:#6c757d;">🚗 ${formatDuration(v.duration)}</small>` : '-'}
+          </td>` : '<td data-label="Distancia" class="center" style="display:none;"></td><td data-label="Tiempo" class="center" style="display:none;"></td>'}
           <td data-label="Borrar" class="center">
             <button data-action="openNoteModal" data-id="${escapeHTML(id)}" data-localidad="${escapeHTML(v.localidad)}" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Notas personales">${noteText ? '📝' : '🗒️'}</button>
             <button class="pref-remove" data-id="${id}">❌</button>
@@ -601,6 +601,9 @@ function initVacantes() {
     document.getElementById('distance-status-pref').textContent = '';
     document.getElementById('distance-clear-pref').style.display = 'none';
     if(document.getElementById('th-distancia-pref')) document.getElementById('th-distancia-pref').style.display = 'none';
+    if(document.getElementById('th-duration-pref')) document.getElementById('th-duration-pref').style.display = 'none';
+    if(document.getElementById('th-distancia')) document.getElementById('th-distancia').style.display = 'none';
+    if(document.getElementById('th-duration')) document.getElementById('th-duration').style.display = 'none';
 
     DATA_VACANTES.forEach(v => {
       v.distancia = null;
@@ -783,11 +786,11 @@ function renderVacantes() {
         <td data-label="Notario anterior"><small style="color:var(--color-text-muted)">${notarioAnt}</small></td>
         <td class="center" data-label="Motivo"><span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></td>
         <td class="center" data-label="Categoría"><span class="badge ${badgeCat}">${escapeHTML(v.categoria)}</span></td>
-        ${state.userCoords ? `<td class="center" data-label="Tiempo y Distancia">
-          <div style="display:flex; flex-direction:column; align-items:flex-end;">
-            <strong>${v.distancia !== null ? v.distancia.toFixed(1) + ' km' : '-'}</strong>
-            ${v.duration ? `<small style="color:#6c757d; margin-top:2px;">🚗 ${formatDuration(v.duration)}</small>` : ''}
-          </div>
+        ${state.userCoords ? `<td class="center" data-label="Distancia">
+          <strong>${v.distancia !== null ? v.distancia.toFixed(1) + ' km' : '-'}</strong>
+        </td>
+        <td class="center" data-label="Tiempo">
+          ${v.duration ? `<small style="color:#6c757d;">🚗 ${formatDuration(v.duration)}</small>` : '-'}
         </td>` : ''}
       </tr>
     `;
@@ -925,6 +928,9 @@ async function haversines(skipGeocode = false) {
     document.getElementById('distance-status-pref').textContent = status.textContent;
     document.getElementById('distance-clear-pref').style.display = 'inline-block';
     if(document.getElementById('th-distancia-pref')) document.getElementById('th-distancia-pref').style.display = 'table-cell';
+    if(document.getElementById('th-duration-pref')) document.getElementById('th-duration-pref').style.display = 'table-cell';
+    if(document.getElementById('th-distancia')) document.getElementById('th-distancia').style.display = 'table-cell';
+    if(document.getElementById('th-duration')) document.getElementById('th-duration').style.display = 'table-cell';
 
     // Auto sort by distance
     
