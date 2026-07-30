@@ -1347,20 +1347,29 @@ window.openTownModal = async function(localidad, provincia) {
 
   try {
     let wikiTitle = encodeURIComponent(locClean);
-    if (lat !== null && lon !== null) {
-      const geoRes = await fetch(`https://es.wikipedia.org/w/api.php?action=query&list=geosearch&gscoord=${lat}|${lon}&gsradius=10000&gslimit=1&format=json&origin=*`);
-      const geoData = await geoRes.json();
-      if (geoData.query && geoData.query.geosearch && geoData.query.geosearch.length > 0) {
-        wikiTitle = encodeURIComponent(geoData.query.geosearch[0].title);
+    let response = await fetch(`https://es.wikipedia.org/api/rest_v1/page/summary/${wikiTitle}`);
+    
+    // Si no lo encuentra por nombre exacto, busca con localidad + provincia
+    if (!response.ok) {
+      const searchRes = await fetch(`https://es.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(locClean + ' ' + provincia)}&utf8=1&format=json&origin=*`);
+      const searchData = await searchRes.json();
+      if (searchData.query && searchData.query.search && searchData.query.search.length > 0) {
+        wikiTitle = encodeURIComponent(searchData.query.search[0].title);
+        response = await fetch(`https://es.wikipedia.org/api/rest_v1/page/summary/${wikiTitle}`);
       }
     }
-    
-    const response = await fetch(`https://es.wikipedia.org/api/rest_v1/page/summary/${wikiTitle}`);
+
     if (!response.ok) throw new Error('Not found');
 
     const data = await response.json();
 
     loading.style.display = 'none';
+    
+    // Check if it's a disambiguation page
+    if (data.type === 'disambiguation') {
+       throw new Error('Disambiguation');
+    }
+
     desc.textContent = data.extract;
     desc.style.display = 'block';
 
