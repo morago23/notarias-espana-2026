@@ -1342,26 +1342,7 @@ window.openTownModal = async function(localidad, provincia) {
     rentaBadge.style.display = 'none';
   }
 
-  weatherBadge.textContent = '⛅ -- °C';
-
   modal.style.display = 'flex';
-
-  if (lat !== null && lon !== null) {
-    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`)
-      .then(res => res.json())
-      .then(d => {
-        if (d.current_weather) {
-          const w = d.current_weather;
-          let icon = '⛅';
-          if (w.weathercode === 0) icon = '☀️';
-          else if (w.weathercode <= 3) icon = '⛅';
-          else if (w.weathercode <= 67) icon = '🌧️';
-          else if (w.weathercode <= 77) icon = '❄️';
-          else if (w.weathercode <= 99) icon = '⛈️';
-          weatherBadge.textContent = `${icon} ${w.temperature}°C`;
-        }
-      }).catch(e => console.error(e));
-  }
 
   try {
     let wikiTitle = encodeURIComponent(locClean);
