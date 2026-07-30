@@ -910,8 +910,21 @@ async function haversines(skipGeocode = false) {
         
         batch.forEach((item, index) => {
           // index + 1 porque el indice 0 es el propio origen
-          item.v.distancia = distances[index + 1] / 1000; // km
-          item.v.duration = durations[index + 1]; // seconds
+          const osrmDist = distances[index + 1] / 1000;
+          const osrmDur = durations[index + 1];
+          const havDist = haversine(state.userCoords.lat, state.userCoords.lon, item.c.lat, item.c.lon);
+          
+          // Si OSRM da un tiempo excesivo (> 14 horas) o una velocidad media bajísima en distancias largas (sugiriendo un ferry largo),
+          // o si es a Canarias/Baleares desde la península, mostramos la distancia en línea recta y quitamos el tiempo.
+          const isFerryOrFarIsland = osrmDur > 50400 || (osrmDur > 0 && (osrmDist / (osrmDur/3600)) < 50 && havDist > 200);
+
+          if (isFerryOrFarIsland) {
+            item.v.distancia = havDist;
+            item.v.duration = null;
+          } else {
+            item.v.distancia = osrmDist;
+            item.v.duration = osrmDur;
+          }
         });
       } else {
         // Fallback a haversine si falla el enrutamiento para este lote

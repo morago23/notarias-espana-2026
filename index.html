@@ -40,15 +40,15 @@
   <main class="container main-content">
     
     <div class="tabs">
-      <button class="tab-btn active" data-target="tab-notarias">Directorio de Notarías</button>
-      <button class="tab-btn" data-target="tab-vacantes">Plazas Vacantes (Concurso)</button>
+      <button class="tab-btn" data-target="tab-notarias">Directorio de Notarías</button>
+      <button class="tab-btn active" data-target="tab-vacantes">Plazas Vacantes (Concurso)</button>
       <button class="tab-btn" data-target="tab-mapa">Mapa 🗺️</button>
       <button class="tab-btn" data-target="tab-preferencias">Mis Preferencias ⭐</button>
       <button class="tab-btn" data-target="tab-estadisticas">Estadísticas y Gráficos</button>
     </div>
 
     <!-- DIRECTORIO DE NOTARIAS -->
-    <section id="tab-notarias" class="tab-content active">
+    <section id="tab-notarias" class="tab-content">
       <div class="controls">
         <input type="text" id="search-notarias" class="search-input" placeholder="Buscar por localidad, provincia o colegio...">
         <select id="filter-colegio" class="filter-select">
@@ -90,7 +90,7 @@
     </section>
 
     <!-- PLAZAS VACANTES -->
-    <section id="tab-vacantes" class="tab-content">
+    <section id="tab-vacantes" class="tab-content active">
       
       <div class="distance-box">
         <h4>📍 Calcula la distancia a las plazas vacantes</h4>
