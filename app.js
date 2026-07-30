@@ -1864,8 +1864,7 @@ function openDuelModal() {
   document.getElementById('duel-title-2').textContent = c2Loc;
   document.getElementById('duel-sub-2').textContent = d2.provincia;
   
-  let html1 = '';
-  let html2 = '';
+  let html = '';
   
   const addStatRow = (label, val1, val2, formatFn, bestIsHighest = true, raw1, raw2) => {
     let w1 = false, w2 = false;
@@ -1885,8 +1884,16 @@ function openDuelModal() {
     const check1 = w1 ? ' 🏆' : '';
     const check2 = w2 ? ' 🏆' : '';
     
-    html1 += `<div style="padding:10px; border-radius:6px; text-align:center; ${style1}"><div style="font-size:11px; opacity:0.8; margin-bottom:4px;">${label}</div><div style="font-size:15px; font-weight:bold;">${formatFn(val1)}${check1}</div></div>`;
-    html2 += `<div style="padding:10px; border-radius:6px; text-align:center; ${style2}"><div style="font-size:11px; opacity:0.8; margin-bottom:4px;">${label}</div><div style="font-size:15px; font-weight:bold;">${formatFn(val2)}${check2}</div></div>`;
+    html += `
+      <div style="margin-bottom: 12px; background: var(--color-bg); padding: 12px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+        <div style="text-align: center; font-size: 11px; font-weight: bold; color: var(--color-text-muted); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px;">${label}</div>
+        <div style="display: flex; justify-content: space-between; align-items: stretch; gap: 8px;">
+          <div style="flex: 1; text-align: center; padding: 10px 8px; border-radius: 6px; display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:bold; ${style1}">${formatFn(val1)}${check1}</div>
+          <div style="width: 20px; display:flex; align-items:center; justify-content:center; font-size: 12px; color: #ccc; font-style:italic;">vs</div>
+          <div style="flex: 1; text-align: center; padding: 10px 8px; border-radius: 6px; display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:bold; ${style2}">${formatFn(val2)}${check2}</div>
+        </div>
+      </div>
+    `;
   };
   
   const r1 = getRenta(c1Loc, d1.provincia) || 0;
@@ -1930,8 +1937,7 @@ function openDuelModal() {
   const ms2 = d2.matchScore !== undefined && d2.matchScore !== null ? d2.matchScore : null;
   addStatRow('⭐ Match Score', ms1, ms2, (v) => v !== null ? Math.round(v) + ' pts' : '--');
   
-  document.getElementById('duel-stats-1').innerHTML = html1;
-  document.getElementById('duel-stats-2').innerHTML = html2;
+  document.getElementById('duel-stats-container').innerHTML = html;
   
   document.getElementById('duel-modal').style.display = 'flex';
 }
