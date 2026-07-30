@@ -88,8 +88,8 @@ function renderPreferencias() {
           <td data-label="Localidad">
             <div class="loc-wrapper" style="display: flex; flex-direction: column; align-items: flex-start;">
               <div class="loc-main">${escapeHTML(v.localidad.replace(/\s*\([^)]+\)/, '').trim())}${noteIndicator}
-                <button data-action="openTownModal" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="btn" style="padding: 2px 6px; font-size: 11px; margin-left: 6px; background-color: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-primary);" title="Ver ficha del pueblo">ℹ️</button>
-                <button data-action="addToDuel" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="btn" style="padding: 2px 6px; font-size: 11px; margin-left: 2px; background-color: #fff1f2; color: #be185d; border: 1px solid #be185d;" title="Añadir a Modo Duelo">⚔️</button>
+                <button data-action="openTownModal" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="icon-btn" title="Ver ficha del pueblo">ℹ️</button>
+                <button data-action="addToDuel" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="icon-btn icon-btn-duel" title="Añadir a Modo Duelo">⚔️</button>
               </div>
               ${noteText ? `<div style="font-size:11px; color:var(--color-primary); margin-top:2px; font-style:italic;">📝 ${escapeHTML(noteText.length > 50 ? noteText.substring(0, 50) + '...' : noteText)}</div>` : ''}
             </div>
@@ -772,8 +772,8 @@ function renderVacantes() {
         <td data-label="Localidad">
           <div class="loc-wrapper" style="display: flex; flex-direction: column; align-items: flex-start;">
             <div class="loc-main">${highlightText(v.localidad.replace(/\s*\([^)]+\)/, '').trim(), query)}${noteIndicator}
-              <button data-action="openTownModal" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="btn" style="padding: 2px 6px; font-size: 11px; margin-left: 6px; background-color: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-primary);" title="Ver ficha del pueblo">ℹ️</button>
-              <button data-action="addToDuel" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="btn" style="padding: 2px 6px; font-size: 11px; margin-left: 2px; background-color: #fff1f2; color: #be185d; border: 1px solid #be185d;" title="Añadir a Modo Duelo">⚔️</button>
+              <button data-action="openTownModal" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="icon-btn" title="Ver ficha del pueblo">ℹ️</button>
+              <button data-action="addToDuel" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="icon-btn icon-btn-duel" title="Añadir a Modo Duelo">⚔️</button>
             </div>
           </div>
         </td>
@@ -1202,7 +1202,7 @@ function renderMapMarkers() {
     const cleanLoc = plazas[0].localidad.replace(/\s*\([^)]*\)/g, '').trim();
     const header = `<div class="map-popup-header" style="display:flex; justify-content:space-between; align-items:center;">
       <div>${escapeHTML(cleanLoc)} <span style="font-size:12px; font-weight:normal; color:var(--color-text-muted)">(${plazas.length})</span></div>
-      <button data-action="openTownModal" data-localidad="${escapeHTML(cleanLoc)}" data-provincia="${escapeHTML(plazas[0].provincia)}" class="btn" style="padding: 2px 6px; font-size: 11px; background-color: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-primary);">ℹ️ Info</button>
+      <button data-action="openTownModal" data-localidad="${escapeHTML(cleanLoc)}" data-provincia="${escapeHTML(plazas[0].provincia)}" class="icon-btn">ℹ️ Info</button>
     </div>`;
     
     const listHtml = plazas.map(v => {

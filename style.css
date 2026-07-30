@@ -288,6 +288,35 @@ body {
   box-shadow: 0 6px 10px -1px rgba(var(--color-accent-rgb), 0.3), 0 2px 4px -1px rgba(var(--color-accent-rgb), 0.1);
 }
 
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  font-size: 11px;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: var(--color-surface);
+  color: var(--color-primary) !important;
+  border: 1px solid var(--color-primary);
+  transition: all 0.2s ease;
+  width: auto !important; /* Ensure it doesn't stretch on mobile */
+  margin-left: 6px;
+}
+.icon-btn:hover {
+  background-color: var(--color-bg);
+  transform: translateY(-1px);
+}
+.icon-btn-duel {
+  background-color: #fff1f2;
+  color: #be185d !important;
+  border-color: #be185d;
+  margin-left: 4px;
+}
+.icon-btn-duel:hover {
+  background-color: #ffe4e6;
+}
+
 /* Table */
 .table-responsive {
   overflow-x: auto;
