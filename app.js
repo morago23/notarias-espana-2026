@@ -1872,7 +1872,7 @@ function openDuelModal() {
     let r1 = raw1 !== undefined ? raw1 : val1;
     let r2 = raw2 !== undefined ? raw2 : val2;
     
-    if (r1 !== r2 && r1 !== 0 && r2 !== 0 && r1 !== 99999 && r2 !== 99999) {
+    if (r1 !== r2 && r1 !== null && r2 !== null && r1 !== 99999 && r2 !== 99999) {
       if (bestIsHighest) {
         if (r1 > r2) w1 = true; else w2 = true;
       } else {
@@ -1891,28 +1891,44 @@ function openDuelModal() {
   
   const r1 = getRenta(c1Loc, d1.provincia) || 0;
   const r2 = getRenta(c2Loc, d2.provincia) || 0;
-  addStatRow('💰 Renta Media', r1, r2, (v) => v ? v.toLocaleString('es-ES') + ' €' : '--');
+  addStatRow('💰 Renta Media', r1, r2, (v) => v ? v.toLocaleString('es-ES') + ' €' : '--', true, r1 === 0 ? null : r1, r2 === 0 ? null : r2);
   
   const pob1 = getPoblacion(c1Loc, d1.provincia) || 0;
   const pob2 = getPoblacion(c2Loc, d2.provincia) || 0;
-  addStatRow('👥 Población', pob1, pob2, (v) => v ? formatPoblacion(v) : '--');
+  addStatRow('👥 Población', pob1, pob2, (v) => v ? formatPoblacion(v) : '--', true, pob1 === 0 ? null : pob1, pob2 === 0 ? null : pob2);
   
-  const ev1 = typeof DATA_EVOLUCION_POB !== 'undefined' && DATA_EVOLUCION_POB[c1Loc.toLowerCase() + '|' + d1.provincia.toLowerCase()] ? DATA_EVOLUCION_POB[c1Loc.toLowerCase() + '|' + d1.provincia.toLowerCase()].crecimiento : 0;
-  const ev2 = typeof DATA_EVOLUCION_POB !== 'undefined' && DATA_EVOLUCION_POB[c2Loc.toLowerCase() + '|' + d2.provincia.toLowerCase()] ? DATA_EVOLUCION_POB[c2Loc.toLowerCase() + '|' + d2.provincia.toLowerCase()].crecimiento : 0;
-  addStatRow('📈 Evolución Población (10 años)', ev1, ev2, (v) => v ? (v > 0 ? '+' : '') + v + '%' : '--');
+  const getEvol = (loc, prov) => {
+    if (typeof DATA_EVOLUCION_POB === 'undefined') return null;
+    const data = DATA_EVOLUCION_POB[loc.toLowerCase() + '|' + prov.toLowerCase()];
+    return data && data.crecimiento !== undefined ? data.crecimiento : null;
+  };
+  const ev1 = getEvol(c1Loc, d1.provincia);
+  const ev2 = getEvol(c2Loc, d2.provincia);
+  addStatRow('📈 Evolución Población (10 años)', ev1, ev2, (v) => v !== null ? (v > 0 ? '+' : '') + v + '%' : '--');
   
-  addStatRow('🚗 Distancia a casa', d1.distancia || 99999, d2.distancia || 99999, (v) => v === 99999 ? '--' : v.toFixed(1) + ' km', false);
+  const dist1 = d1.distancia !== undefined && d1.distancia !== null ? d1.distancia : 99999;
+  const dist2 = d2.distancia !== undefined && d2.distancia !== null ? d2.distancia : 99999;
+  addStatRow('🚗 Distancia a casa', dist1, dist2, (v) => v === 99999 ? '--' : v.toFixed(1) + ' km', false);
   
-  const time1 = d1.duration ? Math.round(d1.duration / 60) : 99999;
-  const time2 = d2.duration ? Math.round(d2.duration / 60) : 99999;
+  const time1 = d1.duration !== undefined && d1.duration !== null ? Math.round(d1.duration / 60) : 99999;
+  const time2 = d2.duration !== undefined && d2.duration !== null ? Math.round(d2.duration / 60) : 99999;
   addStatRow('⏱️ Tiempo a casa', time1, time2, (v) => v === 99999 ? '--' : formatDuration(v * 60), false);
   
-  addStatRow('📊 Habitantes / Notario', d1.ratioPobNot || 0, d2.ratioPobNot || 0, (v) => v ? Math.round(v).toLocaleString('es-ES') : '--');
+  const ratio1 = d1.ratioPobNot || 0;
+  const ratio2 = d2.ratioPobNot || 0;
+  addStatRow('📊 Habitantes / Notario', ratio1, ratio2, (v) => v ? Math.round(v).toLocaleString('es-ES') : '--', true, ratio1 === 0 ? null : ratio1, ratio2 === 0 ? null : ratio2);
   
-  addStatRow('🏖️ A la playa', d1.distCosta || 99999, d2.distCosta || 99999, (v) => v === 99999 ? '--' : v.toFixed(1) + ' km', false);
-  addStatRow('⛰️ A la montaña', d1.distMontana || 99999, d2.distMontana || 99999, (v) => v === 99999 ? '--' : v.toFixed(1) + ' km', false);
+  const playa1 = d1.distCosta !== undefined && d1.distCosta !== null ? d1.distCosta : 99999;
+  const playa2 = d2.distCosta !== undefined && d2.distCosta !== null ? d2.distCosta : 99999;
+  addStatRow('🏖️ A la playa', playa1, playa2, (v) => v === 99999 ? '--' : v.toFixed(1) + ' km', false);
   
-  addStatRow('⭐ Match Score', d1.matchScore || 0, d2.matchScore || 0, (v) => v ? Math.round(v) + ' pts' : '--');
+  const mon1 = d1.distMontana !== undefined && d1.distMontana !== null ? d1.distMontana : 99999;
+  const mon2 = d2.distMontana !== undefined && d2.distMontana !== null ? d2.distMontana : 99999;
+  addStatRow('⛰️ A la montaña', mon1, mon2, (v) => v === 99999 ? '--' : v.toFixed(1) + ' km', false);
+  
+  const ms1 = d1.matchScore !== undefined && d1.matchScore !== null ? d1.matchScore : null;
+  const ms2 = d2.matchScore !== undefined && d2.matchScore !== null ? d2.matchScore : null;
+  addStatRow('⭐ Match Score', ms1, ms2, (v) => v !== null ? Math.round(v) + ' pts' : '--');
   
   document.getElementById('duel-stats-1').innerHTML = html1;
   document.getElementById('duel-stats-2').innerHTML = html2;
