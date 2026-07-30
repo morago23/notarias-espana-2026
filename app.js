@@ -87,10 +87,7 @@ function renderPreferencias() {
           <td class="col-provincia" data-label="Provincia">${escapeHTML(v.provincia)}</td>
           <td data-label="Localidad">
             <div class="loc-wrapper" style="display: flex; flex-direction: column; align-items: flex-start;">
-              <div class="loc-main">${escapeHTML(v.localidad.replace(/\s*\([^)]+\)/, '').trim())}${noteIndicator}
-                <button data-action="openTownModal" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="icon-btn" title="Ver ficha del pueblo">ℹ️</button>
-                <button data-action="addToDuel" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="icon-btn icon-btn-duel" title="Añadir a Modo Duelo">⚔️</button>
-              </div>
+              <div class="loc-main">${escapeHTML(v.localidad.replace(/\s*\([^)]+\)/, '').trim())}${noteIndicator}</div>
               ${noteText ? `<div style="font-size:11px; color:var(--color-primary); margin-top:2px; font-style:italic;">📝 ${escapeHTML(noteText.length > 50 ? noteText.substring(0, 50) + '...' : noteText)}</div>` : ''}
             </div>
           </td>
@@ -114,9 +111,17 @@ function renderPreferencias() {
           <td data-label="Tiempo" class="center">
             ${v.duration ? `<small style="color:#6c757d;">🚗 ${formatDuration(v.duration)}</small>` : '-'}
           </td>` : '<td data-label="Distancia" class="center" style="display:none;"></td><td data-label="Tiempo" class="center" style="display:none;"></td>'}
-          <td data-label="Borrar" class="center">
-            <button data-action="openNoteModal" data-id="${escapeHTML(id)}" data-localidad="${escapeHTML(v.localidad)}" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Notas personales">${noteText ? '📝' : '🗒️'}</button>
-            <button class="pref-remove" data-id="${id}">❌</button>
+          <td data-label="Acciones" class="center">
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <div style="display:flex; gap:4px; align-items:center;">
+                <button data-action="openNoteModal" data-id="${escapeHTML(id)}" data-localidad="${escapeHTML(v.localidad)}" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Notas personales">${noteText ? '📝' : '🗒️'}</button>
+                <button class="pref-remove" data-id="${id}">❌</button>
+              </div>
+              <div style="display:flex; gap:4px; align-items:center;">
+                <button data-action="openTownModal" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="icon-btn" title="Ver ficha del pueblo" style="margin-left:0;">ℹ️</button>
+                <button data-action="addToDuel" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="icon-btn icon-btn-duel" title="Añadir a Modo Duelo" style="margin-left:0;">⚔️</button>
+              </div>
+            </div>
           </td>
         </tr>
       `;
@@ -760,10 +765,16 @@ function renderVacantes() {
 
     return `
       <tr>
-        <td class="center" data-label="Favorito">
-          <div>
-            <button class="fav-btn ${favClass}" data-id="${escapeHTML(v._id)}">${favStar}</button>
-            <button data-action="openNoteModal" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Notas personales">${noteText ? '📝' : '🗒️'}</button>
+        <td class="center" data-label="Favorito / Notas">
+          <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+            <div style="display:flex; gap:4px; align-items:center;">
+              <button class="fav-btn ${favClass}" data-id="${escapeHTML(v._id)}">${favStar}</button>
+              <button data-action="openNoteModal" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Notas personales">${noteText ? '📝' : '🗒️'}</button>
+            </div>
+            <div style="display:flex; gap:4px; align-items:center;">
+              <button data-action="openTownModal" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="icon-btn" title="Ver ficha del pueblo" style="margin-left:0;">ℹ️</button>
+              <button data-action="addToDuel" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="icon-btn icon-btn-duel" title="Añadir a Modo Duelo" style="margin-left:0;">⚔️</button>
+            </div>
           </div>
         </td>
         ${matchDisplay}
@@ -771,10 +782,7 @@ function renderVacantes() {
         <td class="col-provincia" data-label="Provincia">${escapeHTML(v.provincia)}</td>
         <td data-label="Localidad">
           <div class="loc-wrapper" style="display: flex; flex-direction: column; align-items: flex-start;">
-            <div class="loc-main">${highlightText(v.localidad.replace(/\s*\([^)]+\)/, '').trim(), query)}${noteIndicator}
-              <button data-action="openTownModal" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="icon-btn" title="Ver ficha del pueblo">ℹ️</button>
-              <button data-action="addToDuel" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="icon-btn icon-btn-duel" title="Añadir a Modo Duelo">⚔️</button>
-            </div>
+            <div class="loc-main">${highlightText(v.localidad.replace(/\s*\([^)]+\)/, '').trim(), query)}${noteIndicator}</div>
           </div>
         </td>
         <td data-label="Datos / Geo" style="white-space:nowrap;">
