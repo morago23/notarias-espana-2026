@@ -1202,7 +1202,7 @@ function renderMapMarkers() {
     const cleanLoc = plazas[0].localidad.replace(/\s*\([^)]*\)/g, '').trim();
     const header = `<div class="map-popup-header" style="display:flex; justify-content:space-between; align-items:center;">
       <div>${escapeHTML(cleanLoc)} <span style="font-size:12px; font-weight:normal; color:var(--color-text-muted)">(${plazas.length})</span></div>
-      <button data-action="openTownModal" data-localidad="${escapeHTML(cleanLoc)}" data-provincia="${escapeHTML(plazas[0].provincia)}" class="icon-btn">ℹ️ Info</button>
+      <button data-action="openTownModal" data-localidad="${escapeHTML(cleanLoc)}" data-provincia="${escapeHTML(plazas[0].provincia)}" class="icon-btn" title="Ver ficha del pueblo">ℹ️</button>
     </div>`;
     
     const listHtml = plazas.map(v => {
