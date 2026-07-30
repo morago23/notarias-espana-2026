@@ -687,6 +687,11 @@ function filterVacantes() {
         let vB = b.distancia !== null && b.distancia !== undefined ? b.distancia : 99999999;
         return state.vacantesSortDir === 'asc' ? vA - vB : vB - vA;
       }
+      if (state.vacantesSortCol === 'duration') {
+        let vA = a.duration !== null && a.duration !== undefined ? a.duration : 99999999;
+        let vB = b.duration !== null && b.duration !== undefined ? b.duration : 99999999;
+        return state.vacantesSortDir === 'asc' ? vA - vB : vB - vA;
+      }
       if (state.vacantesSortCol === 'ratio') {
         let vA = a.ratioPobNot || 0;
         let vB = b.ratioPobNot || 0;
