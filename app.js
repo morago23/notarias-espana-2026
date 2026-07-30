@@ -114,7 +114,7 @@ function renderPreferencias() {
           <td data-label="Acciones" class="center">
             <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
               <button data-action="openNoteModal" data-id="${escapeHTML(id)}" data-localidad="${escapeHTML(v.localidad)}" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Notas personales">${noteText ? '📝' : '🗒️'}</button>
-              <button data-action="addToDuel" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="icon-btn icon-btn-duel" title="Añadir a Modo Duelo" style="margin-left:0;">⚔️</button>
+              <button data-action="addToDuel" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Añadir a Modo Duelo">⚔️</button>
               <button class="pref-remove" data-id="${id}" title="Eliminar de preferencias" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;">❌</button>
             </div>
           </td>
@@ -764,7 +764,7 @@ function renderVacantes() {
           <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
             <button class="fav-btn ${favClass}" data-id="${escapeHTML(v._id)}" title="Añadir a favoritos">${favStar}</button>
             <button data-action="openNoteModal" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Notas personales">${noteText ? '📝' : '🗒️'}</button>
-            <button data-action="addToDuel" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" class="icon-btn icon-btn-duel" title="Añadir a Modo Duelo" style="margin-left:0;">⚔️</button>
+            <button data-action="addToDuel" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Añadir a Modo Duelo">⚔️</button>
           </div>
         </td>
         ${matchDisplay}
