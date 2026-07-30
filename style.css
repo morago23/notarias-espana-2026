@@ -820,3 +820,65 @@ mark {
     display: none !important;
   }
 }
+
+/* RESPONSIVE TABLE FOR MOBILE (CARDS) */
+@media (max-width: 768px) {
+  .styled-table thead {
+    display: none;
+  }
+  
+  .styled-table, .styled-table tbody, .styled-table tr, .styled-table td {
+    display: block;
+    width: 100%;
+  }
+  
+  .styled-table tr {
+    margin-bottom: 16px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-surface);
+    overflow: hidden;
+    padding: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  
+  .styled-table td {
+    text-align: right;
+    padding-left: 45%;
+    position: relative;
+    border: none;
+    border-bottom: 1px solid var(--color-border);
+    min-height: 40px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .styled-table td:last-child {
+    border-bottom: none;
+  }
+  
+  .styled-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40%;
+    padding-right: 10px;
+    text-align: left;
+    font-weight: bold;
+    color: var(--color-text-muted);
+    font-size: 13px;
+  }
+  
+  /* Ajustar wrappers para el layout de tarjeta */
+  .styled-table .loc-wrapper, .styled-table .geo-wrapper {
+    align-items: flex-end !important;
+  }
+  
+  /* Asegurar que las celdas con flex/center sigan funcionando */
+  .styled-table td.center {
+    justify-content: flex-end;
+  }
+}
