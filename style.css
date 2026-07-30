@@ -753,13 +753,13 @@ mark {
   background: rgba(0,0,0,0.8);
 }
 
-.modal-body {
+.town-modal-body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
 }
 @media (max-width: 768px) {
-  .modal-body {
+  .town-modal-body {
     grid-template-columns: 1fr;
   }
 }
