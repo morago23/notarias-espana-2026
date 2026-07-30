@@ -852,3 +852,16 @@ mark {
   }
 }
 
+
+.town-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.town-link:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
