@@ -1270,7 +1270,6 @@ window.openTownModal = async function(localidad, provincia) {
   const mapIframe = document.getElementById('town-modal-map');
   const popBadge = document.getElementById('town-modal-pop');
   const rentaBadge = document.getElementById('town-modal-renta');
-  const weatherBadge = document.getElementById('town-modal-weather');
 
   // Clean locality for better search (remove text in parentheses)
   const locClean = localidad.replace(/\s*\([^)]*\)/g, '').trim();
