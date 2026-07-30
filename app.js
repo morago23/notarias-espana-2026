@@ -1560,10 +1560,10 @@ function calculateMatchScores() {
   DATA_VACANTES.forEach(v => {
     const renta = (getRenta(v.localidad, v.provincia)) ? getRenta(v.localidad, v.provincia) : 0;
     if (renta > maxRenta) maxRenta = renta;
-    if (v.poblacion && v.poblacion > maxPob) maxPob = v.poblacion;
-    if (v.distCosta && v.distCosta > maxCosta) maxCosta = v.distCosta;
-    if (v.distMontana && v.distMontana > maxMontana) maxMontana = v.distMontana;
-    if (v.distancia && v.distancia > maxDist) maxDist = v.distancia;
+    if (v.poblacion !== null && v.poblacion !== undefined && v.poblacion > maxPob) maxPob = v.poblacion;
+    if (v.distCosta !== null && v.distCosta !== undefined && v.distCosta > maxCosta) maxCosta = v.distCosta;
+    if (v.distMontana !== null && v.distMontana !== undefined && v.distMontana > maxMontana) maxMontana = v.distMontana;
+    if (v.distancia !== null && v.distancia !== undefined && v.distancia > maxDist) maxDist = v.distancia;
   });
 
   // Calculate scores
@@ -1591,13 +1591,18 @@ function calculateMatchScores() {
     const sMorrina = (v.distancia !== null && maxDist > 0) ? (1 - (v.distancia / maxDist)) : 0;
 
     let totalScore = 0;
-    let totalWeights = wAmbicion + wCosta + wMontana + urbaWeight + (state.userCoords ? wMorrina : 0);
+    let totalWeights = wAmbicion + wCosta + wMontana + urbaWeight;
+    
+    // Only add Morriña weight if distance is available
+    if (state.userCoords && v.distancia !== null && v.distancia !== undefined) {
+      totalWeights += wMorrina;
+    }
     
     totalScore += wAmbicion * sAmbicion;
     totalScore += wCosta * sCosta;
     totalScore += wMontana * sMontana;
     totalScore += urbaWeight * sUrba;
-    if (state.userCoords) {
+    if (state.userCoords && v.distancia !== null && v.distancia !== undefined) {
       totalScore += wMorrina * sMorrina;
     }
 

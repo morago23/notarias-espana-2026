@@ -334,8 +334,11 @@ body {
   color: var(--color-text-muted);
 }
 
-.table th.sorted-asc span { content: '↑'; color: var(--color-accent); }
-.table th.sorted-desc span { content: '↓'; color: var(--color-accent); }
+.table th.sortable span { display: inline-block; }
+.table th.sorted-asc span { font-size: 0; }
+.table th.sorted-asc span::after { content: '↑'; font-size: 13px; color: var(--color-accent); }
+.table th.sorted-desc span { font-size: 0; }
+.table th.sorted-desc span::after { content: '↓'; font-size: 13px; color: var(--color-accent); }
 
 .table tbody tr {
   transition: background-color 0.15s ease;
@@ -749,3 +752,15 @@ mark {
 .modal-close:hover {
   background: rgba(0,0,0,0.8);
 }
+
+.modal-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+@media (max-width: 768px) {
+  .modal-body {
+    grid-template-columns: 1fr;
+  }
+}
+
