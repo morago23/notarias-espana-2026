@@ -910,13 +910,15 @@ async function haversines(skipGeocode = false) {
         
         batch.forEach((item, index) => {
           // index + 1 porque el indice 0 es el propio origen
-          const osrmDist = distances[index + 1] / 1000;
-          const osrmDur = durations[index + 1];
+          const osrmDist = distances[index + 1] ? distances[index + 1] / 1000 : 0;
+          const osrmDur = durations[index + 1] || 0;
           const havDist = haversine(state.userCoords.lat, state.userCoords.lon, item.c.lat, item.c.lon);
           
-          // Si OSRM da un tiempo excesivo (> 14 horas) o una velocidad media bajísima en distancias largas (sugiriendo un ferry largo),
-          // o si es a Canarias/Baleares desde la península, mostramos la distancia en línea recta y quitamos el tiempo.
-          const isFerryOrFarIsland = osrmDur > 50400 || (osrmDur > 0 && (osrmDist / (osrmDur/3600)) < 50 && havDist > 200);
+          const destIsOffMainland = item.v.comunidad && ['Canarias', 'Baleares', 'Ceuta', 'Melilla'].some(c => item.v.comunidad.includes(c));
+          
+          // Si OSRM no encuentra ruta (osrmDur == 0), o es una ruta larguísima (> 14 horas),
+          // o es hacia/desde una isla/enclave y la distancia en línea recta es mayor a 150km (implicando avión/barco)
+          const isFerryOrFarIsland = osrmDur === 0 || osrmDur > 50400 || (destIsOffMainland && havDist > 150);
 
           if (isFerryOrFarIsland) {
             item.v.distancia = havDist;
