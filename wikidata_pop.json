@@ -1,0 +1,13 @@
+{
+  "head": {
+    "vars": [
+      "townLabel",
+      "provinceLabel",
+      "year",
+      "population"
+    ]
+  },
+  "results": {
+    "bindings": []
+  }
+}

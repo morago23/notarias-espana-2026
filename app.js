@@ -30,6 +30,7 @@ function initPreferencias() {
   });
   
   document.getElementById('export-csv-btn').addEventListener('click', exportToCSV);
+  document.getElementById('export-vacantes-btn').addEventListener('click', exportFilteredVacantesCSV);
 
   // Distances for Prefs tab
   document.getElementById('distance-btn-pref').addEventListener('click', () => {
@@ -1269,6 +1270,7 @@ window.openTownModal = async function(localidad, provincia) {
   const idealistaBtn = document.getElementById('town-modal-fotocasa-btn');
   const mapIframe = document.getElementById('town-modal-map');
   const popBadge = document.getElementById('town-modal-pop');
+  const evolBadge = document.getElementById('town-modal-evol');
   const rentaBadge = document.getElementById('town-modal-renta');
 
   // Clean locality for better search (remove text in parentheses)
@@ -1318,9 +1320,27 @@ window.openTownModal = async function(localidad, provincia) {
 
   const pob = typeof getPoblacion === 'function' ? getPoblacion(localidad, provincia) : null;
   popBadge.textContent = pob ? `👥 ${formatPoblacion(pob)}` : '👥 -- hab.';
+
+  if (typeof DATA_EVOLUCION_POB !== 'undefined' && DATA_EVOLUCION_POB[unnormId]) {
+    const ev = DATA_EVOLUCION_POB[unnormId];
+    const icon = ev.crecimiento >= 0 ? '📈' : '📉';
+    const sign = ev.crecimiento > 0 ? '+' : '';
+    evolBadge.textContent = `${icon} ${sign}${ev.crecimiento}% (10 años)`;
+    evolBadge.style.display = 'inline-block';
+    // Colores dinámicos
+    if (ev.crecimiento > 5) {
+      evolBadge.style.background = '#dcfce7'; evolBadge.style.color = '#166534'; // verde
+    } else if (ev.crecimiento < -5) {
+      evolBadge.style.background = '#fee2e2'; evolBadge.style.color = '#991b1b'; // rojo
+    } else {
+      evolBadge.style.background = '#f3f4f6'; evolBadge.style.color = '#374151'; // gris neutral
+    }
+  } else {
+    evolBadge.style.display = 'none';
+  }
   
   if (getRenta(localidad, provincia)) {
-    rentaBadge.textContent = `💰 ${getRenta(localidad, provincia).toLocaleString('es-ES')} €`;
+    rentaBadge.textContent = `💰 Renta media: ${getRenta(localidad, provincia).toLocaleString('es-ES')} €`;
     rentaBadge.style.display = 'inline-block';
   } else {
     rentaBadge.style.display = 'none';
@@ -1703,3 +1723,46 @@ document.getElementById('ai-search-input')?.addEventListener('keypress', (e) => 
     document.getElementById('ai-search-btn').click();
   }
 });
+
+function exportFilteredVacantesCSV() {
+  if (!state.vacantesFiltered || state.vacantesFiltered.length === 0) {
+    alert("No hay plazas para exportar con los filtros actuales.");
+    return;
+  }
+
+  let csvContent = "\uFEFF"; // BOM for Excel compatibility
+  csvContent += "Comunidad;Provincia;Localidad / Plaza;Motivo;Categoría;Notario Anterior;Distancia (km);Match Score\n";
+
+  state.vacantesFiltered.forEach((v) => {
+    let notarioAnt = v.anteriorNotario || "";
+    if (!notarioAnt) {
+      const notarioMatch = v.localidad.match(/\((Don|Doña)[^)]+\)/);
+      if (notarioMatch) notarioAnt = notarioMatch[0].replace(/[()]/g, '');
+    }
+
+    const loc = v.localidad.replace(/\s*\([^)]+\)/, '').trim();
+    const dist = v.distancia !== null && v.distancia !== undefined ? v.distancia.toFixed(1).replace('.', ',') : "";
+    const match = v.matchScore !== undefined ? v.matchScore : "";
+
+    const row = [
+      `"${v.comunidad}"`,
+      `"${v.provincia}"`,
+      `"${loc}"`,
+      `"${v.clase}"`,
+      `"${v.categoria}"`,
+      `"${notarioAnt}"`,
+      `"${dist}"`,
+      `"${match}"`
+    ];
+    csvContent += row.join(";") + "\n";
+  });
+
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.setAttribute("href", url);
+  link.setAttribute("download", "plazas_filtradas.csv");
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}

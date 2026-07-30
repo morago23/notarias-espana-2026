@@ -126,6 +126,7 @@
         </select>
         <button id="filter-favoritos" class="action-btn-secondary">⭐ Ver Favoritos</button>
         <button id="toggle-advanced-filters" class="action-btn-secondary" style="background-color: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text);">⚙️ Filtros Avanzados</button>
+        <button id="export-vacantes-btn" class="action-btn-secondary" style="background-color: var(--color-surface); border: 1px solid #10b981; color: #10b981;">📊 Exportar a Excel</button>
         <button id="toggle-match-panel" class="action-btn" style="background-color: #ec4899; border-color: #ec4899; color: white;">❤️ Match Score</button>
       </div>
 
@@ -386,6 +387,7 @@
         <div>
           <div id="town-modal-stats" style="display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap;">
             <span class="badge" id="town-modal-pop" style="background:#e3f2fd; color:#0d47a1; font-size:13px;">👥 -- hab.</span>
+            <span class="badge" id="town-modal-evol" style="background:#f3e8ff; color:#7e22ce; font-size:13px; display:none;">📈 -- %</span>
             <span class="badge" id="town-modal-renta" style="background:#e8f5e9; color:#1b5e20; font-size:13px; display:none;">💰 -- €</span>
           </div>
           
@@ -409,9 +411,9 @@
 
   <script src="geo_poi.js"></script>
   <script src="renta.js"></script>
-  <script src="coords.js"></script>
-  <script src="poblacion.js"></script>
   <script src="data.js"></script>
+  <script src="poblacion.js"></script>
+  <script src="evolucion_pob.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
