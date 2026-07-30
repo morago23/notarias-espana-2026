@@ -1839,13 +1839,17 @@ document.getElementById('duel-cancel-btn').addEventListener('click', () => {
   updateDuelBar();
 });
 
-document.getElementById('close-duel-modal').addEventListener('click', () => {
-  document.getElementById('duel-modal').style.display = 'none';
+document.getElementById('close-duel-page-btn').addEventListener('click', () => {
+  document.getElementById('duel-page').style.display = 'none';
+  document.body.style.overflow = 'auto'; // Restaurar scroll
 });
 
-// Close duel modal if clicking outside content
-document.getElementById('duel-modal').addEventListener('click', (e) => {
-  if (e.target.id === 'duel-modal') document.getElementById('duel-modal').style.display = 'none';
+// Close duel modal si por alguna razon clicamos en el fondo
+document.getElementById('duel-page').addEventListener('click', (e) => {
+  if (e.target.id === 'duel-page') {
+    document.getElementById('duel-page').style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
 });
 
 function openDuelModal() {
@@ -1939,5 +1943,6 @@ function openDuelModal() {
   
   document.getElementById('duel-stats-container').innerHTML = html;
   
-  document.getElementById('duel-modal').style.display = 'flex';
+  document.getElementById('duel-page').style.display = 'block';
+  document.body.style.overflow = 'hidden'; // Evitar scroll del fondo
 }

@@ -420,29 +420,27 @@
     <button id="duel-cancel-btn" class="action-btn-secondary" style="padding:6px 12px; font-size:12px; margin-left:10px;">Cancelar</button>
   </div>
 
-  <!-- MODO DUELO MODAL -->
-  <div id="duel-modal" class="modal-overlay" style="display:none; z-index:200;">
-    <div class="modal-content" style="max-width: 900px; width: 95%; max-height: 90vh; overflow-y: auto;">
-      <button id="close-duel-modal" class="modal-close">&times;</button>
-      <div style="padding: 24px;">
-        <h2 style="text-align:center; color:var(--color-primary); margin-top:0; margin-bottom:24px;">⚔️ Duelo de Plazas</h2>
-        
-        <!-- Cabecera del Duelo -->
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--color-border);">
-          <div style="flex: 1; text-align: center; padding-right: 8px;">
-            <h3 id="duel-title-1" style="margin:0; color:var(--color-primary); font-size: 18px; line-height: 1.2;"></h3>
-            <p id="duel-sub-1" style="margin:4px 0 0; font-size:12px; color:var(--color-text-muted);"></p>
-          </div>
-          <div style="padding: 0 8px; font-weight: bold; color: #cbd5e1; font-size: 20px; font-style: italic; margin-top: -2px;">VS</div>
-          <div style="flex: 1; text-align: center; padding-left: 8px;">
-            <h3 id="duel-title-2" style="margin:0; color:var(--color-primary); font-size: 18px; line-height: 1.2;"></h3>
-            <p id="duel-sub-2" style="margin:4px 0 0; font-size:12px; color:var(--color-text-muted);"></p>
-          </div>
+  <!-- MODO DUELO FULL PAGE -->
+  <div id="duel-page" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:var(--color-bg); z-index:9999; overflow-y:auto;">
+    <div style="background:var(--color-surface); padding:16px 24px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 2px 10px rgba(0,0,0,0.1); position:sticky; top:0; z-index:10;">
+      <h1 style="margin:0; font-size:20px; color:var(--color-primary);">⚔️ Modo Duelo</h1>
+      <button id="close-duel-page-btn" class="btn action-btn-secondary" style="padding:8px 16px;">Cerrar Duelo</button>
+    </div>
+    
+    <div style="max-width: 800px; margin: 24px auto; padding: 0 16px; padding-bottom:80px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid var(--color-border);">
+        <div style="flex: 1; text-align: right; padding-right: 12px; word-break: break-word;">
+          <h2 id="duel-title-1" style="margin:0; color:var(--color-primary); font-size: clamp(18px, 5vw, 28px); line-height: 1.2;"></h2>
+          <p id="duel-sub-1" style="margin:4px 0 0; font-size:13px; color:var(--color-text-muted);"></p>
         </div>
-
-        <!-- Contenedor de Estadísticas -->
-        <div id="duel-stats-container" style="display:flex; flex-direction:column; gap:12px; max-width: 600px; margin: 0 auto;"></div>
+        <div style="padding: 0 4px; font-weight: bold; color: var(--color-accent); font-size: 28px; font-style: italic; line-height: 1;">VS</div>
+        <div style="flex: 1; text-align: left; padding-left: 12px; word-break: break-word;">
+          <h2 id="duel-title-2" style="margin:0; color:var(--color-primary); font-size: clamp(18px, 5vw, 28px); line-height: 1.2;"></h2>
+          <p id="duel-sub-2" style="margin:4px 0 0; font-size:13px; color:var(--color-text-muted);"></p>
+        </div>
       </div>
+      
+      <div id="duel-stats-container" style="display:flex; flex-direction:column; gap:16px;"></div>
     </div>
   </div>
 
