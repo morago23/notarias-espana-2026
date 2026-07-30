@@ -3,9 +3,9 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.DEEPSEEK_API_KEY;
   if (!apiKey) {
-    return res.status(500).json({ error: 'GEMINI_API_KEY no está configurada.' });
+    return res.status(500).json({ error: 'DEEPSEEK_API_KEY no está configurada.' });
   }
 
   try {
@@ -37,28 +37,28 @@ RESPONDE EXCLUSIVAMENTE EN FORMATO JSON EXACTO:
 }
 NO añadas comillas invertidas (\`\`\`) ni markdown, SOLO devuelve el JSON válido.`;
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`, {
+    const response = await fetch('https://api.deepseek.com/chat/completions', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: {
-          temperature: 0.2,
-          response_mime_type: "application/json"
-        }
+        model: 'deepseek-chat',
+        messages: [{ role: 'user', content: prompt }],
+        temperature: 0.2,
+        response_format: { type: 'json_object' }
       })
     });
 
     const data = await response.json();
     
     if (!response.ok) {
-      console.error('Gemini API Error:', data);
-      return res.status(500).json({ error: 'Error comunicando con Gemini', details: data });
+      console.error('Deepseek API Error:', data);
+      return res.status(500).json({ error: 'Error comunicando con Deepseek', details: data });
     }
 
-    let resultText = data.candidates[0].content.parts[0].text.trim();
+    let resultText = data.choices[0].message.content.trim();
     // Remover backticks de markdown si la IA los incluye
     if (resultText.startsWith('```')) {
       resultText = resultText.replace(/^```(?:json)?\n?/i, '').replace(/\n?```$/, '');
