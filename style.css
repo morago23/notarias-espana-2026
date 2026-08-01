@@ -571,6 +571,9 @@ mark {
 
 /* Mobile Adjustments */
 @media (max-width: 768px) {
+  .header {
+    position: relative;
+  }
   .tabs {
     display: grid;
     grid-template-columns: 1fr 1fr;
