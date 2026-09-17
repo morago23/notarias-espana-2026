@@ -12954,5 +12954,29 @@ const DATA_VACANTES = [
     "clase": "Jubilación",
     "notas": "Vacante",
     "anteriorNotario": "Luis Fort López-Barajas"
+  },
+  {
+    "comunidad": "Comunidad de Madrid",
+    "provincia": "Madrid",
+    "localidad": "Madrid (Don Miguel Vicente-Almazán Pérez de Petinto)",
+    "clase": "Jubilación",
+    "notas": "Vacante",
+    "anteriorNotario": "Miguel Vicente-Almazán Pérez de Petinto"
+  },
+  {
+    "comunidad": "Comunidad de Madrid",
+    "provincia": "Madrid",
+    "localidad": "Alcorcón (Don Alfonso García-Perrote Latorre)",
+    "clase": "Excedencia",
+    "notas": "Vacante",
+    "anteriorNotario": "Alfonso García-Perrote Latorre"
+  },
+  {
+    "comunidad": "Comunidad de Madrid",
+    "provincia": "Madrid",
+    "localidad": "Madrid (Don Juan Carlos Ureta Domingo)",
+    "clase": "Jubilación",
+    "notas": "Vacante",
+    "anteriorNotario": "Juan Carlos Ureta Domingo"
   }
 ];
