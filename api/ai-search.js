@@ -41,7 +41,7 @@ CONSULTA DEL USUARIO:
 
 INSTRUCCIONES CRÍTICAS:
 1. Comprende los criterios del usuario con precisión matemática. Si pide "menos de 45 minutos", filtra estrictamente por minutosCoche < 45. Si odia una comunidad, exclúyela.
-2. Si el usuario pide ORDENAR toda la lista (ej. "ordéname las plazas", "hazme una lista"), DEBES devolver TODOS los IDs (o todos los que cumplan sus filtros) ordenados secuencialmente según sus prioridades. NO te limites a 10 resultados en este caso, devuelve todos los necesarios (hasta los 207 si hace falta).
+2. Si el usuario pide ORDENAR toda la lista (ej. "ordéname las plazas", "hazme una lista"), DEBES devolver TODOS los IDs (o todos los que cumplan sus filtros) ordenados secuencialmente según sus prioridades. NO te limites a 10 resultados en este caso, devuelve todos los necesarios.
 3. Si la petición es solo una búsqueda genérica (ej. "dime pueblos con playa"), puedes devolver los mejores (ej. top 10 o 20).
 4. Explica brevemente (2-3 frases) la lógica exacta que has aplicado para filtrar y ordenar.
 
