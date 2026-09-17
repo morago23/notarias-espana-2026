@@ -85,12 +85,40 @@ NO añadas markdown (\`\`\`), SOLO devuelve el JSON válido.`;
       }
     }
     
+    let resultText = '';
+    
     if (!response.ok) {
-      console.error('Gemini API Error:', data);
-      return res.status(500).json({ error: 'Error comunicando con Gemini', details: data });
+      console.warn('Gemini API falló, activando fallback a DeepSeek:', data);
+      
+      const dsKey = process.env.DEEPSEEK_API_KEY;
+      if (!dsKey) {
+        return res.status(500).json({ error: 'Gemini falló y DEEPSEEK_API_KEY no está configurada', details: data });
+      }
+      
+      const dsResponse = await fetch('https://api.deepseek.com/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${dsKey}`
+        },
+        body: JSON.stringify({
+          model: 'deepseek-chat',
+          messages: [{ role: 'user', content: prompt }],
+          temperature: 0.1,
+          response_format: { type: 'json_object' }
+        })
+      });
+      
+      const dsData = await dsResponse.json();
+      if (!dsResponse.ok) {
+        console.error('DeepSeek fallback failed:', dsData);
+        return res.status(500).json({ error: 'Ambas IAs (Gemini y DeepSeek) están saturadas o han fallado', gemini_details: data, deepseek_details: dsData });
+      }
+      
+      resultText = dsData.choices[0].message.content.trim();
+    } else {
+      resultText = data.candidates[0].content.parts[0].text.trim();
     }
-
-    let resultText = data.candidates[0].content.parts[0].text.trim();
     // Remover backticks de markdown si la IA los incluye
     if (resultText.startsWith('```')) {
       resultText = resultText.replace(/^```(?:json)?\n?/i, '').replace(/\n?```$/, '');
