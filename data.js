@@ -12862,7 +12862,7 @@ const DATA_VACANTES = [
   {
     "comunidad": "Andalucía",
     "provincia": "Jaén",
-    "localidad": "Jaén (Don Alfonso Argüelles Luis)",
+    "localidad": "Jaén",
     "clase": "Jubilación",
     "notas": "Vacante",
     "anteriorNotario": "Alfonso Argüelles Luis"
@@ -12870,7 +12870,7 @@ const DATA_VACANTES = [
   {
     "comunidad": "Andalucía",
     "provincia": "Málaga",
-    "localidad": "Marbella (Don Miguel Ángel de la Fuente del Real)",
+    "localidad": "Marbella",
     "clase": "Jubilación",
     "notas": "Vacante",
     "anteriorNotario": "Miguel Ángel de la Fuente del Real"
@@ -12878,7 +12878,7 @@ const DATA_VACANTES = [
   {
     "comunidad": "Castilla-La Mancha",
     "provincia": "Guadalajara",
-    "localidad": "Azuqueca de Henares (Doña Macrina García Moreno)",
+    "localidad": "Azuqueca de Henares",
     "clase": "Jubilación voluntaria",
     "notas": "Vacante",
     "anteriorNotario": "Macrina García Moreno"
@@ -12886,7 +12886,7 @@ const DATA_VACANTES = [
   {
     "comunidad": "Comunidad de Madrid",
     "provincia": "Madrid",
-    "localidad": "Humanes de Madrid (Don Miguel Enrique Estella Garbayo)",
+    "localidad": "Humanes de Madrid",
     "clase": "Jubilación",
     "notas": "Vacante",
     "anteriorNotario": "Miguel Enrique Estella Garbayo"
@@ -12894,7 +12894,7 @@ const DATA_VACANTES = [
   {
     "comunidad": "Comunidad de Madrid",
     "provincia": "Madrid",
-    "localidad": "Madrid (Don Ricardo Isaías Pérez Ballarín)",
+    "localidad": "Madrid",
     "clase": "Jubilación",
     "notas": "Vacante",
     "anteriorNotario": "Ricardo Isaías Pérez Ballarín"
@@ -12902,7 +12902,7 @@ const DATA_VACANTES = [
   {
     "comunidad": "Galicia",
     "provincia": "A Coruña",
-    "localidad": "A Coruña (Don José Manuel Lois Puente)",
+    "localidad": "A Coruña",
     "clase": "Jubilación",
     "notas": "Vacante",
     "anteriorNotario": "José Manuel Lois Puente"
@@ -12910,7 +12910,7 @@ const DATA_VACANTES = [
   {
     "comunidad": "Región de Murcia",
     "provincia": "Murcia",
-    "localidad": "San Javier (Don Pedro Facundo Garré Navarro)",
+    "localidad": "San Javier",
     "clase": "Jubilación",
     "notas": "Vacante",
     "anteriorNotario": "Pedro Facundo Garré Navarro"
@@ -12918,7 +12918,7 @@ const DATA_VACANTES = [
   {
     "comunidad": "Comunitat Valenciana",
     "provincia": "València/Valencia",
-    "localidad": "Valencia (Don Alfonso Pascual de Miguel)",
+    "localidad": "Valencia",
     "clase": "Jubilación",
     "notas": "Vacante",
     "anteriorNotario": "Alfonso Pascual de Miguel"
@@ -12926,7 +12926,7 @@ const DATA_VACANTES = [
   {
     "comunidad": "Comunitat Valenciana",
     "provincia": "Alicante/Alacant",
-    "localidad": "Torrevieja (Don José Julio Barrenechea García)",
+    "localidad": "Torrevieja",
     "clase": "Jubilación",
     "notas": "Vacante",
     "anteriorNotario": "José Julio Barrenechea García"
@@ -12934,7 +12934,7 @@ const DATA_VACANTES = [
   {
     "comunidad": "Principado de Asturias",
     "provincia": "Asturias",
-    "localidad": "Oviedo (Don Juan Antonio Escudero García)",
+    "localidad": "Oviedo",
     "clase": "Jubilación",
     "notas": "Vacante",
     "anteriorNotario": "Juan Antonio Escudero García"
@@ -12942,7 +12942,7 @@ const DATA_VACANTES = [
   {
     "comunidad": "Comunidad de Madrid",
     "provincia": "Madrid",
-    "localidad": "Madrid (Don Juan Manuel Lozano Carreras)",
+    "localidad": "Madrid",
     "clase": "Jubilación",
     "notas": "Vacante",
     "anteriorNotario": "Juan Manuel Lozano Carreras"
@@ -12950,7 +12950,7 @@ const DATA_VACANTES = [
   {
     "comunidad": "Cataluña",
     "provincia": "Barcelona",
-    "localidad": "Sant Cugat del Vallès (Don Luis Fort López-Barajas)",
+    "localidad": "Sant Cugat del Vallès",
     "clase": "Jubilación",
     "notas": "Vacante",
     "anteriorNotario": "Luis Fort López-Barajas"
@@ -12958,7 +12958,7 @@ const DATA_VACANTES = [
   {
     "comunidad": "Comunidad de Madrid",
     "provincia": "Madrid",
-    "localidad": "Madrid (Don Miguel Vicente-Almazán Pérez de Petinto)",
+    "localidad": "Madrid",
     "clase": "Jubilación",
     "notas": "Vacante",
     "anteriorNotario": "Miguel Vicente-Almazán Pérez de Petinto"
@@ -12966,7 +12966,7 @@ const DATA_VACANTES = [
   {
     "comunidad": "Comunidad de Madrid",
     "provincia": "Madrid",
-    "localidad": "Alcorcón (Don Alfonso García-Perrote Latorre)",
+    "localidad": "Alcorcón",
     "clase": "Excedencia",
     "notas": "Vacante",
     "anteriorNotario": "Alfonso García-Perrote Latorre"
@@ -12974,7 +12974,7 @@ const DATA_VACANTES = [
   {
     "comunidad": "Comunidad de Madrid",
     "provincia": "Madrid",
-    "localidad": "Madrid (Don Juan Carlos Ureta Domingo)",
+    "localidad": "Madrid",
     "clase": "Jubilación",
     "notas": "Vacante",
     "anteriorNotario": "Juan Carlos Ureta Domingo"

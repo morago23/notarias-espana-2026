@@ -67,12 +67,7 @@ function renderPreferencias() {
       const badgeClass = v.clase.startsWith('Jubilación') ? 'badge-jubilacion' : v.clase === 'Resulta' ? 'badge-resulta' : v.clase === 'Excedencia' ? 'badge-excedencia' : 'badge-desierta';
       const badgeCat = v.categoria === 'Primera' ? 'badge-primera' : v.categoria === 'Segunda' ? 'badge-segunda' : v.categoria === 'Tercera' ? 'badge-tercera' : '';
       
-      let notarioAnt = v.anteriorNotario || "";
-      if (!notarioAnt) {
-        const notarioMatch = v.localidad.match(/\((Don|Doña)[^)]+\)/);
-        if (notarioMatch) notarioAnt = notarioMatch[0].replace(/[()]/g, '');
-      }
-      if (!notarioAnt) notarioAnt = "-";
+      let notarioAnt = v.anteriorNotario || "-";
 
        const noteText = typeof getNoteForId === 'function' ? getNoteForId(id) : '';
        const noteIndicator = noteText ? `<span title="${escapeHTML(noteText)}" style="cursor:help; font-size:11px; color:var(--color-primary);"> 📝</span>` : '';
@@ -220,15 +215,10 @@ function highlightText(text, query) {
 const vacantesSet = new Set();
 const seenIds = new Set();
 DATA_VACANTES.forEach(v => {
-  const locRaw = v.localidad || '';
-  v.locClean = locRaw.replace(/\s*\([^)]*\)/g, '').trim();
+  const locClean = (v.localidad || '').trim();
+  v.locClean = locClean;
   
-  const matchAnt = locRaw.match(/\((Don|Doña)[^)]+\)/);
-  if (!v.anteriorNotario) {
-    v.anteriorNotario = matchAnt ? matchAnt[0].replace(/[()]/g, '') : null;
-  }
-
-  const baseKey = normalize(v.locClean) + '|' + normalize(v.provincia);
+  const baseKey = normalize(locClean) + '|' + normalize(v.provincia);
   let finalId = baseKey;
   let counter = 2;
   while (seenIds.has(finalId)) {
@@ -744,12 +734,7 @@ function renderVacantes() {
     const badgeClass = isJubilacion ? 'badge-jubilacion' : v.clase === 'Resulta' ? 'badge-resulta' : v.clase === 'Excedencia' ? 'badge-excedencia' : 'badge-desierta';
     const badgeCat = v.categoria === 'Primera' ? 'badge-primera' : v.categoria === 'Segunda' ? 'badge-segunda' : 'badge-tercera';
     
-    let notarioAnt = v.anteriorNotario || "";
-    if (!notarioAnt) {
-      const notarioMatch = v.localidad.match(/\((Don|Doña)[^)]+\)/);
-      if (notarioMatch) notarioAnt = notarioMatch[0].replace(/[()]/g, '');
-    }
-    if (!notarioAnt) notarioAnt = "-";
+    let notarioAnt = v.anteriorNotario || "-";
 
     const isFav = favVacantes.has(v._id);
     const favStar = isFav ? '⭐' : '☆';
@@ -1006,12 +991,7 @@ function exportToCSV() {
        return vacId === id;
     });
     if (v) {
-      let notarioAnt = v.anteriorNotario || "";
-      if (!notarioAnt) {
-        const notarioMatch = v.localidad.match(/\((Don|Doña)[^)]+\)/);
-        if (notarioMatch) notarioAnt = notarioMatch[0].replace(/[()]/g, '');
-      }
-
+      let notarioAnt = v.anteriorNotario || "-";
       const loc = v.localidad.replace(/\s*\([^)]+\)/, '').trim();
       const dist = v.distancia !== null && v.distancia !== undefined ? parseFloat(v.distancia.toFixed(1)) : "";
       const mins = v.duration !== null && v.duration !== undefined ? Math.round(v.duration / 60) : "";
@@ -1219,12 +1199,7 @@ function renderMapMarkers() {
       const favStar = isFav ? '⭐' : '☆';
       const favClass = isFav ? 'active' : '';
       
-      let notarioAnt = v.anteriorNotario || "";
-      if (!notarioAnt) {
-        const notarioMatch = v.localidad.match(/\((Don|Doña)[^)]+\)/);
-        if (notarioMatch) notarioAnt = notarioMatch[0].replace(/[()]/g, '');
-      }
-      if (!notarioAnt) notarioAnt = "-";
+      let notarioAnt = v.anteriorNotario || "-";
       
       return `
         <div class="map-popup-item">
@@ -1821,11 +1796,7 @@ function exportFilteredVacantesCSV() {
   ];
 
   state.vacantesFiltered.forEach((v) => {
-    let notarioAnt = v.anteriorNotario || "";
-    if (!notarioAnt) {
-      const notarioMatch = v.localidad.match(/\((Don|Doña)[^)]+\)/);
-      if (notarioMatch) notarioAnt = notarioMatch[0].replace(/[()]/g, '');
-    }
+    let notarioAnt = v.anteriorNotario || "-";
 
     const loc = v.localidad.replace(/\s*\([^)]+\)/, '').trim();
     const dist = v.distancia !== null && v.distancia !== undefined ? parseFloat(v.distancia.toFixed(1)) : "";
