@@ -64,7 +64,7 @@ function renderPreferencias() {
     });
     
     if (v) {
-      const badgeClass = v.clase.startsWith('Jubilación') ? 'badge-jubilacion' : v.clase === 'Resulta' ? 'badge-resulta' : 'badge-desierta';
+      const badgeClass = v.clase.startsWith('Jubilación') ? 'badge-jubilacion' : v.clase === 'Resulta' ? 'badge-resulta' : v.clase === 'Excedencia' ? 'badge-excedencia' : 'badge-desierta';
       const badgeCat = v.categoria === 'Primera' ? 'badge-primera' : v.categoria === 'Segunda' ? 'badge-segunda' : v.categoria === 'Tercera' ? 'badge-tercera' : '';
       
       let notarioAnt = v.anteriorNotario || "";
@@ -218,18 +218,32 @@ function highlightText(text, query) {
 
 // Vacantes matching
 const vacantesSet = new Set();
+const seenIds = new Set();
 DATA_VACANTES.forEach(v => {
   const locRaw = v.localidad || '';
-  const locClean = locRaw.replace(/\s*\([^)]*\)/g, '').trim();
-  const key = normalize(locClean) + '|' + normalize(v.provincia);
-  vacantesSet.add(key);
+  v.locClean = locRaw.replace(/\s*\([^)]*\)/g, '').trim();
+  
+  const matchAnt = locRaw.match(/\((Don|Doña)[^)]+\)/);
+  v.anteriorNotario = matchAnt ? matchAnt[0].replace(/[()]/g, '') : null;
+
+  const baseKey = normalize(v.locClean) + '|' + normalize(v.provincia);
+  let finalId = baseKey;
+  let counter = 2;
+  while (seenIds.has(finalId)) {
+    finalId = baseKey + '|' + counter;
+    counter++;
+  }
+  seenIds.add(finalId);
+  v._id = finalId;
+
+  vacantesSet.add(baseKey);
 
   // Cruzar datos para obtener la categoría (clase de la notaría)
-  let nMatch = DATA_NOTARIAS.find(n => normalize(n.localidad) === normalize(locClean) && normalize(n.provincia) === normalize(v.provincia));
+  let nMatch = DATA_NOTARIAS.find(n => normalize(n.localidad) === normalize(v.locClean) && normalize(n.provincia) === normalize(v.provincia));
   
   if (!nMatch) {
     const provV = normalize(v.provincia);
-    const locV = normalize(locClean).replace(/'/g, '').replace(/’/g, '').replace(/, el$/, '').replace(/, la$/, '').replace(/^el /, '').replace(/^la /, '').replace(/, l$/, '').replace(/^l /, '');
+    const locV = normalize(v.locClean).replace(/'/g, '').replace(/’/g, '').replace(/, el$/, '').replace(/, la$/, '').replace(/^el /, '').replace(/^la /, '').replace(/, l$/, '').replace(/^l /, '');
     
     // Diccionario para casos excepcionales (cambios de idioma oficial vs listado)
     const aliases = {
@@ -264,12 +278,11 @@ DATA_VACANTES.forEach(v => {
 
   v.categoria = nMatch ? nMatch.clase : '-';
   v.numNotarias = nMatch ? parseInt(nMatch.numero) || 1 : 1;
-  const pob = typeof getPoblacion === 'function' ? getPoblacion(v.localidad, v.provincia) : null;
+  const pob = typeof getPoblacion === 'function' ? getPoblacion(v.locClean, v.provincia) : null;
   v.poblacion = pob;
   v.ratioPobNot = pob ? Math.round(pob / v.numNotarias) : 0;
 
-  const unnormId = v.localidad.replace(/\s*\([^)]*\)/g, '').trim() + '|' + v.provincia;
-  v.unnormId = unnormId;
+  v.unnormId = v.locClean + '|' + v.provincia;
   const coords = getCoords(v.localidad, v.provincia);
   if (coords) {
     const lat = coords.lat;
@@ -646,12 +659,8 @@ function filterVacantes() {
   const costaF = document.getElementById('filter-vacante-costa').value;
 
   let filtered = DATA_VACANTES.filter(v => {
-    const locClean = v.localidad.replace(/\s*\([^)]*\)/g, '').trim();
-    const id = normalize(locClean) + '|' + normalize(v.provincia);
-    v._id = id;
-
-    if (state.vacantesOnlyFavs && !favVacantes.has(id)) return false;
-    if (state.aiMatches && !state.aiMatches.includes(id)) return false;
+    if (state.vacantesOnlyFavs && !favVacantes.has(v._id)) return false;
+    if (state.aiMatches && !state.aiMatches.includes(v._id)) return false;
     if (comF && v.comunidad !== comF) return false;
     if (catF && v.categoria !== catF) return false;
     if (tipoF) {
@@ -730,7 +739,7 @@ function renderVacantes() {
 
   tbody.innerHTML = page.map(v => {
     const isJubilacion = v.clase.includes('Jubilación');
-    const badgeClass = isJubilacion ? 'badge-jubilacion' : v.clase === 'Resulta' ? 'badge-resulta' : 'badge-desierta';
+    const badgeClass = isJubilacion ? 'badge-jubilacion' : v.clase === 'Resulta' ? 'badge-resulta' : v.clase === 'Excedencia' ? 'badge-excedencia' : 'badge-desierta';
     const badgeCat = v.categoria === 'Primera' ? 'badge-primera' : v.categoria === 'Segunda' ? 'badge-segunda' : 'badge-tercera';
     
     let notarioAnt = v.anteriorNotario || "";
@@ -1203,7 +1212,7 @@ function renderMapMarkers() {
     </div>`;
     
     const listHtml = plazas.map(v => {
-      const badgeClass = v.clase.includes('Jubilación') ? 'badge-jubilacion' : v.clase === 'Resulta' ? 'badge-resulta' : 'badge-desierta';
+      const badgeClass = v.clase.includes('Jubilación') ? 'badge-jubilacion' : v.clase === 'Resulta' ? 'badge-resulta' : v.clase === 'Excedencia' ? 'badge-excedencia' : 'badge-desierta';
       const isFav = favVacantes.has(v._id);
       const favStar = isFav ? '⭐' : '☆';
       const favClass = isFav ? 'active' : '';

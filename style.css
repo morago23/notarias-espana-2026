@@ -20,6 +20,8 @@
   --color-desierta-bg: #ffe4e6;
   --color-jubilacion: #7c3aed; /* Violet 600 */
   --color-jubilacion-bg: #ede9fe;
+  --color-excedencia: #d97706; /* Amber 600 */
+  --color-excedencia-bg: #fef3c7;
   
   --font-family: 'Inter', system-ui, -apple-system, sans-serif;
   --border-radius: 6px;
@@ -51,6 +53,8 @@ body.dark-mode {
   --color-desierta-bg: rgba(251, 113, 133, 0.15);
   --color-jubilacion: #a78bfa; 
   --color-jubilacion-bg: rgba(167, 139, 250, 0.15);
+  --color-excedencia: #fbbf24;
+  --color-excedencia-bg: rgba(251, 191, 36, 0.15);
   
   --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
   --box-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
@@ -409,6 +413,7 @@ body.dark-mode .badge-tercera { background: rgba(148, 163, 184, 0.15); color: #9
 .badge-resulta { background: var(--color-resulta-bg); color: var(--color-resulta); }
 .badge-desierta { background: var(--color-desierta-bg); color: var(--color-desierta); }
 .badge-jubilacion { background: var(--color-jubilacion-bg); color: var(--color-jubilacion); }
+.badge-excedencia { background: var(--color-excedencia-bg); color: var(--color-excedencia); }
 
 .vacante-si {
   color: var(--color-resulta);
@@ -700,6 +705,10 @@ mark {
   border-color: var(--color-desierta);
   color: var(--color-desierta);
 }
+.marker-excedencia {
+  border-color: var(--color-excedencia);
+  color: var(--color-excedencia);
+}
 .marker-mixed {
   border-color: var(--color-primary);
   color: var(--color-primary);
@@ -822,10 +831,10 @@ mark {
 
   /* Mostrar solo la pestaña de Preferencias al imprimir (o la activa) */
   .tab-content {
-    display: block !important;
-  }
-  #tab-mapa, #tab-vacantes {
     display: none !important;
+  }
+  #tab-preferencias {
+    display: block !important;
   }
 
   /* Ajustar tabla para que entre bien */

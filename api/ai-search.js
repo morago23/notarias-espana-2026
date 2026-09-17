@@ -24,7 +24,7 @@ La lista contiene objetos JSON con:
 - l: Localidad
 - p: Provincia
 - c: Comunidad Autónoma
-- clase: Clase de la notaría (1ª, 2ª, 3ª)
+- clase: Motivo de la vacante (Jubilación, Resulta, Desierta, Excedencia)
 - categoria: Categoría de la notaría (1ª, 2ª, 3ª)
 - pob: Población de la localidad
 - dCosta: Distancia a la costa/mar en km (si le gusta el mar, busca valores bajos o 0)

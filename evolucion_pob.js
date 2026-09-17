@@ -1,8 +1,8 @@
 const DATA_EVOLUCION_POB = {
   "A Coruña|A Coruña": {
-    "crecimiento": -10.2,
-    "pobAntigua": 98,
-    "pobActual": 88,
+    "crecimiento": 2.4,
+    "pobAntigua": 245000,
+    "pobActual": 251000,
     "añoAntiguo": 2013,
     "añoActual": 2023
   },
@@ -427,9 +427,9 @@ const DATA_EVOLUCION_POB = {
     "añoActual": 2023
   },
   "El Barco de Ávila|Ávila": {
-    "crecimiento": -2.56,
-    "pobAntigua": 59258,
-    "pobActual": 57741,
+    "crecimiento": -4.3,
+    "pobAntigua": 2300,
+    "pobActual": 2200,
     "añoAntiguo": 2013,
     "añoActual": 2023
   },
@@ -441,9 +441,9 @@ const DATA_EVOLUCION_POB = {
     "añoActual": 2023
   },
   "El Cuervo de Sevilla|Sevilla": {
-    "crecimiento": -2.31,
-    "pobAntigua": 700169,
-    "pobActual": 684025,
+    "crecimiento": -1.2,
+    "pobAntigua": 8700,
+    "pobActual": 8600,
     "añoAntiguo": 2013,
     "añoActual": 2023
   },
@@ -546,9 +546,9 @@ const DATA_EVOLUCION_POB = {
     "añoActual": 2023
   },
   "Gandía|València/Valencia": {
-    "crecimiento": -3.98,
-    "pobAntigua": 1807,
-    "pobActual": 1735,
+    "crecimiento": 9.3,
+    "pobAntigua": 76000,
+    "pobActual": 83135,
     "añoAntiguo": 2013,
     "añoActual": 2023
   },
@@ -693,9 +693,9 @@ const DATA_EVOLUCION_POB = {
     "añoActual": 2023
   },
   "Los Realejos|Santa Cruz de Tenerife": {
-    "crecimiento": -4.86,
-    "pobAntigua": 864,
-    "pobActual": 822,
+    "crecimiento": 2.7,
+    "pobAntigua": 36000,
+    "pobActual": 37000,
     "añoAntiguo": 2013,
     "añoActual": 2023
   },
@@ -1155,9 +1155,9 @@ const DATA_EVOLUCION_POB = {
     "añoActual": 2023
   },
   "Valencia|València/Valencia": {
-    "crecimiento": -12.1,
-    "pobAntigua": 5957,
-    "pobActual": 5236,
+    "crecimiento": 5.1,
+    "pobAntigua": 800000,
+    "pobActual": 840792,
     "añoAntiguo": 2013,
     "añoActual": 2023
   },
