@@ -52,21 +52,38 @@ RESPONDE EXCLUSIVAMENTE EN FORMATO JSON EXACTO:
 }
 NO añadas markdown (\`\`\`), SOLO devuelve el JSON válido.`;
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: {
-          temperature: 0.1,
-          response_mime_type: "application/json"
-        }
-      })
-    });
+    let response;
+    let data;
+    let retries = 3;
+    let backoff = 1000;
+    
+    for (let i = 0; i < retries; i++) {
+      response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: {
+            temperature: 0.1,
+            response_mime_type: "application/json"
+          }
+        })
+      });
 
-    const data = await response.json();
+      data = await response.json();
+      
+      if (response.ok || ![429, 500, 503, 504].includes(response.status)) {
+        break;
+      }
+      
+      console.warn(`Gemini API Error (Retry ${i+1}/${retries}):`, data);
+      if (i < retries - 1) {
+        await new Promise(resolve => setTimeout(resolve, backoff));
+        backoff *= 2;
+      }
+    }
     
     if (!response.ok) {
       console.error('Gemini API Error:', data);
