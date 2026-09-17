@@ -108,6 +108,7 @@ const DATA_POBLACION = {
   "Lora del Río|Sevilla": 18122,
   "Los Realejos|Santa Cruz de Tenerife": 37867,
   "Lumbrales|Salamanca": 1507,
+  "Alcorcón|Madrid": 172845,
   "Madrid|Madrid": 3506730,
   "Maella|Zaragoza": 2158,
   "Marbella|Málaga": 159786,

@@ -113,6 +113,7 @@ const DATA_RENTA = {
   "Los Realejos|Santa Cruz de Tenerife": 10894,
   "Lucena del Cid|Castelló/Castellón": 17615,
   "Lumbrales|Salamanca": 15224,
+  "Alcorcón|Madrid": 15667,
   "Madrid|Madrid": 22779,
   "Maella|Zaragoza": 12738,
   "Marbella|Málaga": 16352,

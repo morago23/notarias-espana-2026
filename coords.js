@@ -479,6 +479,10 @@ const DATA_COORDS = {
     "lat": 40.2508847,
     "lon": -3.8270997
   },
+  "Alcorcón|Madrid": {
+    "lat": 40.3468,
+    "lon": -3.8278
+  },
   "Madrid|Madrid": {
     "lat": 40.4237276,
     "lon": -3.6899043
