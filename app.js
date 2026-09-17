@@ -1722,10 +1722,8 @@ document.getElementById('ai-search-btn')?.addEventListener('click', async () => 
   try {
     // Preparar array ligero
     const vacantesLigero = DATA_VACANTES.map(v => {
-      const locClean = v.localidad.replace(/\s*\([^)]*\)/g, '').trim();
-      const id = normalize(locClean) + '|' + normalize(v.provincia);
       return {
-        _id: id,
+        _id: v._id,
         l: v.localidad,
         p: v.provincia,
         c: v.comunidad,
