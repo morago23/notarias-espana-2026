@@ -1484,7 +1484,8 @@ document.getElementById('note-modal-delete').addEventListener('click', () => {
 document.getElementById('share-profile-btn').addEventListener('click', () => {
   const profileData = {
     f: favOrder, // favorites order
-    n: userNotes  // notes
+    n: userNotes, // notes
+    d: JSON.parse(localStorage.getItem('userDistData') || 'null') // distance/postal code data
   };
   const json = JSON.stringify(profileData);
   const encoded = btoa(unescape(encodeURIComponent(json)));
@@ -1526,7 +1527,8 @@ document.getElementById('share-modal').addEventListener('click', (e) => {
       // Ask user before overwriting
       const count = profileData.f.length;
       const noteCount = profileData.n ? Object.keys(profileData.n).length : 0;
-      if (confirm(`Se ha detectado un perfil compartido con ${count} plaza(s) favorita(s)${noteCount > 0 ? ` y ${noteCount} nota(s)` : ''}.\n\n¿Quieres importarlo? Esto reemplazará tus favoritos y notas actuales.`)) {
+      const hasDist = profileData.d ? ' y tu configuración de distancias' : '';
+      if (confirm(`Se ha detectado un perfil compartido con ${count} plaza(s) favorita(s)${noteCount > 0 ? `, ${noteCount} nota(s)` : ''}${hasDist}.\n\n¿Quieres importarlo? Esto reemplazará tus preferencias actuales.`)) {
         // Import favorites
         favOrder.length = 0;
         favVacantes.clear();
@@ -1542,15 +1544,21 @@ document.getElementById('share-modal').addEventListener('click', (e) => {
           Object.assign(userNotes, profileData.n);
           localStorage.setItem('userNotes', JSON.stringify(userNotes));
         }
+
+        // Import distances
+        if (profileData.d) {
+          localStorage.setItem('userDistData', JSON.stringify(profileData.d));
+        }
         
         // Clean URL
         history.replaceState(null, '', window.location.pathname);
         
-        // Refresh UI
-        if (typeof filterVacantes === 'function') filterVacantes();
-        if (typeof renderPreferencias === 'function') renderPreferencias();
-        
-        alert('✅ Perfil importado correctamente. Tus favoritos y notas se han sincronizado.');
+        alert('✅ Perfil importado correctamente. Tus preferencias se han sincronizado.');
+        if (profileData.d) location.reload();
+        else {
+          if (typeof filterVacantes === 'function') filterVacantes();
+          if (typeof renderPreferencias === 'function') renderPreferencias();
+        }
       }
     }
     
