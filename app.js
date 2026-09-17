@@ -224,7 +224,9 @@ DATA_VACANTES.forEach(v => {
   v.locClean = locRaw.replace(/\s*\([^)]*\)/g, '').trim();
   
   const matchAnt = locRaw.match(/\((Don|Doña)[^)]+\)/);
-  v.anteriorNotario = matchAnt ? matchAnt[0].replace(/[()]/g, '') : null;
+  if (!v.anteriorNotario) {
+    v.anteriorNotario = matchAnt ? matchAnt[0].replace(/[()]/g, '') : null;
+  }
 
   const baseKey = normalize(v.locClean) + '|' + normalize(v.provincia);
   let finalId = baseKey;
