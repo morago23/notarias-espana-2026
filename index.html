@@ -43,6 +43,7 @@
     <div class="tabs">
       <button class="tab-btn" data-target="tab-notarias">Directorio de Notarías</button>
       <button class="tab-btn active" data-target="tab-vacantes">Plazas Vacantes (Concurso)</button>
+      <button class="tab-btn" data-target="tab-flashcards">Asistente Flashcards 🃏</button>
       <button class="tab-btn" data-target="tab-mapa">Mapa 🗺️</button>
       <button class="tab-btn" data-target="tab-preferencias">Mis Preferencias ⭐</button>
       <button class="tab-btn" data-target="tab-estadisticas">Estadísticas y Gráficos</button>
@@ -326,6 +327,13 @@
       </div>
     </section>
 
+    <!-- ASISTENTE FLASHCARDS -->
+    <section id="tab-flashcards" class="tab-content">
+      <div id="fc-app-container" class="fc-container">
+        <!-- Rendered dynamically by flashcards.js -->
+      </div>
+    </section>
+
   </main>
 
   <footer class="footer">
@@ -448,13 +456,27 @@
     </div>
   </div>
 
+  <!-- INFORME GALO FULL MODAL -->
+  <div id="galo-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-content" style="max-width: 650px;">
+      <button id="close-galo-modal" class="modal-close">&times;</button>
+      <div class="modal-body" style="padding: 24px;">
+        <h2 id="galo-modal-title" style="margin-top: 0; margin-bottom: 4px; color: var(--color-accent); font-size: 22px;">📋 Informe Galo Completo</h2>
+        <p id="galo-modal-subtitle" style="color: var(--color-text-muted); font-size: 14px; margin-top: 0; margin-bottom: 16px;"></p>
+        <div id="galo-modal-content" class="fc-galo-full-text"></div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
   <script src="geo_poi.js"></script>
   <script src="renta.js"></script>
   <script src="coords.js"></script>
   <script src="data.js"></script>
+  <script src="data_galo.js"></script>
   <script src="poblacion.js"></script>
   <script src="evolucion_pob.js"></script>
   <script src="app.js"></script>
+  <script src="flashcards.js"></script>
 </body>
 </html>
