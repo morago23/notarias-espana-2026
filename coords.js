@@ -826,10 +826,81 @@ const DATA_COORDS = {
   "Oviedo|Asturias": {
     "lat": 43.3533452,
     "lon": -5.8795096
-  }
-,
+  },
   "Villahermosa|Ciudad Real": {
     "lat": 38.7490059,
     "lon": -2.8712398
+  },
+  "Alicante/Alacant|Alicante/Alacant": {
+    "lat": 38.3459963,
+    "lon": -0.4906855
+  },
+  "Mérida|Badajoz": {
+    "lat": 38.9161111,
+    "lon": -6.3436111
+  },
+  "Palencia|Palencia": {
+    "lat": 42.00955,
+    "lon": -4.52717
+  },
+  "Madrid-Valdeacederas|Madrid": {
+    "lat": 40.4664,
+    "lon": -3.6975
+  },
+  "Madrid-San Isidro|Madrid": {
+    "lat": 40.3984,
+    "lon": -3.7262
+  },
+  "Madrid-Puerta del Ángel|Madrid": {
+    "lat": 40.4128,
+    "lon": -3.7294
+  },
+  "Zaragoza|Zaragoza": {
+    "lat": 41.6488226,
+    "lon": -0.8890853
+  },
+  "Donostia/San Sebastián|Gipuzkoa/Guipúzcoa": {
+    "lat": 43.318334,
+    "lon": -1.9812313
+  },
+  "Carballo|A Coruña": {
+    "lat": 43.2133,
+    "lon": -8.6892
+  },
+  "San Sebastián de los Reyes|Madrid": {
+    "lat": 40.5474,
+    "lon": -3.6259
+  },
+  "Chiclana de la Frontera|Cádiz": {
+    "lat": 36.4194,
+    "lon": -6.1494
+  },
+  "Tolosa|Gipuzkoa/Guipúzcoa": {
+    "lat": 43.1369,
+    "lon": -2.0789
+  },
+  "Balmaseda|Bizkaia/Vizcaya": {
+    "lat": 43.1958,
+    "lon": -3.1928
+  },
+  "La Pobla del Duc|València/Valencia": {
+    "lat": 38.9044,
+    "lon": -0.4169
+  },
+  "Sabadell|Barcelona": {
+    "lat": 41.5462745,
+    "lon": 2.1086131
+  },
+  "El Masnou|Barcelona": {
+    "lat": 41.4797,
+    "lon": 2.3175
+  },
+  "Berlanga|Badajoz": {
+    "lat": 38.2831,
+    "lon": -5.8292
+  },
+  "Sant Joan de Vilatorrada|Barcelona": {
+    "lat": 41.7455264,
+    "lon": 1.8055068
   }
 };

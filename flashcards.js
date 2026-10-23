@@ -36,11 +36,13 @@ function initFlashcardsApp() {
 
   // Enrich and sort DATA_GALO alphabetically by Comunidad -> Provincia -> Localidad / Plaza
   const items = DATA_GALO.map((raw, idx) => {
+    const numero = (raw['Número'] || '').toString().trim();
     const comunidad = (raw['Comunidad'] || '').trim();
     const provincia = (raw['Provincia'] || '').trim();
     const localidad = (raw['Localidad / Plaza'] || '').trim();
     const motivo = (raw['Motivo'] || '').trim();
     let categoria = (raw['Categoría'] || '').trim();
+    const turno = (raw['Turno'] || '').trim();
     const notarioAnterior = (raw['Notario Anterior'] || '').trim() || '-';
     const informeGalo = (raw['Informe Galo'] || '').trim();
 
@@ -70,6 +72,8 @@ function initFlashcardsApp() {
     return {
       fcId,
       originalIndex: idx,
+      numero,
+      turno,
       comunidad,
       provincia,
       localidad,
@@ -157,10 +161,11 @@ function initFlashcardsApp() {
 
 function findNotariaMatchForGalo(localidad, provincia) {
   const locClean = (localidad || '').replace(/\s*\([^)]*\)/g, '').trim();
-  let nMatch = DATA_NOTARIAS.find(n => normalize(n.localidad) === normalize(locClean) && normalize(n.provincia) === normalize(provincia));
+  const baseLoc = locClean.replace(/^Madrid-.*$/i, 'Madrid').replace(/^Zaragoza-.*$/i, 'Zaragoza');
+  let nMatch = DATA_NOTARIAS.find(n => normalize(n.localidad) === normalize(baseLoc) && normalize(n.provincia) === normalize(provincia));
   if (!nMatch) {
     const provV = normalize(provincia);
-    const locV = normalize(locClean).replace(/'/g, '').replace(/’/g, '').replace(/, el$/, '').replace(/, la$/, '').replace(/^el /, '').replace(/^la /, '').replace(/, l$/, '').replace(/^l /, '');
+    const locV = normalize(baseLoc).replace(/'/g, '').replace(/’/g, '').replace(/, el$/, '').replace(/, la$/, '').replace(/^el /, '').replace(/^la /, '').replace(/, l$/, '').replace(/^l /, '');
     const aliases = {
       'sant mateu': 'san mateo',
       'font de la figuera': 'fuente la higuera',
@@ -248,6 +253,21 @@ function loadFcStateFromStorage() {
   }
 }
 
+function remapFcIdIfNeeded(oldId, usedTargets) {
+  if (fcState.plazas.some(p => p.fcId === oldId)) return oldId;
+  // Format: fc_<idx>_<loc>_<prov>
+  const suffix = String(oldId).replace(/^fc_\d+_/, '');
+  const candidate = fcState.plazas.find(p =>
+    !usedTargets.has(p.fcId) &&
+    `${normalize(p.localidad)}_${normalize(p.provincia)}` === suffix
+  );
+  if (candidate) {
+    usedTargets.add(candidate.fcId);
+    return candidate.fcId;
+  }
+  return null;
+}
+
 function applyImportedFcData(data, showNotification = true) {
   if (!data || typeof data !== 'object') return false;
 
@@ -256,10 +276,36 @@ function applyImportedFcData(data, showNotification = true) {
   fcState.userCoords = data.userCoords || null;
   fcState.locationName = data.locationName || '';
   fcState.currentIndex = typeof data.currentIndex === 'number' ? Math.max(0, Math.min(data.currentIndex, fcState.plazas.length - 1)) : 0;
-  fcState.ratings = data.ratings && typeof data.ratings === 'object' ? data.ratings : {};
-  fcState.groupOrders = data.groupOrders && typeof data.groupOrders === 'object'
-    ? { 1: data.groupOrders[1] || [], 2: data.groupOrders[2] || [], 3: data.groupOrders[3] || [], 4: data.groupOrders[4] || [], 5: data.groupOrders[5] || [] }
-    : { 1: [], 2: [], 3: [], 4: [], 5: [] };
+
+  const rawRatings = data.ratings && typeof data.ratings === 'object' ? data.ratings : {};
+  const mappedRatings = {};
+  const idMap = {};
+  const usedTargets = new Set();
+
+  Object.keys(rawRatings).forEach(oldId => {
+    const newId = remapFcIdIfNeeded(oldId, usedTargets);
+    if (newId) {
+      idMap[oldId] = newId;
+      mappedRatings[newId] = rawRatings[oldId];
+    }
+  });
+  fcState.ratings = mappedRatings;
+
+  if (data.groupOrders && typeof data.groupOrders === 'object') {
+    const mappedGroups = { 1: [], 2: [], 3: [], 4: [], 5: [] };
+    for (let g = 1; g <= 5; g++) {
+      (data.groupOrders[g] || []).forEach(oldId => {
+        const newId = idMap[oldId] || (fcState.plazas.some(p => p.fcId === oldId) ? oldId : null);
+        if (newId && !mappedGroups[g].includes(newId)) {
+          mappedGroups[g].push(newId);
+        }
+      });
+    }
+    fcState.groupOrders = mappedGroups;
+  } else {
+    fcState.groupOrders = { 1: [], 2: [], 3: [], 4: [], 5: [] };
+  }
+
   fcState.currentOrderGroup = data.currentOrderGroup || 1;
   fcState.autoSortApplied = data.autoSortApplied || { 4: null, 5: null };
   fcState.screen = data.screen || 'welcome';
@@ -994,7 +1040,8 @@ function renderFlashcardScreen(ratedCount, totalCount) {
             ${fcState.plazas.map((item, idx) => {
               const r = fcState.ratings[item.fcId];
               const mark = r ? `[${r}] ` : '• ';
-              return `<option value="${idx}" ${idx === fcState.currentIndex ? 'selected' : ''}>${idx + 1}. ${mark}${escapeHTML(item.comunidad)} - ${escapeHTML(item.provincia)} - ${escapeHTML(item.localidad)}</option>`;
+              const numLabel = item.numero ? `Nº ${item.numero} ` : '';
+              return `<option value="${idx}" ${idx === fcState.currentIndex ? 'selected' : ''}>${idx + 1}. ${mark}[${numLabel}] ${escapeHTML(item.comunidad)} - ${escapeHTML(item.provincia)} - ${escapeHTML(item.localidad)}</option>`;
             }).join('')}
           </select>
         </div>
@@ -1018,6 +1065,7 @@ function renderFlashcardScreen(ratedCount, totalCount) {
               </a>
             </h2>
             <div class="fc-card-badges">
+              <span class="badge" style="background:var(--color-primary); color:#fff;">Nº ${escapeHTML(p.numero)}${p.comunidad === 'Cataluña' ? ' (Cat.)' : ' (BOE)'}</span>
               <span class="badge ${badgeMotivo}">${escapeHTML(p.motivo)}</span>
               <span class="badge ${badgeCat}">Cat. ${escapeHTML(p.categoria)}</span>
             </div>
@@ -1026,6 +1074,10 @@ function renderFlashcardScreen(ratedCount, totalCount) {
 
         <!-- Data Grid -->
         <div class="fc-data-grid">
+          <div class="fc-data-item">
+            <span class="fc-data-label">🔢 Nº Convocatoria / Turno</span>
+            <span class="fc-data-value"><strong>Nº ${escapeHTML(p.numero)}</strong> (${p.comunidad === 'Cataluña' ? 'DOGC' : 'BOE'}) · ${escapeHTML(p.turno || '-')}</span>
+          </div>
           <div class="fc-data-item">
             <span class="fc-data-label">👤 Notario Anterior</span>
             <span class="fc-data-value">${escapeHTML(p.notarioAnterior)}</span>
@@ -1196,6 +1248,7 @@ function renderOrderingScreen() {
             <thead>
               <tr>
                 <th class="center" style="width: 90px;">Orden</th>
+                <th class="center" style="width: 80px;">Nº Conv.</th>
                 <th>Provincia</th>
                 <th>Localidad</th>
                 <th class="center">Categoría</th>
@@ -1221,6 +1274,7 @@ function renderOrderingScreen() {
                       <span class="fc-handle-icon">☰</span>
                       <span class="fc-rank-badge" style="background:${groupObj.bg}; color:${groupObj.color};">#${rankOffset + idx + 1}</span>
                     </td>
+                    <td class="center" data-label="Nº Conv."><span class="badge" style="background:var(--color-surface-hover); color:var(--color-text); font-weight:700;">${escapeHTML(p.numero)}${p.comunidad === 'Cataluña' ? ' (Cat)' : ''}</span></td>
                     <td data-label="Provincia">${escapeHTML(p.provincia)}</td>
                     <td data-label="Localidad">
                       <strong>${escapeHTML(p.localidad)}</strong>
@@ -1303,6 +1357,7 @@ function renderFinalScreen() {
           <thead>
             <tr>
               <th class="center">Orden</th>
+              <th class="center">Nº Conv.</th>
               <th class="center">Valoración</th>
               <th>Comunidad</th>
               <th>Provincia</th>
@@ -1327,6 +1382,7 @@ function renderFinalScreen() {
               return `
                 <tr>
                   <td class="center" data-label="Orden"><strong>#${idx + 1}</strong></td>
+                  <td class="center" data-label="Nº Conv."><span class="badge" style="background:var(--color-surface-hover); color:var(--color-text); font-weight:700;">${escapeHTML(p.numero)}${p.comunidad === 'Cataluña' ? ' (Cat)' : ''}</span></td>
                   <td class="center" data-label="Valoración">
                     <span class="badge" style="background:${g.bg}; color:${g.color}; border:1px solid ${g.border};">${g.id} - ${g.name}</span>
                   </td>

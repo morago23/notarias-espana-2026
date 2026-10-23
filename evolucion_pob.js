@@ -175,7 +175,7 @@ const DATA_EVOLUCION_POB = {
     "añoActual": 2023
   },
   "Barcelona|Barcelona": {
-    "crecimiento": 3.0,
+    "crecimiento": 3,
     "pobAntigua": 1611822,
     "pobActual": 1660122,
     "añoAntiguo": 2013,
@@ -1169,7 +1169,7 @@ const DATA_EVOLUCION_POB = {
     "añoActual": 2023
   },
   "Valle de Mena|Burgos": {
-    "crecimiento": 5.0,
+    "crecimiento": 5,
     "pobAntigua": 3901,
     "pobActual": 4096,
     "añoAntiguo": 2013,
@@ -1305,6 +1305,132 @@ const DATA_EVOLUCION_POB = {
     "crecimiento": -5.33,
     "pobAntigua": 1446,
     "pobActual": 1369,
+    "añoAntiguo": 2013,
+    "añoActual": 2023
+  },
+  "Alicante/Alacant|Alicante/Alacant": {
+    "crecimiento": 4.19,
+    "pobAntigua": 335052,
+    "pobActual": 349282,
+    "añoAntiguo": 2013,
+    "añoActual": 2023
+  },
+  "Mérida|Badajoz": {
+    "crecimiento": 1.02,
+    "pobAntigua": 58985,
+    "pobActual": 59587,
+    "añoAntiguo": 2013,
+    "añoActual": 2023
+  },
+  "Palencia|Palencia": {
+    "crecimiento": -5.33,
+    "pobAntigua": 80649,
+    "pobActual": 76351,
+    "añoAntiguo": 2013,
+    "añoActual": 2023
+  },
+  "Madrid-Valdeacederas|Madrid": {
+    "crecimiento": 4.1,
+    "pobAntigua": 3207247,
+    "pobActual": 3338697,
+    "añoAntiguo": 2013,
+    "añoActual": 2023
+  },
+  "Madrid-San Isidro|Madrid": {
+    "crecimiento": 4.1,
+    "pobAntigua": 3207247,
+    "pobActual": 3338697,
+    "añoAntiguo": 2013,
+    "añoActual": 2023
+  },
+  "Madrid-Puerta del Ángel|Madrid": {
+    "crecimiento": 4.1,
+    "pobAntigua": 3207247,
+    "pobActual": 3338697,
+    "añoAntiguo": 2013,
+    "añoActual": 2023
+  },
+  "Zaragoza|Zaragoza": {
+    "crecimiento": 0.07,
+    "pobAntigua": 682004,
+    "pobActual": 682513,
+    "añoAntiguo": 2013,
+    "añoActual": 2023
+  },
+  "Donostia/San Sebastián|Gipuzkoa/Guipúzcoa": {
+    "crecimiento": 1.24,
+    "pobAntigua": 186500,
+    "pobActual": 188810,
+    "añoAntiguo": 2013,
+    "añoActual": 2023
+  },
+  "Carballo|A Coruña": {
+    "crecimiento": 0.52,
+    "pobAntigua": 31366,
+    "pobActual": 31530,
+    "añoAntiguo": 2013,
+    "añoActual": 2023
+  },
+  "San Sebastián de los Reyes|Madrid": {
+    "crecimiento": 12.6,
+    "pobAntigua": 82090,
+    "pobActual": 92434,
+    "añoAntiguo": 2013,
+    "añoActual": 2023
+  },
+  "Chiclana de la Frontera|Cádiz": {
+    "crecimiento": 7.45,
+    "pobAntigua": 82212,
+    "pobActual": 88339,
+    "añoAntiguo": 2013,
+    "añoActual": 2023
+  },
+  "Tolosa|Gipuzkoa/Guipúzcoa": {
+    "crecimiento": 5.18,
+    "pobAntigua": 18889,
+    "pobActual": 19867,
+    "añoAntiguo": 2013,
+    "añoActual": 2023
+  },
+  "Balmaseda|Bizkaia/Vizcaya": {
+    "crecimiento": -1.65,
+    "pobAntigua": 7788,
+    "pobActual": 7660,
+    "añoAntiguo": 2013,
+    "añoActual": 2023
+  },
+  "La Pobla del Duc|València/Valencia": {
+    "crecimiento": -4.11,
+    "pobAntigua": 2553,
+    "pobActual": 2448,
+    "añoAntiguo": 2013,
+    "añoActual": 2023
+  },
+  "Sabadell|Barcelona": {
+    "crecimiento": 5.01,
+    "pobAntigua": 207963,
+    "pobActual": 218391,
+    "añoAntiguo": 2013,
+    "añoActual": 2023
+  },
+  "El Masnou|Barcelona": {
+    "crecimiento": 6.32,
+    "pobAntigua": 22742,
+    "pobActual": 24180,
+    "añoAntiguo": 2013,
+    "añoActual": 2023
+  },
+  "Berlanga|Badajoz": {
+    "crecimiento": -9.85,
+    "pobAntigua": 2488,
+    "pobActual": 2243,
+    "añoAntiguo": 2013,
+    "añoActual": 2023
+  },
+  "Sant Joan de Vilatorrada|Barcelona": {
+    "crecimiento": 2.34,
+    "pobAntigua": 10733,
+    "pobActual": 10984,
     "añoAntiguo": 2013,
     "añoActual": 2023
   }

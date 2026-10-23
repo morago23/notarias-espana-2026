@@ -58,6 +58,7 @@ function renderPreferencias() {
   favOrder.forEach((id, index) => {
     // Buscar la vacante
     const v = DATA_VACANTES.find(vac => {
+       if (vac._id === id) return true;
        const locClean = vac.localidad.replace(/\s*\([^)]*\)/g, '').trim();
        const vacId = normalize(locClean) + '|' + normalize(vac.provincia);
        return vacId === id;
@@ -72,11 +73,15 @@ function renderPreferencias() {
        const noteText = typeof getNoteForId === 'function' ? getNoteForId(id) : '';
        const noteIndicator = noteText ? `<span title="${escapeHTML(noteText)}" style="cursor:help; font-size:11px; color:var(--color-primary);"> 📝</span>` : '';
        const numNot = v.numNotarias;
+       const numLabel = v.numero ? `${v.numero}${v.origen === 'DOGC' ? ' <small style="font-weight:normal; opacity:0.8;">(Cat)</small>' : ''}` : '-';
 
        html += `
         <tr data-id="${id}" class="pref-item">
           <td class="center pref-handle" data-label="Orden" style="font-weight:bold; color:var(--color-primary); font-size:1.1rem; cursor:grab;">
             ☰ ${index + 1}
+          </td>
+          <td class="center" data-label="Nº Conv.">
+            <span class="badge" style="background:var(--color-surface-alt); color:var(--color-primary); border:1px solid var(--color-border); font-weight:700;">${numLabel}</span>
           </td>
           <td class="col-comunidad" data-label="Comunidad">${escapeHTML(v.comunidad)}</td>
           <td class="col-provincia" data-label="Provincia">${escapeHTML(v.provincia)}</td>
@@ -229,13 +234,16 @@ DATA_VACANTES.forEach(v => {
   v._id = finalId;
 
   vacantesSet.add(baseKey);
+  if (normalize(locClean).startsWith('madrid-')) vacantesSet.add('madrid|' + normalize(v.provincia));
+  if (normalize(locClean).startsWith('zaragoza-')) vacantesSet.add('zaragoza|' + normalize(v.provincia));
 
-  // Cruzar datos para obtener la categoría (clase de la notaría)
-  let nMatch = DATA_NOTARIAS.find(n => normalize(n.localidad) === normalize(v.locClean) && normalize(n.provincia) === normalize(v.provincia));
+  // Cruzar datos para obtener la categoría (clase de la notaría) y número de notarías
+  const baseLocForMatch = locClean.replace(/^Madrid-.*$/i, 'Madrid').replace(/^Zaragoza-.*$/i, 'Zaragoza');
+  let nMatch = DATA_NOTARIAS.find(n => normalize(n.localidad) === normalize(baseLocForMatch) && normalize(n.provincia) === normalize(v.provincia));
   
   if (!nMatch) {
     const provV = normalize(v.provincia);
-    const locV = normalize(v.locClean).replace(/'/g, '').replace(/’/g, '').replace(/, el$/, '').replace(/, la$/, '').replace(/^el /, '').replace(/^la /, '').replace(/, l$/, '').replace(/^l /, '');
+    const locV = normalize(baseLocForMatch).replace(/'/g, '').replace(/’/g, '').replace(/, el$/, '').replace(/, la$/, '').replace(/^el /, '').replace(/^la /, '').replace(/, l$/, '').replace(/^l /, '');
     
     // Diccionario para casos excepcionales (cambios de idioma oficial vs listado)
     const aliases = {
@@ -244,7 +252,7 @@ DATA_VACANTES.forEach(v => {
       'caniza, a.': 'a caniza',
       'areatza': 'villaro',
       'bergara': 'vergara',
-      'sant joan de vilatorrada': 'sant joan de vilatorrada' // El error es de la provincia en vacantes (dice Lleida, es Barcelona)
+      'sant joan de vilatorrada': 'sant joan de vilatorrada'
     };
     
     const aliasLoc = aliases[locV] || locV;
@@ -268,7 +276,7 @@ DATA_VACANTES.forEach(v => {
     });
   }
 
-  v.categoria = nMatch ? nMatch.clase : '-';
+  v.categoria = v.categoria || (nMatch ? nMatch.clase : '-');
   v.numNotarias = nMatch ? parseInt(nMatch.numero) || 1 : 1;
   const pob = typeof getPoblacion === 'function' ? getPoblacion(v.locClean, v.provincia) : null;
   v.poblacion = pob;
@@ -675,7 +683,7 @@ function filterVacantes() {
     }
 
     if (search) {
-      const txt = normalize(`${v.localidad} ${v.provincia} ${v.comunidad} ${v.categoria}`);
+      const txt = normalize(`${v.numero || ''} ${v.notas || ''} ${v.localidad} ${v.provincia} ${v.comunidad} ${v.categoria} ${v.anteriorNotario || ''}`);
       if (!txt.includes(search)) return false;
     }
     return true;
@@ -683,6 +691,12 @@ function filterVacantes() {
 
   if (state.vacantesSortCol) {
     filtered.sort((a, b) => {
+      if (state.vacantesSortCol === 'numero') {
+        let vA = parseInt(a.numero) || 999999;
+        let vB = parseInt(b.numero) || 999999;
+        if (vA !== vB) return state.vacantesSortDir === 'asc' ? vA - vB : vB - vA;
+        return String(a.origen || '').localeCompare(String(b.origen || ''), 'es');
+      }
       if (state.vacantesSortCol === 'distancia') {
         let vA = a.distancia !== null && a.distancia !== undefined ? a.distancia : 99999999;
         let vB = b.distancia !== null && b.distancia !== undefined ? b.distancia : 99999999;
@@ -720,7 +734,7 @@ function filterVacantes() {
 
 function renderVacantes() {
   const tbody = document.getElementById('vacantes-tbody');
-  const page = state.vacantesFiltered; // Show all vacantes, it's max 141
+  const page = state.vacantesFiltered;
 
   if (page.length === 0) {
     tbody.innerHTML = `<tr><td colspan="20" class="center">No hay vacantes encontradas.</td></tr>`;
@@ -742,6 +756,7 @@ function renderVacantes() {
 
     const noteText = getNoteForId(v._id);
     const noteIndicator = noteText ? `<span title="${escapeHTML(noteText)}" style="cursor:help; font-size:11px; color:var(--color-primary);"> 📝</span>` : '';
+    const numLabel = v.numero ? `${v.numero}${v.origen === 'DOGC' ? ' <small style="font-weight:normal; opacity:0.8;">(Cat)</small>' : ''}` : '-';
 
     let matchDisplay = '';
     if (state.matchCalculated) {
@@ -762,6 +777,9 @@ function renderVacantes() {
             <button data-action="openNoteModal" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Notas personales">${noteText ? '📝' : '🗒️'}</button>
             <button data-action="addToDuel" data-id="${escapeHTML(v._id)}" data-localidad="${escapeHTML(v.localidad)}" data-provincia="${escapeHTML(v.provincia)}" style="background:none; border:none; cursor:pointer; font-size:14px; padding:2px;" title="Añadir a Modo Duelo">⚔️</button>
           </div>
+        </td>
+        <td class="center" data-label="Nº Convocatoria">
+          <span class="badge" style="background:var(--color-surface-alt); color:var(--color-primary); border:1px solid var(--color-border); font-weight:700;" title="Número en ${escapeHTML(v.origen || 'BOE')} (${escapeHTML(v.turno || '')})">${numLabel}</span>
         </td>
         ${matchDisplay}
         <td class="col-comunidad" data-label="Comunidad">${escapeHTML(v.comunidad)}</td>
@@ -981,11 +999,12 @@ function exportToCSV() {
   }
 
   const rows = [
-    ["Orden", "Comunidad", "Provincia", "Localidad / Plaza", "Motivo", "Categoría", "Notario Anterior", "Distancia (km)", "Tiempo (min)"]
+    ["Orden Preferencia", "Nº Convocatoria", "Comunidad", "Provincia", "Localidad / Plaza", "Motivo", "Categoría", "Turno", "Notario Anterior", "Distancia (km)", "Tiempo (min)"]
   ];
 
   favOrder.forEach((id, index) => {
     const v = DATA_VACANTES.find(vac => {
+       if (vac._id === id) return true;
        const locClean = vac.localidad.replace(/\s*\([^)]*\)/g, '').trim();
        const vacId = normalize(locClean) + '|' + normalize(vac.provincia);
        return vacId === id;
@@ -998,11 +1017,13 @@ function exportToCSV() {
 
       rows.push([
         index + 1,
+        v.numero || "",
         v.comunidad,
         v.provincia,
         loc,
         v.clase,
         v.categoria,
+        v.turno || "",
         notarioAnt,
         dist,
         mins
@@ -1200,11 +1221,12 @@ function renderMapMarkers() {
       const favClass = isFav ? 'active' : '';
       
       let notarioAnt = v.anteriorNotario || "-";
+      const numBadge = v.numero ? `<strong>Nº ${v.numero}${v.origen === 'DOGC' ? ' (Cat)' : ''}</strong> · ` : '';
       
       return `
         <div class="map-popup-item">
           <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
-            <span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span>
+            <span>${numBadge}<span class="badge ${badgeClass}">${escapeHTML(v.clase)}</span></span>
             <strong>${v.categoria}</strong>
           </div>
           <div style="font-size:13px; margin-bottom:4px; color:var(--color-text-muted);">
@@ -1792,7 +1814,7 @@ function exportFilteredVacantesCSV() {
   }
 
   const rows = [
-    ["Comunidad", "Provincia", "Localidad / Plaza", "Motivo", "Categoría", "Notario Anterior", "Distancia (km)", "Match Score"]
+    ["Nº Convocatoria", "Comunidad", "Provincia", "Localidad / Plaza", "Motivo", "Categoría", "Turno", "Notario Anterior", "Distancia (km)", "Match Score"]
   ];
 
   state.vacantesFiltered.forEach((v) => {
@@ -1803,11 +1825,13 @@ function exportFilteredVacantesCSV() {
     const match = v.matchScore !== undefined ? v.matchScore : "";
 
     rows.push([
+      v.numero || "",
       v.comunidad,
       v.provincia,
       loc,
       v.clase,
       v.categoria,
+      v.turno || "",
       notarioAnt,
       dist,
       match
