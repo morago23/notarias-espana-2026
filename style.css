@@ -1589,6 +1589,100 @@ mark {
   margin-bottom: 12px;
 }
 
+/* Resto de Notarías de la Localidad Box */
+.fc-peers-box {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+}
+
+.fc-peers-box.fc-peers-in-modal {
+  margin-top: 16px;
+  margin-bottom: 0;
+  background: var(--color-surface);
+}
+
+.fc-peers-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.fc-peers-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.fc-peers-avg {
+  font-size: 12px;
+  color: var(--color-accent);
+  background: rgba(var(--color-accent-rgb), 0.1);
+  border: 1px solid rgba(var(--color-accent-rgb), 0.25);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.fc-peers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 240px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.fc-peer-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.fc-peers-in-modal .fc-peer-item {
+  background: var(--color-bg);
+}
+
+.fc-peer-name {
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+.fc-peer-subloc {
+  font-weight: 400;
+  font-size: 11.5px;
+  color: var(--color-text-muted);
+}
+
+.fc-peer-stats {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-size: 12.5px;
+  color: var(--color-text-muted);
+}
+
+.fc-peer-Stats strong,
+.fc-peer-stat-prot strong,
+.fc-peer-stat-pol strong {
+  color: var(--color-text);
+}
+
 /* Responsive Mobile for Flashcards */
 @media (max-width: 768px) {
   .fc-welcome-card {
@@ -1600,6 +1694,30 @@ mark {
   .fc-data-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
+  }
+  /* En móvil, mostrar el Informe Galo entero directamente sin desplegar */
+  .fc-galo-body.fc-galo-collapsed {
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  .fc-galo-toggle-btn,
+  .fc-galo-fade-overlay {
+    display: none !important;
+  }
+  .fc-peers-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .fc-peer-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .fc-peer-stats {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 14px;
   }
   .fc-rating-buttons {
     grid-template-columns: 1fr;
@@ -1626,4 +1744,3 @@ mark {
     width: 100%;
   }
 }
-

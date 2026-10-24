@@ -66,6 +66,11 @@ function initFlashcardsApp() {
     // Coordinates
     const coords = getCoordsForGalo(localidad, provincia);
 
+    // Rest of notaries in the same locality (only if numNotarias > 1)
+    const { restoNotarias, mediaProtResto, mediaPolResto } = numNotarias > 1
+      ? getRestoNotariasForGalo(localidad, provincia, notarioAnterior, raw['Notario'])
+      : { restoNotarias: [], mediaProtResto: null, mediaPolResto: null };
+
     // Unique stable ID
     const fcId = `fc_${idx}_${normalize(localidad)}_${normalize(provincia)}`;
 
@@ -83,6 +88,9 @@ function initFlashcardsApp() {
       numNotarias,
       protocolos2025,
       polizas2025,
+      restoNotarias,
+      mediaProtResto,
+      mediaPolResto,
       informeGalo,
       coords,
       distancia: null,
@@ -218,6 +226,49 @@ function getCoordsForGalo(localidad, provincia) {
     }
   }
   return null;
+}
+
+function isSameNotaryName(n1, n2) {
+  const a = normalize(n1 || '');
+  const b = normalize(n2 || '');
+  if (!a || !b || a === '-') return false;
+  if (a === b) return true;
+  const ta = a.split(/[\s-]+/).filter(t => t.length > 2);
+  const tb = b.split(/[\s-]+/).filter(t => t.length > 2);
+  if (!ta.length || !tb.length) return false;
+  const common = ta.filter(t => tb.includes(t)).length;
+  return common >= Math.min(ta.length, tb.length) && common >= 2;
+}
+
+function getRestoNotariasForGalo(localidad, provincia, notarioAnterior, rawNotario) {
+  if (typeof DATA_LOCALIDAD_PEERS_2025 === 'undefined') {
+    return { restoNotarias: [], mediaProtResto: null, mediaPolResto: null };
+  }
+  const locClean = (localidad || '').replace(/\s*\([^)]*\)/g, '').trim();
+  const baseLoc = locClean.replace(/^Madrid-.*$/i, 'Madrid').replace(/^Zaragoza-.*$/i, 'Zaragoza');
+  const key = `${normalize(provincia)}|${normalize(baseLoc)}`;
+  const allInLoc = DATA_LOCALIDAD_PEERS_2025[key] || [];
+  if (!allInLoc.length) {
+    return { restoNotarias: [], mediaProtResto: null, mediaPolResto: null };
+  }
+
+  const resto = allInLoc.filter(item =>
+    !isSameNotaryName(item.notario, notarioAnterior) &&
+    !isSameNotaryName(item.notario, rawNotario)
+  );
+
+  if (!resto.length) {
+    return { restoNotarias: [], mediaProtResto: null, mediaPolResto: null };
+  }
+
+  const sumProt = resto.reduce((acc, r) => acc + (r.protocolos || 0), 0);
+  const sumPol = resto.reduce((acc, r) => acc + (r.polizas || 0), 0);
+
+  return {
+    restoNotarias: resto,
+    mediaProtResto: Math.round(sumProt / resto.length),
+    mediaPolResto: Math.round(sumPol / resto.length)
+  };
 }
 
 function saveFcStateToStorage() {
@@ -699,8 +750,46 @@ function openFullGaloModal(plaza) {
   document.getElementById('galo-modal-title').textContent = `📋 Informe Galo: ${plaza.localidad}`;
   document.getElementById('galo-modal-subtitle').textContent = `${plaza.provincia} (${plaza.comunidad}) — Notario ant.: ${plaza.notarioAnterior}`;
   const contentEl = document.getElementById('galo-modal-content');
-  contentEl.innerHTML = formatInformeGaloHtml(plaza.informeGalo);
+  contentEl.innerHTML = formatInformeGaloHtml(plaza.informeGalo) + renderPeersSectionHtml(plaza, true);
   modal.style.display = 'flex';
+}
+
+function renderPeersSectionHtml(plaza, inModal = false) {
+  if (!plaza || plaza.numNotarias <= 1 || !plaza.restoNotarias || plaza.restoNotarias.length === 0) {
+    return '';
+  }
+
+  const avgProtStr = plaza.mediaProtResto !== null ? plaza.mediaProtResto.toLocaleString('es-ES') : '-';
+  const avgPolStr = plaza.mediaPolResto !== null ? plaza.mediaPolResto.toLocaleString('es-ES') : '-';
+
+  return `
+    <div class="fc-peers-box ${inModal ? 'fc-peers-in-modal' : ''}">
+      <div class="fc-peers-header">
+        <div class="fc-peers-title">
+          <span>🏛️ Resto de notarías en ${escapeHTML(plaza.localidad)} (${plaza.restoNotarias.length})</span>
+        </div>
+        <div class="fc-peers-avg">
+          <span>Media resto: 📜 <strong>${avgProtStr}</strong> prot. · 📑 <strong>${avgPolStr}</strong> pól.</span>
+        </div>
+      </div>
+      <div class="fc-peers-list">
+        ${plaza.restoNotarias.map(r => {
+          const pStr = (r.protocolos || 0).toLocaleString('es-ES');
+          const zStr = (r.polizas || 0).toLocaleString('es-ES');
+          const subLoc = r.notaria ? ` <span class="fc-peer-subloc">(${escapeHTML(r.notaria)})</span>` : '';
+          return `
+            <div class="fc-peer-item">
+              <div class="fc-peer-name">${escapeHTML(r.notario)}${subLoc}</div>
+              <div class="fc-peer-stats">
+                <span class="fc-peer-stat-prot" title="Protocolos 2025">📜 <strong>${pStr}</strong> prot.</span>
+                <span class="fc-peer-stat-pol" title="Pólizas 2025">📑 <strong>${zStr}</strong> pól.</span>
+              </div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    </div>
+  `;
 }
 
 function formatInformeGaloHtml(text) {
@@ -1002,7 +1091,8 @@ function renderFlashcardScreen(ratedCount, totalCount) {
   const polText = p.polizas2025 !== null ? p.polizas2025.toLocaleString('es-ES') : 'Sin datos';
 
   const galoText = p.informeGalo || '';
-  const isLongGalo = galoText.length > 260 || galoText.split('\n').length > 4;
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+  const isLongGalo = !isMobile && (galoText.length > 260 || galoText.split('\n').length > 4);
 
   // Group counts summary
   const groupCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
@@ -1104,7 +1194,10 @@ function renderFlashcardScreen(ratedCount, totalCount) {
           </div>
         </div>
 
-        <!-- INFORME GALO (Destacado y desplegable) -->
+        <!-- RESTO DE NOTARÍAS DE LA LOCALIDAD (Solo si hay más de 1 notaría) -->
+        ${renderPeersSectionHtml(p, false)}
+
+        <!-- INFORME GALO (Destacado y desplegable en escritorio, entero en móvil) -->
         <div class="fc-galo-box">
           <div class="fc-galo-header">
             <div class="fc-galo-title">

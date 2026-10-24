@@ -10490,3 +10490,4131 @@ const DATA_GALO = [
     "Total general": "334.0"
   }
 ];
+
+// Protocolos y pólizas 2025 de todas las notarías en localidades con más de una notaría
+const DATA_LOCALIDAD_PEERS_2025 = {
+  "araba/alava|vitoria-gasteiz": [
+    {
+      "notario": "Blanca Palacios Guillén",
+      "protocolos": 10451,
+      "polizas": 951
+    },
+    {
+      "notario": "Francisco Rodríguez-Poyo Segura",
+      "protocolos": 6427,
+      "polizas": 415
+    },
+    {
+      "notario": "Ángel Fernández-Reyes Luis",
+      "protocolos": 3698,
+      "polizas": 229
+    },
+    {
+      "notario": "Francisco Javier de las Fuentes Abad",
+      "protocolos": 3254,
+      "polizas": 239
+    },
+    {
+      "notario": "Fernando Ramos Alcazar",
+      "protocolos": 2652,
+      "polizas": 101
+    },
+    {
+      "notario": "Félix Ignacio Torres Cía",
+      "protocolos": 2538,
+      "polizas": 108
+    },
+    {
+      "notario": "María Concepción Granado Fernández de la Pradilla",
+      "protocolos": 1978,
+      "polizas": 20
+    },
+    {
+      "notario": "Sofía Trapote González",
+      "protocolos": 1935,
+      "polizas": 65
+    },
+    {
+      "notario": "José Manuel Jiménez del Cerro",
+      "protocolos": 1916,
+      "polizas": 840
+    },
+    {
+      "notario": "Luis Pérez de Lazárraga Villanueva",
+      "protocolos": 1765,
+      "polizas": 963
+    },
+    {
+      "notario": "Enara Basabe Belaustegui",
+      "protocolos": 1202,
+      "polizas": 94
+    },
+    {
+      "notario": "Teresa María del Pilar Cano Marco",
+      "protocolos": 727,
+      "polizas": 19
+    },
+    {
+      "notario": "María del Camino López de Heredia San Julián",
+      "protocolos": 55,
+      "polizas": 3
+    }
+  ],
+  "valencia/valencia|valencia": [
+    {
+      "notario": "Luis Calabuig de Leyva",
+      "protocolos": 10830,
+      "polizas": 491
+    },
+    {
+      "notario": "Federico Ortells Pérez",
+      "protocolos": 10298,
+      "polizas": 219
+    },
+    {
+      "notario": "Vicente Juan Escrivá Rubio",
+      "protocolos": 8815,
+      "polizas": 542
+    },
+    {
+      "notario": "Alfonso Maldonado Rubio",
+      "protocolos": 8522,
+      "polizas": 1063
+    },
+    {
+      "notario": "César Belda Casanova",
+      "protocolos": 7357,
+      "polizas": 1110
+    },
+    {
+      "notario": "Alejandro Cervera Taulet",
+      "protocolos": 7322,
+      "polizas": 1559
+    },
+    {
+      "notario": "Clara Barberá Pichó",
+      "protocolos": 6661,
+      "polizas": 603
+    },
+    {
+      "notario": "Jorge Barberá Pichó",
+      "protocolos": 6574,
+      "polizas": 656
+    },
+    {
+      "notario": "José Vicente Roig Dalmau",
+      "protocolos": 6145,
+      "polizas": 244
+    },
+    {
+      "notario": "José Manuel Valiente Cabadés",
+      "protocolos": 5613,
+      "polizas": 523
+    },
+    {
+      "notario": "Jorge Antonio Milz Ramón",
+      "protocolos": 5555,
+      "polizas": 1004
+    },
+    {
+      "notario": "Joaquín Borrell García",
+      "protocolos": 4414,
+      "polizas": 306
+    },
+    {
+      "notario": "José Alicarte Domingo",
+      "protocolos": 4189,
+      "polizas": 543
+    },
+    {
+      "notario": "José Manuel Rodrigo Paradells",
+      "protocolos": 3723,
+      "polizas": 310
+    },
+    {
+      "notario": "José María Fuster Muñoz",
+      "protocolos": 3316,
+      "polizas": 338
+    },
+    {
+      "notario": "Jorge Cano Rico",
+      "protocolos": 3300,
+      "polizas": 0
+    },
+    {
+      "notario": "Diego Simó Sevilla",
+      "protocolos": 3252,
+      "polizas": 184
+    },
+    {
+      "notario": "Emilio Vicente Orts Calabuig",
+      "protocolos": 3249,
+      "polizas": 320
+    },
+    {
+      "notario": "Ricardo Monllor González",
+      "protocolos": 3137,
+      "polizas": 367
+    },
+    {
+      "notario": "Francisco Badia Escriche",
+      "protocolos": 3134,
+      "polizas": 333
+    },
+    {
+      "notario": "Javier Máximo Juárez González",
+      "protocolos": 3127,
+      "polizas": 343
+    },
+    {
+      "notario": "Santiago José Méndez Ureña",
+      "protocolos": 3085,
+      "polizas": 385
+    },
+    {
+      "notario": "Juan Piquer Belloch",
+      "protocolos": 3061,
+      "polizas": 591
+    },
+    {
+      "notario": "Ubaldo Nieto Carol",
+      "protocolos": 2971,
+      "polizas": 415
+    },
+    {
+      "notario": "Máximo Catalán Pardo",
+      "protocolos": 2892,
+      "polizas": 129
+    },
+    {
+      "notario": "Rafael Estevan Gordo",
+      "protocolos": 2811,
+      "polizas": 130
+    },
+    {
+      "notario": "Fernando Corbí Coloma",
+      "protocolos": 2784,
+      "polizas": 416
+    },
+    {
+      "notario": "Simeón Ribelles Durá",
+      "protocolos": 2544,
+      "polizas": 184
+    },
+    {
+      "notario": "María Isabel Merino Cubells",
+      "protocolos": 2475,
+      "polizas": 71
+    },
+    {
+      "notario": "Ana Julia Roselló García",
+      "protocolos": 2447,
+      "polizas": 231
+    },
+    {
+      "notario": "Salvador Eduardo García Parra",
+      "protocolos": 2425,
+      "polizas": 244
+    },
+    {
+      "notario": "Juan Francisco Baixauli Alonso",
+      "protocolos": 2414,
+      "polizas": 82
+    },
+    {
+      "notario": "José Manuel Fuertes Vidal",
+      "protocolos": 2379,
+      "polizas": 967
+    },
+    {
+      "notario": "Víctor Manuel Noguera Marí",
+      "protocolos": 2378,
+      "polizas": 401
+    },
+    {
+      "notario": "Alfonso Pascual de Miguel",
+      "protocolos": 2266,
+      "polizas": 0
+    },
+    {
+      "notario": "Santiago Mompó Gimeno",
+      "protocolos": 2086,
+      "polizas": 0
+    },
+    {
+      "notario": "Fernando Pérez Narbón",
+      "protocolos": 2059,
+      "polizas": 1798
+    },
+    {
+      "notario": "Enrique Robles Perea",
+      "protocolos": 2002,
+      "polizas": 1799
+    },
+    {
+      "notario": "Salvador Moratal Margarit",
+      "protocolos": 1939,
+      "polizas": 140
+    },
+    {
+      "notario": "Eduardo Lluna Aparisi",
+      "protocolos": 1933,
+      "polizas": 1076
+    },
+    {
+      "notario": "Fernando Olaizola Martínez",
+      "protocolos": 1855,
+      "polizas": 86
+    },
+    {
+      "notario": "Joaquín Sapena Davó",
+      "protocolos": 1781,
+      "polizas": 75
+    },
+    {
+      "notario": "Miguel Roca Bermúdez de Castro",
+      "protocolos": 1666,
+      "polizas": 104
+    },
+    {
+      "notario": "Francisco José Sapena Davó",
+      "protocolos": 1633,
+      "polizas": 159
+    },
+    {
+      "notario": "María Isabel Menéndez-Valdés Tauroni",
+      "protocolos": 1600,
+      "polizas": 72
+    },
+    {
+      "notario": "Fernando Pascual Senent Ana",
+      "protocolos": 1522,
+      "polizas": 347
+    },
+    {
+      "notario": "Francisco Cantos Viñals",
+      "protocolos": 1222,
+      "polizas": 25
+    },
+    {
+      "notario": "Francisco Moret Martínez",
+      "protocolos": 854,
+      "polizas": 21
+    },
+    {
+      "notario": "Ángel López-Amo Calatayud",
+      "protocolos": 813,
+      "polizas": 120
+    },
+    {
+      "notario": "Manuel Mínguez Jiménez",
+      "protocolos": 467,
+      "polizas": 23
+    },
+    {
+      "notario": "Manuel José Chirivella Bonet",
+      "protocolos": 467,
+      "polizas": 14
+    },
+    {
+      "notario": "Vicente Tomás Bernat",
+      "protocolos": 204,
+      "polizas": 11
+    }
+  ],
+  "alicante/alacant|alicante/alacant": [
+    {
+      "notario": "José Perfecto Verdú Beltrán",
+      "protocolos": 4982,
+      "polizas": 344,
+      "notaria": "Alicante/Alacant"
+    },
+    {
+      "notario": "Alejandro Fernández Toro",
+      "protocolos": 4785,
+      "polizas": 394,
+      "notaria": "Alicante/Alacant"
+    },
+    {
+      "notario": "María Cristina Clemente Buendía",
+      "protocolos": 4631,
+      "polizas": 136,
+      "notaria": "Alicante/Alacant"
+    },
+    {
+      "notario": "Antonio Ripoll Soler",
+      "protocolos": 3593,
+      "polizas": 259,
+      "notaria": "Alicante/Alacant"
+    },
+    {
+      "notario": "José Luis López Orozco",
+      "protocolos": 3561,
+      "polizas": 234,
+      "notaria": "Alicante/Alacant"
+    },
+    {
+      "notario": "José Nieto Sánchez",
+      "protocolos": 3221,
+      "polizas": 135,
+      "notaria": "Alicante/Alacant"
+    },
+    {
+      "notario": "Miguel Ángel Robles Perea",
+      "protocolos": 2989,
+      "polizas": 118,
+      "notaria": "Alicante/Alacant"
+    },
+    {
+      "notario": "José Antonio Pérez Ramos",
+      "protocolos": 2901,
+      "polizas": 283,
+      "notaria": "Alicante/Alacant"
+    },
+    {
+      "notario": "Francisco Benítez Ortiz",
+      "protocolos": 2747,
+      "polizas": 540,
+      "notaria": "Alicante/Alacant"
+    },
+    {
+      "notario": "Juan Manuel Clemente González",
+      "protocolos": 2586,
+      "polizas": 53,
+      "notaria": "Alicante/Alacant"
+    },
+    {
+      "notario": "Antonio Luis Mira Cantó",
+      "protocolos": 2550,
+      "polizas": 451,
+      "notaria": "Alicante/Alacant"
+    },
+    {
+      "notario": "Gaspar Peral Bernat",
+      "protocolos": 2504,
+      "polizas": 460,
+      "notaria": "Alicante/Alacant"
+    },
+    {
+      "notario": "Augusto Pérez-Coca Crespo",
+      "protocolos": 2488,
+      "polizas": 309,
+      "notaria": "Alicante/Alacant"
+    },
+    {
+      "notario": "Cristina López Esteve",
+      "protocolos": 2441,
+      "polizas": 45,
+      "notaria": "Alicante/Alacant"
+    },
+    {
+      "notario": "Mario Signes Pascual",
+      "protocolos": 2374,
+      "polizas": 231,
+      "notaria": "Alicante/Alacant"
+    },
+    {
+      "notario": "Delfín Martínez Pérez",
+      "protocolos": 2162,
+      "polizas": 226,
+      "notaria": "Alicante/Alacant"
+    },
+    {
+      "notario": "Rafael Sebastián Ferrer Molina",
+      "protocolos": 2016,
+      "polizas": 168,
+      "notaria": "Alicante/Alacant"
+    },
+    {
+      "notario": "Francisco Javier Garach Aguado",
+      "protocolos": 1986,
+      "polizas": 14,
+      "notaria": "Alicante/Alacant"
+    },
+    {
+      "notario": "María de los Reyes Sánchez Moreno",
+      "protocolos": 1937,
+      "polizas": 161,
+      "notaria": "Alicante/Alacant"
+    },
+    {
+      "notario": "María Dolores Signes Verdera",
+      "protocolos": 1717,
+      "polizas": 121,
+      "notaria": "Alicante/Alacant"
+    }
+  ],
+  "badajoz|merida": [
+    {
+      "notario": "Francisco Javier Hernández Téllez",
+      "protocolos": 2974,
+      "polizas": 524
+    },
+    {
+      "notario": "Fernando Gutiérrez Valdenebro",
+      "protocolos": 2551,
+      "polizas": 524
+    },
+    {
+      "notario": "Gonzalo Rafael Fernández Pugnaire",
+      "protocolos": 2262,
+      "polizas": 384
+    },
+    {
+      "notario": "Francisco de Borja Igartua Fesser",
+      "protocolos": 1332,
+      "polizas": 201
+    }
+  ],
+  "madrid|madrid": [
+    {
+      "notario": "Alberto Navarro-Rubio Serres",
+      "protocolos": 26704,
+      "polizas": 0
+    },
+    {
+      "notario": "José María Mateos Salgado",
+      "protocolos": 12658,
+      "polizas": 1539
+    },
+    {
+      "notario": "José Ortiz Rodríguez",
+      "protocolos": 11893,
+      "polizas": 864
+    },
+    {
+      "notario": "Antonio Luis Reina Gutiérrez",
+      "protocolos": 11347,
+      "polizas": 3089
+    },
+    {
+      "notario": "Tomás Pérez Ramos",
+      "protocolos": 10406,
+      "polizas": 460
+    },
+    {
+      "notario": "Juan Luis Guijarro de Miguel",
+      "protocolos": 9854,
+      "polizas": 360
+    },
+    {
+      "notario": "Jaime Recarte Casanova",
+      "protocolos": 9720,
+      "polizas": 520
+    },
+    {
+      "notario": "Francisco Miras Ortiz",
+      "protocolos": 9006,
+      "polizas": 1342
+    },
+    {
+      "notario": "José Miguel García Lombardía",
+      "protocolos": 8978,
+      "polizas": 2747
+    },
+    {
+      "notario": "Andrés Domínguez Nafría",
+      "protocolos": 8674,
+      "polizas": 1672
+    },
+    {
+      "notario": "Alejandro Ruiz-Ayucar Seifert",
+      "protocolos": 8548,
+      "polizas": 85
+    },
+    {
+      "notario": "José Periel Martín",
+      "protocolos": 8383,
+      "polizas": 282
+    },
+    {
+      "notario": "Antonio Pérez-Coca Crespo",
+      "protocolos": 8192,
+      "polizas": 1584
+    },
+    {
+      "notario": "Esteban Sánchez Sánchez",
+      "protocolos": 7971,
+      "polizas": 230,
+      "notaria": "Madrid - Palomeras"
+    },
+    {
+      "notario": "Gregorio Javier Sierra Martínez",
+      "protocolos": 7786,
+      "polizas": 292
+    },
+    {
+      "notario": "Carlos Alcocer Torra",
+      "protocolos": 7675,
+      "polizas": 0
+    },
+    {
+      "notario": "Pablo Matias de la Esperanza Rodríguez",
+      "protocolos": 7603,
+      "polizas": 777
+    },
+    {
+      "notario": "Valerio Pérez de Madrid Carreras",
+      "protocolos": 7505,
+      "polizas": 354
+    },
+    {
+      "notario": "Juan Aznar de la Haza",
+      "protocolos": 7134,
+      "polizas": 376
+    },
+    {
+      "notario": "Ángel Almoguera Gómez",
+      "protocolos": 6959,
+      "polizas": 227
+    },
+    {
+      "notario": "Ignacio Gil-Antuñano Vizcaíno",
+      "protocolos": 6889,
+      "polizas": 500
+    },
+    {
+      "notario": "Miguel Ruiz-Gallardón García-Rasilla",
+      "protocolos": 6797,
+      "polizas": 0
+    },
+    {
+      "notario": "Celso Méndez Ureña",
+      "protocolos": 6771,
+      "polizas": 850
+    },
+    {
+      "notario": "Pedro Antonio Mateos Salgado",
+      "protocolos": 6608,
+      "polizas": 198
+    },
+    {
+      "notario": "Francisco Calderón Alvarez",
+      "protocolos": 6475,
+      "polizas": 763
+    },
+    {
+      "notario": "Antonio de la Esperanza Rodríguez",
+      "protocolos": 6409,
+      "polizas": 596
+    },
+    {
+      "notario": "Emilio Leal Labrador",
+      "protocolos": 6401,
+      "polizas": 372
+    },
+    {
+      "notario": "José Blanco Losada",
+      "protocolos": 6283,
+      "polizas": 613
+    },
+    {
+      "notario": "Javier de Lucas Cadenas",
+      "protocolos": 6177,
+      "polizas": 478
+    },
+    {
+      "notario": "José Manuel Hernández Antolín",
+      "protocolos": 6163,
+      "polizas": 513,
+      "notaria": "Madrid - Vista Alegre"
+    },
+    {
+      "notario": "Francisco Javier Gardeazábal del Río",
+      "protocolos": 6155,
+      "polizas": 765
+    },
+    {
+      "notario": "Rocío Rodríguez Martín",
+      "protocolos": 6053,
+      "polizas": 1039
+    },
+    {
+      "notario": "Ana López-Monís Gallego",
+      "protocolos": 6052,
+      "polizas": 1128
+    },
+    {
+      "notario": "Luis Ángel Jesús María Garay Cuadros",
+      "protocolos": 5928,
+      "polizas": 681
+    },
+    {
+      "notario": "Pablo Jacinto Ramallo Taboada",
+      "protocolos": 5875,
+      "polizas": 0
+    },
+    {
+      "notario": "Carlos Pérez Ramos",
+      "protocolos": 5769,
+      "polizas": 179
+    },
+    {
+      "notario": "José Ignacio Rivas Guardo",
+      "protocolos": 5756,
+      "polizas": 301
+    },
+    {
+      "notario": "Miguel Yuste Rojas",
+      "protocolos": 5669,
+      "polizas": 1787
+    },
+    {
+      "notario": "Juan José de Palacio Rodríguez",
+      "protocolos": 5663,
+      "polizas": 0
+    },
+    {
+      "notario": "Enrique Javier de Bernardo Martínez-Piñeiro",
+      "protocolos": 5553,
+      "polizas": 497
+    },
+    {
+      "notario": "Enrique Augusto Franch Quiralte",
+      "protocolos": 5474,
+      "polizas": 472
+    },
+    {
+      "notario": "Ignacio Paz-Ares Rodríguez",
+      "protocolos": 5472,
+      "polizas": 3491
+    },
+    {
+      "notario": "Eduardo Ávila Rodríguez",
+      "protocolos": 5381,
+      "polizas": 400
+    },
+    {
+      "notario": "Manuel Richi Alberti",
+      "protocolos": 5221,
+      "polizas": 0
+    },
+    {
+      "notario": "José Luis López de Garayo y Gallardo",
+      "protocolos": 5155,
+      "polizas": 1155
+    },
+    {
+      "notario": "Alaitz Macarena Alvarez de Zuriarrain",
+      "protocolos": 4998,
+      "polizas": 24
+    },
+    {
+      "notario": "Francisco Consegal García",
+      "protocolos": 4972,
+      "polizas": 576
+    },
+    {
+      "notario": "Fernando Pérez Alcalá del Olmo",
+      "protocolos": 4963,
+      "polizas": 529
+    },
+    {
+      "notario": "Eduardo Díez Fernández-Barbé",
+      "protocolos": 4961,
+      "polizas": 360
+    },
+    {
+      "notario": "Isabel Estapé Tous",
+      "protocolos": 4958,
+      "polizas": 4701
+    },
+    {
+      "notario": "José María García Pedraza",
+      "protocolos": 4921,
+      "polizas": 732
+    },
+    {
+      "notario": "Ignacio Martínez-Gil Vich",
+      "protocolos": 4902,
+      "polizas": 437
+    },
+    {
+      "notario": "Cristina Caballería Martel",
+      "protocolos": 4893,
+      "polizas": 299
+    },
+    {
+      "notario": "José Enrique Cachón Blanco",
+      "protocolos": 4853,
+      "polizas": 2486
+    },
+    {
+      "notario": "Javier Fernández-Merino Rodríguez-Bustamante",
+      "protocolos": 4846,
+      "polizas": 449
+    },
+    {
+      "notario": "Manuel Lora-Tamayo Villacieros",
+      "protocolos": 4794,
+      "polizas": 942,
+      "notaria": "Madrid - Concepción"
+    },
+    {
+      "notario": "Eduardo Jiménez García",
+      "protocolos": 4747,
+      "polizas": 297
+    },
+    {
+      "notario": "Rafael Bonardell Lenzano",
+      "protocolos": 4584,
+      "polizas": 219
+    },
+    {
+      "notario": "Ignacio García-Noblejas Santa-Olalla",
+      "protocolos": 4568,
+      "polizas": 462
+    },
+    {
+      "notario": "Ignacio Manrique Plaza",
+      "protocolos": 4565,
+      "polizas": 178
+    },
+    {
+      "notario": "Francisco Javier Monedero San Martín",
+      "protocolos": 4555,
+      "polizas": 0
+    },
+    {
+      "notario": "Luis Enrique García Labajo",
+      "protocolos": 4549,
+      "polizas": 289
+    },
+    {
+      "notario": "Francisco López Colmenarejo",
+      "protocolos": 4521,
+      "polizas": 383,
+      "notaria": "Madrid - Quintana"
+    },
+    {
+      "notario": "Rafael González Gozalo",
+      "protocolos": 4490,
+      "polizas": 1048
+    },
+    {
+      "notario": "Manuel de Cueto García",
+      "protocolos": 4480,
+      "polizas": 0
+    },
+    {
+      "notario": "José Luis Martínez-Gil Vich",
+      "protocolos": 4430,
+      "polizas": 333
+    },
+    {
+      "notario": "Segismundo Álvarez Royo-Villanova",
+      "protocolos": 4423,
+      "polizas": 199
+    },
+    {
+      "notario": "Aurora Ruiz Alonso",
+      "protocolos": 4381,
+      "polizas": 238
+    },
+    {
+      "notario": "María Rosario de Miguel Roses",
+      "protocolos": 4300,
+      "polizas": 339
+    },
+    {
+      "notario": "Miriam Herrando Deprit",
+      "protocolos": 4291,
+      "polizas": 302
+    },
+    {
+      "notario": "Eloisa López-Monís Gallego",
+      "protocolos": 4259,
+      "polizas": 500
+    },
+    {
+      "notario": "Maria Amanay Rivas Ruiz",
+      "protocolos": 4242,
+      "polizas": 309
+    },
+    {
+      "notario": "Fernando Gomá Lanzón",
+      "protocolos": 4215,
+      "polizas": 621
+    },
+    {
+      "notario": "Luis Quiroga Gutiérrez",
+      "protocolos": 4179,
+      "polizas": 487,
+      "notaria": "Madrid - Canillas"
+    },
+    {
+      "notario": "Juan Pérez Hereza",
+      "protocolos": 4171,
+      "polizas": 775
+    },
+    {
+      "notario": "Manuel Soler Lluch",
+      "protocolos": 4167,
+      "polizas": 966
+    },
+    {
+      "notario": "José Gregorio Juncos Martínez",
+      "protocolos": 4151,
+      "polizas": 622
+    },
+    {
+      "notario": "Luis Calatayud Gallego",
+      "protocolos": 4056,
+      "polizas": 245
+    },
+    {
+      "notario": "Jorge Sáez-Santurtún Prieto",
+      "protocolos": 4041,
+      "polizas": 210
+    },
+    {
+      "notario": "Rocío Lora-Tamayo Villacieros",
+      "protocolos": 4022,
+      "polizas": 504,
+      "notaria": "Madrid - Usera"
+    },
+    {
+      "notario": "Luis Alejandro Pérez-Escolar Hernando",
+      "protocolos": 4012,
+      "polizas": 287
+    },
+    {
+      "notario": "Alejandro Miguel Velasco Gómez",
+      "protocolos": 4000,
+      "polizas": 71
+    },
+    {
+      "notario": "Sandra María Medina Gonzálvez",
+      "protocolos": 3978,
+      "polizas": 1189
+    },
+    {
+      "notario": "Íñigo Casla Uriarte",
+      "protocolos": 3976,
+      "polizas": 456
+    },
+    {
+      "notario": "Blanca Consuelo Valenzuela Fernández",
+      "protocolos": 3918,
+      "polizas": 399
+    },
+    {
+      "notario": "Carlos María García Ortíz",
+      "protocolos": 3901,
+      "polizas": 647,
+      "notaria": "Madrid - Embajadores"
+    },
+    {
+      "notario": "María Heredero Caballería",
+      "protocolos": 3889,
+      "polizas": 218
+    },
+    {
+      "notario": "Almudena Zamora Ipas",
+      "protocolos": 3867,
+      "polizas": 122
+    },
+    {
+      "notario": "Eva María Fernández Medina",
+      "protocolos": 3846,
+      "polizas": 394
+    },
+    {
+      "notario": "Ignacio Maldonado Ramos",
+      "protocolos": 3842,
+      "polizas": 0
+    },
+    {
+      "notario": "Augusto Gómez-Martinho Cruz",
+      "protocolos": 3804,
+      "polizas": 109
+    },
+    {
+      "notario": "Ricardo Vilas Escauriaza",
+      "protocolos": 3739,
+      "polizas": 645
+    },
+    {
+      "notario": "Fernando Sánchez-Arjona Bonilla",
+      "protocolos": 3700,
+      "polizas": 326
+    },
+    {
+      "notario": "Ana Fernández-Tresguerres García",
+      "protocolos": 3692,
+      "polizas": 196
+    },
+    {
+      "notario": "Jesús Manuel Pérez Yuste",
+      "protocolos": 3607,
+      "polizas": 705,
+      "notaria": "Madrid - Palos de Moguer"
+    },
+    {
+      "notario": "Alfonso Madridejos Fernández",
+      "protocolos": 3591,
+      "polizas": 342
+    },
+    {
+      "notario": "Rafael de la Fuente García",
+      "protocolos": 3568,
+      "polizas": 186
+    },
+    {
+      "notario": "Jorge Luis García Llorente",
+      "protocolos": 3477,
+      "polizas": 58
+    },
+    {
+      "notario": "Alicia Velarde Valiente",
+      "protocolos": 3410,
+      "polizas": 210
+    },
+    {
+      "notario": "Norberto González Sobrino",
+      "protocolos": 3386,
+      "polizas": 1174
+    },
+    {
+      "notario": "Santiago Mora Velarde",
+      "protocolos": 3385,
+      "polizas": 86
+    },
+    {
+      "notario": "Jesús María Ortega Fernández",
+      "protocolos": 3384,
+      "polizas": 2651
+    },
+    {
+      "notario": "Francisco Javier Barreiros Fernández",
+      "protocolos": 3336,
+      "polizas": 263
+    },
+    {
+      "notario": "Agustín María Daniel Pérez-Bustamante de Monasterio",
+      "protocolos": 3303,
+      "polizas": 264
+    },
+    {
+      "notario": "Jesús Roa Martínez",
+      "protocolos": 3276,
+      "polizas": 819
+    },
+    {
+      "notario": "Santiago Alfonso González López",
+      "protocolos": 3264,
+      "polizas": 513
+    },
+    {
+      "notario": "Fernando Fernández Medina",
+      "protocolos": 3241,
+      "polizas": 205
+    },
+    {
+      "notario": "Nunilo Pérez Fernández",
+      "protocolos": 3225,
+      "polizas": 694
+    },
+    {
+      "notario": "Miguel Ángel Mestanza Iturmendi",
+      "protocolos": 3184,
+      "polizas": 224
+    },
+    {
+      "notario": "Pedro José Bartolomé Fuentes",
+      "protocolos": 3155,
+      "polizas": 214
+    },
+    {
+      "notario": "Pedro Luis Gutiérrez Moreno",
+      "protocolos": 3149,
+      "polizas": 867
+    },
+    {
+      "notario": "Ignacio Gomá Lanzón",
+      "protocolos": 3083,
+      "polizas": 204
+    },
+    {
+      "notario": "Ignacio Ramos Covarrubias",
+      "protocolos": 3070,
+      "polizas": 647
+    },
+    {
+      "notario": "José María Rivas Díaz",
+      "protocolos": 3062,
+      "polizas": 75
+    },
+    {
+      "notario": "Patricia Sotillos Fueyo",
+      "protocolos": 3060,
+      "polizas": 49
+    },
+    {
+      "notario": "José María Recio del Campo",
+      "protocolos": 3056,
+      "polizas": 0
+    },
+    {
+      "notario": "Eva María Sanz del Real",
+      "protocolos": 3047,
+      "polizas": 319
+    },
+    {
+      "notario": "Juan Barrios Alvarez",
+      "protocolos": 3028,
+      "polizas": 133
+    },
+    {
+      "notario": "María Eugenia Reviriego Picón",
+      "protocolos": 3027,
+      "polizas": 213
+    },
+    {
+      "notario": "Federico Garayalde Niño",
+      "protocolos": 3018,
+      "polizas": 1715
+    },
+    {
+      "notario": "Gonzalo de la Mata Posadas",
+      "protocolos": 3003,
+      "polizas": 268,
+      "notaria": "Madrid - Barrio del Pilar"
+    },
+    {
+      "notario": "Rafael Thode Garrido",
+      "protocolos": 3003,
+      "polizas": 241,
+      "notaria": "Madrid - Puerta del Ángel"
+    },
+    {
+      "notario": "Juan Pablo Sánchez Eguinoa",
+      "protocolos": 2995,
+      "polizas": 406
+    },
+    {
+      "notario": "María Blanca Entrena Palomero",
+      "protocolos": 2982,
+      "polizas": 6747
+    },
+    {
+      "notario": "Carlos Arriola Garrote",
+      "protocolos": 2927,
+      "polizas": 25
+    },
+    {
+      "notario": "Álvaro Fernández Piera",
+      "protocolos": 2899,
+      "polizas": 153
+    },
+    {
+      "notario": "José Carlos Sánchez González",
+      "protocolos": 2884,
+      "polizas": 278
+    },
+    {
+      "notario": "Javier Mejías Gómez",
+      "protocolos": 2877,
+      "polizas": 201
+    },
+    {
+      "notario": "Fernando José Rivero Sánchez-Covisa",
+      "protocolos": 2821,
+      "polizas": 311,
+      "notaria": "Madrid - Villaverde"
+    },
+    {
+      "notario": "Enrique Rafael García Romero",
+      "protocolos": 2817,
+      "polizas": 368,
+      "notaria": "Madrid - Valverde"
+    },
+    {
+      "notario": "Susana Ortega Fernández",
+      "protocolos": 2806,
+      "polizas": 91
+    },
+    {
+      "notario": "Antonio Domínguez Mena",
+      "protocolos": 2791,
+      "polizas": 241
+    },
+    {
+      "notario": "Cruz Gonzalo López-Müller Gómez",
+      "protocolos": 2781,
+      "polizas": 548
+    },
+    {
+      "notario": "Tatiana Pilar Martín Ruiz",
+      "protocolos": 2755,
+      "polizas": 0
+    },
+    {
+      "notario": "José Juan de Ibarrondo y Guerrica-Echevarría",
+      "protocolos": 2710,
+      "polizas": 0
+    },
+    {
+      "notario": "Lucía María Serrano de Haro Martínez",
+      "protocolos": 2673,
+      "polizas": 296
+    },
+    {
+      "notario": "Ramón Luis Aparicio Núñez",
+      "protocolos": 2672,
+      "polizas": 350,
+      "notaria": "Madrid - Entrevias"
+    },
+    {
+      "notario": "Eduardo Hijas Cid",
+      "protocolos": 2658,
+      "polizas": 180
+    },
+    {
+      "notario": "Antonio Francisco Peralta Esperilla",
+      "protocolos": 2656,
+      "polizas": 0,
+      "notaria": "Madrid - Barajas"
+    },
+    {
+      "notario": "Alberto Bravo Olaciregui",
+      "protocolos": 2644,
+      "polizas": 1576
+    },
+    {
+      "notario": "José María Marín Vázquez",
+      "protocolos": 2641,
+      "polizas": 78,
+      "notaria": "Madrid - Vinateros"
+    },
+    {
+      "notario": "Carlos Mateo Martínez de Bartolomé",
+      "protocolos": 2627,
+      "polizas": 370
+    },
+    {
+      "notario": "Santiago Cháfer Rudilla",
+      "protocolos": 2613,
+      "polizas": 152,
+      "notaria": "Madrid - Mirasierra"
+    },
+    {
+      "notario": "Manuel González-Meneses García-Valdecasas",
+      "protocolos": 2585,
+      "polizas": 481
+    },
+    {
+      "notario": "Pedro José Garrido Chamorro",
+      "protocolos": 2578,
+      "polizas": 43
+    },
+    {
+      "notario": "Reina de los Ángeles Freijedo Alvarez",
+      "protocolos": 2559,
+      "polizas": 266,
+      "notaria": "Madrid - Villa de Vallecas"
+    },
+    {
+      "notario": "José Manuel García-Lozano Zulueta",
+      "protocolos": 2552,
+      "polizas": 0
+    },
+    {
+      "notario": "Elena Turiel Ibañez",
+      "protocolos": 2529,
+      "polizas": 410,
+      "notaria": "Madrid-Peña Grande"
+    },
+    {
+      "notario": "Juan Manuel Lozano Carreras",
+      "protocolos": 2519,
+      "polizas": 138
+    },
+    {
+      "notario": "Luis Núñez Boluda",
+      "protocolos": 2500,
+      "polizas": 181
+    },
+    {
+      "notario": "José Ángel Martínez Sanchiz",
+      "protocolos": 2499,
+      "polizas": 170
+    },
+    {
+      "notario": "Juan Manuel Perelló Font",
+      "protocolos": 2493,
+      "polizas": 328
+    },
+    {
+      "notario": "Miguel Vicente-Almazán Pérez de Petinto",
+      "protocolos": 2489,
+      "polizas": 117,
+      "notaria": "Madrid - San Isidro"
+    },
+    {
+      "notario": "Carmen Boulet Alonso",
+      "protocolos": 2466,
+      "polizas": 206
+    },
+    {
+      "notario": "Juan José Álvarez-Sala Walther",
+      "protocolos": 2456,
+      "polizas": 809
+    },
+    {
+      "notario": "Rodrigo Antonio Tena Arregui",
+      "protocolos": 2437,
+      "polizas": 134
+    },
+    {
+      "notario": "Álvaro Lucini Mateo",
+      "protocolos": 2432,
+      "polizas": 0
+    },
+    {
+      "notario": "Luis Rueda Esteban",
+      "protocolos": 2422,
+      "polizas": 232
+    },
+    {
+      "notario": "Pedro Armas Omedes",
+      "protocolos": 2405,
+      "polizas": 948
+    },
+    {
+      "notario": "Alfredo Barrau Moreno",
+      "protocolos": 2392,
+      "polizas": 0
+    },
+    {
+      "notario": "Paloma Consuelo Mozo García",
+      "protocolos": 2380,
+      "polizas": 15
+    },
+    {
+      "notario": "Miguel Núñez Caballero",
+      "protocolos": 2368,
+      "polizas": 0,
+      "notaria": "Madrid - San Chinarro"
+    },
+    {
+      "notario": "Fernando Molina Stranz",
+      "protocolos": 2359,
+      "polizas": 3706
+    },
+    {
+      "notario": "Juan Carlos García Cortés",
+      "protocolos": 2317,
+      "polizas": 262,
+      "notaria": "Madrid - Opañel"
+    },
+    {
+      "notario": "Eusebio Javier González Lasso de la Vega",
+      "protocolos": 2296,
+      "polizas": 1376
+    },
+    {
+      "notario": "Juan Kutz Azqueta",
+      "protocolos": 2292,
+      "polizas": 208
+    },
+    {
+      "notario": "María del Pilar Lorán Herrero",
+      "protocolos": 2278,
+      "polizas": 195,
+      "notaria": "Madrid - Vicálvaro"
+    },
+    {
+      "notario": "Ricardo Ferrer Giménez",
+      "protocolos": 2274,
+      "polizas": 264
+    },
+    {
+      "notario": "María Pilar De Prada Solaesa",
+      "protocolos": 2260,
+      "polizas": 91,
+      "notaria": "Madrid - Valdeacederas"
+    },
+    {
+      "notario": "Emilio Sánchez-Carpintero Abad",
+      "protocolos": 2258,
+      "polizas": 113
+    },
+    {
+      "notario": "María del Pilar López-Contreras Conde",
+      "protocolos": 2248,
+      "polizas": 0
+    },
+    {
+      "notario": "Emilio Esteban-Hanza Navarro",
+      "protocolos": 2174,
+      "polizas": 1372
+    },
+    {
+      "notario": "Francisco Mata Botella",
+      "protocolos": 2141,
+      "polizas": 87
+    },
+    {
+      "notario": "Carmen Carolina Crespo Alvarez",
+      "protocolos": 2138,
+      "polizas": 191
+    },
+    {
+      "notario": "José María Madridejos Fernández",
+      "protocolos": 2119,
+      "polizas": 348
+    },
+    {
+      "notario": "Almudena Santiago Charlán",
+      "protocolos": 2106,
+      "polizas": 197,
+      "notaria": "Madrid - Canillejas"
+    },
+    {
+      "notario": "Manuel Mellado Rodríguez",
+      "protocolos": 2078,
+      "polizas": 522
+    },
+    {
+      "notario": "Fernando de la Cámara García",
+      "protocolos": 2072,
+      "polizas": 56
+    },
+    {
+      "notario": "Vicente María de Prada Guaita",
+      "protocolos": 2069,
+      "polizas": 105
+    },
+    {
+      "notario": "María Luisa Saura Fischer",
+      "protocolos": 2068,
+      "polizas": 18
+    },
+    {
+      "notario": "Ana María Carrión Abedul",
+      "protocolos": 2050,
+      "polizas": 198,
+      "notaria": "Madrid - Valdebebas"
+    },
+    {
+      "notario": "María Teresa González Heredia",
+      "protocolos": 2041,
+      "polizas": 109,
+      "notaria": "Madrid - Aluche"
+    },
+    {
+      "notario": "Javier Vinader Carracedo",
+      "protocolos": 1993,
+      "polizas": 1282
+    },
+    {
+      "notario": "Ana María Mahiques Miret",
+      "protocolos": 1963,
+      "polizas": 0
+    },
+    {
+      "notario": "Antonio Huerta Trólez",
+      "protocolos": 1951,
+      "polizas": 108
+    },
+    {
+      "notario": "Martín González-Moral García",
+      "protocolos": 1918,
+      "polizas": 99
+    },
+    {
+      "notario": "Carlos Huidobro y Arreba",
+      "protocolos": 1866,
+      "polizas": 1937
+    },
+    {
+      "notario": "Miguel Bañuls Ribas",
+      "protocolos": 1809,
+      "polizas": 312
+    },
+    {
+      "notario": "José María de Prada Guaita",
+      "protocolos": 1801,
+      "polizas": 159
+    },
+    {
+      "notario": "María Eva Mateo González",
+      "protocolos": 1800,
+      "polizas": 414,
+      "notaria": "Madrid -  Aravaca"
+    },
+    {
+      "notario": "Carlos Olona Schüller",
+      "protocolos": 1800,
+      "polizas": 158
+    },
+    {
+      "notario": "María de las Mercedes Pérez Hereza",
+      "protocolos": 1774,
+      "polizas": 53,
+      "notaria": "Madrid - Valdezarza"
+    },
+    {
+      "notario": "Antonio Enrique Magraner Duart",
+      "protocolos": 1773,
+      "polizas": 92,
+      "notaria": "Madrid - Chopera"
+    },
+    {
+      "notario": "Patricio Monzón Moreno",
+      "protocolos": 1763,
+      "polizas": 22
+    },
+    {
+      "notario": "Pedro Carrión García de Parada",
+      "protocolos": 1666,
+      "polizas": 78
+    },
+    {
+      "notario": "Carlos María De Prada Guaita",
+      "protocolos": 1661,
+      "polizas": 102
+    },
+    {
+      "notario": "María del Rosario Algora Wesolowski",
+      "protocolos": 1608,
+      "polizas": 273
+    },
+    {
+      "notario": "Javier Navarro-Rubio Serrés",
+      "protocolos": 1561,
+      "polizas": 170
+    },
+    {
+      "notario": "Hugo Lincoln Pascual",
+      "protocolos": 1467,
+      "polizas": 62,
+      "notaria": "Madrid - Pueblo Nuevo"
+    },
+    {
+      "notario": "Jesús Alberto Lleonart Castro",
+      "protocolos": 1456,
+      "polizas": 102
+    },
+    {
+      "notario": "Tomás Salve Martínez",
+      "protocolos": 1456,
+      "polizas": 72,
+      "notaria": "Madrid - Fuencarral"
+    },
+    {
+      "notario": "María del Pilar Bermúdez de Castro Fernández",
+      "protocolos": 1416,
+      "polizas": 160
+    },
+    {
+      "notario": "Concepción Pilar Barrio Del Olmo",
+      "protocolos": 1416,
+      "polizas": 19
+    },
+    {
+      "notario": "Luis López de Paz",
+      "protocolos": 1260,
+      "polizas": 217
+    },
+    {
+      "notario": "Manuel Gerardo Tarrío Berjano",
+      "protocolos": 1195,
+      "polizas": 13
+    },
+    {
+      "notario": "Carlos Rodríguez-Viña Cancio",
+      "protocolos": 1157,
+      "polizas": 32,
+      "notaria": "Madrid - Pinar del Rey"
+    },
+    {
+      "notario": "Julia Sanz López",
+      "protocolos": 1123,
+      "polizas": 105
+    },
+    {
+      "notario": "Palmira Delgado Martín",
+      "protocolos": 1084,
+      "polizas": 62
+    },
+    {
+      "notario": "Andrés Santiago Guervós",
+      "protocolos": 1055,
+      "polizas": 220,
+      "notaria": "Madrid - Fontarrón"
+    },
+    {
+      "notario": "Jorge Prades López",
+      "protocolos": 879,
+      "polizas": 68
+    },
+    {
+      "notario": "Ricardo Pérez Ballarín",
+      "protocolos": 847,
+      "polizas": 76
+    },
+    {
+      "notario": "Esperanza Prados Velasco",
+      "protocolos": 770,
+      "polizas": 170
+    },
+    {
+      "notario": "Juan Díez Herrera",
+      "protocolos": 655,
+      "polizas": 137
+    },
+    {
+      "notario": "Carlos Ruiz-Rivas Hernando",
+      "protocolos": 523,
+      "polizas": 81
+    },
+    {
+      "notario": "Pedro de Elizalde y Aymerich",
+      "protocolos": 424,
+      "polizas": 272
+    },
+    {
+      "notario": "María Pilar Boulet Alonso",
+      "protocolos": 418,
+      "polizas": 15
+    },
+    {
+      "notario": "Joaquín Martín Rovira Perea",
+      "protocolos": 372,
+      "polizas": 20
+    },
+    {
+      "notario": "Andrés de la Fuente O'Connor",
+      "protocolos": 312,
+      "polizas": 0
+    },
+    {
+      "notario": "Francisco Javier Oñate Cuadros",
+      "protocolos": 96,
+      "polizas": 4,
+      "notaria": "Madrid - Chopera"
+    },
+    {
+      "notario": "Carmelo Lacaci de la Peña",
+      "protocolos": 35,
+      "polizas": 0
+    }
+  ],
+  "a coruna|a coruna": [
+    {
+      "notario": "Raúl Muñoz Maestre",
+      "protocolos": 10762,
+      "polizas": 2099
+    },
+    {
+      "notario": "Manuel Mariño Vila",
+      "protocolos": 5182,
+      "polizas": 781
+    },
+    {
+      "notario": "Gonzalo Emilio Freire Barral",
+      "protocolos": 3175,
+      "polizas": 674
+    },
+    {
+      "notario": "Juan Manuel Cora Guerreiro",
+      "protocolos": 3050,
+      "polizas": 383
+    },
+    {
+      "notario": "Francisco Manuel Ordóñez Armán",
+      "protocolos": 2824,
+      "polizas": 253
+    },
+    {
+      "notario": "Víctor José Peón Rama",
+      "protocolos": 2704,
+      "polizas": 445
+    },
+    {
+      "notario": "Pablo Carbajo Martínez",
+      "protocolos": 2475,
+      "polizas": 285
+    },
+    {
+      "notario": "José Manuel Lois Puente",
+      "protocolos": 2254,
+      "polizas": 261
+    },
+    {
+      "notario": "Mónica María Jurjo García",
+      "protocolos": 2109,
+      "polizas": 258
+    },
+    {
+      "notario": "Francisco Javier Castromil Dotras",
+      "protocolos": 1481,
+      "polizas": 128
+    },
+    {
+      "notario": "María Mercedes Bermejo Pumar",
+      "protocolos": 1421,
+      "polizas": 66
+    },
+    {
+      "notario": "Enrique Santiago Rajoy Feijoo",
+      "protocolos": 1418,
+      "polizas": 137
+    },
+    {
+      "notario": "José Guillermo Rodicio Rodicio",
+      "protocolos": 1386,
+      "polizas": 173
+    },
+    {
+      "notario": "Isidoro Antonio Calvo Vidal",
+      "protocolos": 1050,
+      "polizas": 71
+    },
+    {
+      "notario": "María José Gil Caballero",
+      "protocolos": 757,
+      "polizas": 67
+    },
+    {
+      "notario": "Fernando Máiz Cal",
+      "protocolos": 344,
+      "polizas": 23
+    }
+  ],
+  "asturias|oviedo": [
+    {
+      "notario": "Francisco Javier Ramos Calles",
+      "protocolos": 6039,
+      "polizas": 624
+    },
+    {
+      "notario": "Javier Merino Gutierrez",
+      "protocolos": 5443,
+      "polizas": 1014
+    },
+    {
+      "notario": "Jesús María García Martínez",
+      "protocolos": 3949,
+      "polizas": 677
+    },
+    {
+      "notario": "Manuel Jesús Tuero Tuero",
+      "protocolos": 3804,
+      "polizas": 571
+    },
+    {
+      "notario": "Manuel Rodríguez de la Paz Guijarro",
+      "protocolos": 3304,
+      "polizas": 2015
+    },
+    {
+      "notario": "María Rosa Igay Merino",
+      "protocolos": 2985,
+      "polizas": 124
+    },
+    {
+      "notario": "Joaquín Tejerina Nuño",
+      "protocolos": 2457,
+      "polizas": 176
+    },
+    {
+      "notario": "Ángel María Martínez Ceyanes",
+      "protocolos": 2174,
+      "polizas": 229
+    },
+    {
+      "notario": "Cristina Herrero Fernández",
+      "protocolos": 2107,
+      "polizas": 518
+    },
+    {
+      "notario": "Vicente Martorell García",
+      "protocolos": 2047,
+      "polizas": 82
+    },
+    {
+      "notario": "Elena García-Argüelles Farpón",
+      "protocolos": 1816,
+      "polizas": 187
+    },
+    {
+      "notario": "Juan Antonio Escudero García",
+      "protocolos": 1777,
+      "polizas": 190
+    },
+    {
+      "notario": "María Isabel Valdés-Solís Cecchini",
+      "protocolos": 1389,
+      "polizas": 115
+    }
+  ],
+  "palencia|palencia": [
+    {
+      "notario": "Juan Carlos Villamuza Rodríguez",
+      "protocolos": 4114,
+      "polizas": 466
+    },
+    {
+      "notario": "Raquel Rodríguez Repiso",
+      "protocolos": 2291,
+      "polizas": 1212
+    },
+    {
+      "notario": "Juan Polvorosa Mies",
+      "protocolos": 1966,
+      "polizas": 254
+    },
+    {
+      "notario": "Francisco Prudencio Cubillas Triana",
+      "protocolos": 1841,
+      "polizas": 126
+    },
+    {
+      "notario": "Luz Romero Cabello de Alba",
+      "protocolos": 1726,
+      "polizas": 86
+    }
+  ],
+  "zaragoza|zaragoza": [
+    {
+      "notario": "Juan Antonio Yuste González de Rueda",
+      "protocolos": 5805,
+      "polizas": 996
+    },
+    {
+      "notario": "Simón Alfonso Pobes Layunta",
+      "protocolos": 5293,
+      "polizas": 454
+    },
+    {
+      "notario": "José Manuel Martínez Sánchez",
+      "protocolos": 5172,
+      "polizas": 1060
+    },
+    {
+      "notario": "Tomás García Cano",
+      "protocolos": 5104,
+      "polizas": 441
+    },
+    {
+      "notario": "José María Navarro Viñuales",
+      "protocolos": 4838,
+      "polizas": 218
+    },
+    {
+      "notario": "Fernando Giménez Villar",
+      "protocolos": 4591,
+      "polizas": 395
+    },
+    {
+      "notario": "Augusto Ariño García-Belenguer",
+      "protocolos": 4355,
+      "polizas": 654
+    },
+    {
+      "notario": "Francisco de Asís Pizarro Moreno",
+      "protocolos": 3997,
+      "polizas": 410
+    },
+    {
+      "notario": "Jesús Ángel Pérez Espuelas",
+      "protocolos": 3972,
+      "polizas": 487
+    },
+    {
+      "notario": "Luis Arturo Pérez Collados",
+      "protocolos": 3788,
+      "polizas": 249
+    },
+    {
+      "notario": "Dámaso Cruz Gimeno",
+      "protocolos": 3610,
+      "polizas": 84
+    },
+    {
+      "notario": "María Luisa Lorén Rosas",
+      "protocolos": 3592,
+      "polizas": 608
+    },
+    {
+      "notario": "Pedro Martínez Viamonte",
+      "protocolos": 3188,
+      "polizas": 173
+    },
+    {
+      "notario": "Francisco Javier Hernaiz Corrales",
+      "protocolos": 3002,
+      "polizas": 229
+    },
+    {
+      "notario": "Luis Ignacio Leach Ros",
+      "protocolos": 2969,
+      "polizas": 1022
+    },
+    {
+      "notario": "Adolfo Calatayud Sierra",
+      "protocolos": 2954,
+      "polizas": 173
+    },
+    {
+      "notario": "María del Pilar García Lamarca",
+      "protocolos": 2819,
+      "polizas": 696
+    },
+    {
+      "notario": "Fernando Usón Valero",
+      "protocolos": 2813,
+      "polizas": 323
+    },
+    {
+      "notario": "Carlos Gesali Val",
+      "protocolos": 2742,
+      "polizas": 1009
+    },
+    {
+      "notario": "Juan Ramón Allué Segura",
+      "protocolos": 2634,
+      "polizas": 445
+    },
+    {
+      "notario": "Luis de Codes Díaz-Quetcuti",
+      "protocolos": 2514,
+      "polizas": 149
+    },
+    {
+      "notario": "Leopoldo Périz Navarrete",
+      "protocolos": 2498,
+      "polizas": 121
+    },
+    {
+      "notario": "Juan Pardo Defez",
+      "protocolos": 2458,
+      "polizas": 128
+    },
+    {
+      "notario": "Fermín Moreno Ayguadé",
+      "protocolos": 2167,
+      "polizas": 279,
+      "notaria": "Zaragoza - Actur"
+    },
+    {
+      "notario": "Víctor Fernando Alconchel Puértolas",
+      "protocolos": 2110,
+      "polizas": 676
+    },
+    {
+      "notario": "Vicente Morató Izquierdo",
+      "protocolos": 1885,
+      "polizas": 862
+    },
+    {
+      "notario": "Teresa Cruz Gisbert",
+      "protocolos": 1878,
+      "polizas": 172
+    },
+    {
+      "notario": "Julio Boned Juliani",
+      "protocolos": 1868,
+      "polizas": 723
+    },
+    {
+      "notario": "María Jesús Pinedo Úbeda",
+      "protocolos": 1864,
+      "polizas": 337
+    },
+    {
+      "notario": "Elisa Calzada Castaño",
+      "protocolos": 1360,
+      "polizas": 64
+    },
+    {
+      "notario": "Juan Bautista Gómez Opic",
+      "protocolos": 1254,
+      "polizas": 14
+    },
+    {
+      "notario": "Silvia Toquero Cariello",
+      "protocolos": 1095,
+      "polizas": 64
+    },
+    {
+      "notario": "María Jesús Lacruz Pérez",
+      "protocolos": 290,
+      "polizas": 10
+    }
+  ],
+  "bizkaia/vizcaya|bilbao": [
+    {
+      "notario": "Eduardo Ares de Parga y Saldias",
+      "protocolos": 6802,
+      "polizas": 334
+    },
+    {
+      "notario": "Fernando Varela Uría",
+      "protocolos": 5565,
+      "polizas": 433
+    },
+    {
+      "notario": "Nicolás Almarza Ayarza",
+      "protocolos": 4685,
+      "polizas": 517
+    },
+    {
+      "notario": "Miguel Ángel Martínez Urroz",
+      "protocolos": 4511,
+      "polizas": 256
+    },
+    {
+      "notario": "Raquel Ruiz Torres",
+      "protocolos": 4477,
+      "polizas": 514
+    },
+    {
+      "notario": "Juan Ignacio Bustamante Esparza",
+      "protocolos": 4412,
+      "polizas": 50
+    },
+    {
+      "notario": "Miguel Llorente Gonzalvo",
+      "protocolos": 3978,
+      "polizas": 246
+    },
+    {
+      "notario": "Manuel Garcés Pérez",
+      "protocolos": 3630,
+      "polizas": 613
+    },
+    {
+      "notario": "Juan Benguria Cortabitarte",
+      "protocolos": 3619,
+      "polizas": 891
+    },
+    {
+      "notario": "María del Carmen Velasco Ramírez",
+      "protocolos": 3537,
+      "polizas": 555
+    },
+    {
+      "notario": "Manuel López Pardiñas",
+      "protocolos": 3469,
+      "polizas": 407
+    },
+    {
+      "notario": "Ignacio Alonso Salazar",
+      "protocolos": 3052,
+      "polizas": 239
+    },
+    {
+      "notario": "Andrés María Urrutia Badiola",
+      "protocolos": 2959,
+      "polizas": 224
+    },
+    {
+      "notario": "José María de la Peña Cadenato",
+      "protocolos": 2760,
+      "polizas": 0
+    },
+    {
+      "notario": "Vicente María del Arenal Otero",
+      "protocolos": 2696,
+      "polizas": 326
+    },
+    {
+      "notario": "Enrique Arana Ruiz-Cámara",
+      "protocolos": 2548,
+      "polizas": 220
+    },
+    {
+      "notario": "Lorena Lamana Riesco",
+      "protocolos": 2502,
+      "polizas": 215
+    },
+    {
+      "notario": "Juan Ignacio Gomeza Villa",
+      "protocolos": 2298,
+      "polizas": 343
+    },
+    {
+      "notario": "Ramón Múgica Alcorta",
+      "protocolos": 2184,
+      "polizas": 257
+    },
+    {
+      "notario": "José Ignacio Garriga Gamarra",
+      "protocolos": 2172,
+      "polizas": 227
+    },
+    {
+      "notario": "Alfonso Batalla de Antonio",
+      "protocolos": 1876,
+      "polizas": 1192
+    },
+    {
+      "notario": "Ignacio Jesús Gomeza Eleizalde",
+      "protocolos": 1707,
+      "polizas": 181
+    },
+    {
+      "notario": "Jaime Alfonso Fernández Ostolaza",
+      "protocolos": 1685,
+      "polizas": 872
+    },
+    {
+      "notario": "Jesús Sánchez Vigil de la Villa",
+      "protocolos": 1651,
+      "polizas": 118
+    },
+    {
+      "notario": "Almudena Fernández Ostolaza",
+      "protocolos": 1268,
+      "polizas": 66
+    },
+    {
+      "notario": "Francisco Arriola Garrote",
+      "protocolos": 1221,
+      "polizas": 74
+    },
+    {
+      "notario": "Francisco Regalado Marichalar",
+      "protocolos": 1209,
+      "polizas": 259
+    },
+    {
+      "notario": "María Josefa Gomeza Villa",
+      "protocolos": 377,
+      "polizas": 3
+    },
+    {
+      "notario": "Íñigo Guillermo Revilla Fernández",
+      "protocolos": 256,
+      "polizas": 17
+    }
+  ],
+  "alicante/alacant|torrevieja": [
+    {
+      "notario": "Juan Elías Margarit Robles",
+      "protocolos": 7373,
+      "polizas": 182
+    },
+    {
+      "notario": "Jorge Mínguez Balaguer",
+      "protocolos": 7237,
+      "polizas": 142
+    },
+    {
+      "notario": "Clara González Gómez",
+      "protocolos": 5742,
+      "polizas": 115
+    },
+    {
+      "notario": "José Julio Barrenechea García",
+      "protocolos": 4849,
+      "polizas": 59
+    },
+    {
+      "notario": "María Luz Hernández Imbernón",
+      "protocolos": 3178,
+      "polizas": 191
+    },
+    {
+      "notario": "José Antonio Pérez Álvarez",
+      "protocolos": 2728,
+      "polizas": 146
+    },
+    {
+      "notario": "María Dolores Alburquerque Rodríguez",
+      "protocolos": 2176,
+      "polizas": 74
+    },
+    {
+      "notario": "Tatiana Pilar Martín Ruiz",
+      "protocolos": 1290,
+      "polizas": 31
+    }
+  ],
+  "asturias|gijon": [
+    {
+      "notario": "Carlos Cortiñas Rodríguez-Arango",
+      "protocolos": 6845,
+      "polizas": 712
+    },
+    {
+      "notario": "Montserrat Martínez López",
+      "protocolos": 5469,
+      "polizas": 723
+    },
+    {
+      "notario": "Fernando Sánchez de Lamadrid Sicre",
+      "protocolos": 5000,
+      "polizas": 654
+    },
+    {
+      "notario": "José Clemente Vázquez López",
+      "protocolos": 4777,
+      "polizas": 530
+    },
+    {
+      "notario": "Francisco Javier Nogales Castillo",
+      "protocolos": 3828,
+      "polizas": 280
+    },
+    {
+      "notario": "Ignacio Bermejo Morales",
+      "protocolos": 3663,
+      "polizas": 365
+    },
+    {
+      "notario": "Carlos García Melón",
+      "protocolos": 2580,
+      "polizas": 299
+    },
+    {
+      "notario": "Miguel Angel Bañegil Espinosa",
+      "protocolos": 2552,
+      "polizas": 721
+    },
+    {
+      "notario": "José Ricardo Serrano Fernández",
+      "protocolos": 2320,
+      "polizas": 300
+    },
+    {
+      "notario": "María Dolores Rodríguez Fernández",
+      "protocolos": 2023,
+      "polizas": 231
+    },
+    {
+      "notario": "Sara Jimena Unceta de la Cruz",
+      "protocolos": 1309,
+      "polizas": 108
+    },
+    {
+      "notario": "Antonio Álvarez Soler",
+      "protocolos": 834,
+      "polizas": 84
+    }
+  ],
+  "madrid|alcorcon": [
+    {
+      "notario": "Urbano Alvarez Merino",
+      "protocolos": 6573,
+      "polizas": 726
+    },
+    {
+      "notario": "Antonio José Florit de Carranza",
+      "protocolos": 6547,
+      "polizas": 920
+    },
+    {
+      "notario": "María del Carmen Ruiz de Adana Jurado",
+      "protocolos": 3278,
+      "polizas": 253
+    },
+    {
+      "notario": "Pablo García Toral",
+      "protocolos": 3197,
+      "polizas": 241
+    },
+    {
+      "notario": "Francisco Javier Rodríguez Boix",
+      "protocolos": 1055,
+      "polizas": 108
+    },
+    {
+      "notario": "Juan Antonio Moncada y del Prado",
+      "protocolos": 319,
+      "polizas": 1
+    },
+    {
+      "notario": "Manuel Ignacio Cotorruelo Sánchez",
+      "protocolos": 2,
+      "polizas": 0
+    }
+  ],
+  "asturias|aviles": [
+    {
+      "notario": "Juan Álvarez Valdés",
+      "protocolos": 4463,
+      "polizas": 710
+    },
+    {
+      "notario": "Carmela Noguera Martín",
+      "protocolos": 2401,
+      "polizas": 312
+    },
+    {
+      "notario": "María Pilar Sousa Riobó",
+      "protocolos": 2255,
+      "polizas": 145
+    },
+    {
+      "notario": "Fernando Ovies Pérez",
+      "protocolos": 2088,
+      "polizas": 519
+    },
+    {
+      "notario": "Luis Sobrino González",
+      "protocolos": 1255,
+      "polizas": 174
+    }
+  ],
+  "jaen|jaen": [
+    {
+      "notario": "José Ramón Messia Alarcón",
+      "protocolos": 3426,
+      "polizas": 287
+    },
+    {
+      "notario": "Francisco Niño Aragón",
+      "protocolos": 2727,
+      "polizas": 396
+    },
+    {
+      "notario": "Susana Martínez Rodríguez",
+      "protocolos": 2598,
+      "polizas": 76
+    },
+    {
+      "notario": "Luis Antonio de Loma-Ossorio Rubio",
+      "protocolos": 2299,
+      "polizas": 339
+    },
+    {
+      "notario": "Luis María Martínez Pantoja",
+      "protocolos": 2270,
+      "polizas": 594
+    },
+    {
+      "notario": "Esperanza Méndez Vilchez",
+      "protocolos": 2253,
+      "polizas": 233
+    },
+    {
+      "notario": "Matilde María de Loma-Ossorio Rubio",
+      "protocolos": 2176,
+      "polizas": 285
+    },
+    {
+      "notario": "Alfonso Argüelles Luis",
+      "protocolos": 1829,
+      "polizas": 846
+    }
+  ],
+  "gipuzkoa/guipuzcoa|donostia/san sebastian": [
+    {
+      "notario": "Fermín Lizarazu Aramayo",
+      "protocolos": 4325,
+      "polizas": 840,
+      "notaria": "San Sebastián/Donostia"
+    },
+    {
+      "notario": "Manuel Fernando Cánovas Sánchez",
+      "protocolos": 3432,
+      "polizas": 525,
+      "notaria": "San Sebastián/Donostia"
+    },
+    {
+      "notario": "Enrique Miguel García-Jalón de la Lama",
+      "protocolos": 3087,
+      "polizas": 769,
+      "notaria": "San Sebastián/Donostia"
+    },
+    {
+      "notario": "Gaspar Rodríguez Santos",
+      "protocolos": 2687,
+      "polizas": 375,
+      "notaria": "San Sebastián/Donostia"
+    },
+    {
+      "notario": "José Carlos Arnedo Ruiz",
+      "protocolos": 2681,
+      "polizas": 569,
+      "notaria": "San Sebastián/Donostia"
+    },
+    {
+      "notario": "Martín Gabarain Astorqui",
+      "protocolos": 2637,
+      "polizas": 868,
+      "notaria": "San Sebastián/Donostia"
+    },
+    {
+      "notario": "José Gabriel González Botías",
+      "protocolos": 2575,
+      "polizas": 429,
+      "notaria": "San Sebastián/Donostia"
+    },
+    {
+      "notario": "Francisco Javier Oñate Cuadros",
+      "protocolos": 2409,
+      "polizas": 474,
+      "notaria": "San Sebastián/Donostia"
+    },
+    {
+      "notario": "María Larraitz Franco Galarraga",
+      "protocolos": 2232,
+      "polizas": 378,
+      "notaria": "San Sebastián/Donostia"
+    },
+    {
+      "notario": "Diego María Granados Asensio",
+      "protocolos": 1710,
+      "polizas": 115,
+      "notaria": "San Sebastián/Donostia"
+    },
+    {
+      "notario": "Ana Isabel Jaurrieta Alegria",
+      "protocolos": 1694,
+      "polizas": 441,
+      "notaria": "San Sebastián/Donostia"
+    },
+    {
+      "notario": "José Luis Carvajal García Pando",
+      "protocolos": 1645,
+      "polizas": 873,
+      "notaria": "San Sebastián/Donostia"
+    },
+    {
+      "notario": "Álvaro Rodríguez Santos",
+      "protocolos": 1456,
+      "polizas": 175,
+      "notaria": "San Sebastián/Donostia"
+    }
+  ],
+  "malaga|marbella": [
+    {
+      "notario": "Luis Plá Rubio",
+      "protocolos": 8838,
+      "polizas": 654
+    },
+    {
+      "notario": "Manuel Javier de Churruca y García de Fuentes",
+      "protocolos": 8413,
+      "polizas": 219
+    },
+    {
+      "notario": "Joaquín María Crespo Candela",
+      "protocolos": 6209,
+      "polizas": 235
+    },
+    {
+      "notario": "Alberto Jesús Hinojosa Bolivar",
+      "protocolos": 5094,
+      "polizas": 369
+    },
+    {
+      "notario": "Filiberto Carrillo de Albornoz Fisac",
+      "protocolos": 4437,
+      "polizas": 194
+    },
+    {
+      "notario": "José Ordóñez Cuadros",
+      "protocolos": 3982,
+      "polizas": 278
+    },
+    {
+      "notario": "Miguel Ángel de la Fuente del Real",
+      "protocolos": 3921,
+      "polizas": 224
+    },
+    {
+      "notario": "José Andújar Hurtado",
+      "protocolos": 3698,
+      "polizas": 502,
+      "notaria": "Marbella-San Pedro de Alcántara"
+    },
+    {
+      "notario": "Marta Patricia Pascua Ponce",
+      "protocolos": 2637,
+      "polizas": 94
+    },
+    {
+      "notario": "Eduardo Hernández Compta",
+      "protocolos": 2609,
+      "polizas": 48
+    },
+    {
+      "notario": "Miguel Muñoz Cervera",
+      "protocolos": 2479,
+      "polizas": 197,
+      "notaria": "Marbella-S. P. Alcantara"
+    },
+    {
+      "notario": "Jesús María Sanza Amurrio",
+      "protocolos": 1810,
+      "polizas": 41
+    }
+  ],
+  "valladolid|valladolid": [
+    {
+      "notario": "Javier Gómez Martínez",
+      "protocolos": 8545,
+      "polizas": 1530
+    },
+    {
+      "notario": "Teresa Hervella Durántez",
+      "protocolos": 4915,
+      "polizas": 511
+    },
+    {
+      "notario": "Ignacio Cuadrado Zuloaga",
+      "protocolos": 4868,
+      "polizas": 1061
+    },
+    {
+      "notario": "María del Coro García Simón",
+      "protocolos": 4572,
+      "polizas": 1256
+    },
+    {
+      "notario": "María de la Cruz Cano Torres",
+      "protocolos": 4028,
+      "polizas": 322
+    },
+    {
+      "notario": "Carlos Luis Herrero Ordoñez",
+      "protocolos": 3686,
+      "polizas": 1367
+    },
+    {
+      "notario": "Leopoldo Martínez de Salinas Alonso",
+      "protocolos": 2886,
+      "polizas": 247
+    },
+    {
+      "notario": "Luis Ramos Torres",
+      "protocolos": 2870,
+      "polizas": 398
+    },
+    {
+      "notario": "María Teresa de la Fuente Escudero",
+      "protocolos": 2814,
+      "polizas": 290
+    },
+    {
+      "notario": "Alejandro Marcos Hidalgo",
+      "protocolos": 2772,
+      "polizas": 321
+    },
+    {
+      "notario": "Jesús Martínez-Cortes Gimeno",
+      "protocolos": 2743,
+      "polizas": 448
+    },
+    {
+      "notario": "Rafael Galán Díaz",
+      "protocolos": 2585,
+      "polizas": 118,
+      "notaria": "Valladolid-Parquesol"
+    },
+    {
+      "notario": "María González-Carballo Almodóvar",
+      "protocolos": 2376,
+      "polizas": 130
+    },
+    {
+      "notario": "María Belén Barrios Garrido-Lestache",
+      "protocolos": 2033,
+      "polizas": 285
+    },
+    {
+      "notario": "Carmen Fernández-Prida Casado",
+      "protocolos": 1935,
+      "polizas": 248
+    },
+    {
+      "notario": "José María Cano Calvo",
+      "protocolos": 1801,
+      "polizas": 242
+    },
+    {
+      "notario": "Carlos León Matorras",
+      "protocolos": 1268,
+      "polizas": 120
+    },
+    {
+      "notario": "Pablo Fernández-Prida Casado",
+      "protocolos": 344,
+      "polizas": 49
+    },
+    {
+      "notario": "Virginia Loriente Lobo",
+      "protocolos": 228,
+      "polizas": 2
+    },
+    {
+      "notario": "Álvaro Cordero Taborda",
+      "protocolos": 112,
+      "polizas": 4
+    }
+  ],
+  "leon|ponferrada": [
+    {
+      "notario": "Rogelio Pacios Yáñez",
+      "protocolos": 4269,
+      "polizas": 729
+    },
+    {
+      "notario": "Ana María Gómez García",
+      "protocolos": 3305,
+      "polizas": 294
+    },
+    {
+      "notario": "Bernardo Martínez López",
+      "protocolos": 1557,
+      "polizas": 380
+    },
+    {
+      "notario": "Héitor Bello Díaz-Quintela",
+      "protocolos": 959,
+      "polizas": 231
+    },
+    {
+      "notario": "Jorge Luis Sánchez Carballo",
+      "protocolos": 137,
+      "polizas": 15
+    }
+  ],
+  "a coruna|carballo": [
+    {
+      "notario": "Javier Manuel Elbo Ferrant",
+      "protocolos": 3383,
+      "polizas": 645
+    },
+    {
+      "notario": "Carlos Andrés Mosquera Delgado",
+      "protocolos": 2016,
+      "polizas": 206
+    }
+  ],
+  "guadalajara|azuqueca de henares": [
+    {
+      "notario": "María Raquel Alcocer Ballesteros",
+      "protocolos": 3146,
+      "polizas": 124
+    },
+    {
+      "notario": "Macrina García Moreno",
+      "protocolos": 1687,
+      "polizas": 333
+    }
+  ],
+  "murcia|san javier": [
+    {
+      "notario": "Alfredo Gómez Hita",
+      "protocolos": 4376,
+      "polizas": 992
+    },
+    {
+      "notario": "Pedro Facundo Garre Navarro",
+      "protocolos": 2630,
+      "polizas": 239
+    },
+    {
+      "notario": "Íñigo Guillermo Revilla Fernández",
+      "protocolos": 330,
+      "polizas": 17
+    },
+    {
+      "notario": "Francisco Javier Madrid Conesa",
+      "protocolos": 70,
+      "polizas": 18
+    }
+  ],
+  "pontevedra|ponteareas": [
+    {
+      "notario": "Álvaro Lorenzo-Fariña Domínguez",
+      "protocolos": 5255,
+      "polizas": 383,
+      "notaria": "Puenteareas/Ponteareas"
+    },
+    {
+      "notario": "Alma María Carbajal de la Iglesia",
+      "protocolos": 2450,
+      "polizas": 124
+    }
+  ],
+  "santa cruz de tenerife|los realejos": [
+    {
+      "notario": "Javier Pichel Pichel",
+      "protocolos": 2144,
+      "polizas": 382
+    },
+    {
+      "notario": "Juan Montes Martínez",
+      "protocolos": 1642,
+      "polizas": 159
+    }
+  ],
+  "alicante/alacant|xabia/javea": [
+    {
+      "notario": "Antonio Jiménez Clar",
+      "protocolos": 3571,
+      "polizas": 148
+    },
+    {
+      "notario": "Juan Luis Millet Sancho",
+      "protocolos": 1523,
+      "polizas": 81,
+      "notaria": "Jávea/Xàbia"
+    },
+    {
+      "notario": "Vicente Salvador Sanjuán Pellicer",
+      "protocolos": 1229,
+      "polizas": 91,
+      "notaria": "Jávea/Xàbia"
+    }
+  ],
+  "cordoba|cabra": [
+    {
+      "notario": "Álvaro Jesús López Riesco",
+      "protocolos": 1049,
+      "polizas": 220
+    },
+    {
+      "notario": "Manuel Pozuelo Vázquez de Agredos",
+      "protocolos": 892,
+      "polizas": 111
+    }
+  ],
+  "alicante/alacant|petrer": [
+    {
+      "notario": "Alejandro Constantino Pérez Martínez",
+      "protocolos": 2557,
+      "polizas": 290,
+      "notaria": "Petrel/Petrer"
+    },
+    {
+      "notario": "María Ángeles Santamaría Juan",
+      "protocolos": 2090,
+      "polizas": 88,
+      "notaria": "Petrel/Petrer"
+    }
+  ],
+  "sevilla|lora del rio": [
+    {
+      "notario": "María del Carmen Martínez Fernández",
+      "protocolos": 892,
+      "polizas": 144
+    },
+    {
+      "notario": "María Aránzazu Amorós Buqueras",
+      "protocolos": 800,
+      "polizas": 149
+    }
+  ],
+  "jaen|alcala la real": [
+    {
+      "notario": "Mercedes Carazo Carazo",
+      "protocolos": 1284,
+      "polizas": 331
+    },
+    {
+      "notario": "Isabel Martí del Moral",
+      "protocolos": 843,
+      "polizas": 178
+    }
+  ],
+  "valencia/valencia|gandia": [
+    {
+      "notario": "Concepción Barber Vidal",
+      "protocolos": 3543,
+      "polizas": 164
+    },
+    {
+      "notario": "María Teresa Marín Garrido",
+      "protocolos": 2683,
+      "polizas": 230
+    },
+    {
+      "notario": "María Esther Rupérez Paracuellos",
+      "protocolos": 2094,
+      "polizas": 209
+    },
+    {
+      "notario": "José Miguel Marzal Gas",
+      "protocolos": 2072,
+      "polizas": 300
+    },
+    {
+      "notario": "Luis Moreno Ávila",
+      "protocolos": 2048,
+      "polizas": 208
+    },
+    {
+      "notario": "María José Perelló Agustina",
+      "protocolos": 1903,
+      "polizas": 358
+    },
+    {
+      "notario": "Gonzalo Cano Mora",
+      "protocolos": 1689,
+      "polizas": 149
+    }
+  ],
+  "valencia/valencia|alzira": [
+    {
+      "notario": "Ricardo Tabernero Capella",
+      "protocolos": 2870,
+      "polizas": 339,
+      "notaria": "Alcira/Alzira"
+    },
+    {
+      "notario": "Federico Palasi Roig",
+      "protocolos": 2712,
+      "polizas": 409,
+      "notaria": "Alcira/Alzira"
+    },
+    {
+      "notario": "José Juan Llobregat Vaya",
+      "protocolos": 2212,
+      "polizas": 256,
+      "notaria": "Alcira/Alzira"
+    },
+    {
+      "notario": "Miguel Ildefonso Gallut Ortega",
+      "protocolos": 1407,
+      "polizas": 176,
+      "notaria": "Alcira/Alzira"
+    }
+  ],
+  "madrid|arganda del rey": [
+    {
+      "notario": "Domingo Paniagua Santamaría",
+      "protocolos": 4510,
+      "polizas": 1227
+    },
+    {
+      "notario": "Pedro Horcajada Fernández-Quero",
+      "protocolos": 2100,
+      "polizas": 157
+    }
+  ],
+  "zaragoza|calatayud": [
+    {
+      "notario": "Fernando Agustín Bonaga",
+      "protocolos": 1572,
+      "polizas": 227
+    },
+    {
+      "notario": "Javier Lorenzo Mazana Puyol",
+      "protocolos": 1527,
+      "polizas": 243
+    }
+  ],
+  "madrid|san sebastian de los reyes": [
+    {
+      "notario": "Álvaro José Obando Bigeriego",
+      "protocolos": 4841,
+      "polizas": 374
+    },
+    {
+      "notario": "María Jesús Arcos Domínguez",
+      "protocolos": 4724,
+      "polizas": 527
+    }
+  ],
+  "cadiz|chiclana de la frontera": [
+    {
+      "notario": "José Manuel Paez Moreno",
+      "protocolos": 2642,
+      "polizas": 160
+    },
+    {
+      "notario": "José Enrique Carmona Cuenca",
+      "protocolos": 2274,
+      "polizas": 454
+    },
+    {
+      "notario": "María José Beviá Gomis",
+      "protocolos": 2220,
+      "polizas": 149
+    },
+    {
+      "notario": "María Lourdes Zaragoza Tafalla",
+      "protocolos": 1013,
+      "polizas": 253
+    }
+  ],
+  "navarra|estella-lizarra": [
+    {
+      "notario": "Lorenzo Doval de Mateo",
+      "protocolos": 1578,
+      "polizas": 211,
+      "notaria": "Estella/Lizarra"
+    },
+    {
+      "notario": "Ricardo Viana Ruiz",
+      "protocolos": 1470,
+      "polizas": 329,
+      "notaria": "Estella/Lizarra"
+    },
+    {
+      "notario": "Eduardo Yuste Sánchez",
+      "protocolos": 705,
+      "polizas": 79,
+      "notaria": "Estella/Lizarra"
+    }
+  ],
+  "gipuzkoa/guipuzcoa|bergara": [
+    {
+      "notario": "Roberto Rafael Oliver Puertolas",
+      "protocolos": 1074,
+      "polizas": 128,
+      "notaria": "Vergara/Bergara"
+    },
+    {
+      "notario": "María Longarte Ulacia",
+      "protocolos": 1027,
+      "polizas": 99,
+      "notaria": "Vergara/Bergara"
+    }
+  ],
+  "gipuzkoa/guipuzcoa|tolosa": [
+    {
+      "notario": "María Valentina Montero Vilar",
+      "protocolos": 2534,
+      "polizas": 359
+    },
+    {
+      "notario": "Pedro Elosegui Bergareche",
+      "protocolos": 2513,
+      "polizas": 345
+    }
+  ],
+  "bizkaia/vizcaya|balmaseda": [
+    {
+      "notario": "Igone Arechaga González",
+      "protocolos": 1987,
+      "polizas": 66
+    },
+    {
+      "notario": "Carlos Alberto Muley Posso",
+      "protocolos": 1659,
+      "polizas": 124
+    }
+  ],
+  "bizkaia/vizcaya|gernika-lumo": [
+    {
+      "notario": "Igor Ispizua Omar",
+      "protocolos": 1215,
+      "polizas": 112,
+      "notaria": "Guernica y Lumo/Gernika-Lumo"
+    },
+    {
+      "notario": "Alfonso Ansola Horcajo",
+      "protocolos": 1025,
+      "polizas": 81,
+      "notaria": "Guernica y Lumo/Gernika-Lumo"
+    }
+  ],
+  "alicante/alacant|dolores": [
+    {
+      "notario": "Jorge Pérez Álvarez",
+      "protocolos": 2206,
+      "polizas": 144
+    },
+    {
+      "notario": "Alicia Ruiz Torregrosa",
+      "protocolos": 1672,
+      "polizas": 187
+    }
+  ],
+  "gipuzkoa/guipuzcoa|zumarraga": [
+    {
+      "notario": "Eduardo Vallejo Inchausti",
+      "protocolos": 1242,
+      "polizas": 85
+    },
+    {
+      "notario": "Marta García-Jalón Luzuriaga",
+      "protocolos": 1185,
+      "polizas": 102
+    }
+  ],
+  "leon|astorga": [
+    {
+      "notario": "María Antonia Torga Noval",
+      "protocolos": 1388,
+      "polizas": 200
+    },
+    {
+      "notario": "Marta Rovira Fernández-Arche",
+      "protocolos": 1161,
+      "polizas": 187
+    }
+  ],
+  "cantabria|laredo": [
+    {
+      "notario": "Jesús Elías Corral Delgado",
+      "protocolos": 1236,
+      "polizas": 109
+    },
+    {
+      "notario": "Roberto Follía Martínez",
+      "protocolos": 665,
+      "polizas": 82
+    }
+  ],
+  "salamanca|ciudad rodrigo": [
+    {
+      "notario": "Francisco Echávarri López",
+      "protocolos": 2187,
+      "polizas": 227
+    },
+    {
+      "notario": "Pablo Fernández-Prida Casado",
+      "protocolos": 854,
+      "polizas": 125
+    }
+  ],
+  "ourense|o barco de valdeorras": [
+    {
+      "notario": "Marta Luisa Diz Amor",
+      "protocolos": 1518,
+      "polizas": 246
+    },
+    {
+      "notario": "Gabriela Marqués Mosquera",
+      "protocolos": 1205,
+      "polizas": 175
+    }
+  ],
+  "illes balears|felanitx": [
+    {
+      "notario": "Luis Leoncio Bustillo Tejedor",
+      "protocolos": 3566,
+      "polizas": 247
+    },
+    {
+      "notario": "María Magdalena Sans Gelabert",
+      "protocolos": 1990,
+      "polizas": 176
+    }
+  ],
+  "la rioja|arnedo": [
+    {
+      "notario": "Ignacio Otaño Calvo",
+      "protocolos": 1202,
+      "polizas": 148
+    },
+    {
+      "notario": "Susana Garzón Echevarría",
+      "protocolos": 1157,
+      "polizas": 212
+    }
+  ],
+  "barcelona|barcelona": [
+    {
+      "notario": "Jesús Javier Benavides Lima",
+      "protocolos": 19859,
+      "polizas": 605
+    },
+    {
+      "notario": "Salvador Farrés Ripoll",
+      "protocolos": 16855,
+      "polizas": 1384
+    },
+    {
+      "notario": "María del Camino Quiroga Martínez",
+      "protocolos": 13171,
+      "polizas": 721
+    },
+    {
+      "notario": "Jaime Calvo Francia",
+      "protocolos": 11901,
+      "polizas": 660
+    },
+    {
+      "notario": "Miguel de Páramo Argüelles",
+      "protocolos": 10881,
+      "polizas": 207
+    },
+    {
+      "notario": "Ariel Sultán Benguigui",
+      "protocolos": 9199,
+      "polizas": 900
+    },
+    {
+      "notario": "Jesús Gómez Taboada",
+      "protocolos": 8791,
+      "polizas": 321
+    },
+    {
+      "notario": "Ramón García-Torrent Carballo",
+      "protocolos": 8347,
+      "polizas": 1488
+    },
+    {
+      "notario": "Francisca Aloy Martorell",
+      "protocolos": 7620,
+      "polizas": 830,
+      "notaria": "Barcelona -Sant Andreu-"
+    },
+    {
+      "notario": "Isabel Molinos Gil",
+      "protocolos": 7192,
+      "polizas": 466
+    },
+    {
+      "notario": "María de Zulueta Sagarra",
+      "protocolos": 6025,
+      "polizas": 766
+    },
+    {
+      "notario": "Francisco Palop Tordera",
+      "protocolos": 5713,
+      "polizas": 418
+    },
+    {
+      "notario": "Joaquín Rodríguez-Carlancha Romero",
+      "protocolos": 5710,
+      "polizas": 184
+    },
+    {
+      "notario": "Borja Criado Malagarriga",
+      "protocolos": 5609,
+      "polizas": 290
+    },
+    {
+      "notario": "Antonio Díez de Blas",
+      "protocolos": 5221,
+      "polizas": 542
+    },
+    {
+      "notario": "Raúl González Fuentes",
+      "protocolos": 5198,
+      "polizas": 851
+    },
+    {
+      "notario": "Joan Carles Ollé Favaró",
+      "protocolos": 5133,
+      "polizas": 0
+    },
+    {
+      "notario": "Gerardo Conesa Martínez",
+      "protocolos": 5129,
+      "polizas": 1673
+    },
+    {
+      "notario": "Blanca Pardo García",
+      "protocolos": 5072,
+      "polizas": 1456
+    },
+    {
+      "notario": "José Vicente Torres Montero",
+      "protocolos": 5007,
+      "polizas": 223
+    },
+    {
+      "notario": "Ana María Vázquez Vázquez",
+      "protocolos": 5004,
+      "polizas": 237,
+      "notaria": "Barcelona -Horta-"
+    },
+    {
+      "notario": "Emilio Roselló Carrión",
+      "protocolos": 4999,
+      "polizas": 322
+    },
+    {
+      "notario": "Antonio Bosch Carrera",
+      "protocolos": 4821,
+      "polizas": 0
+    },
+    {
+      "notario": "Fernando José de Yllescas Muñoz",
+      "protocolos": 4724,
+      "polizas": 792
+    },
+    {
+      "notario": "Rafael Córdoba Benedicto",
+      "protocolos": 4705,
+      "polizas": 1455
+    },
+    {
+      "notario": "Tomás Feliu Alvarez de Sotomayor",
+      "protocolos": 4660,
+      "polizas": 752
+    },
+    {
+      "notario": "Juan Antonio Andújar Hurtado",
+      "protocolos": 4655,
+      "polizas": 340
+    },
+    {
+      "notario": "Cristina Requena Torrecillas",
+      "protocolos": 4573,
+      "polizas": 369
+    },
+    {
+      "notario": "Eduardo Bautista Blázquez",
+      "protocolos": 4542,
+      "polizas": 351
+    },
+    {
+      "notario": "María Dolores Giménez Arbona",
+      "protocolos": 4132,
+      "polizas": 399
+    },
+    {
+      "notario": "Manuel Piquer Belloch",
+      "protocolos": 4124,
+      "polizas": 1159
+    },
+    {
+      "notario": "Pablo Pleguezuelos Merino",
+      "protocolos": 4099,
+      "polizas": 339
+    },
+    {
+      "notario": "Sergi González Delgado",
+      "protocolos": 4098,
+      "polizas": 761
+    },
+    {
+      "notario": "Camilo José Sexto Presas",
+      "protocolos": 4089,
+      "polizas": 374
+    },
+    {
+      "notario": "Luis Alberto Álvarez Moreno",
+      "protocolos": 3904,
+      "polizas": 0
+    },
+    {
+      "notario": "Julio Martínez-Gil Pardo de Vera",
+      "protocolos": 3902,
+      "polizas": 297
+    },
+    {
+      "notario": "Rosa María Pérez Paniagua",
+      "protocolos": 3814,
+      "polizas": 873
+    },
+    {
+      "notario": "Gonzalo Sauca Núñez de Prado",
+      "protocolos": 3768,
+      "polizas": 648
+    },
+    {
+      "notario": "Laura Nogales Martín",
+      "protocolos": 3759,
+      "polizas": 323
+    },
+    {
+      "notario": "Damián Moreno Maya",
+      "protocolos": 3716,
+      "polizas": 277
+    },
+    {
+      "notario": "Immaculada Rúbies Royo",
+      "protocolos": 3628,
+      "polizas": 399
+    },
+    {
+      "notario": "Francisco Javier Hernández Alonso",
+      "protocolos": 3620,
+      "polizas": 212
+    },
+    {
+      "notario": "Juan Madridejos Velasco",
+      "protocolos": 3582,
+      "polizas": 150
+    },
+    {
+      "notario": "Miguel Ángel Campo Güerri",
+      "protocolos": 3579,
+      "polizas": 189
+    },
+    {
+      "notario": "Leopoldo Martínez de Salinas Bassols",
+      "protocolos": 3574,
+      "polizas": 195
+    },
+    {
+      "notario": "Enrique Oliver de Querol",
+      "protocolos": 3561,
+      "polizas": 174
+    },
+    {
+      "notario": "José Ramón Salamero Rodríguez-Varo",
+      "protocolos": 3420,
+      "polizas": 430
+    },
+    {
+      "notario": "Antonio Alfonso Rosselló Mestre",
+      "protocolos": 3405,
+      "polizas": 309
+    },
+    {
+      "notario": "Juan Ignacio Castro-Girona Martínez",
+      "protocolos": 3347,
+      "polizas": 169
+    },
+    {
+      "notario": "José Ángel Ruiz Prado",
+      "protocolos": 3342,
+      "polizas": 231
+    },
+    {
+      "notario": "Valero Soler Martín-Javato",
+      "protocolos": 3337,
+      "polizas": 3627
+    },
+    {
+      "notario": "Javier Martínez Lehmann",
+      "protocolos": 3260,
+      "polizas": 3697
+    },
+    {
+      "notario": "Elena Cantos Márquez",
+      "protocolos": 3248,
+      "polizas": 482
+    },
+    {
+      "notario": "Marco Antonio Alonso Hevia",
+      "protocolos": 3204,
+      "polizas": 367
+    },
+    {
+      "notario": "Blanca María García Oquendo",
+      "protocolos": 3200,
+      "polizas": 275
+    },
+    {
+      "notario": "Miquel Tarragona Coromina",
+      "protocolos": 3197,
+      "polizas": 414
+    },
+    {
+      "notario": "María Garay Gil",
+      "protocolos": 3191,
+      "polizas": 201
+    },
+    {
+      "notario": "Paula Alonso Rodríguez",
+      "protocolos": 3156,
+      "polizas": 369
+    },
+    {
+      "notario": "Ricardo Manén Barceló",
+      "protocolos": 3125,
+      "polizas": 195
+    },
+    {
+      "notario": "Francisco Javier García Ruiz",
+      "protocolos": 3050,
+      "polizas": 174
+    },
+    {
+      "notario": "Santiago María Giménez Arbona",
+      "protocolos": 3031,
+      "polizas": 216
+    },
+    {
+      "notario": "José Daniel Gil Pérez",
+      "protocolos": 2975,
+      "polizas": 168
+    },
+    {
+      "notario": "Íñigo Martín Ramírez de Cárdenas Cabello de los Cobos",
+      "protocolos": 2955,
+      "polizas": 248,
+      "notaria": "Barcelona -Sants-"
+    },
+    {
+      "notario": "María Paz Juárez Olmos",
+      "protocolos": 2953,
+      "polizas": 222
+    },
+    {
+      "notario": "Ruperto Isidoro Martínez Martínez",
+      "protocolos": 2950,
+      "polizas": 156
+    },
+    {
+      "notario": "Carlota Royes Perdrix",
+      "protocolos": 2943,
+      "polizas": 225
+    },
+    {
+      "notario": "Lorenzo Pío Valverde García",
+      "protocolos": 2935,
+      "polizas": 0
+    },
+    {
+      "notario": "Pablo Lluna Andreu",
+      "protocolos": 2848,
+      "polizas": 443
+    },
+    {
+      "notario": "Adolfo Bujarrabal Antón",
+      "protocolos": 2817,
+      "polizas": 208
+    },
+    {
+      "notario": "Ausencio José Santos Martín",
+      "protocolos": 2770,
+      "polizas": 220
+    },
+    {
+      "notario": "Pedro Esteban-Feliu Coll",
+      "protocolos": 2766,
+      "polizas": 161
+    },
+    {
+      "notario": "Lucía Pilar Gil López de Sagredo",
+      "protocolos": 2677,
+      "polizas": 130
+    },
+    {
+      "notario": "Francisco Alejandro Armas Omedes",
+      "protocolos": 2673,
+      "polizas": 116
+    },
+    {
+      "notario": "Luis Sampietro Villacampa",
+      "protocolos": 2655,
+      "polizas": 180
+    },
+    {
+      "notario": "Joan Carles Farrés Ustrell",
+      "protocolos": 2626,
+      "polizas": 642
+    },
+    {
+      "notario": "Diego de Dueñas Alvarez",
+      "protocolos": 2620,
+      "polizas": 190
+    },
+    {
+      "notario": "José Marqueño Ellacuría",
+      "protocolos": 2613,
+      "polizas": 512
+    },
+    {
+      "notario": "María Armas Herráez",
+      "protocolos": 2597,
+      "polizas": 116
+    },
+    {
+      "notario": "Jaime Agustín Justribó",
+      "protocolos": 2595,
+      "polizas": 191
+    },
+    {
+      "notario": "Jesús Julián Fuentes Martínez",
+      "protocolos": 2593,
+      "polizas": 323
+    },
+    {
+      "notario": "Álvaro Marqueño Ellacuría",
+      "protocolos": 2592,
+      "polizas": 434
+    },
+    {
+      "notario": "Luis Jou Mirabent",
+      "protocolos": 2577,
+      "polizas": 0
+    },
+    {
+      "notario": "María de los Desamparados Ríos Messana",
+      "protocolos": 2568,
+      "polizas": 296
+    },
+    {
+      "notario": "Pedro Ángel Casado Martín",
+      "protocolos": 2516,
+      "polizas": 219
+    },
+    {
+      "notario": "Juan Carlos Alonso Alvarez",
+      "protocolos": 2424,
+      "polizas": 247
+    },
+    {
+      "notario": "Ignacio Javier Boisán Cañamero",
+      "protocolos": 2409,
+      "polizas": 310
+    },
+    {
+      "notario": "Gonzalo Antonio Veciana García-Boente",
+      "protocolos": 2351,
+      "polizas": 208
+    },
+    {
+      "notario": "María de Rocafiguera Gibert",
+      "protocolos": 2323,
+      "polizas": 721
+    },
+    {
+      "notario": "José Luis Martínez-Gil Calero",
+      "protocolos": 2292,
+      "polizas": 183,
+      "notaria": "Barcelona -Horta-"
+    },
+    {
+      "notario": "Ignacio de Prada Martínez",
+      "protocolos": 2283,
+      "polizas": 184
+    },
+    {
+      "notario": "Eduardo Pobes Layunta",
+      "protocolos": 2275,
+      "polizas": 252
+    },
+    {
+      "notario": "Salvador Farrés Reig",
+      "protocolos": 2262,
+      "polizas": 306
+    },
+    {
+      "notario": "María Lourdes Rodríguez Ramírez",
+      "protocolos": 2233,
+      "polizas": 220
+    },
+    {
+      "notario": "María del Mar Illueca Oltra",
+      "protocolos": 2161,
+      "polizas": 198
+    },
+    {
+      "notario": "Miguel Yuste Sánchez",
+      "protocolos": 2142,
+      "polizas": 320,
+      "notaria": "Barcelona-Besós-Poble Nou"
+    },
+    {
+      "notario": "Luis Fernando Pazos Pezzi",
+      "protocolos": 2139,
+      "polizas": 136
+    },
+    {
+      "notario": "Adela García Arana",
+      "protocolos": 2119,
+      "polizas": 98
+    },
+    {
+      "notario": "María del Rocío Maestre Cavanna",
+      "protocolos": 2101,
+      "polizas": 241
+    },
+    {
+      "notario": "Rubén Perán Sánchez",
+      "protocolos": 2041,
+      "polizas": 56
+    },
+    {
+      "notario": "Belén García-Sancha Saez",
+      "protocolos": 2015,
+      "polizas": 74,
+      "notaria": "Barcelona -Sant Andreu-"
+    },
+    {
+      "notario": "Blanca María de la Cámara Entrena",
+      "protocolos": 1997,
+      "polizas": 233
+    },
+    {
+      "notario": "José Alberto Marín Sánchez",
+      "protocolos": 1936,
+      "polizas": 157
+    },
+    {
+      "notario": "María del Pilar Martínez-Cortés Gimeno",
+      "protocolos": 1896,
+      "polizas": 64
+    },
+    {
+      "notario": "Marta Fuentes Blanco",
+      "protocolos": 1871,
+      "polizas": 166
+    },
+    {
+      "notario": "Alberto Ares de Parga Adán",
+      "protocolos": 1818,
+      "polizas": 139
+    },
+    {
+      "notario": "Mariana Querejeta Roca",
+      "protocolos": 1769,
+      "polizas": 460
+    },
+    {
+      "notario": "María Mercedes Martínez Parra",
+      "protocolos": 1717,
+      "polizas": 213
+    },
+    {
+      "notario": "Ángelo Jesús Carretero Ramírez",
+      "protocolos": 1666,
+      "polizas": 254
+    },
+    {
+      "notario": "María Olga Hernández Hernández",
+      "protocolos": 1638,
+      "polizas": 36
+    },
+    {
+      "notario": "Elisabeth García Cueto",
+      "protocolos": 1587,
+      "polizas": 180
+    },
+    {
+      "notario": "Carlos Masiá Martí",
+      "protocolos": 1482,
+      "polizas": 92
+    },
+    {
+      "notario": "Ángel Serrano de Nicolás",
+      "protocolos": 1439,
+      "polizas": 52
+    },
+    {
+      "notario": "Ildefonso Sánchez Prat",
+      "protocolos": 1432,
+      "polizas": 63
+    },
+    {
+      "notario": "Javier Serrano Copete",
+      "protocolos": 1379,
+      "polizas": 61
+    },
+    {
+      "notario": "Albert Capell Martinez",
+      "protocolos": 1296,
+      "polizas": 110
+    },
+    {
+      "notario": "José María Valls Xufré",
+      "protocolos": 1252,
+      "polizas": 57
+    },
+    {
+      "notario": "Francisco Javier Monedero Alcover",
+      "protocolos": 1237,
+      "polizas": 246
+    },
+    {
+      "notario": "Cristina Magalló Zapater",
+      "protocolos": 1190,
+      "polizas": 72
+    },
+    {
+      "notario": "Mario Rafael Romeo García",
+      "protocolos": 1175,
+      "polizas": 330
+    },
+    {
+      "notario": "Lucía Rodríguez Rodríguez",
+      "protocolos": 1171,
+      "polizas": 111
+    },
+    {
+      "notario": "Ignacio Navarro Martín",
+      "protocolos": 1123,
+      "polizas": 100
+    },
+    {
+      "notario": "Marc Sansalvadó Chalaux",
+      "protocolos": 1023,
+      "polizas": 71
+    },
+    {
+      "notario": "Ramón Abelló Diz",
+      "protocolos": 1022,
+      "polizas": 65
+    },
+    {
+      "notario": "María Isabel Gabarró Miquel",
+      "protocolos": 930,
+      "polizas": 16
+    },
+    {
+      "notario": "Teresa María Villazán Tovar",
+      "protocolos": 859,
+      "polizas": 46
+    },
+    {
+      "notario": "Fernando Bautista Pérez",
+      "protocolos": 753,
+      "polizas": 42
+    },
+    {
+      "notario": "José Antonio García Vila",
+      "protocolos": 340,
+      "polizas": 18
+    },
+    {
+      "notario": "Alberto Tomás López Blanco",
+      "protocolos": 219,
+      "polizas": 2
+    }
+  ],
+  "lleida|lleida": [
+    {
+      "notario": "Pablo Gómez Clavería",
+      "protocolos": 7153,
+      "polizas": 2511
+    },
+    {
+      "notario": "Sebastián Gutiérrez Gañán",
+      "protocolos": 5833,
+      "polizas": 2134
+    },
+    {
+      "notario": "Gerardo Mármol Llombart",
+      "protocolos": 4615,
+      "polizas": 1825
+    },
+    {
+      "notario": "Diego Martínez Sancho",
+      "protocolos": 3257,
+      "polizas": 298
+    },
+    {
+      "notario": "Jordi Puente González",
+      "protocolos": 3131,
+      "polizas": 208
+    },
+    {
+      "notario": "María Cristina Hernández Ruiz",
+      "protocolos": 2605,
+      "polizas": 657
+    },
+    {
+      "notario": "Joaquín Parejo García",
+      "protocolos": 1566,
+      "polizas": 109
+    },
+    {
+      "notario": "José Manuel Villafranca Mercé",
+      "protocolos": 1231,
+      "polizas": 84
+    },
+    {
+      "notario": "José Lorenzo Iribarne Blanco",
+      "protocolos": 973,
+      "polizas": 102
+    },
+    {
+      "notario": "Lourdes Martos García",
+      "protocolos": 197,
+      "polizas": 9
+    },
+    {
+      "notario": "Francisco Javier Cruz Gimeno",
+      "protocolos": 131,
+      "polizas": 17
+    }
+  ],
+  "barcelona|cornella de llobregat": [
+    {
+      "notario": "María Blanca Rodríguez Coladas",
+      "protocolos": 2755,
+      "polizas": 535
+    },
+    {
+      "notario": "Arturo Luis Ramírez Castelao",
+      "protocolos": 2119,
+      "polizas": 238
+    },
+    {
+      "notario": "Carlos Manuel Parejo-Merino Parejo",
+      "protocolos": 1542,
+      "polizas": 113
+    },
+    {
+      "notario": "Manuel Ángel Benedito Roig",
+      "protocolos": 304,
+      "polizas": 33
+    },
+    {
+      "notario": "José Manuel Sánchez Tapia",
+      "protocolos": 111,
+      "polizas": 26
+    }
+  ],
+  "barcelona|sabadell": [
+    {
+      "notario": "Javier Micó Giner",
+      "protocolos": 8571,
+      "polizas": 999
+    },
+    {
+      "notario": "Alejandro Sáez Ripoll",
+      "protocolos": 4476,
+      "polizas": 402
+    },
+    {
+      "notario": "Montserrat Prieto Santos",
+      "protocolos": 4192,
+      "polizas": 1225
+    },
+    {
+      "notario": "Aurora Cristina Díaz-Fraile del Monte",
+      "protocolos": 3195,
+      "polizas": 118
+    },
+    {
+      "notario": "Ignacio Corbí González",
+      "protocolos": 2878,
+      "polizas": 301
+    },
+    {
+      "notario": "Jesús Cembrano Zaldivar",
+      "protocolos": 2729,
+      "polizas": 75
+    },
+    {
+      "notario": "Juan Gómez Martínez",
+      "protocolos": 2554,
+      "polizas": 250
+    },
+    {
+      "notario": "José Antonio Simón Hernández",
+      "protocolos": 2486,
+      "polizas": 202
+    },
+    {
+      "notario": "Marta Navarro Redondo",
+      "protocolos": 2407,
+      "polizas": 204
+    },
+    {
+      "notario": "María Lara Domínguez Martínez",
+      "protocolos": 2305,
+      "polizas": 874
+    },
+    {
+      "notario": "María Mercedes Lázaro Velo",
+      "protocolos": 1950,
+      "polizas": 86
+    },
+    {
+      "notario": "Enrique Ruiz de Bustillo Pont",
+      "protocolos": 1760,
+      "polizas": 81
+    },
+    {
+      "notario": "Joan Bosch Boada",
+      "protocolos": 660,
+      "polizas": 18
+    },
+    {
+      "notario": "Sergio García-Rosado Cutillas",
+      "protocolos": 149,
+      "polizas": 61
+    }
+  ],
+  "barcelona|l'hospitalet de llobregat": [
+    {
+      "notario": "Santiago Gotor Sánchez",
+      "protocolos": 5986,
+      "polizas": 594
+    },
+    {
+      "notario": "Ana Nogales Martín",
+      "protocolos": 3716,
+      "polizas": 367
+    },
+    {
+      "notario": "Alberto Verde Continente",
+      "protocolos": 3282,
+      "polizas": 591
+    },
+    {
+      "notario": "Fernando María Díaz Gallardo",
+      "protocolos": 3194,
+      "polizas": 188
+    },
+    {
+      "notario": "Jorge Vicente Farrés Reig",
+      "protocolos": 3081,
+      "polizas": 301
+    },
+    {
+      "notario": "Juan García Saez",
+      "protocolos": 2710,
+      "polizas": 85
+    },
+    {
+      "notario": "Fernando Morales Limia",
+      "protocolos": 2376,
+      "polizas": 127
+    },
+    {
+      "notario": "José Castaño López",
+      "protocolos": 2253,
+      "polizas": 126
+    },
+    {
+      "notario": "Jorge Colmeiro de las Cuevas",
+      "protocolos": 620,
+      "polizas": 64
+    },
+    {
+      "notario": "María Sánchez García",
+      "protocolos": 442,
+      "polizas": 25
+    }
+  ],
+  "barcelona|granollers": [
+    {
+      "notario": "Anna Arandes Marcocci",
+      "protocolos": 5302,
+      "polizas": 587
+    },
+    {
+      "notario": "Ana María Fortuny Subirats",
+      "protocolos": 4237,
+      "polizas": 1284
+    },
+    {
+      "notario": "José Ignacio de Navasqües Eireos",
+      "protocolos": 3502,
+      "polizas": 223
+    },
+    {
+      "notario": "María Ángeles Vidal Davydoff",
+      "protocolos": 2162,
+      "polizas": 203
+    },
+    {
+      "notario": "José Poyatos Diaz",
+      "protocolos": 352,
+      "polizas": 40
+    }
+  ],
+  "barcelona|sant cugat del valles": [
+    {
+      "notario": "Luis Antonio Boada Dotor",
+      "protocolos": 1561,
+      "polizas": 541
+    },
+    {
+      "notario": "Luis Fort López-Barajas",
+      "protocolos": 1557,
+      "polizas": 531
+    },
+    {
+      "notario": "María Concepción Alonso Vasallo",
+      "protocolos": 1342,
+      "polizas": 425
+    }
+  ],
+  "girona|blanes": [
+    {
+      "notario": "Daniel Rodríguez Dengra",
+      "protocolos": 3950,
+      "polizas": 283
+    },
+    {
+      "notario": "Marta Marín del Campo",
+      "protocolos": 3615,
+      "polizas": 300
+    },
+    {
+      "notario": "Javier Salas Ramos",
+      "protocolos": 231,
+      "polizas": 16
+    }
+  ],
+  "barcelona|pineda de mar": [
+    {
+      "notario": "Sonia Sánchez Ruiz",
+      "protocolos": 1931,
+      "polizas": 155
+    },
+    {
+      "notario": "Pedro Pablo Albiol Ballesteros",
+      "protocolos": 982,
+      "polizas": 81
+    }
+  ],
+  "barcelona|sant adria de besos": [
+    {
+      "notario": "Víctor Mateu Prades",
+      "protocolos": 1644,
+      "polizas": 226
+    },
+    {
+      "notario": "María Blanca Pascual Sequeros",
+      "protocolos": 1556,
+      "polizas": 219
+    }
+  ],
+  "barcelona|sant vicenc dels horts": [
+    {
+      "notario": "María del Carmen Parra Martínez",
+      "protocolos": 1483,
+      "polizas": 182
+    },
+    {
+      "notario": "Francisco Javier García-Más Vélez",
+      "protocolos": 1372,
+      "polizas": 159
+    }
+  ],
+  "barcelona|el masnou": [
+    {
+      "notario": "Víctor Esquirol Jiménez",
+      "protocolos": 1566,
+      "polizas": 221
+    },
+    {
+      "notario": "Francesc Torrent Cufí",
+      "protocolos": 1387,
+      "polizas": 214
+    }
+  ],
+  "girona|figueres": [
+    {
+      "notario": "Vicente Daudí Arnal",
+      "protocolos": 6117,
+      "polizas": 923
+    },
+    {
+      "notario": "Miguel Ángel Vera Moreno",
+      "protocolos": 2332,
+      "polizas": 185
+    },
+    {
+      "notario": "Joan Fortaner i Torrent",
+      "protocolos": 2232,
+      "polizas": 233
+    },
+    {
+      "notario": "Júlia Descamps Muntada",
+      "protocolos": 1776,
+      "polizas": 542
+    },
+    {
+      "notario": "Lucía Martínez Clement",
+      "protocolos": 640,
+      "polizas": 139
+    }
+  ],
+  "barcelona|esplugues de llobregat": [
+    {
+      "notario": "José Vicente Galdón Garrido",
+      "protocolos": 3605,
+      "polizas": 419
+    },
+    {
+      "notario": "Juan Galdón López",
+      "protocolos": 3507,
+      "polizas": 353
+    },
+    {
+      "notario": "María Gracia Criado Fernández",
+      "protocolos": 817,
+      "polizas": 34
+    },
+    {
+      "notario": "Miguel Ángel Rodríguez Barroso",
+      "protocolos": 58,
+      "polizas": 0
+    }
+  ],
+  "girona|palafrugell": [
+    {
+      "notario": "Enrique Jaime Ventura Paradinas",
+      "protocolos": 1886,
+      "polizas": 353
+    },
+    {
+      "notario": "Jaime Fernández Tussy",
+      "protocolos": 1537,
+      "polizas": 247
+    }
+  ],
+  "barcelona|esparreguera": [
+    {
+      "notario": "Vicente Miguel Mestre Soro",
+      "protocolos": 2517,
+      "polizas": 359
+    },
+    {
+      "notario": "Gonzalo Quiralte Moreno",
+      "protocolos": 1093,
+      "polizas": 56
+    }
+  ],
+  "girona|torroella de montgri-estartit": [
+    {
+      "notario": "Purificación Almansa Losada",
+      "protocolos": 1533,
+      "polizas": 377
+    },
+    {
+      "notario": "Rocio Ramírez López-Frías",
+      "protocolos": 739,
+      "polizas": 73,
+      "notaria": "Torroella de Montgrí-L'Estartit"
+    }
+  ],
+  "barcelona|calaf": [
+    {
+      "notario": "Blanca Camacho López-Barajas",
+      "protocolos": 321,
+      "polizas": 119
+    },
+    {
+      "notario": "Alberto Ares de Parga Adán",
+      "protocolos": 22,
+      "polizas": 7
+    }
+  ],
+  "barcelona|calella": [
+    {
+      "notario": "Mónica de Blas Esteban",
+      "protocolos": 1933,
+      "polizas": 230
+    },
+    {
+      "notario": "José Luis Ballestín González",
+      "protocolos": 1839,
+      "polizas": 218
+    }
+  ],
+  "girona|l'escala": [
+    {
+      "notario": "Javier Eduardo Satue de Velasco",
+      "protocolos": 1958,
+      "polizas": 257
+    },
+    {
+      "notario": "María José Solís de la Fuente",
+      "protocolos": 76,
+      "polizas": 14
+    }
+  ],
+  "girona|palamos": [
+    {
+      "notario": "José Fernando Ribes García",
+      "protocolos": 3773,
+      "polizas": 570
+    },
+    {
+      "notario": "Joan Ignasi Sorigue Abel",
+      "protocolos": 95,
+      "polizas": 16
+    }
+  ],
+  "girona|la bisbal d'emporda": [
+    {
+      "notario": "Marta Bernabeu Farrus",
+      "protocolos": 1973,
+      "polizas": 418
+    },
+    {
+      "notario": "Marco Ciani García",
+      "protocolos": 306,
+      "polizas": 37
+    }
+  ]
+};
