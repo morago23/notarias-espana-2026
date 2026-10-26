@@ -1,4 +1,4 @@
-// ================= ASISTENTE DE ELECCIÓN: MODO EXCEL + BOE ANEXO II/1 (BOE-A-2026-21686) =================
+// ================= ASISTENTE DE ELECCIÓN: MODO EXCEL PROGRESIVO (1 A 1) + BOE ANEXO II/1 (BOE-A-2026-21686) =================
 
 // Mapa literal de la columna "Notaría" del Anexo I del BOE-A-2026-21686 para las plazas cuyo nombre oficial en BOE varía respecto a DATA_GALO
 const BOE_LITERAL_NOTARIA_MAP = {
@@ -25,6 +25,7 @@ const BOE_LITERAL_NOTARIA_MAP = {
 const fcState = {
   unlocked: false,
   screen: 'welcome', // 'welcome' | 'excel' | 'final'
+  isFullscreenOverlay: true, // Se abre en pantalla completa
   userName: '',
   userSurnames: '',
   escalafon: '',
@@ -35,30 +36,22 @@ const fcState = {
   userCoords: null,
   locationName: '',
   plazas: [], // Array enriquecido de las 228 plazas de DATA_GALO
-  orderedIds: [], // Array con los fcId en el orden exacto de preferencia (1..228)
-  readMap: {}, // { [fcId]: boolean } marca si el usuario ya la ha leído/revisado
+  orderedIds: [], // Array con los 228 fcId: los primeros `revealedCount` son los ya visibles y ordenados por el usuario
+  revealedCount: 1, // Empieza mostrando solo 1 línea, y van apareciendo de 1 en 1
+  lastRevealedId: null, // ID de la última notaría que acaba de aparecer para resaltarla
   excludedBoe: {}, // { [fcId]: boolean } si el usuario decide no pedirla en el Anexo II/1
   notes: {}, // { [fcId]: string } notas personales en la tabla
-  expandedGaloRows: {}, // { [fcId]: boolean }
   expandedPeersRows: {}, // { [fcId]: boolean }
   searchQuery: '',
   filterComunidad: '',
   filterCategoria: '',
   filterTurno: '',
-  filterReadStatus: '', // '' | 'unread' | 'read'
   boeMaxCount: 228,
-  boeShowMotivoDisambig: false, // Si se quiere añadir entre paréntesis el notario anterior cuando hay varias en el mismo municipio
-  boeCatSuffix: true, // Indicar (Cataluña) junto al nº de orden en las plazas del DOGC
+  boeShowMotivoDisambig: false,
+  boeCatSuffix: true,
   finalTab: 'boe', // 'boe' | 'excel'
   sortableInstance: null
 };
-
-function parseNumField(raw, key) {
-  const val = raw[key];
-  if (val === '' || val === undefined || val === null) return 0;
-  const n = parseFloat(val);
-  return isNaN(n) ? 0 : Math.round(n);
-}
 
 function buildOfficialMotivoText(motivo, notarioAnterior) {
   const m = (motivo || '').trim();
@@ -74,7 +67,6 @@ function buildOfficialMotivoText(motivo, notarioAnterior) {
 function initFlashcardsApp() {
   if (typeof DATA_GALO === 'undefined') return;
 
-  // Enriquecer cada una de las 228 plazas con todos los datos demográficos, geográficos y estadísticos
   const items = DATA_GALO.map((raw, idx) => {
     const numero = (raw['Número'] || '').toString().trim();
     const comunidad = (raw['Comunidad'] || '').trim();
@@ -89,7 +81,6 @@ function initFlashcardsApp() {
     const informeGalo = (raw['Informe Galo'] || '').trim();
     const origen = comunidad === 'Cataluña' ? 'DOGC' : 'BOE';
 
-    // Nombre exacto según convocatoria BOE / DOGC para el Anexo II/1
     const notariaSegunConvocatoria = (origen === 'BOE' && BOE_LITERAL_NOTARIA_MAP[numero])
       ? BOE_LITERAL_NOTARIA_MAP[numero]
       : localidad;
@@ -123,20 +114,6 @@ function initFlashcardsApp() {
       ? Math.round(parseFloat(rawTotalGen))
       : null;
 
-    // Desglose de actos relevantes 2025
-    const actCompraventas = parseNumField(raw, 'Contratos traslativos sobre todo tipo de bienes y derechos');
-    const actHipotecas = parseNumField(raw, 'Creditos, prestamos y garantias hipotecarias');
-    const actCancelaciones = parseNumField(raw, 'Cartas de pago y cancelaciones');
-    const actHerencias = parseNumField(raw, 'Herencias');
-    const actTestamentos = parseNumField(raw, 'Testamentos y disposiciones de ultima voluntad');
-    const actSociedades = parseNumField(raw, 'Entidades con personalidad juridica');
-    const actPoderes = parseNumField(raw, 'Apoderamientos');
-    const actActas = parseNumField(raw, 'Actas');
-    const actFincas = parseNumField(raw, 'Actos que implican modificacion fisica sobre las fincas');
-    const actDonaciones = parseNumField(raw, 'Donaciones y transmisiones gratuitas inter vivos');
-    const actFamilia = parseNumField(raw, 'Actos de orden familiar y personal') +
-                       parseNumField(raw, 'Contratos por razon de matrimonio y actos relativos a uniones o separaciones de hecho');
-
     // Cruzar con DATA_NOTARIAS para obtener número de notarías en la localidad y categoría
     const nMatch = findNotariaMatchForGalo(localidad, provincia);
     const numNotarias = nMatch ? (parseInt(nMatch.numero) || 1) : 1;
@@ -144,44 +121,7 @@ function initFlashcardsApp() {
       categoria = nMatch ? nMatch.clase : '-';
     }
 
-    // Demografía y Renta
-    const poblacion = typeof getPoblacion === 'function' ? getPoblacion(localidad, provincia) : null;
-    const ratioPobNot = poblacion ? Math.round(poblacion / numNotarias) : null;
-    const renta = typeof getRenta === 'function' ? getRenta(localidad, provincia) : null;
-    const evolObj = typeof getEvol === 'function' ? getEvol(localidad, provincia) : null;
-    const evolucionPob = evolObj && evolObj.crecimiento !== undefined ? evolObj.crecimiento : null;
-
-    // Coordenadas y POIs (Costa, Montaña, Aeropuerto)
     const coords = getCoordsForGalo(localidad, provincia);
-    let distCosta = null;
-    let distMontana = null;
-    let distAero = null;
-    if (coords && typeof haversine === 'function') {
-      if (typeof PUNTOS_COSTA !== 'undefined') {
-        let minC = Infinity;
-        PUNTOS_COSTA.forEach(c => {
-          const d = haversine(coords.lat, coords.lon, c.lat, c.lon);
-          if (d < minC) minC = d;
-        });
-        if (minC !== Infinity) distCosta = Math.round(minC);
-      }
-      if (typeof PUNTOS_MONTANA !== 'undefined') {
-        let minM = Infinity;
-        PUNTOS_MONTANA.forEach(m => {
-          const d = haversine(coords.lat, coords.lon, m.lat, m.lon);
-          if (d < minM) minM = d;
-        });
-        if (minM !== Infinity) distMontana = Math.round(minM);
-      }
-      if (typeof AEROPUERTOS !== 'undefined') {
-        let minA = Infinity;
-        AEROPUERTOS.forEach(a => {
-          const d = haversine(coords.lat, coords.lon, a.lat, a.lon);
-          if (d < minA) minA = d;
-        });
-        if (minA !== Infinity) distAero = Math.round(minA);
-      }
-    }
 
     // Resto de notarías de la misma localidad
     const { restoNotarias, mediaProtResto, mediaPolResto } = numNotarias > 1
@@ -207,13 +147,6 @@ function initFlashcardsApp() {
       categoria,
       notarioAnterior,
       numNotarias,
-      poblacion,
-      ratioPobNot,
-      renta,
-      evolucionPob,
-      distCosta,
-      distMontana,
-      distAero,
       protocolos2025,
       polizasA2025,
       polizasB2025,
@@ -221,17 +154,6 @@ function initFlashcardsApp() {
       foliosProt2025,
       foliosPorProt,
       totalGeneral2025,
-      actCompraventas,
-      actHipotecas,
-      actCancelaciones,
-      actHerencias,
-      actTestamentos,
-      actSociedades,
-      actPoderes,
-      actActas,
-      actFincas,
-      actDonaciones,
-      actFamilia,
       restoNotarias,
       mediaProtResto,
       mediaPolResto,
@@ -256,6 +178,8 @@ function initFlashcardsApp() {
 
   fcState.plazas = items;
   fcState.orderedIds = items.map(p => p.fcId);
+  fcState.revealedCount = 1;
+  fcState.lastRevealedId = fcState.orderedIds[0] || null;
   fcState.boeMaxCount = items.length;
 
   // Cargar progreso guardado en localStorage
@@ -289,6 +213,18 @@ function initFlashcardsApp() {
       if (e.target.id === 'galo-modal') galoModal.style.display = 'none';
     });
   }
+
+  // Cuando el usuario hace clic en la pestaña "Asistente Excel + BOE 📊", activar pantalla completa automáticamente
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (btn.getAttribute('data-target') === 'tab-flashcards') {
+        fcState.isFullscreenOverlay = true;
+        renderFcApp();
+      } else {
+        document.body.classList.remove('fc-fullscreen-active');
+      }
+    });
+  });
 
   renderFcApp();
 }
@@ -425,7 +361,7 @@ function ensureCompleteOrderedIds(candidateIds) {
 function saveFcStateToStorage() {
   try {
     const payload = {
-      version: 2,
+      version: 3,
       screen: fcState.screen,
       userName: fcState.userName,
       userSurnames: fcState.userSurnames,
@@ -437,7 +373,8 @@ function saveFcStateToStorage() {
       userCoords: fcState.userCoords,
       locationName: fcState.locationName,
       orderedIds: fcState.orderedIds,
-      readMap: fcState.readMap,
+      revealedCount: fcState.revealedCount,
+      lastRevealedId: fcState.lastRevealedId,
       excludedBoe: fcState.excludedBoe,
       notes: fcState.notes,
       boeMaxCount: fcState.boeMaxCount,
@@ -491,14 +428,12 @@ function applyImportedFcData(data, showNotification = true) {
 
   const usedTargets = new Set();
 
-  // Si viene del formato v2 (orderedIds directo)
   if (Array.isArray(data.orderedIds) && data.orderedIds.length > 0) {
     const mapped = data.orderedIds
       .map(oldId => remapFcIdIfNeeded(oldId, usedTargets))
       .filter(Boolean);
     fcState.orderedIds = ensureCompleteOrderedIds(mapped);
   } else if (data.groupOrders && typeof data.groupOrders === 'object') {
-    // Compatibilidad con formato v1 anterior (grupos 1..5)
     const combined = [];
     for (let g = 1; g <= 5; g++) {
       (data.groupOrders[g] || []).forEach(oldId => {
@@ -511,26 +446,13 @@ function applyImportedFcData(data, showNotification = true) {
     fcState.orderedIds = ensureCompleteOrderedIds([]);
   }
 
-  // Leídas / revisadas
-  if (data.readMap && typeof data.readMap === 'object') {
-    const newRead = {};
-    const usedR = new Set();
-    Object.keys(data.readMap).forEach(k => {
-      if (data.readMap[k]) {
-        const nk = remapFcIdIfNeeded(k, usedR);
-        if (nk) newRead[nk] = true;
-      }
-    });
-    fcState.readMap = newRead;
-  } else if (data.ratings && typeof data.ratings === 'object') {
-    const newRead = {};
-    const usedR = new Set();
-    Object.keys(data.ratings).forEach(k => {
-      const nk = remapFcIdIfNeeded(k, usedR);
-      if (nk) newRead[nk] = true;
-    });
-    fcState.readMap = newRead;
+  if (typeof data.revealedCount === 'number' && data.revealedCount >= 1) {
+    fcState.revealedCount = Math.min(fcState.plazas.length, Math.max(1, data.revealedCount));
+  } else {
+    fcState.revealedCount = 1;
   }
+
+  fcState.lastRevealedId = data.lastRevealedId || fcState.orderedIds[fcState.revealedCount - 1] || null;
 
   if (data.excludedBoe && typeof data.excludedBoe === 'object') {
     fcState.excludedBoe = data.excludedBoe;
@@ -548,7 +470,6 @@ function applyImportedFcData(data, showNotification = true) {
     fcState.boeCatSuffix = data.boeCatSuffix;
   }
 
-  // Mapear pantallas antiguas ('flashcards' / 'ordering') a 'excel'
   if (data.screen === 'flashcards' || data.screen === 'ordering' || data.screen === 'excel') {
     fcState.screen = 'excel';
   } else if (data.screen === 'final') {
@@ -573,7 +494,7 @@ function applyImportedFcData(data, showNotification = true) {
 
 // ================= CÁLCULO DE DISTANCIAS =================
 
-async function geocodeAndCalculateFcDistances(queryStr, silent = false) {
+async function geocodeAndCalculateFcDistances(queryStr) {
   const query = (queryStr || '').trim();
   if (!query) return false;
 
@@ -676,22 +597,43 @@ async function calculateFcDistancesFromCoords(userCoords) {
   }
 }
 
-// ================= MOVIMIENTO DE FILAS EN LA TABLA EXCEL =================
+// ================= APARICIÓN PROGRESIVA (1 A 1) Y MOVIMIENTO DE FILAS =================
 
-function movePlazaToGlobalPosition(fcId, newOneBasedRank) {
+function revealNextPlaza() {
+  if (fcState.revealedCount < fcState.plazas.length) {
+    fcState.revealedCount++;
+    fcState.lastRevealedId = fcState.orderedIds[fcState.revealedCount - 1] || null;
+    saveFcStateToStorage();
+    renderFcApp();
+
+    // Hacer scroll suave hacia la nueva fila que acaba de aparecer
+    setTimeout(() => {
+      if (fcState.lastRevealedId) {
+        const rowEl = document.querySelector(`tr[data-id="${CSS.escape(fcState.lastRevealedId)}"]`);
+        if (rowEl) {
+          rowEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }
+    }, 60);
+  }
+}
+
+function movePlazaWithinRevealed(fcId, newOneBasedRank) {
   const currentIdx = fcState.orderedIds.indexOf(fcId);
-  if (currentIdx === -1) return;
+  if (currentIdx === -1 || currentIdx >= fcState.revealedCount) return;
 
-  const total = fcState.orderedIds.length;
-  const targetIdx = Math.max(0, Math.min(total - 1, (parseInt(newOneBasedRank, 10) || 1) - 1));
+  // Solo se mueve dentro de las filas ya aparecidas (1 .. revealedCount)
+  const maxAllowed = fcState.revealedCount;
+  const targetIdx = Math.max(0, Math.min(maxAllowed - 1, (parseInt(newOneBasedRank, 10) || 1) - 1));
   if (currentIdx === targetIdx) return;
 
-  const arr = [...fcState.orderedIds];
-  const [moved] = arr.splice(currentIdx, 1);
-  arr.splice(targetIdx, 0, moved);
+  const revealedPart = fcState.orderedIds.slice(0, fcState.revealedCount);
+  const unrevealedPart = fcState.orderedIds.slice(fcState.revealedCount);
 
-  fcState.orderedIds = arr;
-  fcState.readMap[fcId] = true; // Marcar como revisada al moverla manualmente
+  const [moved] = revealedPart.splice(currentIdx, 1);
+  revealedPart.splice(targetIdx, 0, moved);
+
+  fcState.orderedIds = [...revealedPart, ...unrevealedPart];
   saveFcStateToStorage();
   renderFcApp();
 }
@@ -762,16 +704,24 @@ function formatInformeGaloHtml(text) {
 
 // ================= EXPORTACIÓN: EXCEL COMPLETO, CSV, JSON Y BOE ANEXO II/1 =================
 
-function getOrderedPlazasArray() {
+function getRevealedOrderedPlazasArray() {
+  const mapPlaza = {};
+  fcState.plazas.forEach(p => { mapPlaza[p.fcId] = p; });
+  const complete = ensureCompleteOrderedIds(fcState.orderedIds);
+  return complete.slice(0, fcState.revealedCount).map(id => mapPlaza[id]).filter(Boolean);
+}
+
+function getAllOrderedPlazasArray() {
   const mapPlaza = {};
   fcState.plazas.forEach(p => { mapPlaza[p.fcId] = p; });
   return ensureCompleteOrderedIds(fcState.orderedIds).map(id => mapPlaza[id]).filter(Boolean);
 }
 
 function getBoeFilteredPlazasArray() {
-  const all = getOrderedPlazasArray();
-  const maxN = Math.max(1, Math.min(all.length, parseInt(fcState.boeMaxCount, 10) || all.length));
-  return all.slice(0, maxN).filter(p => !fcState.excludedBoe[p.fcId]);
+  // Por defecto exporta las notarías colocadas/visibles (o hasta boeMaxCount)
+  const all = getAllOrderedPlazasArray();
+  const limit = Math.max(1, Math.min(all.length, parseInt(fcState.boeMaxCount, 10) || fcState.revealedCount));
+  return all.slice(0, limit).filter(p => !fcState.excludedBoe[p.fcId]);
 }
 
 function formatBoeOrdenConvocatoria(p) {
@@ -782,7 +732,7 @@ function formatBoeOrdenConvocatoria(p) {
 }
 
 function formatBoeNotariaSolicitada(p) {
-  let base = p.notariaSegunConvocatoria || p.localidad;
+  const base = p.notariaSegunConvocatoria || p.localidad;
   if (fcState.boeShowMotivoDisambig && p.notarioAnterior && p.notarioAnterior !== '-') {
     return `${base} (${p.motivoSegunConvocatoria})`;
   }
@@ -791,7 +741,7 @@ function formatBoeNotariaSolicitada(p) {
 
 function exportFcProgressJSON() {
   const payload = {
-    version: 2,
+    version: 3,
     app: 'NotariasExcelBOE',
     screen: fcState.screen,
     userName: fcState.userName,
@@ -804,7 +754,8 @@ function exportFcProgressJSON() {
     userCoords: fcState.userCoords,
     locationName: fcState.locationName,
     orderedIds: fcState.orderedIds,
-    readMap: fcState.readMap,
+    revealedCount: fcState.revealedCount,
+    lastRevealedId: fcState.lastRevealedId,
     excludedBoe: fcState.excludedBoe,
     notes: fcState.notes,
     boeMaxCount: fcState.boeMaxCount,
@@ -818,21 +769,22 @@ function exportFcProgressJSON() {
   const a = document.createElement('a');
   const safeName = (fcState.userName || 'notario').replace(/[^a-z0-9_-]/gi, '_');
   a.href = url;
-  a.download = `progreso_eleccion_notarias_${safeName}.json`;
+  a.download = `progreso_eleccion_notarias_${safeName}_${fcState.revealedCount}de${fcState.plazas.length}.json`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
 
-// 1) Descargar Lista Completa en Excel (.xlsx) con toda la información
+// 1) Descargar Lista en Excel (.xlsx)
 function downloadFullExcelXLSX() {
-  const ordered = getOrderedPlazasArray();
+  const ordered = getAllOrderedPlazasArray();
   const baseHeaders = typeof DATA_GALO_HEADERS !== 'undefined' ? DATA_GALO_HEADERS : Object.keys(fcState.plazas[0]?.raw || {});
 
   const rowsData = ordered.map((p, idx) => {
     const obj = {
       'Orden de Preferencia': idx + 1,
+      'Estado en Tabla': idx < fcState.revealedCount ? 'Colocada' : 'Pendiente',
       'Orden Convocatoria (BOE/DOGC)': formatBoeOrdenConvocatoria(p),
       'Convocatoria': p.origen,
       'Notaría Solicitada (según BOE)': p.notariaSegunConvocatoria,
@@ -845,33 +797,18 @@ function downloadFullExcelXLSX() {
       'Colegio Notarial': p.colegio,
       'Motivo Vacante': p.motivo,
       'Notario Anterior': p.notarioAnterior,
-      'Núm. Notarios Localidad': p.numNotarias,
-      'Media Protocolos Resto Localidad': p.mediaProtResto !== null ? p.mediaProtResto : '',
-      'Media Pólizas Resto Localidad': p.mediaPolResto !== null ? p.mediaPolResto : '',
-      'Población (hab.)': p.poblacion !== null ? p.poblacion : '',
-      'Ratio Hab./Notario': p.ratioPobNot !== null ? p.ratioPobNot : '',
-      'Crecimiento Pob. 10 años (%)': p.evolucionPob !== null ? p.evolucionPob : '',
-      'Renta Neta Media (€)': p.renta !== null ? p.renta : '',
-      'Distancia C.P. (km)': p.distancia !== null ? Number(p.distancia.toFixed(1)) : '',
-      'Tiempo en Coche': p.duration ? formatDuration(p.duration) : '',
-      'Dist. Costa (km)': p.distCosta !== null ? p.distCosta : '',
-      'Dist. Aeropuerto (km)': p.distAero !== null ? p.distAero : '',
       'Protocolos 2025': p.protocolos2025 !== null ? p.protocolos2025 : '',
       'Pólizas 2025': p.polizas2025 !== null ? p.polizas2025 : '',
       'Folios Instrumentos 2025': p.foliosProt2025 !== null ? p.foliosProt2025 : '',
       'Media Folios / Protocolo': p.foliosPorProt !== null ? Number(p.foliosPorProt) : '',
       'Total General 2025': p.totalGeneral2025 !== null ? p.totalGeneral2025 : '',
-      'Compraventas (Traslativos)': p.actCompraventas,
-      'Hipotecas y Préstamos': p.actHipotecas,
-      'Herencias': p.actHerencias,
-      'Testamentos': p.actTestamentos,
-      'Sociedades': p.actSociedades,
-      'Poderes': p.actPoderes,
-      'Actas': p.actActas,
+      'Informe Galo': p.informeGalo || '',
       'Notas Personales': fcState.notes[p.fcId] || '',
-      'Revisada': fcState.readMap[p.fcId] ? 'Sí' : 'No',
-      'Incluida en BOE Anexo II/1': fcState.excludedBoe[p.fcId] ? 'No' : 'Sí',
-      'Informe Galo': p.informeGalo || ''
+      'Núm. Notarios Localidad': p.numNotarias,
+      'Media Protocolos Resto Localidad': p.mediaProtResto !== null ? p.mediaProtResto : '',
+      'Media Pólizas Resto Localidad': p.mediaPolResto !== null ? p.mediaPolResto : '',
+      'Distancia C.P. (km)': p.distancia !== null ? Number(p.distancia.toFixed(1)) : '',
+      'Tiempo en Coche': p.duration ? formatDuration(p.duration) : ''
     };
 
     baseHeaders.forEach(h => {
@@ -887,85 +824,19 @@ function downloadFullExcelXLSX() {
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.json_to_sheet(rowsData);
     ws['!cols'] = [
-      { wch: 18 }, { wch: 18 }, { wch: 12 }, { wch: 28 }, { wch: 24 },
-      { wch: 12 }, { wch: 22 }, { wch: 18 }, { wch: 26 }, { wch: 20 },
-      { wch: 18 }, { wch: 15 }, { wch: 28 }, { wch: 16 }, { wch: 18 },
-      { wch: 18 }, { wch: 15 }, { wch: 15 }, { wch: 16 }, { wch: 16 },
-      { wch: 15 }, { wch: 15 }, { wch: 14 }, { wch: 14 }, { wch: 15 },
-      { wch: 14 }, { wch: 18 }, { wch: 16 }, { wch: 16 }, { wch: 16 },
-      { wch: 16 }, { wch: 12 }, { wch: 12 }, { wch: 12 }, { wch: 12 },
-      { wch: 12 }, { wch: 35 }, { wch: 10 }, { wch: 14 }, { wch: 65 }
+      { wch: 18 }, { wch: 14 }, { wch: 18 }, { wch: 12 }, { wch: 28 },
+      { wch: 24 }, { wch: 12 }, { wch: 22 }, { wch: 18 }, { wch: 26 },
+      { wch: 18 }, { wch: 18 }, { wch: 15 }, { wch: 28 }, { wch: 15 },
+      { wch: 14 }, { wch: 18 }, { wch: 16 }, { wch: 16 }, { wch: 65 },
+      { wch: 35 }, { wch: 16 }, { wch: 18 }, { wch: 18 }, { wch: 15 }, { wch: 15 }
     ];
-    XLSX.utils.book_append_sheet(wb, ws, 'Listado Completo Eleccion');
+    XLSX.utils.book_append_sheet(wb, ws, 'Listado Eleccion');
     const safeName = (fcState.userName || 'notarias').replace(/[^a-z0-9_-]/gi, '_');
-    XLSX.writeFile(wb, `Listado_Completo_Eleccion_Notarias_${safeName}.xlsx`);
-  } else {
-    downloadFinalOrderedCSV();
+    XLSX.writeFile(wb, `Listado_Eleccion_Notarias_${safeName}.xlsx`);
   }
 }
 
-// 2) Descargar Lista Completa en CSV (.csv)
-function downloadFinalOrderedCSV() {
-  const ordered = getOrderedPlazasArray();
-  const extraLeadHeaders = [
-    'Orden de Preferencia',
-    'Orden Convocatoria',
-    'Notaría que se solicita (según convocatoria)',
-    'Notas Personales',
-    'Revisada',
-    'Incluida en BOE',
-    'Núm. Notarios Localidad',
-    'Media Protocolos Resto',
-    'Población (hab.)',
-    'Renta Media (€)',
-    'Distancia (km)',
-    'Tiempo en Coche'
-  ];
-
-  const baseHeaders = typeof DATA_GALO_HEADERS !== 'undefined' ? DATA_GALO_HEADERS : Object.keys(fcState.plazas[0]?.raw || {});
-  const allHeaders = [...extraLeadHeaders, ...baseHeaders];
-
-  const csvRows = [];
-  csvRows.push(allHeaders.map(escapeCsvCell).join(','));
-
-  ordered.forEach((p, idx) => {
-    const distStr = p.distancia !== null && p.distancia !== undefined ? p.distancia.toFixed(1) : '';
-    const timeStr = p.duration ? formatDuration(p.duration) : '';
-
-    const leadVals = [
-      idx + 1,
-      formatBoeOrdenConvocatoria(p),
-      formatBoeNotariaSolicitada(p),
-      fcState.notes[p.fcId] || '',
-      fcState.readMap[p.fcId] ? 'Sí' : 'No',
-      fcState.excludedBoe[p.fcId] ? 'No' : 'Sí',
-      p.numNotarias,
-      p.mediaProtResto !== null ? p.mediaProtResto : '',
-      p.poblacion !== null ? p.poblacion : '',
-      p.renta !== null ? p.renta : '',
-      distStr,
-      timeStr
-    ];
-
-    const rawVals = baseHeaders.map(h => p.raw[h] !== undefined && p.raw[h] !== null ? p.raw[h] : '');
-    const row = [...leadVals, ...rawVals];
-    csvRows.push(row.map(escapeCsvCell).join(','));
-  });
-
-  const csvString = '\uFEFF' + csvRows.join('\r\n');
-  const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  const safeName = (fcState.userName || 'notarias').replace(/[^a-z0-9_-]/gi, '_');
-  a.href = url;
-  a.download = `Listado_Completo_Eleccion_Notarias_${safeName}.csv`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
-
-// 3) Descargar Excel con el formato exacto del ANEXO II/1 del BOE (BOE-A-2026-21686)
+// 2) Descargar Excel con el formato exacto del ANEXO II/1 del BOE (BOE-A-2026-21686)
 function downloadBoeAnexoExcelXLSX() {
   const boeList = getBoeFilteredPlazasArray();
 
@@ -1012,7 +883,6 @@ function downloadBoeAnexoExcelXLSX() {
   }
 }
 
-// 4) Imprimir / Guardar PDF oficial del ANEXO II/1 (BOE-A-2026-21686)
 function printBoeAnexoII1() {
   document.body.classList.add('printing-boe-anexo');
   window.print();
@@ -1021,7 +891,6 @@ function printBoeAnexoII1() {
   }, 500);
 }
 
-// 5) Copiar tabla BOE Anexo II/1 al portapapeles
 function copyBoeTableToClipboard() {
   const boeList = getBoeFilteredPlazasArray();
   const lines = [
@@ -1042,15 +911,6 @@ function copyBoeTableToClipboard() {
   });
 }
 
-function escapeCsvCell(val) {
-  if (val === null || val === undefined) return '';
-  const str = String(val);
-  if (str.includes(',') || str.includes('"') || str.includes('\n') || str.includes('\r')) {
-    return '"' + str.replace(/"/g, '""') + '"';
-  }
-  return str;
-}
-
 function handleImportFile(file) {
   if (!file) return;
   const reader = new FileReader();
@@ -1066,7 +926,7 @@ function handleImportFile(file) {
             saveFcStateToStorage();
             renderFcApp();
           }
-          alert(`✅ Progreso y orden importados correctamente.`);
+          alert(`✅ Progreso importado correctamente (${fcState.revealedCount}/${fcState.plazas.length} notarías en tabla).`);
           return;
         }
       }
@@ -1101,8 +961,8 @@ function parseImportedCsvOrExcel(content, isBinary = false) {
     if (!rows || rows.length === 0) return false;
 
     const importedOrder = [];
-    const newReadMap = {};
     const newNotes = { ...fcState.notes };
+    let colocadasCount = 0;
 
     rows.forEach(r => {
       const loc = (r['Localidad / Plaza'] || r['Localidad'] || r['NOTARÍA QUE SE SOLICITA (según convocatoria)'] || r['Notaría Solicitada (según BOE)'] || '').toString().trim();
@@ -1139,9 +999,7 @@ function parseImportedCsvOrExcel(content, isBinary = false) {
 
       if (match && !importedOrder.includes(match.fcId)) {
         importedOrder.push(match.fcId);
-        if (r['Revisada'] === 'Sí' || r['Valoración']) {
-          newReadMap[match.fcId] = true;
-        }
+        if (r['Estado en Tabla'] === 'Colocada') colocadasCount++;
         if (r['Notas Personales']) {
           newNotes[match.fcId] = String(r['Notas Personales']);
         }
@@ -1151,7 +1009,7 @@ function parseImportedCsvOrExcel(content, isBinary = false) {
     if (importedOrder.length === 0) return false;
 
     fcState.orderedIds = ensureCompleteOrderedIds(importedOrder);
-    if (Object.keys(newReadMap).length > 0) fcState.readMap = newReadMap;
+    fcState.revealedCount = colocadasCount > 0 ? colocadasCount : importedOrder.length;
     fcState.notes = newNotes;
     fcState.screen = 'excel';
     saveFcStateToStorage();
@@ -1161,29 +1019,32 @@ function parseImportedCsvOrExcel(content, isBinary = false) {
   }
 }
 
-// ================= RENDERIZADO DE LA APLICACIÓN =================
+// ================= RENDERIZADO DE LA APLICACIÓN (PANTALLA COMPLETA) =================
 
 function renderFcApp() {
   const container = document.getElementById('fc-app-container');
   if (!container) return;
 
+  const tabEl = document.getElementById('tab-flashcards');
+  const isTabActive = tabEl && tabEl.classList.contains('active');
+
+  if (isTabActive && fcState.isFullscreenOverlay) {
+    container.classList.add('fc-fullscreen-modal');
+    document.body.classList.add('fc-fullscreen-active');
+  } else {
+    container.classList.remove('fc-fullscreen-modal');
+    document.body.classList.remove('fc-fullscreen-active');
+  }
+
   if (!fcState.unlocked && sessionStorage.getItem('fcUnlocked') !== 'true') {
-    container.classList.remove('fc-container-wide');
     container.innerHTML = renderPasswordScreen();
     attachPasswordEvents();
     return;
   }
   fcState.unlocked = true;
 
-  // En modo Excel y Final usamos todo el ancho disponible de la pantalla para que quepa mucha información
-  if (fcState.screen === 'excel' || fcState.screen === 'final') {
-    container.classList.add('fc-container-wide');
-  } else {
-    container.classList.remove('fc-container-wide');
-  }
-
-  const readCount = Object.keys(fcState.readMap).filter(k => fcState.readMap[k]).length;
   const totalCount = fcState.plazas.length;
+  const revCount = fcState.revealedCount;
 
   const topBarHtml = `
     <div class="fc-topbar no-print-boe">
@@ -1193,7 +1054,7 @@ function renderFcApp() {
             1. Datos e Inicio ${fcState.postalCode ? `(${escapeHTML(fcState.postalCode)})` : ''}
           </button>
           <button class="fc-step-pill ${fcState.screen === 'excel' ? 'active' : ''}" id="fc-nav-excel">
-            2. Tabla Excel Interactiva (${readCount}/${totalCount} leídas)
+            2. Tabla Progresiva (${revCount} / ${totalCount} notarías)
           </button>
           <button class="fc-step-pill ${fcState.screen === 'final' ? 'active' : ''}" id="fc-nav-final">
             3. Finalizar: Excel y BOE Anexo II/1
@@ -1202,37 +1063,43 @@ function renderFcApp() {
       </div>
       <div class="fc-topbar-right">
         <button class="action-btn-secondary fc-btn-sm" id="fc-btn-save-progress" title="Guardar progreso en archivo .json">
-          💾 Guardar Progreso (.json)
+          💾 Guardar (.json)
         </button>
         <label class="action-btn-secondary fc-btn-sm" style="cursor:pointer; margin:0;" title="Importar archivo .json, .csv o .xlsx">
-          📂 Importar (.json / .xlsx / .csv)
+          📂 Importar
           <input type="file" id="fc-input-import-top" accept=".json,.csv,.xlsx" style="display:none;">
         </label>
+        <button class="action-btn-secondary fc-btn-sm" id="fc-btn-browser-fs" title="Activar/desactivar pantalla completa del navegador (F11)">
+          ⛶ Pantalla Completa
+        </button>
+        <button class="action-btn-secondary fc-btn-sm" id="fc-btn-exit-fs" style="color:#ef4444; border-color:rgba(239,68,68,0.35);" title="Salir al menú general de la web">
+          ✖ Salir al menú web
+        </button>
       </div>
     </div>
   `;
 
   let bodyHtml = '';
   if (fcState.screen === 'welcome') {
-    bodyHtml = renderWelcomeScreen(readCount, totalCount);
+    bodyHtml = renderWelcomeScreen(revCount, totalCount);
   } else if (fcState.screen === 'excel') {
-    bodyHtml = renderExcelScreen(readCount, totalCount);
+    bodyHtml = renderExcelScreen(revCount, totalCount);
   } else if (fcState.screen === 'final') {
     bodyHtml = renderFinalScreen();
   }
 
-  container.innerHTML = topBarHtml + bodyHtml;
+  container.innerHTML = topBarHtml + `<div class="fc-main-scroll-area">${bodyHtml}</div>`;
   attachFcEvents();
 }
 
 function renderPasswordScreen() {
   return `
-    <div class="fc-welcome-wrapper">
+    <div class="fc-welcome-wrapper" style="padding-top: 60px;">
       <div class="fc-welcome-card" style="max-width: 440px; text-align: center;">
         <div class="fc-welcome-badge">🔒 Acceso Restringido</div>
         <h2 class="fc-welcome-title">Asistente Excel + BOE</h2>
         <p class="fc-welcome-desc" style="margin-bottom: 20px;">
-          Introduce la contraseña para acceder a la tabla interactiva con el Informe Galo y el generador del Anexo II/1 del BOE.
+          Introduce la contraseña para acceder a la tabla progresiva con el Informe Galo y el generador del Anexo II/1 del BOE.
         </p>
         <form id="fc-password-form" style="display: flex; flex-direction: column; gap: 12px;">
           <input type="password" id="fc-password-input" class="search-input" style="min-width: unset; text-align: center; font-size: 16px;" placeholder="Contraseña..." autocomplete="current-password" required>
@@ -1240,7 +1107,10 @@ function renderPasswordScreen() {
             ❌ Contraseña incorrecta. Inténtalo de nuevo.
           </div>
           <button type="submit" class="action-btn fc-btn-lg" style="width: 100%;">
-            🔓 Entrar
+            🔓 Entrar en Pantalla Completa
+          </button>
+          <button type="button" id="fc-pwd-exit-btn" class="action-btn-secondary" style="width: 100%;">
+            Volver a la web
           </button>
         </form>
       </div>
@@ -1252,6 +1122,7 @@ function attachPasswordEvents() {
   const form = document.getElementById('fc-password-form');
   const input = document.getElementById('fc-password-input');
   const errEl = document.getElementById('fc-password-error');
+  document.getElementById('fc-pwd-exit-btn')?.addEventListener('click', exitFullscreenToWeb);
   if (!form || !input) return;
 
   form.addEventListener('submit', (e) => {
@@ -1268,16 +1139,30 @@ function attachPasswordEvents() {
   });
 }
 
+function exitFullscreenToWeb() {
+  fcState.isFullscreenOverlay = false;
+  document.body.classList.remove('fc-fullscreen-active');
+  if (document.fullscreenElement) {
+    try { document.exitFullscreen(); } catch (e) {}
+  }
+  const vacTabBtn = document.querySelector('.tab-btn[data-target="tab-vacantes"]');
+  if (vacTabBtn) {
+    vacTabBtn.click();
+  } else {
+    renderFcApp();
+  }
+}
+
 // ================= PANTALLA 1: DATOS E INICIO =================
 
-function renderWelcomeScreen(readCount, totalCount) {
+function renderWelcomeScreen(revCount, totalCount) {
   return `
     <div class="fc-welcome-wrapper">
-      <div class="fc-welcome-card" style="max-width: 740px;">
-        <div class="fc-welcome-badge">📊 Tabla Excel Interactiva + Modelo Oficial BOE-A-2026-21686</div>
-        <h2 class="fc-welcome-title">Ordena tus Notarías Vacantes desde el principio</h2>
+      <div class="fc-welcome-card" style="max-width: 760px;">
+        <div class="fc-welcome-badge">📊 Tabla Progresiva 1 a 1 + Modelo Oficial BOE-A-2026-21686</div>
+        <h2 class="fc-welcome-title">Ordena tus Notarías Vacantes de 1 en 1</h2>
         <p class="fc-welcome-desc">
-          Lee directamente todas las <strong>${totalCount} plazas vacantes</strong> en una tabla tipo Excel con toda la información (<strong>Informe Galo completo, protocolos, pólizas, folios, desglose de actos, compañeros de plaza, demografía, renta y distancia en coche</strong>) y muévelas en tiempo real arrastrándolas o escribiendo el número de posición. Al terminar, obtendrás tu <strong>Excel completo</strong> y el <strong>Anexo II/1 oficial del BOE</strong> listo para presentar.
+          Empiezas con <strong>una sola línea</strong> en la tabla. A medida que vas leyendo y colocándola en su posición, pulsas <strong>"➕ Siguiente notaría"</strong> y aparece la 2.ª, luego la 3.ª, y así sucesivamente hasta las ${totalCount}. Al terminar, obtendrás tu <strong>Excel</strong> y el <strong>Anexo II/1 oficial del BOE</strong>.
         </p>
 
         <div class="fc-form-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;">
@@ -1305,17 +1190,17 @@ function renderWelcomeScreen(readCount, totalCount) {
 
         <div class="fc-welcome-actions">
           <button id="fc-start-btn" class="action-btn fc-btn-lg">
-            📊 Abrir Tabla Excel de Elección (${totalCount} plazas)
+            ${revCount > 1 ? `▶️ Continuar por la notaría ${revCount} de ${totalCount}` : `🚀 Empezar con la 1.ª Notaría`}
           </button>
           <button id="fc-reset-order-btn" class="action-btn-secondary fc-btn-lg" style="color:#ef4444; border-color:rgba(239,68,68,0.4);">
-            🔄 Restablecer orden alfabético inicial
+            🔄 Reiniciar a 1 sola línea desde cero
           </button>
         </div>
 
         <div class="fc-import-box">
           <div class="fc-import-box-header">
             <strong>📂 ¿Tienes un progreso o listado guardado anteriormente?</strong>
-            <p>Puedes importar tu archivo de progreso (<code>.json</code>) o un listado en Excel/CSV (<code>.xlsx</code> / <code>.csv</code>) para retomar tu orden exacto.</p>
+            <p>Puedes importar tu archivo de progreso (<code>.json</code>) o un listado en Excel/CSV (<code>.xlsx</code> / <code>.csv</code>) para retomar exactamente por donde ibas.</p>
           </div>
           <div class="fc-import-box-actions">
             <label class="action-btn-secondary" style="cursor:pointer;">
@@ -1332,127 +1217,89 @@ function renderWelcomeScreen(readCount, totalCount) {
   `;
 }
 
-// ================= PANTALLA 2: TABLA EXCEL INTERACTIVA =================
+// ================= PANTALLA 2: TABLA EXCEL PROGRESIVA (1 EN 1) =================
 
-function renderExcelScreen(readCount, totalCount) {
-  const orderedPlazas = getOrderedPlazasArray();
-  const comunidades = [...new Set(fcState.plazas.map(p => p.comunidad))].sort((a, b) => a.localeCompare(b, 'es'));
-
-  const q = normalize(fcState.searchQuery);
-  const hasActiveFilter = Boolean(q || fcState.filterComunidad || fcState.filterCategoria || fcState.filterTurno || fcState.filterReadStatus);
-
-  // Filtrar manteniendo el índice global real (globalRank = 1..228)
-  const visibleRows = [];
-  orderedPlazas.forEach((p, idx) => {
-    const globalRank = idx + 1;
-    const isRead = Boolean(fcState.readMap[p.fcId]);
-
-    if (fcState.filterComunidad && p.comunidad !== fcState.filterComunidad) return;
-    if (fcState.filterCategoria && p.categoria !== fcState.filterCategoria) return;
-    if (fcState.filterTurno && p.turno !== fcState.filterTurno) return;
-    if (fcState.filterReadStatus === 'read' && !isRead) return;
-    if (fcState.filterReadStatus === 'unread' && isRead) return;
-    if (q) {
-      const hay = normalize(`${p.numero} ${p.localidad} ${p.notariaSegunConvocatoria} ${p.provincia} ${p.comunidad} ${p.distrito} ${p.notarioAnterior} ${p.motivo} ${p.informeGalo} ${fcState.notes[p.fcId] || ''}`);
-      if (!hay.includes(q)) return;
-    }
-
-    visibleRows.push({ p, globalRank, isRead });
-  });
+function renderExcelScreen(revCount, totalCount) {
+  const revealedPlazas = getRevealedOrderedPlazasArray();
+  const pct = Math.round((revCount / totalCount) * 100);
+  const canRevealMore = revCount < totalCount;
 
   return `
     <div class="fc-excel-wrapper">
-      <!-- Barra de herramientas tipo Excel -->
+      <!-- Barra superior de control progresivo -->
       <div class="fc-excel-toolbar">
         <div class="fc-excel-toolbar-top">
-          <div>
-            <h2 class="fc-excel-title">📊 Tabla de Elección de Notarías (${visibleRows.length} de ${totalCount} mostradas)</h2>
+          <div class="fc-progressive-status">
+            <div class="fc-progressive-title-row">
+              <h2 class="fc-excel-title">
+                📊 Notarías en tu tabla: <strong style="color:var(--color-accent);">${revCount}</strong> de <strong>${totalCount}</strong> (${pct}%)
+              </h2>
+              <div class="fc-progressive-bar-mini">
+                <div class="fc-progressive-bar-fill" style="width:${pct}%;"></div>
+              </div>
+            </div>
             <p class="fc-excel-subtitle">
-              Arrastra cualquier fila desde <strong>☰</strong> o escribe directamente el <strong>número de orden (#1 a #${totalCount})</strong> y pulsa <code>Enter</code> para moverla a esa posición. Se guarda automáticamente.
+              Coloca la notaría arrastrando desde <strong>☰</strong> o escribiendo su <strong>puesto (#1 a #${revCount})</strong> y pulsando <code>Enter</code>. Cuando la tengas en su sitio, pulsa <strong>"➕ Siguiente notaría"</strong> para que aparezca la siguiente línea.
             </p>
           </div>
+
           <div class="fc-excel-toolbar-actions">
+            ${canRevealMore ? `
+              <button type="button" class="action-btn fc-btn-next-plaza" id="fc-btn-reveal-next">
+                ➕ Siguiente notaría (${revCount + 1} / ${totalCount})
+              </button>
+            ` : `
+              <span class="badge" style="background:#10b981; color:#fff; font-size:13px; padding:8px 12px;">
+                🎉 ¡Las ${totalCount} notarías están en la tabla!
+              </span>
+            `}
             <button type="button" class="action-btn-secondary fc-btn-sm" id="fc-excel-download-xlsx" style="border-color:#10b981; color:#10b981;">
               📊 Descargar Excel (.xlsx)
             </button>
-            <button type="button" class="action-btn fc-btn-sm" id="fc-go-final-btn">
+            <button type="button" class="action-btn fc-btn-sm" id="fc-go-final-btn" style="background:#1d4ed8; border-color:#1d4ed8;">
               ✅ Terminar: Ver Excel y BOE Anexo II/1 ➡️
             </button>
           </div>
         </div>
-
-        <!-- Filtros y Pre-ordenación de la tabla -->
-        <div class="fc-excel-filters-row">
-          <input type="text" id="fc-excel-search" class="search-input fc-excel-filter-input" placeholder="🔍 Buscar localidad, provincia, notario, texto en Informe Galo..." value="${escapeHTML(fcState.searchQuery)}">
-
-          <select id="fc-excel-filter-com" class="filter-select fc-excel-select">
-            <option value="">Todas las Comunidades</option>
-            ${comunidades.map(c => `<option value="${escapeHTML(c)}" ${fcState.filterComunidad === c ? 'selected' : ''}>${escapeHTML(c)}</option>`).join('')}
-          </select>
-
-          <select id="fc-excel-filter-cat" class="filter-select fc-excel-select">
-            <option value="">Todas las Categorías</option>
-            <option value="Primera" ${fcState.filterCategoria === 'Primera' ? 'selected' : ''}>1.ª Categoría</option>
-            <option value="Segunda" ${fcState.filterCategoria === 'Segunda' ? 'selected' : ''}>2.ª Categoría</option>
-            <option value="Tercera" ${fcState.filterCategoria === 'Tercera' ? 'selected' : ''}>3.ª Categoría</option>
-          </select>
-
-          <select id="fc-excel-filter-turno" class="filter-select fc-excel-select">
-            <option value="">Todos los Turnos</option>
-            <option value="Antigüedad en la carrera" ${fcState.filterTurno === 'Antigüedad en la carrera' ? 'selected' : ''}>Antigüedad carrera</option>
-            <option value="Antigüedad en clase" ${fcState.filterTurno === 'Antigüedad en clase' ? 'selected' : ''}>Antigüedad clase</option>
-          </select>
-
-          <select id="fc-excel-filter-read" class="filter-select fc-excel-select">
-            <option value="">Todas (${totalCount})</option>
-            <option value="unread" ${fcState.filterReadStatus === 'unread' ? 'selected' : ''}>Pendientes de leer (${totalCount - readCount})</option>
-            <option value="read" ${fcState.filterReadStatus === 'read' ? 'selected' : ''}>Ya leídas / movidas (${readCount})</option>
-          </select>
-
-          ${hasActiveFilter ? `
-            <button type="button" class="action-btn-secondary fc-btn-sm" id="fc-excel-clear-filters">
-              ❌ Quitar filtros
-            </button>
-          ` : ''}
-        </div>
       </div>
 
-      ${hasActiveFilter ? `
-        <div class="fc-filter-warning-banner">
-          <span>ℹ️ <strong>Filtro activo:</strong> Mostrando ${visibleRows.length} de ${totalCount} plazas. Puedes cambiar el puesto global de cualquier plaza escribiendo el número en la casilla <strong>Orden (#)</strong> y pulsando <code>Enter</code>. Quita el filtro para arrastrar con el ratón.</span>
-        </div>
-      ` : ''}
-
-      <!-- Tabla tipo Hoja de Cálculo de Alta Densidad -->
-      <div class="fc-spreadsheet-container">
+      <!-- Tabla tipo Hoja de Cálculo con el orden de columnas exacto pedido -->
+      <div class="fc-spreadsheet-container" id="fc-spreadsheet-scroll">
         <table class="fc-spreadsheet-table" id="fc-excel-table">
           <thead>
             <tr>
-              <th class="fc-col-order">Orden (#)</th>
-              <th class="fc-col-conv">Convocatoria / Turno</th>
-              <th class="fc-col-loc">Plaza / Localidad / Colegio</th>
-              <th class="fc-col-demo">Demografía y Entorno</th>
-              <th class="fc-col-dist">Distancia C.P.</th>
-              <th class="fc-col-work">Protocolos, Pólizas y Folios 2025</th>
-              <th class="fc-col-acts">Desglose de Actos 2025</th>
-              <th class="fc-col-peers">Compañeros en la Plaza</th>
-              <th class="fc-col-galo">Informe Galo Completo y Notas</th>
+              <th class="fc-col-order">1. Orden (#)</th>
+              <th class="fc-col-loc">2. Plaza / Convocatoria / Turno</th>
+              <th class="fc-col-work">3. Protocolos y Pólizas 2025</th>
+              <th class="fc-col-galo">4. Informe Galo</th>
+              <th class="fc-col-peers">5. Compañeros en la Plaza</th>
+              <th class="fc-col-dist">6. Distancia C.P.</th>
             </tr>
           </thead>
           <tbody id="fc-excel-tbody">
-            ${visibleRows.length === 0 ? `
-              <tr>
-                <td colspan="9" class="empty-state">No hay plazas que coincidan con el filtro actual.</td>
-              </tr>
-            ` : visibleRows.map(({ p, globalRank, isRead }) => renderExcelRowHtml(p, globalRank, isRead, hasActiveFilter)).join('')}
+            ${revealedPlazas.map((p, idx) => renderExcelRowHtml(p, idx + 1, revCount)).join('')}
           </tbody>
         </table>
+      </div>
+
+      <!-- Barra inferior para sacar la siguiente notaría sin tener que subir arriba -->
+      <div class="fc-bottom-reveal-bar">
+        ${canRevealMore ? `
+          <button type="button" class="action-btn fc-btn-next-plaza-lg" id="fc-btn-reveal-next-bottom">
+            ➕ Sacar siguiente notaría (Línea ${revCount + 1} de ${totalCount})
+          </button>
+        ` : `
+          <button type="button" class="action-btn fc-btn-next-plaza-lg" id="fc-btn-finish-bottom" style="background:#10b981; border-color:#10b981;">
+            🎉 ¡Has colocado las ${totalCount} notarías! Ver Excel y BOE Anexo II/1 ➡️
+          </button>
+        `}
       </div>
     </div>
   `;
 }
 
-function renderExcelRowHtml(p, globalRank, isRead, hasActiveFilter) {
+function renderExcelRowHtml(p, rank, revCount) {
+  const isNewlyRevealed = p.fcId === fcState.lastRevealedId;
   const isExcluded = Boolean(fcState.excludedBoe[p.fcId]);
   const noteVal = fcState.notes[p.fcId] || '';
 
@@ -1470,29 +1317,14 @@ function renderExcelRowHtml(p, globalRank, isRead, hasActiveFilter) {
         ? 'badge-excedencia'
         : 'badge-desierta';
 
-  // Demografía y entorno
-  const pobStr = p.poblacion !== null ? p.poblacion.toLocaleString('es-ES') + ' hab.' : 's/d';
-  const ratioStr = p.ratioPobNot !== null ? p.ratioPobNot.toLocaleString('es-ES') + ' hab/not' : '';
-  const rentaStr = p.renta !== null ? p.renta.toLocaleString('es-ES') + ' €' : '';
-  const evolStr = p.evolucionPob !== null
-    ? `${p.evolucionPob > 0 ? '+' : ''}${p.evolucionPob}%`
-    : '';
-  const evolColor = p.evolucionPob !== null
-    ? (p.evolucionPob >= 0 ? '#16a34a' : '#dc2626')
-    : 'inherit';
-
-  // Distancia
-  const distStr = p.distancia !== null ? `${p.distancia.toFixed(1)} km` : (fcState.postalCode ? '...' : 'Sin C.P.');
-  const timeStr = p.duration ? formatDuration(p.duration) : (p.distancia !== null ? '✈️ / Ferry' : '');
-
-  // Actividad 2025
+  // Columna 3: Protocolos y Pólizas 2025
   const protStr = p.protocolos2025 !== null ? p.protocolos2025.toLocaleString('es-ES') : '-';
   const polStr = p.polizas2025 !== null ? p.polizas2025.toLocaleString('es-ES') : '-';
   const foliosStr = p.foliosProt2025 !== null ? p.foliosProt2025.toLocaleString('es-ES') : '-';
   const folPorProtStr = p.foliosPorProt !== null ? `${p.foliosPorProt} fol/prot` : '';
   const totalGenStr = p.totalGeneral2025 !== null ? p.totalGeneral2025.toLocaleString('es-ES') : '-';
 
-  // Compañeros en la plaza
+  // Columna 5: Compañeros en la plaza
   let peersHtml = '';
   if (p.numNotarias <= 1) {
     peersHtml = `<div class="fc-cell-badge-unique">🏛️ Plaza Única (1 notario)</div>`;
@@ -1523,19 +1355,20 @@ function renderExcelRowHtml(p, globalRank, isRead, hasActiveFilter) {
     `;
   }
 
+  // Columna 6: Distancia
+  const distStr = p.distancia !== null ? `${p.distancia.toFixed(1)} km` : (fcState.postalCode ? '...' : 'Sin C.P.');
+  const timeStr = p.duration ? formatDuration(p.duration) : (p.distancia !== null ? '✈️ / Ferry' : '');
+
   return `
-    <tr data-id="${escapeHTML(p.fcId)}" class="fc-excel-row ${isRead ? 'fc-row-read' : ''} ${isExcluded ? 'fc-row-excluded' : ''}">
-      <!-- 1. ORDEN (#) -->
+    <tr data-id="${escapeHTML(p.fcId)}" class="fc-excel-row ${isNewlyRevealed ? 'fc-row-new' : ''} ${isExcluded ? 'fc-row-excluded' : ''}">
+      <!-- COLUMNA 1: ORDEN (#) -->
       <td class="fc-cell-order">
+        ${isNewlyRevealed ? `<div class="fc-new-pill">🆕 NUEVA</div>` : ''}
         <div class="fc-order-box">
-          <span class="fc-drag-handle ${hasActiveFilter ? 'disabled' : ''}" title="${hasActiveFilter ? 'Quita el filtro para arrastrar con el ratón' : 'Arrastra para mover esta fila'}">☰</span>
-          <input type="number" min="1" max="${fcState.plazas.length}" value="${globalRank}" class="fc-rank-input" data-rank-input="${escapeHTML(p.fcId)}" title="Escribe el puesto al que quieres mover esta plaza y pulsa Enter">
+          <span class="fc-drag-handle" title="Arrastra desde aquí para mover esta fila">☰</span>
+          <input type="number" min="1" max="${revCount}" value="${rank}" class="fc-rank-input" data-rank-input="${escapeHTML(p.fcId)}" title="Escribe el puesto (1 a ${revCount}) y pulsa Enter">
         </div>
         <div class="fc-order-checks">
-          <label class="fc-check-label" title="Marcar como ya leída / revisada">
-            <input type="checkbox" data-read-check="${escapeHTML(p.fcId)}" ${isRead ? 'checked' : ''}>
-            <span>Leída</span>
-          </label>
           <label class="fc-check-label" title="Incluir esta plaza en la solicitud del BOE (Anexo II/1)">
             <input type="checkbox" data-boe-check="${escapeHTML(p.fcId)}" ${!isExcluded ? 'checked' : ''}>
             <span>Pedir BOE</span>
@@ -1543,29 +1376,10 @@ function renderExcelRowHtml(p, globalRank, isRead, hasActiveFilter) {
         </div>
       </td>
 
-      <!-- 2. CONVOCATORIA / TURNO -->
-      <td class="fc-cell-conv">
-        <div class="fc-conv-top">
-          <span class="badge" style="background:var(--color-primary); color:#fff; font-weight:700;">
-            Nº ${escapeHTML(p.numero)} ${p.origen === 'DOGC' ? '(Cat)' : '(BOE)'}
-          </span>
-          <span class="badge ${badgeCat}">Cat. ${escapeHTML(p.categoria)}</span>
-        </div>
-        <div class="fc-conv-turno" title="Turno de provisión">
-          ⚖️ ${escapeHTML(p.turno)}
-        </div>
-        <div class="fc-conv-motivo">
-          <span class="badge ${badgeMotivo}">${escapeHTML(p.motivo)}</span>
-        </div>
-        <div class="fc-conv-ant" title="Notario causante de la vacante">
-          👤 Ant.: <strong>${escapeHTML(p.notarioAnterior)}</strong>
-        </div>
-      </td>
-
-      <!-- 3. PLAZA / LOCALIDAD / COLEGIO -->
+      <!-- COLUMNA 2: PLAZA / CONVOCATORIA / TURNO -->
       <td class="fc-cell-loc">
         <div class="fc-loc-name">
-          <a href="#" data-action="openTownModal" data-localidad="${escapeHTML(p.localidad)}" data-provincia="${escapeHTML(p.provincia)}" class="town-link" title="Abrir ficha con Wikipedia, Google Maps, Street View e Idealista">
+          <a href="#" data-action="openTownModal" data-localidad="${escapeHTML(p.localidad)}" data-provincia="${escapeHTML(p.provincia)}" class="town-link" title="Ver ficha del municipio (Wikipedia, Maps, Street View, Idealista)">
             ${escapeHTML(p.localidad)}
           </a>
         </div>
@@ -1577,33 +1391,22 @@ function renderExcelRowHtml(p, globalRank, isRead, hasActiveFilter) {
         <div class="fc-loc-sub">
           <strong>${escapeHTML(p.provincia)}</strong> · ${escapeHTML(p.comunidad)}
         </div>
-        <div class="fc-loc-distrito">
-          Distrito: ${escapeHTML(p.distrito)}
+        <div class="fc-conv-top" style="margin-top:5px;">
+          <span class="badge" style="background:var(--color-primary); color:#fff; font-weight:700;">
+            Nº ${escapeHTML(p.numero)} ${p.origen === 'DOGC' ? '(Cat)' : '(BOE)'}
+          </span>
+          <span class="badge ${badgeCat}">Cat. ${escapeHTML(p.categoria)}</span>
+          <span class="badge ${badgeMotivo}">${escapeHTML(p.motivo)}</span>
+        </div>
+        <div class="fc-conv-turno">
+          ⚖️ ${escapeHTML(p.turno)}
+        </div>
+        <div class="fc-conv-ant">
+          👤 Ant.: <strong>${escapeHTML(p.notarioAnterior)}</strong>
         </div>
       </td>
 
-      <!-- 4. DEMOGRAFÍA Y ENTORNO -->
-      <td class="fc-cell-demo">
-        <div class="fc-demo-line">
-          <span title="Población del municipio">👥 <strong>${pobStr}</strong></span>
-          ${evolStr ? `<span style="color:${evolColor}; font-weight:600; font-size:11.5px;" title="Evolución de población (10 años)">(${evolStr})</span>` : ''}
-        </div>
-        ${ratioStr ? `<div class="fc-demo-line" title="Ratio habitantes por notario">📊 ${ratioStr}</div>` : ''}
-        ${rentaStr ? `<div class="fc-demo-line" style="color:#15803d; font-weight:600;" title="Renta neta media por persona">💰 ${rentaStr}</div>` : ''}
-        <div class="fc-demo-pois">
-          ${p.distCosta !== null ? `<span title="Distancia a la costa">🏖️ ${p.distCosta}km</span>` : ''}
-          ${p.distMontana !== null ? `<span title="Distancia a montaña">🏔️ ${p.distMontana}km</span>` : ''}
-          ${p.distAero !== null ? `<span title="Distancia al aeropuerto">✈️ ${p.distAero}km</span>` : ''}
-        </div>
-      </td>
-
-      <!-- 5. DISTANCIA AL C.P. -->
-      <td class="fc-cell-dist">
-        <div class="fc-dist-km"><strong>${distStr}</strong></div>
-        ${timeStr ? `<div class="fc-dist-time">🚗 ${timeStr}</div>` : ''}
-      </td>
-
-      <!-- 6. PROTOCOLOS, PÓLIZAS Y FOLIOS 2025 -->
+      <!-- COLUMNA 3: PROTOCOLOS Y PÓLIZAS 2025 -->
       <td class="fc-cell-work">
         <div class="fc-work-main">
           <span class="fc-work-prot" title="Instrumentos públicos 2025 (escrituras, actas y protestos)">📜 <strong>${protStr}</strong> prot.</span>
@@ -1614,39 +1417,31 @@ function renderExcelRowHtml(p, globalRank, isRead, hasActiveFilter) {
         <div class="fc-work-folios" title="Folios de los instrumentos públicos 2025">
           📄 ${foliosStr} folios ${folPorProtStr ? `<span class="fc-work-ratio">(${folPorProtStr})</span>` : ''}
         </div>
-        <div class="fc-work-total" title="Total general de asientos/instrumentos en estadística 2025">
+        <div class="fc-work-total" title="Total general en estadística 2025">
           ∑ Total: <strong>${totalGenStr}</strong>
         </div>
       </td>
 
-      <!-- 7. DESGLOSE DE ACTOS 2025 -->
-      <td class="fc-cell-acts">
-        <div class="fc-acts-grid">
-          <span title="Contratos traslativos (Compraventas)">🏠 Comprav.: <strong>${p.actCompraventas}</strong></span>
-          <span title="Créditos, préstamos y garantías hipotecarias">🏦 Hipot.: <strong>${p.actHipotecas}</strong></span>
-          <span title="Herencias">⚖️ Herenc.: <strong>${p.actHerencias}</strong></span>
-          <span title="Testamentos y última voluntad">✒️ Testam.: <strong>${p.actTestamentos}</strong></span>
-          <span title="Entidades con personalidad jurídica (Sociedades)">🏢 Socied.: <strong>${p.actSociedades}</strong></span>
-          <span title="Apoderamientos">🤝 Poderes: <strong>${p.actPoderes}</strong></span>
-          <span title="Actas notariales">📋 Actas: <strong>${p.actActas}</strong></span>
-          <span title="Cartas de pago y cancelaciones">🔓 Cancel.: <strong>${p.actCancelaciones}</strong></span>
-        </div>
-      </td>
-
-      <!-- 8. COMPAÑEROS EN LA PLAZA -->
-      <td class="fc-cell-peers">
-        ${peersHtml}
-      </td>
-
-      <!-- 9. INFORME GALO COMPLETO Y NOTAS -->
+      <!-- COLUMNA 4: INFORME GALO -->
       <td class="fc-cell-galo">
         <div class="fc-cell-galo-content">
           ${formatInformeGaloHtml(p.informeGalo)}
         </div>
         <div class="fc-cell-note-wrap">
-          <input type="text" class="fc-inline-note-input" data-note-input="${escapeHTML(p.fcId)}" placeholder="📝 Escribe aquí tu nota sobre esta plaza..." value="${escapeHTML(noteVal)}">
-          <button type="button" class="fc-icon-action" data-view-galo="${escapeHTML(p.fcId)}" title="Ver Informe Galo y compañeros en ventana grande">🔍</button>
+          <input type="text" class="fc-inline-note-input" data-note-input="${escapeHTML(p.fcId)}" placeholder="📝 Nota personal sobre esta plaza..." value="${escapeHTML(noteVal)}">
+          <button type="button" class="fc-icon-action" data-view-galo="${escapeHTML(p.fcId)}" title="Abrir Informe Galo en grande">🔍</button>
         </div>
+      </td>
+
+      <!-- COLUMNA 5: COMPAÑEROS EN LA PLAZA -->
+      <td class="fc-cell-peers">
+        ${peersHtml}
+      </td>
+
+      <!-- COLUMNA 6: DISTANCIA C.P. -->
+      <td class="fc-cell-dist">
+        <div class="fc-dist-km"><strong>${distStr}</strong></div>
+        ${timeStr ? `<div class="fc-dist-time">🚗 ${timeStr}</div>` : ''}
       </td>
     </tr>
   `;
@@ -1655,22 +1450,20 @@ function renderExcelRowHtml(p, globalRank, isRead, hasActiveFilter) {
 // ================= PANTALLA 3: FINALIZAR (EXCEL + BOE ANEXO II/1) =================
 
 function renderFinalScreen() {
-  const orderedPlazas = getOrderedPlazasArray();
+  const orderedPlazas = getAllOrderedPlazasArray();
   const boePlazas = getBoeFilteredPlazasArray();
 
   return `
     <div class="fc-final-wrapper">
-      <!-- Panel de Control de Exportación (Se oculta al imprimir el Anexo II/1) -->
       <div class="fc-final-hero no-print-boe">
-        <h2 style="margin-top:0;">🎉 Listado de Elección y Solicitud Oficial BOE (BOE-A-2026-21686)</h2>
+        <h2 style="margin-top:0;">🎉 Listado de Elección en Excel y Solicitud Oficial BOE (BOE-A-2026-21686)</h2>
         <p style="margin-bottom: 18px;">
-          Aquí tienes tus dos documentos listos: la <strong>Lista Completa en Excel</strong> con todas las estadísticas y el <strong>Modelo Oficial ANEXO II/1 del BOE</strong> exactamente como exige la convocatoria.
+          Aquí tienes tus dos listados listos para descargar: la <strong>Lista en Excel</strong> y el <strong>Modelo Oficial ANEXO II/1 del BOE</strong>.
         </p>
 
-        <!-- Botones principales de descarga -->
         <div class="fc-final-actions" style="margin-bottom: 20px;">
           <button type="button" class="action-btn fc-btn-lg" id="fc-btn-download-full-xlsx" style="background:#10b981; border-color:#10b981;">
-            📊 1. Descargar Lista Completa en Excel (.xlsx)
+            📊 1. Descargar Lista en Excel (.xlsx)
           </button>
           <button type="button" class="action-btn fc-btn-lg" id="fc-btn-print-boe" style="background:#1d4ed8; border-color:#1d4ed8;">
             🖨️ 2. Imprimir / Guardar PDF Oficial BOE (Anexo II/1)
@@ -1682,13 +1475,12 @@ function renderFinalScreen() {
             📋 Copiar Tabla BOE
           </button>
           <button type="button" class="action-btn-secondary fc-btn-lg" id="fc-btn-back-excel">
-            ⬅️ Volver a la Tabla Excel
+            ⬅️ Volver a la Tabla Progresiva
           </button>
         </div>
 
-        <!-- Configuración en vivo de los datos de cabecera del ANEXO II/1 -->
         <div class="fc-boe-config-box">
-          <div class="fc-boe-config-title">⚙️ Datos para la cabecera y formato del <strong>ANEXO II/1 (BOE-A-2026-21686)</strong>:</div>
+          <div class="fc-boe-config-title">⚙️ Datos para la cabecera del <strong>ANEXO II/1 (BOE-A-2026-21686)</strong>:</div>
           <div class="fc-boe-config-grid">
             <div class="fc-form-group">
               <label>N.º ESCALAFÓN</label>
@@ -1730,13 +1522,12 @@ function renderFinalScreen() {
           </div>
         </div>
 
-        <!-- Selector de vista previa -->
         <div class="fc-final-view-tabs">
           <button type="button" class="fc-view-tab-btn ${fcState.finalTab === 'boe' ? 'active' : ''}" data-final-tab="boe">
-            📜 Vista Oficial BOE: ANEXO II/1 (${boePlazas.length} plazas solicitadas)
+            📜 Vista Oficial BOE: ANEXO II/1 (${boePlazas.length} plazas)
           </button>
           <button type="button" class="fc-view-tab-btn ${fcState.finalTab === 'excel' ? 'active' : ''}" data-final-tab="excel">
-            📊 Vista Lista Excel Completa (${orderedPlazas.length} plazas)
+            📊 Vista Lista en Excel (${orderedPlazas.length} plazas)
           </button>
         </div>
       </div>
@@ -1795,7 +1586,7 @@ function renderFinalScreen() {
         </div>
       </div>
 
-      <!-- VISTA TABLA EXCEL RESUMEN COMPLETA -->
+      <!-- VISTA TABLA EXCEL RESUMEN -->
       <div id="fc-final-excel-preview" class="no-print-boe" style="${fcState.finalTab === 'excel' ? '' : 'display:none;'}">
         <div class="table-responsive">
           <table class="table fc-order-table">
@@ -1805,40 +1596,34 @@ function renderFinalScreen() {
                 <th class="center">Orden Conv.</th>
                 <th>Notaría (según BOE)</th>
                 <th>Provincia / CCAA</th>
-                <th class="center">Categoría</th>
-                <th>Turno</th>
-                <th>Notario Anterior (Motivo)</th>
                 <th class="center">Protocolos 2025</th>
                 <th class="center">Pólizas 2025</th>
-                <th class="center">Población / Renta</th>
+                <th>Informe Galo</th>
+                <th>Compañeros</th>
                 <th class="center">Distancia / Tiempo</th>
-                <th>Notas Personales</th>
               </tr>
             </thead>
             <tbody>
               ${orderedPlazas.map((p, idx) => {
-                const badgeCat = p.categoria === 'Primera' ? 'badge-primera' : p.categoria === 'Segunda' ? 'badge-segunda' : 'badge-tercera';
                 const protStr = p.protocolos2025 !== null ? p.protocolos2025.toLocaleString('es-ES') : '-';
                 const polStr = p.polizas2025 !== null ? p.polizas2025.toLocaleString('es-ES') : '-';
                 const distStr = p.distancia !== null ? `${p.distancia.toFixed(1)} km` : '-';
                 const timeStr = p.duration ? ` (${formatDuration(p.duration)})` : '';
-                const pobStr = p.poblacion !== null ? p.poblacion.toLocaleString('es-ES') + ' hab.' : '-';
-                const rentaStr = p.renta !== null ? p.renta.toLocaleString('es-ES') + ' €' : '';
 
                 return `
                   <tr>
                     <td class="center"><strong>#${idx + 1}</strong></td>
                     <td class="center"><span class="badge" style="background:var(--color-surface-hover); color:var(--color-text); font-weight:700;">${escapeHTML(formatBoeOrdenConvocatoria(p))}</span></td>
-                    <td><strong>${escapeHTML(p.notariaSegunConvocatoria)}</strong></td>
+                    <td>
+                      <strong>${escapeHTML(p.notariaSegunConvocatoria)}</strong>
+                      <div style="font-size:11px; color:var(--color-text-muted);">${escapeHTML(p.turno)} · ${escapeHTML(p.notarioAnterior)}</div>
+                    </td>
                     <td>${escapeHTML(p.provincia)} <small style="color:var(--color-text-muted);">(${escapeHTML(p.comunidad)})</small></td>
-                    <td class="center"><span class="badge ${badgeCat}">${escapeHTML(p.categoria)}</span></td>
-                    <td><small>${escapeHTML(p.turno)}</small></td>
-                    <td><small>${escapeHTML(p.notarioAnterior)} (${escapeHTML(p.motivo)})</small></td>
                     <td class="center"><strong>${protStr}</strong></td>
                     <td class="center">${polStr}</td>
-                    <td class="center"><small>${pobStr}${rentaStr ? `<br>${rentaStr}` : ''}</small></td>
+                    <td style="max-width:340px;"><small>${escapeHTML((p.informeGalo || '').slice(0, 160))}${(p.informeGalo || '').length > 160 ? '...' : ''}</small></td>
+                    <td class="center"><small>${p.numNotarias === 1 ? 'Única' : `${p.numNotarias} not. (Media: ${p.mediaProtResto ?? '-'})`}</small></td>
                     <td class="center">${distStr}<small style="color:var(--color-text-muted);">${timeStr}</small></td>
-                    <td><small>${escapeHTML(fcState.notes[p.fcId] || '')}</small></td>
                   </tr>
                 `;
               }).join('')}
@@ -1868,14 +1653,23 @@ function attachFcEvents() {
     fcState.screen = 'final';
     saveFcStateToStorage();
     renderFcApp();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  // Guardar / Importar en barra superior
+  // Guardar / Importar / Pantalla Completa en barra superior
   document.getElementById('fc-btn-save-progress')?.addEventListener('click', exportFcProgressJSON);
   document.getElementById('fc-input-import-top')?.addEventListener('change', (e) => {
     if (e.target.files?.[0]) handleImportFile(e.target.files[0]);
   });
+
+  document.getElementById('fc-btn-browser-fs')?.addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen?.().catch(() => {});
+    } else {
+      document.exitFullscreen?.().catch(() => {});
+    }
+  });
+
+  document.getElementById('fc-btn-exit-fs')?.addEventListener('click', exitFullscreenToWeb);
 
   // Eventos Pantalla 1 (Inicio)
   if (fcState.screen === 'welcome') {
@@ -1912,10 +1706,12 @@ function attachFcEvents() {
     });
 
     document.getElementById('fc-reset-order-btn')?.addEventListener('click', () => {
-      if (confirm('¿Quieres restablecer el orden de las 228 plazas al orden alfabético inicial (Comunidad > Provincia > Localidad)?')) {
+      if (confirm('¿Quieres reiniciar la tabla para empezar de nuevo con 1 sola línea y el orden alfabético inicial?')) {
         fcState.orderedIds = fcState.plazas.map(p => p.fcId);
-        fcState.readMap = {};
+        fcState.revealedCount = 1;
+        fcState.lastRevealedId = fcState.orderedIds[0] || null;
         fcState.excludedBoe = {};
+        fcState.screen = 'excel';
         saveFcStateToStorage();
         renderFcApp();
       }
@@ -1928,63 +1724,28 @@ function attachFcEvents() {
     document.getElementById('fc-welcome-export-btn')?.addEventListener('click', exportFcProgressJSON);
   }
 
-  // Eventos Pantalla 2 (Tabla Excel)
+  // Eventos Pantalla 2 (Tabla Excel Progresiva 1 a 1)
   if (fcState.screen === 'excel') {
+    document.getElementById('fc-btn-reveal-next')?.addEventListener('click', revealNextPlaza);
+    document.getElementById('fc-btn-reveal-next-bottom')?.addEventListener('click', revealNextPlaza);
     document.getElementById('fc-excel-download-xlsx')?.addEventListener('click', downloadFullExcelXLSX);
-    document.getElementById('fc-go-final-btn')?.addEventListener('click', () => {
+
+    const goFinal = () => {
+      fcState.boeMaxCount = fcState.revealedCount;
       fcState.screen = 'final';
       saveFcStateToStorage();
       renderFcApp();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    };
+    document.getElementById('fc-go-final-btn')?.addEventListener('click', goFinal);
+    document.getElementById('fc-btn-finish-bottom')?.addEventListener('click', goFinal);
 
-    // Filtros
-    const searchInput = document.getElementById('fc-excel-search');
-    if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
-        const pos = e.target.selectionStart;
-        fcState.searchQuery = e.target.value;
-        renderFcApp();
-        const newSearch = document.getElementById('fc-excel-search');
-        if (newSearch) {
-          newSearch.focus();
-          try { newSearch.setSelectionRange(pos, pos); } catch (err) {}
-        }
-      });
-    }
-
-    document.getElementById('fc-excel-filter-com')?.addEventListener('change', (e) => {
-      fcState.filterComunidad = e.target.value;
-      renderFcApp();
-    });
-    document.getElementById('fc-excel-filter-cat')?.addEventListener('change', (e) => {
-      fcState.filterCategoria = e.target.value;
-      renderFcApp();
-    });
-    document.getElementById('fc-excel-filter-turno')?.addEventListener('change', (e) => {
-      fcState.filterTurno = e.target.value;
-      renderFcApp();
-    });
-    document.getElementById('fc-excel-filter-read')?.addEventListener('change', (e) => {
-      fcState.filterReadStatus = e.target.value;
-      renderFcApp();
-    });
-    document.getElementById('fc-excel-clear-filters')?.addEventListener('click', () => {
-      fcState.searchQuery = '';
-      fcState.filterComunidad = '';
-      fcState.filterCategoria = '';
-      fcState.filterTurno = '';
-      fcState.filterReadStatus = '';
-      renderFcApp();
-    });
-
-    // Cambio de posición escribiendo el número de orden (#1..#228)
+    // Cambio de posición escribiendo el número de orden (#1..#revealedCount)
     document.querySelectorAll('[data-rank-input]').forEach(inp => {
       const commitRank = () => {
         const id = inp.getAttribute('data-rank-input');
         const val = parseInt(inp.value, 10);
         if (!isNaN(val) && val >= 1) {
-          movePlazaToGlobalPosition(id, val);
+          movePlazaWithinRevealed(id, val);
         }
       };
       inp.addEventListener('keydown', (e) => {
@@ -1994,21 +1755,6 @@ function attachFcEvents() {
         }
       });
       inp.addEventListener('change', commitRank);
-    });
-
-    // Casilla "Leída"
-    document.querySelectorAll('[data-read-check]').forEach(chk => {
-      chk.addEventListener('change', () => {
-        const id = chk.getAttribute('data-read-check');
-        if (chk.checked) {
-          fcState.readMap[id] = true;
-        } else {
-          delete fcState.readMap[id];
-        }
-        saveFcStateToStorage();
-        const tr = chk.closest('tr');
-        if (tr) tr.classList.toggle('fc-row-read', chk.checked);
-      });
     });
 
     // Casilla "Pedir BOE"
@@ -2044,33 +1790,26 @@ function attachFcEvents() {
       });
     });
 
-    // SortableJS Drag & Drop en la tabla (cuando no hay filtro activo)
-    const hasActiveFilter = Boolean(fcState.searchQuery || fcState.filterComunidad || fcState.filterCategoria || fcState.filterTurno || fcState.filterReadStatus);
+    // SortableJS Drag & Drop entre las filas ya aparecidas
     const tbody = document.getElementById('fc-excel-tbody');
     if (tbody && window.Sortable) {
       if (fcState.sortableInstance) {
         try { fcState.sortableInstance.destroy(); } catch (e) {}
         fcState.sortableInstance = null;
       }
-      if (!hasActiveFilter) {
-        fcState.sortableInstance = new Sortable(tbody, {
-          handle: '.fc-drag-handle',
-          animation: 150,
-          ghostClass: 'fc-sortable-ghost',
-          onEnd: function (evt) {
-            const movedRow = evt.item;
-            const movedId = movedRow?.getAttribute('data-id');
-            if (movedId) {
-              fcState.readMap[movedId] = true;
-            }
-            const rows = Array.from(tbody.querySelectorAll('.fc-excel-row'));
-            const newOrder = rows.map(r => r.getAttribute('data-id')).filter(Boolean);
-            fcState.orderedIds = ensureCompleteOrderedIds(newOrder);
-            saveFcStateToStorage();
-            renderFcApp();
-          }
-        });
-      }
+      fcState.sortableInstance = new Sortable(tbody, {
+        handle: '.fc-drag-handle',
+        animation: 150,
+        ghostClass: 'fc-sortable-ghost',
+        onEnd: function () {
+          const rows = Array.from(tbody.querySelectorAll('.fc-excel-row'));
+          const newRevealedOrder = rows.map(r => r.getAttribute('data-id')).filter(Boolean);
+          const unrevealedPart = fcState.orderedIds.slice(fcState.revealedCount);
+          fcState.orderedIds = ensureCompleteOrderedIds([...newRevealedOrder, ...unrevealedPart]);
+          saveFcStateToStorage();
+          renderFcApp();
+        }
+      });
     }
   }
 
@@ -2086,7 +1825,6 @@ function attachFcEvents() {
       renderFcApp();
     });
 
-    // Campos de cabecera del Anexo II/1 en vivo
     const bindLiveField = (id, key) => {
       const el = document.getElementById(id);
       if (!el) return;
