@@ -1,40 +1,80 @@
-// ================= ASISTENTE FLASHCARDS =================
+// ================= ASISTENTE DE ELECCIÓN: MODO EXCEL + BOE ANEXO II/1 (BOE-A-2026-21686) =================
 
-const FC_GROUPS = [
-  { id: 1, name: 'Top', label: '1 - Top 🌟', shortLabel: 'Top', color: '#10b981', bg: 'rgba(16, 185, 129, 0.12)', border: '#10b981' },
-  { id: 2, name: 'Muy buena', label: '2 - Muy buena 👍', shortLabel: 'Muy buena', color: '#3b82f6', bg: 'rgba(59, 130, 246, 0.12)', border: '#3b82f6' },
-  { id: 3, name: 'Buena', label: '3 - Buena 👌', shortLabel: 'Buena', color: '#6366f1', bg: 'rgba(99, 102, 241, 0.12)', border: '#6366f1' },
-  { id: 4, name: 'Mala', label: '4 - Mala ⚠️', shortLabel: 'Mala', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.12)', border: '#f59e0b' },
-  { id: 5, name: 'Muy mala', label: '5 - Muy mala ❌', shortLabel: 'Muy mala', color: '#ef4444', bg: 'rgba(239, 68, 68, 0.12)', border: '#ef4444' }
-];
+// Mapa literal de la columna "Notaría" del Anexo I del BOE-A-2026-21686 para las plazas cuyo nombre oficial en BOE varía respecto a DATA_GALO
+const BOE_LITERAL_NOTARIA_MAP = {
+  '2': 'València',
+  '6': 'Coruña, A',
+  '36': 'Realejos, Los',
+  '42': 'Gandia',
+  '48': 'Barco de Ávila, El',
+  '57': 'Trevias',
+  '74': 'Vellés, La',
+  '78': 'Berdun',
+  '80': 'Pontenova, A',
+  '91': 'Font de la Figuera, la',
+  '92': "Font d' en Carròs, la",
+  '93': 'Cuervo de Sevilla, El',
+  '95': 'Llucena/Lucena del Cid',
+  '117': 'Castillo de las Guardas, El',
+  '130': 'Pobla del Duc, La',
+  '143': 'Barco de Valdeorras, O',
+  '158': 'Cañiza, A',
+  '171': 'Robla, La'
+};
 
 const fcState = {
   unlocked: false,
-  screen: 'welcome', // 'welcome' | 'flashcards' | 'ordering' | 'final'
+  screen: 'welcome', // 'welcome' | 'excel' | 'final'
   userName: '',
+  userSurnames: '',
+  escalafon: '',
+  lugarFirma: 'Madrid',
+  diaFirma: new Date().getDate().toString(),
+  mesFirma: 'octubre',
   postalCode: '',
   userCoords: null,
   locationName: '',
-  currentIndex: 0,
-  ratings: {}, // { [fcId]: 1|2|3|4|5 }
-  groupOrders: {
-    1: [],
-    2: [],
-    3: [],
-    4: [],
-    5: []
-  },
-  currentOrderGroup: 1, // 1..5
-  plazas: [], // Enriched and sorted array of 210 items from DATA_GALO
-  sortableInstance: null,
-  galoExpanded: false,
-  autoSortApplied: { 4: null, 5: null }
+  plazas: [], // Array enriquecido de las 228 plazas de DATA_GALO
+  orderedIds: [], // Array con los fcId en el orden exacto de preferencia (1..228)
+  readMap: {}, // { [fcId]: boolean } marca si el usuario ya la ha leído/revisado
+  excludedBoe: {}, // { [fcId]: boolean } si el usuario decide no pedirla en el Anexo II/1
+  notes: {}, // { [fcId]: string } notas personales en la tabla
+  expandedGaloRows: {}, // { [fcId]: boolean }
+  expandedPeersRows: {}, // { [fcId]: boolean }
+  searchQuery: '',
+  filterComunidad: '',
+  filterCategoria: '',
+  filterTurno: '',
+  filterReadStatus: '', // '' | 'unread' | 'read'
+  boeMaxCount: 228,
+  boeShowMotivoDisambig: false, // Si se quiere añadir entre paréntesis el notario anterior cuando hay varias en el mismo municipio
+  boeCatSuffix: true, // Indicar (Cataluña) junto al nº de orden en las plazas del DOGC
+  finalTab: 'boe', // 'boe' | 'excel'
+  sortableInstance: null
 };
+
+function parseNumField(raw, key) {
+  const val = raw[key];
+  if (val === '' || val === undefined || val === null) return 0;
+  const n = parseFloat(val);
+  return isNaN(n) ? 0 : Math.round(n);
+}
+
+function buildOfficialMotivoText(motivo, notarioAnterior) {
+  const m = (motivo || '').trim();
+  const ant = (notarioAnterior || '').trim();
+  if (!ant || ant === '-') return m;
+  if (m === 'Desierta') return `Desierta en concurso precedente (protocolo de ${ant})`;
+  if (m === 'Jubilación') return `Jubilación de ${ant}`;
+  if (m === 'Resulta' || m === 'Traslado') return `Traslado de ${ant}`;
+  if (m === 'Excedencia') return `Excedencia de ${ant}`;
+  return `${m} (${ant})`;
+}
 
 function initFlashcardsApp() {
   if (typeof DATA_GALO === 'undefined') return;
 
-  // Enrich and sort DATA_GALO alphabetically by Comunidad -> Provincia -> Localidad / Plaza
+  // Enriquecer cada una de las 228 plazas con todos los datos demográficos, geográficos y estadísticos
   const items = DATA_GALO.map((raw, idx) => {
     const numero = (raw['Número'] || '').toString().trim();
     const comunidad = (raw['Comunidad'] || '').trim();
@@ -44,50 +84,154 @@ function initFlashcardsApp() {
     let categoria = (raw['Categoría'] || '').trim();
     const turno = (raw['Turno'] || '').trim();
     const notarioAnterior = (raw['Notario Anterior'] || '').trim() || '-';
+    const colegio = (raw['Colegio'] || comunidad || '').trim();
+    const distrito = (raw['Distrito'] || localidad || '').trim();
     const informeGalo = (raw['Informe Galo'] || '').trim();
+    const origen = comunidad === 'Cataluña' ? 'DOGC' : 'BOE';
 
+    // Nombre exacto según convocatoria BOE / DOGC para el Anexo II/1
+    const notariaSegunConvocatoria = (origen === 'BOE' && BOE_LITERAL_NOTARIA_MAP[numero])
+      ? BOE_LITERAL_NOTARIA_MAP[numero]
+      : localidad;
+
+    const motivoSegunConvocatoria = buildOfficialMotivoText(motivo, notarioAnterior);
+
+    // Datos de actividad 2025
     const rawProt = raw['Instrumentos públicos (escrituras, actas y protestos)'];
     const rawPolA = raw['Pólizas Sección A'];
+    const rawPolB = raw['Pólizas Sección B'];
+    const rawFoliosProt = raw['Folios de los instrumentos públicos'];
+    const rawTotalGen = raw['Total general'];
 
     const protocolos2025 = rawProt !== '' && rawProt !== undefined && !isNaN(parseFloat(rawProt))
       ? Math.round(parseFloat(rawProt))
       : null;
-    const polizas2025 = rawPolA !== '' && rawPolA !== undefined && !isNaN(parseFloat(rawPolA))
+    const polizasA2025 = rawPolA !== '' && rawPolA !== undefined && !isNaN(parseFloat(rawPolA))
       ? Math.round(parseFloat(rawPolA))
       : null;
+    const polizasB2025 = rawPolB !== '' && rawPolB !== undefined && !isNaN(parseFloat(rawPolB))
+      ? Math.round(parseFloat(rawPolB))
+      : 0;
+    const polizas2025 = polizasA2025 !== null ? (polizasA2025 + polizasB2025) : null;
+    const foliosProt2025 = rawFoliosProt !== '' && rawFoliosProt !== undefined && !isNaN(parseFloat(rawFoliosProt))
+      ? Math.round(parseFloat(rawFoliosProt))
+      : null;
+    const foliosPorProt = (protocolos2025 && protocolos2025 > 0 && foliosProt2025 !== null)
+      ? (foliosProt2025 / protocolos2025).toFixed(1)
+      : null;
+    const totalGeneral2025 = rawTotalGen !== '' && rawTotalGen !== undefined && !isNaN(parseFloat(rawTotalGen))
+      ? Math.round(parseFloat(rawTotalGen))
+      : null;
 
-    // Cross-reference with DATA_NOTARIAS to get numNotarias and fallback categoria
+    // Desglose de actos relevantes 2025
+    const actCompraventas = parseNumField(raw, 'Contratos traslativos sobre todo tipo de bienes y derechos');
+    const actHipotecas = parseNumField(raw, 'Creditos, prestamos y garantias hipotecarias');
+    const actCancelaciones = parseNumField(raw, 'Cartas de pago y cancelaciones');
+    const actHerencias = parseNumField(raw, 'Herencias');
+    const actTestamentos = parseNumField(raw, 'Testamentos y disposiciones de ultima voluntad');
+    const actSociedades = parseNumField(raw, 'Entidades con personalidad juridica');
+    const actPoderes = parseNumField(raw, 'Apoderamientos');
+    const actActas = parseNumField(raw, 'Actas');
+    const actFincas = parseNumField(raw, 'Actos que implican modificacion fisica sobre las fincas');
+    const actDonaciones = parseNumField(raw, 'Donaciones y transmisiones gratuitas inter vivos');
+    const actFamilia = parseNumField(raw, 'Actos de orden familiar y personal') +
+                       parseNumField(raw, 'Contratos por razon de matrimonio y actos relativos a uniones o separaciones de hecho');
+
+    // Cruzar con DATA_NOTARIAS para obtener número de notarías en la localidad y categoría
     const nMatch = findNotariaMatchForGalo(localidad, provincia);
     const numNotarias = nMatch ? (parseInt(nMatch.numero) || 1) : 1;
     if (!categoria || categoria === '-') {
       categoria = nMatch ? nMatch.clase : '-';
     }
 
-    // Coordinates
-    const coords = getCoordsForGalo(localidad, provincia);
+    // Demografía y Renta
+    const poblacion = typeof getPoblacion === 'function' ? getPoblacion(localidad, provincia) : null;
+    const ratioPobNot = poblacion ? Math.round(poblacion / numNotarias) : null;
+    const renta = typeof getRenta === 'function' ? getRenta(localidad, provincia) : null;
+    const evolObj = typeof getEvol === 'function' ? getEvol(localidad, provincia) : null;
+    const evolucionPob = evolObj && evolObj.crecimiento !== undefined ? evolObj.crecimiento : null;
 
-    // Rest of notaries in the same locality (only if numNotarias > 1)
+    // Coordenadas y POIs (Costa, Montaña, Aeropuerto)
+    const coords = getCoordsForGalo(localidad, provincia);
+    let distCosta = null;
+    let distMontana = null;
+    let distAero = null;
+    if (coords && typeof haversine === 'function') {
+      if (typeof PUNTOS_COSTA !== 'undefined') {
+        let minC = Infinity;
+        PUNTOS_COSTA.forEach(c => {
+          const d = haversine(coords.lat, coords.lon, c.lat, c.lon);
+          if (d < minC) minC = d;
+        });
+        if (minC !== Infinity) distCosta = Math.round(minC);
+      }
+      if (typeof PUNTOS_MONTANA !== 'undefined') {
+        let minM = Infinity;
+        PUNTOS_MONTANA.forEach(m => {
+          const d = haversine(coords.lat, coords.lon, m.lat, m.lon);
+          if (d < minM) minM = d;
+        });
+        if (minM !== Infinity) distMontana = Math.round(minM);
+      }
+      if (typeof AEROPUERTOS !== 'undefined') {
+        let minA = Infinity;
+        AEROPUERTOS.forEach(a => {
+          const d = haversine(coords.lat, coords.lon, a.lat, a.lon);
+          if (d < minA) minA = d;
+        });
+        if (minA !== Infinity) distAero = Math.round(minA);
+      }
+    }
+
+    // Resto de notarías de la misma localidad
     const { restoNotarias, mediaProtResto, mediaPolResto } = numNotarias > 1
       ? getRestoNotariasForGalo(localidad, provincia, notarioAnterior, raw['Notario'])
       : { restoNotarias: [], mediaProtResto: null, mediaPolResto: null };
 
-    // Unique stable ID
     const fcId = `fc_${idx}_${normalize(localidad)}_${normalize(provincia)}`;
 
     return {
       fcId,
       originalIndex: idx,
       numero,
+      origen,
+      notariaSegunConvocatoria,
+      motivoSegunConvocatoria,
       turno,
       comunidad,
       provincia,
       localidad,
+      distrito,
+      colegio,
       motivo,
       categoria,
       notarioAnterior,
       numNotarias,
+      poblacion,
+      ratioPobNot,
+      renta,
+      evolucionPob,
+      distCosta,
+      distMontana,
+      distAero,
       protocolos2025,
+      polizasA2025,
+      polizasB2025,
       polizas2025,
+      foliosProt2025,
+      foliosPorProt,
+      totalGeneral2025,
+      actCompraventas,
+      actHipotecas,
+      actCancelaciones,
+      actHerencias,
+      actTestamentos,
+      actSociedades,
+      actPoderes,
+      actActas,
+      actFincas,
+      actDonaciones,
+      actFamilia,
       restoNotarias,
       mediaProtResto,
       mediaPolResto,
@@ -99,7 +243,7 @@ function initFlashcardsApp() {
     };
   });
 
-  // Sort alphabetically by Comunidad -> Provincia -> Localidad -> Notario Anterior
+  // Orden inicial por defecto: Comunidad -> Provincia -> Localidad -> Notario Anterior
   items.sort((a, b) => {
     const cCmp = a.comunidad.localeCompare(b.comunidad, 'es', { sensitivity: 'base' });
     if (cCmp !== 0) return cCmp;
@@ -111,14 +255,16 @@ function initFlashcardsApp() {
   });
 
   fcState.plazas = items;
+  fcState.orderedIds = items.map(p => p.fcId);
+  fcState.boeMaxCount = items.length;
 
-  // Load saved state from localStorage if available
+  // Cargar progreso guardado en localStorage
   loadFcStateFromStorage();
 
-  // If we already have userCoords in fcState (or global state), compute distances
+  // Calcular distancias si ya tenemos coordenadas
   if (fcState.userCoords) {
     calculateFcDistancesFromCoords(fcState.userCoords);
-  } else if (state && state.userCoords) {
+  } else if (typeof state !== 'undefined' && state && state.userCoords) {
     const savedDist = localStorage.getItem('userDistData');
     if (savedDist) {
       try {
@@ -132,7 +278,7 @@ function initFlashcardsApp() {
     }
   }
 
-  // Modal close listeners for Informe Galo modal
+  // Modal de Informe Galo
   const closeGaloModal = document.getElementById('close-galo-modal');
   const galoModal = document.getElementById('galo-modal');
   if (closeGaloModal && galoModal) {
@@ -143,26 +289,6 @@ function initFlashcardsApp() {
       if (e.target.id === 'galo-modal') galoModal.style.display = 'none';
     });
   }
-
-  // Keyboard shortcuts when on flashcards tab & flashcards screen
-  document.addEventListener('keydown', (e) => {
-    const tabEl = document.getElementById('tab-flashcards');
-    if (!tabEl || !tabEl.classList.contains('active')) return;
-    if (!fcState.unlocked) return;
-    if (fcState.screen !== 'flashcards') return;
-    if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) return;
-
-    if (e.key >= '1' && e.key <= '5') {
-      e.preventDefault();
-      rateCurrentCard(parseInt(e.key));
-    } else if (e.key === 'ArrowLeft') {
-      e.preventDefault();
-      prevFlashcard();
-    } else if (e.key === 'ArrowRight') {
-      e.preventDefault();
-      nextFlashcard();
-    }
-  });
 
   renderFcApp();
 }
@@ -271,25 +397,57 @@ function getRestoNotariasForGalo(localidad, provincia, notarioAnterior, rawNotar
   };
 }
 
+// ================= PERSISTENCIA E IMPORTACIÓN / EXPORTACIÓN =================
+
+function ensureCompleteOrderedIds(candidateIds) {
+  const allValidIds = fcState.plazas.map(p => p.fcId);
+  const validSet = new Set(allValidIds);
+  const result = [];
+  const seen = new Set();
+
+  (candidateIds || []).forEach(id => {
+    if (validSet.has(id) && !seen.has(id)) {
+      result.push(id);
+      seen.add(id);
+    }
+  });
+
+  allValidIds.forEach(id => {
+    if (!seen.has(id)) {
+      result.push(id);
+      seen.add(id);
+    }
+  });
+
+  return result;
+}
+
 function saveFcStateToStorage() {
   try {
     const payload = {
-      version: 1,
+      version: 2,
       screen: fcState.screen,
       userName: fcState.userName,
+      userSurnames: fcState.userSurnames,
+      escalafon: fcState.escalafon,
+      lugarFirma: fcState.lugarFirma,
+      diaFirma: fcState.diaFirma,
+      mesFirma: fcState.mesFirma,
       postalCode: fcState.postalCode,
       userCoords: fcState.userCoords,
       locationName: fcState.locationName,
-      currentIndex: fcState.currentIndex,
-      ratings: fcState.ratings,
-      groupOrders: fcState.groupOrders,
-      currentOrderGroup: fcState.currentOrderGroup,
-      autoSortApplied: fcState.autoSortApplied,
+      orderedIds: fcState.orderedIds,
+      readMap: fcState.readMap,
+      excludedBoe: fcState.excludedBoe,
+      notes: fcState.notes,
+      boeMaxCount: fcState.boeMaxCount,
+      boeShowMotivoDisambig: fcState.boeShowMotivoDisambig,
+      boeCatSuffix: fcState.boeCatSuffix,
       savedAt: new Date().toISOString()
     };
     localStorage.setItem('fcProgressState', JSON.stringify(payload));
   } catch (e) {
-    console.error('Error guardando estado de flashcards:', e);
+    console.error('Error guardando estado:', e);
   }
 }
 
@@ -300,13 +458,12 @@ function loadFcStateFromStorage() {
     const data = JSON.parse(raw);
     applyImportedFcData(data, false);
   } catch (e) {
-    console.error('Error cargando estado de flashcards:', e);
+    console.error('Error cargando estado:', e);
   }
 }
 
 function remapFcIdIfNeeded(oldId, usedTargets) {
   if (fcState.plazas.some(p => p.fcId === oldId)) return oldId;
-  // Format: fc_<idx>_<loc>_<prov>
   const suffix = String(oldId).replace(/^fc_\d+_/, '');
   const candidate = fcState.plazas.find(p =>
     !usedTargets.has(p.fcId) &&
@@ -323,43 +480,82 @@ function applyImportedFcData(data, showNotification = true) {
   if (!data || typeof data !== 'object') return false;
 
   fcState.userName = data.userName || '';
+  fcState.userSurnames = data.userSurnames || '';
+  fcState.escalafon = data.escalafon || '';
+  if (data.lugarFirma !== undefined) fcState.lugarFirma = data.lugarFirma;
+  if (data.diaFirma !== undefined) fcState.diaFirma = data.diaFirma;
+  if (data.mesFirma !== undefined) fcState.mesFirma = data.mesFirma;
   fcState.postalCode = data.postalCode || '';
   fcState.userCoords = data.userCoords || null;
   fcState.locationName = data.locationName || '';
-  fcState.currentIndex = typeof data.currentIndex === 'number' ? Math.max(0, Math.min(data.currentIndex, fcState.plazas.length - 1)) : 0;
 
-  const rawRatings = data.ratings && typeof data.ratings === 'object' ? data.ratings : {};
-  const mappedRatings = {};
-  const idMap = {};
   const usedTargets = new Set();
 
-  Object.keys(rawRatings).forEach(oldId => {
-    const newId = remapFcIdIfNeeded(oldId, usedTargets);
-    if (newId) {
-      idMap[oldId] = newId;
-      mappedRatings[newId] = rawRatings[oldId];
-    }
-  });
-  fcState.ratings = mappedRatings;
-
-  if (data.groupOrders && typeof data.groupOrders === 'object') {
-    const mappedGroups = { 1: [], 2: [], 3: [], 4: [], 5: [] };
+  // Si viene del formato v2 (orderedIds directo)
+  if (Array.isArray(data.orderedIds) && data.orderedIds.length > 0) {
+    const mapped = data.orderedIds
+      .map(oldId => remapFcIdIfNeeded(oldId, usedTargets))
+      .filter(Boolean);
+    fcState.orderedIds = ensureCompleteOrderedIds(mapped);
+  } else if (data.groupOrders && typeof data.groupOrders === 'object') {
+    // Compatibilidad con formato v1 anterior (grupos 1..5)
+    const combined = [];
     for (let g = 1; g <= 5; g++) {
       (data.groupOrders[g] || []).forEach(oldId => {
-        const newId = idMap[oldId] || (fcState.plazas.some(p => p.fcId === oldId) ? oldId : null);
-        if (newId && !mappedGroups[g].includes(newId)) {
-          mappedGroups[g].push(newId);
-        }
+        const newId = remapFcIdIfNeeded(oldId, usedTargets);
+        if (newId && !combined.includes(newId)) combined.push(newId);
       });
     }
-    fcState.groupOrders = mappedGroups;
+    fcState.orderedIds = ensureCompleteOrderedIds(combined);
   } else {
-    fcState.groupOrders = { 1: [], 2: [], 3: [], 4: [], 5: [] };
+    fcState.orderedIds = ensureCompleteOrderedIds([]);
   }
 
-  fcState.currentOrderGroup = data.currentOrderGroup || 1;
-  fcState.autoSortApplied = data.autoSortApplied || { 4: null, 5: null };
-  fcState.screen = data.screen || 'welcome';
+  // Leídas / revisadas
+  if (data.readMap && typeof data.readMap === 'object') {
+    const newRead = {};
+    const usedR = new Set();
+    Object.keys(data.readMap).forEach(k => {
+      if (data.readMap[k]) {
+        const nk = remapFcIdIfNeeded(k, usedR);
+        if (nk) newRead[nk] = true;
+      }
+    });
+    fcState.readMap = newRead;
+  } else if (data.ratings && typeof data.ratings === 'object') {
+    const newRead = {};
+    const usedR = new Set();
+    Object.keys(data.ratings).forEach(k => {
+      const nk = remapFcIdIfNeeded(k, usedR);
+      if (nk) newRead[nk] = true;
+    });
+    fcState.readMap = newRead;
+  }
+
+  if (data.excludedBoe && typeof data.excludedBoe === 'object') {
+    fcState.excludedBoe = data.excludedBoe;
+  }
+  if (data.notes && typeof data.notes === 'object') {
+    fcState.notes = data.notes;
+  }
+  if (typeof data.boeMaxCount === 'number') {
+    fcState.boeMaxCount = data.boeMaxCount;
+  }
+  if (typeof data.boeShowMotivoDisambig === 'boolean') {
+    fcState.boeShowMotivoDisambig = data.boeShowMotivoDisambig;
+  }
+  if (typeof data.boeCatSuffix === 'boolean') {
+    fcState.boeCatSuffix = data.boeCatSuffix;
+  }
+
+  // Mapear pantallas antiguas ('flashcards' / 'ordering') a 'excel'
+  if (data.screen === 'flashcards' || data.screen === 'ordering' || data.screen === 'excel') {
+    fcState.screen = 'excel';
+  } else if (data.screen === 'final') {
+    fcState.screen = 'final';
+  } else {
+    fcState.screen = 'welcome';
+  }
 
   saveFcStateToStorage();
 
@@ -375,7 +571,8 @@ function applyImportedFcData(data, showNotification = true) {
   return true;
 }
 
-// Distance calculation for Flashcards
+// ================= CÁLCULO DE DISTANCIAS =================
+
 async function geocodeAndCalculateFcDistances(queryStr, silent = false) {
   const query = (queryStr || '').trim();
   if (!query) return false;
@@ -411,7 +608,7 @@ async function geocodeAndCalculateFcDistances(queryStr, silent = false) {
     }
     return true;
   } catch (err) {
-    console.error('Error calculando distancias en flashcards:', err);
+    console.error('Error calculando distancias:', err);
     if (statusEl) {
       statusEl.textContent = '⚠️ Error al conectar con el servidor de rutas. Se usará distancia en línea recta si está disponible.';
       statusEl.style.color = '#f59e0b';
@@ -423,7 +620,6 @@ async function geocodeAndCalculateFcDistances(queryStr, silent = false) {
 async function calculateFcDistancesFromCoords(userCoords) {
   if (!userCoords) return;
 
-  // First, set quick Haversine fallback immediately so UI never shows empty while OSRM loads
   fcState.plazas.forEach(p => {
     if (p.coords) {
       const havDist = haversine(userCoords.lat, userCoords.lon, p.coords.lat, p.coords.lon);
@@ -431,7 +627,6 @@ async function calculateFcDistancesFromCoords(userCoords) {
     }
   });
 
-  // Batch OSRM requests
   const validItems = fcState.plazas.filter(p => p.coords);
   const batchSize = 85;
 
@@ -470,276 +665,33 @@ async function calculateFcDistancesFromCoords(userCoords) {
           }
         });
       }
-    } catch (e) {
-      // Keep haversine fallback
-    }
+    } catch (e) {}
     if (i + batchSize < validItems.length) {
       await new Promise(r => setTimeout(r, 250));
     }
   }
 
-  // Re-render if currently viewing flashcards or ordering
-  if (fcState.screen === 'flashcards' || fcState.screen === 'ordering' || fcState.screen === 'final') {
+  if (fcState.screen === 'excel' || fcState.screen === 'final') {
     renderFcApp();
   }
 }
 
-// Export / Import Progress (JSON or CSV)
-function exportFcProgressJSON() {
-  const payload = {
-    version: 1,
-    app: 'NotariasFlashcards',
-    screen: fcState.screen,
-    userName: fcState.userName,
-    postalCode: fcState.postalCode,
-    userCoords: fcState.userCoords,
-    locationName: fcState.locationName,
-    currentIndex: fcState.currentIndex,
-    ratings: fcState.ratings,
-    groupOrders: fcState.groupOrders,
-    currentOrderGroup: fcState.currentOrderGroup,
-    autoSortApplied: fcState.autoSortApplied,
-    savedAt: new Date().toISOString()
-  };
+// ================= MOVIMIENTO DE FILAS EN LA TABLA EXCEL =================
 
-  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  const safeName = (fcState.userName || 'opositor').replace(/[^a-z0-9_-]/gi, '_');
-  const ratedCount = Object.keys(fcState.ratings).length;
-  a.href = url;
-  a.download = `progreso_flashcards_${safeName}_${ratedCount}de${fcState.plazas.length}.json`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
+function movePlazaToGlobalPosition(fcId, newOneBasedRank) {
+  const currentIdx = fcState.orderedIds.indexOf(fcId);
+  if (currentIdx === -1) return;
 
-function handleImportFile(file) {
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = async (e) => {
-    const content = e.target.result;
-    try {
-      // Check if JSON
-      if (file.name.endsWith('.json') || content.trim().startsWith('{')) {
-        const data = JSON.parse(content);
-        if (data && (data.ratings || data.groupOrders)) {
-          applyImportedFcData(data, true);
-          // If imported on welcome screen and has progress, take user directly to where they were
-          if (fcState.screen === 'welcome') {
-            const ratedCount = Object.keys(fcState.ratings).length;
-            if (ratedCount >= fcState.plazas.length) {
-              fcState.screen = 'ordering';
-            } else {
-              fcState.screen = 'flashcards';
-            }
-            saveFcStateToStorage();
-            renderFcApp();
-          }
-          alert(`✅ Progreso importado correctamente (${Object.keys(fcState.ratings).length}/${fcState.plazas.length} notarías clasificadas).`);
-          return;
-        }
-      }
+  const total = fcState.orderedIds.length;
+  const targetIdx = Math.max(0, Math.min(total - 1, (parseInt(newOneBasedRank, 10) || 1) - 1));
+  if (currentIdx === targetIdx) return;
 
-      // Otherwise try parsing as CSV exported by this tool
-      const importedFromCsv = parseImportedCsv(content);
-      if (importedFromCsv) {
-        alert(`✅ Orden y clasificación importados desde CSV (${Object.keys(fcState.ratings).length} notarías).`);
-        renderFcApp();
-      } else {
-        alert('⚠️ El archivo seleccionado no tiene un formato válido de progreso o CSV de notarías.');
-      }
-    } catch (err) {
-      console.error('Error importando archivo:', err);
-      alert('⚠️ Error al leer el archivo. Asegúrate de subir un archivo .json de progreso o .csv exportado por la herramienta.');
-    }
-  };
-  reader.readAsText(file, 'UTF-8');
-}
+  const arr = [...fcState.orderedIds];
+  const [moved] = arr.splice(currentIdx, 1);
+  arr.splice(targetIdx, 0, moved);
 
-function parseImportedCsv(csvText) {
-  try {
-    if (typeof XLSX === 'undefined') return false;
-    const wb = XLSX.read(csvText, { type: 'string' });
-    const firstSheet = wb.Sheets[wb.SheetNames[0]];
-    const rows = XLSX.utils.sheet_to_json(firstSheet, { defval: '' });
-    if (!rows || rows.length === 0) return false;
-
-    const newRatings = {};
-    const newGroupOrders = { 1: [], 2: [], 3: [], 4: [], 5: [] };
-
-    rows.forEach(r => {
-      const loc = (r['Localidad / Plaza'] || r['Localidad'] || '').toString().trim();
-      const prov = (r['Provincia'] || '').toString().trim();
-      const ant = (r['Notario Anterior'] || '').toString().trim();
-      const catGroupStr = (r['Valoración'] || r['Grupo'] || r['Clasificación'] || '').toString().trim();
-
-      const match = fcState.plazas.find(p =>
-        normalize(p.localidad) === normalize(loc) &&
-        normalize(p.provincia) === normalize(prov) &&
-        (!ant || normalize(p.notarioAnterior) === normalize(ant))
-      ) || fcState.plazas.find(p =>
-        normalize(p.localidad) === normalize(loc) &&
-        normalize(p.provincia) === normalize(prov)
-      );
-
-      if (match) {
-        let gId = 3;
-        const normG = normalize(catGroupStr);
-        if (normG.includes('top') || normG === '1') gId = 1;
-        else if (normG.includes('muy buena') || normG === '2') gId = 2;
-        else if (normG.includes('buena') || normG === '3') gId = 3;
-        else if (normG.includes('muy mala') || normG === '5') gId = 5;
-        else if (normG.includes('mala') || normG === '4') gId = 4;
-
-        newRatings[match.fcId] = gId;
-        if (!newGroupOrders[gId].includes(match.fcId)) {
-          newGroupOrders[gId].push(match.fcId);
-        }
-      }
-    });
-
-    if (Object.keys(newRatings).length === 0) return false;
-
-    fcState.ratings = newRatings;
-    fcState.groupOrders = newGroupOrders;
-    if (rows[0]['Nombre Usuario']) fcState.userName = rows[0]['Nombre Usuario'];
-    if (rows[0]['Código Postal Origen']) fcState.postalCode = rows[0]['Código Postal Origen'].toString();
-
-    const ratedCount = Object.keys(newRatings).length;
-    if (ratedCount >= fcState.plazas.length) {
-      fcState.screen = 'final';
-    } else {
-      fcState.screen = 'flashcards';
-      const firstUnrated = fcState.plazas.findIndex(p => !fcState.ratings[p.fcId]);
-      fcState.currentIndex = firstUnrated !== -1 ? firstUnrated : 0;
-    }
-
-    saveFcStateToStorage();
-    if (fcState.postalCode) geocodeAndCalculateFcDistances(fcState.postalCode, true);
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
-
-// Sync groupOrders with current ratings
-function syncGroupOrders() {
-  for (let g = 1; g <= 5; g++) {
-    const validIdsForGroup = fcState.plazas
-      .filter(p => fcState.ratings[p.fcId] === g)
-      .map(p => p.fcId);
-
-    // Keep existing order for items still in this group
-    const existingOrdered = (fcState.groupOrders[g] || []).filter(id => validIdsForGroup.includes(id));
-    // Append any newly rated items in this group
-    const missing = validIdsForGroup.filter(id => !existingOrdered.includes(id));
-    fcState.groupOrders[g] = [...existingOrdered, ...missing];
-  }
-}
-
-// Navigation & Actions
-function rateCurrentCard(groupId) {
-  const plaza = fcState.plazas[fcState.currentIndex];
-  if (!plaza) return;
-
-  fcState.ratings[plaza.fcId] = groupId;
-  syncGroupOrders();
-
-  // Find if there are remaining unrated cards or move to next
-  if (fcState.currentIndex < fcState.plazas.length - 1) {
-    fcState.currentIndex++;
-    fcState.galoExpanded = false;
-    saveFcStateToStorage();
-    renderFcApp();
-  } else {
-    // Check if any card was left unrated earlier
-    const firstUnrated = fcState.plazas.findIndex(p => !fcState.ratings[p.fcId]);
-    if (firstUnrated !== -1) {
-      fcState.currentIndex = firstUnrated;
-      fcState.galoExpanded = false;
-      saveFcStateToStorage();
-      renderFcApp();
-    } else {
-      // All cards rated! Go to Screen 3 (Ordering)
-      goToOrderingScreen(1);
-    }
-  }
-}
-
-function prevFlashcard() {
-  if (fcState.currentIndex > 0) {
-    fcState.currentIndex--;
-    fcState.galoExpanded = false;
-    saveFcStateToStorage();
-    renderFcApp();
-  }
-}
-
-function nextFlashcard() {
-  if (fcState.currentIndex < fcState.plazas.length - 1) {
-    fcState.currentIndex++;
-    fcState.galoExpanded = false;
-    saveFcStateToStorage();
-    renderFcApp();
-  }
-}
-
-function goToOrderingScreen(groupNum = 1) {
-  syncGroupOrders();
-  fcState.screen = 'ordering';
-  fcState.currentOrderGroup = groupNum;
-  saveFcStateToStorage();
-  renderFcApp();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function sortCurrentGroupBy(criterion, direction = 'desc') {
-  const g = fcState.currentOrderGroup;
-  const ids = [...(fcState.groupOrders[g] || [])];
-  const mapPlaza = {};
-  fcState.plazas.forEach(p => { mapPlaza[p.fcId] = p; });
-
-  ids.sort((idA, idB) => {
-    const a = mapPlaza[idA];
-    const b = mapPlaza[idB];
-    if (!a || !b) return 0;
-
-    if (criterion === 'protocolos') {
-      const vA = a.protocolos2025 !== null ? a.protocolos2025 : -1;
-      const vB = b.protocolos2025 !== null ? b.protocolos2025 : -1;
-      return direction === 'desc' ? vB - vA : vA - vB;
-    }
-    if (criterion === 'distancia') {
-      const vA = a.distancia !== null ? a.distancia : 999999;
-      const vB = b.distancia !== null ? b.distancia : 999999;
-      return direction === 'asc' ? vA - vB : vB - vA;
-    }
-    if (criterion === 'polizas') {
-      const vA = a.polizas2025 !== null ? a.polizas2025 : -1;
-      const vB = b.polizas2025 !== null ? b.polizas2025 : -1;
-      return direction === 'desc' ? vB - vA : vA - vB;
-    }
-    return 0;
-  });
-
-  fcState.groupOrders[g] = ids;
-  if (g === 4 || g === 5) {
-    fcState.autoSortApplied[g] = `${criterion}_${direction}`;
-  }
-  saveFcStateToStorage();
-  renderFcApp();
-}
-
-function moveItemInCurrentGroup(index, delta) {
-  const g = fcState.currentOrderGroup;
-  const arr = fcState.groupOrders[g];
-  const target = index + delta;
-  if (target < 0 || target >= arr.length) return;
-  const temp = arr[index];
-  arr[index] = arr[target];
-  arr[target] = temp;
+  fcState.orderedIds = arr;
+  fcState.readMap[fcId] = true; // Marcar como revisada al moverla manualmente
   saveFcStateToStorage();
   renderFcApp();
 }
@@ -808,35 +760,164 @@ function formatInformeGaloHtml(text) {
   }).join('');
 }
 
-// Export Final CSV with all columns in order of election
-function downloadFinalOrderedCSV() {
-  syncGroupOrders();
+// ================= EXPORTACIÓN: EXCEL COMPLETO, CSV, JSON Y BOE ANEXO II/1 =================
+
+function getOrderedPlazasArray() {
   const mapPlaza = {};
   fcState.plazas.forEach(p => { mapPlaza[p.fcId] = p; });
+  return ensureCompleteOrderedIds(fcState.orderedIds).map(id => mapPlaza[id]).filter(Boolean);
+}
 
-  const finalOrderedPlazas = [];
-  for (let g = 1; g <= 5; g++) {
-    (fcState.groupOrders[g] || []).forEach(id => {
-      if (mapPlaza[id]) {
-        finalOrderedPlazas.push({ plaza: mapPlaza[id], groupId: g });
+function getBoeFilteredPlazasArray() {
+  const all = getOrderedPlazasArray();
+  const maxN = Math.max(1, Math.min(all.length, parseInt(fcState.boeMaxCount, 10) || all.length));
+  return all.slice(0, maxN).filter(p => !fcState.excludedBoe[p.fcId]);
+}
+
+function formatBoeOrdenConvocatoria(p) {
+  if (p.origen === 'DOGC' && fcState.boeCatSuffix) {
+    return `${p.numero} (Cataluña)`;
+  }
+  return String(p.numero);
+}
+
+function formatBoeNotariaSolicitada(p) {
+  let base = p.notariaSegunConvocatoria || p.localidad;
+  if (fcState.boeShowMotivoDisambig && p.notarioAnterior && p.notarioAnterior !== '-') {
+    return `${base} (${p.motivoSegunConvocatoria})`;
+  }
+  return base;
+}
+
+function exportFcProgressJSON() {
+  const payload = {
+    version: 2,
+    app: 'NotariasExcelBOE',
+    screen: fcState.screen,
+    userName: fcState.userName,
+    userSurnames: fcState.userSurnames,
+    escalafon: fcState.escalafon,
+    lugarFirma: fcState.lugarFirma,
+    diaFirma: fcState.diaFirma,
+    mesFirma: fcState.mesFirma,
+    postalCode: fcState.postalCode,
+    userCoords: fcState.userCoords,
+    locationName: fcState.locationName,
+    orderedIds: fcState.orderedIds,
+    readMap: fcState.readMap,
+    excludedBoe: fcState.excludedBoe,
+    notes: fcState.notes,
+    boeMaxCount: fcState.boeMaxCount,
+    boeShowMotivoDisambig: fcState.boeShowMotivoDisambig,
+    boeCatSuffix: fcState.boeCatSuffix,
+    savedAt: new Date().toISOString()
+  };
+
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const safeName = (fcState.userName || 'notario').replace(/[^a-z0-9_-]/gi, '_');
+  a.href = url;
+  a.download = `progreso_eleccion_notarias_${safeName}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// 1) Descargar Lista Completa en Excel (.xlsx) con toda la información
+function downloadFullExcelXLSX() {
+  const ordered = getOrderedPlazasArray();
+  const baseHeaders = typeof DATA_GALO_HEADERS !== 'undefined' ? DATA_GALO_HEADERS : Object.keys(fcState.plazas[0]?.raw || {});
+
+  const rowsData = ordered.map((p, idx) => {
+    const obj = {
+      'Orden de Preferencia': idx + 1,
+      'Orden Convocatoria (BOE/DOGC)': formatBoeOrdenConvocatoria(p),
+      'Convocatoria': p.origen,
+      'Notaría Solicitada (según BOE)': p.notariaSegunConvocatoria,
+      'Turno': p.turno,
+      'Categoría': p.categoria,
+      'Comunidad': p.comunidad,
+      'Provincia': p.provincia,
+      'Localidad': p.localidad,
+      'Distrito': p.distrito,
+      'Colegio Notarial': p.colegio,
+      'Motivo Vacante': p.motivo,
+      'Notario Anterior': p.notarioAnterior,
+      'Núm. Notarios Localidad': p.numNotarias,
+      'Media Protocolos Resto Localidad': p.mediaProtResto !== null ? p.mediaProtResto : '',
+      'Media Pólizas Resto Localidad': p.mediaPolResto !== null ? p.mediaPolResto : '',
+      'Población (hab.)': p.poblacion !== null ? p.poblacion : '',
+      'Ratio Hab./Notario': p.ratioPobNot !== null ? p.ratioPobNot : '',
+      'Crecimiento Pob. 10 años (%)': p.evolucionPob !== null ? p.evolucionPob : '',
+      'Renta Neta Media (€)': p.renta !== null ? p.renta : '',
+      'Distancia C.P. (km)': p.distancia !== null ? Number(p.distancia.toFixed(1)) : '',
+      'Tiempo en Coche': p.duration ? formatDuration(p.duration) : '',
+      'Dist. Costa (km)': p.distCosta !== null ? p.distCosta : '',
+      'Dist. Aeropuerto (km)': p.distAero !== null ? p.distAero : '',
+      'Protocolos 2025': p.protocolos2025 !== null ? p.protocolos2025 : '',
+      'Pólizas 2025': p.polizas2025 !== null ? p.polizas2025 : '',
+      'Folios Instrumentos 2025': p.foliosProt2025 !== null ? p.foliosProt2025 : '',
+      'Media Folios / Protocolo': p.foliosPorProt !== null ? Number(p.foliosPorProt) : '',
+      'Total General 2025': p.totalGeneral2025 !== null ? p.totalGeneral2025 : '',
+      'Compraventas (Traslativos)': p.actCompraventas,
+      'Hipotecas y Préstamos': p.actHipotecas,
+      'Herencias': p.actHerencias,
+      'Testamentos': p.actTestamentos,
+      'Sociedades': p.actSociedades,
+      'Poderes': p.actPoderes,
+      'Actas': p.actActas,
+      'Notas Personales': fcState.notes[p.fcId] || '',
+      'Revisada': fcState.readMap[p.fcId] ? 'Sí' : 'No',
+      'Incluida en BOE Anexo II/1': fcState.excludedBoe[p.fcId] ? 'No' : 'Sí',
+      'Informe Galo': p.informeGalo || ''
+    };
+
+    baseHeaders.forEach(h => {
+      if (!(h in obj)) {
+        obj[h] = p.raw[h] !== undefined && p.raw[h] !== null ? p.raw[h] : '';
       }
     });
-  }
 
-  // Also include any unrated plazas at the end just in case
-  fcState.plazas.forEach(p => {
-    if (!fcState.ratings[p.fcId]) {
-      finalOrderedPlazas.push({ plaza: p, groupId: null });
-    }
+    return obj;
   });
 
-  // Headers: Orden Elección, Valoración, Núm. Notarios Localidad, Distancia (km), Tiempo Coche, plus all original CSV headers
+  if (typeof XLSX !== 'undefined') {
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(rowsData);
+    ws['!cols'] = [
+      { wch: 18 }, { wch: 18 }, { wch: 12 }, { wch: 28 }, { wch: 24 },
+      { wch: 12 }, { wch: 22 }, { wch: 18 }, { wch: 26 }, { wch: 20 },
+      { wch: 18 }, { wch: 15 }, { wch: 28 }, { wch: 16 }, { wch: 18 },
+      { wch: 18 }, { wch: 15 }, { wch: 15 }, { wch: 16 }, { wch: 16 },
+      { wch: 15 }, { wch: 15 }, { wch: 14 }, { wch: 14 }, { wch: 15 },
+      { wch: 14 }, { wch: 18 }, { wch: 16 }, { wch: 16 }, { wch: 16 },
+      { wch: 16 }, { wch: 12 }, { wch: 12 }, { wch: 12 }, { wch: 12 },
+      { wch: 12 }, { wch: 35 }, { wch: 10 }, { wch: 14 }, { wch: 65 }
+    ];
+    XLSX.utils.book_append_sheet(wb, ws, 'Listado Completo Eleccion');
+    const safeName = (fcState.userName || 'notarias').replace(/[^a-z0-9_-]/gi, '_');
+    XLSX.writeFile(wb, `Listado_Completo_Eleccion_Notarias_${safeName}.xlsx`);
+  } else {
+    downloadFinalOrderedCSV();
+  }
+}
+
+// 2) Descargar Lista Completa en CSV (.csv)
+function downloadFinalOrderedCSV() {
+  const ordered = getOrderedPlazasArray();
   const extraLeadHeaders = [
-    'Orden Elección',
-    'Valoración',
-    'Nombre Usuario',
-    'Código Postal Origen',
+    'Orden de Preferencia',
+    'Orden Convocatoria',
+    'Notaría que se solicita (según convocatoria)',
+    'Notas Personales',
+    'Revisada',
+    'Incluida en BOE',
     'Núm. Notarios Localidad',
+    'Media Protocolos Resto',
+    'Población (hab.)',
+    'Renta Media (€)',
     'Distancia (km)',
     'Tiempo en Coche'
   ];
@@ -847,19 +928,21 @@ function downloadFinalOrderedCSV() {
   const csvRows = [];
   csvRows.push(allHeaders.map(escapeCsvCell).join(','));
 
-  finalOrderedPlazas.forEach((item, idx) => {
-    const p = item.plaza;
-    const gObj = FC_GROUPS.find(g => g.id === item.groupId);
-    const groupLabel = gObj ? `${gObj.id} - ${gObj.name}` : 'Sin clasificar';
+  ordered.forEach((p, idx) => {
     const distStr = p.distancia !== null && p.distancia !== undefined ? p.distancia.toFixed(1) : '';
     const timeStr = p.duration ? formatDuration(p.duration) : '';
 
     const leadVals = [
       idx + 1,
-      groupLabel,
-      fcState.userName || '',
-      fcState.postalCode || '',
+      formatBoeOrdenConvocatoria(p),
+      formatBoeNotariaSolicitada(p),
+      fcState.notes[p.fcId] || '',
+      fcState.readMap[p.fcId] ? 'Sí' : 'No',
+      fcState.excludedBoe[p.fcId] ? 'No' : 'Sí',
       p.numNotarias,
+      p.mediaProtResto !== null ? p.mediaProtResto : '',
+      p.poblacion !== null ? p.poblacion : '',
+      p.renta !== null ? p.renta : '',
       distStr,
       timeStr
     ];
@@ -869,18 +952,94 @@ function downloadFinalOrderedCSV() {
     csvRows.push(row.map(escapeCsvCell).join(','));
   });
 
-  // Add UTF-8 BOM so Excel opens Spanish characters cleanly
   const csvString = '\uFEFF' + csvRows.join('\r\n');
   const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   const safeName = (fcState.userName || 'notarias').replace(/[^a-z0-9_-]/gi, '_');
   a.href = url;
-  a.download = `listado_eleccion_notarias_${safeName}.csv`;
+  a.download = `Listado_Completo_Eleccion_Notarias_${safeName}.csv`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
+}
+
+// 3) Descargar Excel con el formato exacto del ANEXO II/1 del BOE (BOE-A-2026-21686)
+function downloadBoeAnexoExcelXLSX() {
+  const boeList = getBoeFilteredPlazasArray();
+
+  const aoa = [
+    ['ANEXO II/1'],
+    [],
+    ['N.º ESCALAFÓN:', fcState.escalafon || '', 'APELLIDOS:', fcState.userSurnames || ''],
+    ['NOMBRE:', fcState.userName || '', '', ''],
+    [],
+    [
+      'ORDEN DE PREFERENCIA',
+      'ORDEN CONVOCATORIA',
+      'NOTARÍA QUE SE SOLICITA (según convocatoria)',
+      'TURNO'
+    ]
+  ];
+
+  boeList.forEach((p, idx) => {
+    aoa.push([
+      idx + 1,
+      formatBoeOrdenConvocatoria(p),
+      formatBoeNotariaSolicitada(p),
+      p.turno
+    ]);
+  });
+
+  aoa.push([]);
+  aoa.push(['En caso necesario deberán utilizarse cuantas hojas sean precisas']);
+  aoa.push([`${fcState.lugarFirma || '..........'} a ${fcState.diaFirma || '....'} de ${fcState.mesFirma || '..........'} de 2026`]);
+  aoa.push(['(lugar, fecha y firma)']);
+
+  if (typeof XLSX !== 'undefined') {
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.aoa_to_sheet(aoa);
+    ws['!cols'] = [
+      { wch: 24 },
+      { wch: 24 },
+      { wch: 48 },
+      { wch: 30 }
+    ];
+    XLSX.utils.book_append_sheet(wb, ws, 'ANEXO II-1 BOE');
+    const safeName = (fcState.userSurnames || fcState.userName || 'BOE').replace(/[^a-z0-9_-]/gi, '_');
+    XLSX.writeFile(wb, `BOE_Anexo_II_1_Solicitud_${safeName}.xlsx`);
+  }
+}
+
+// 4) Imprimir / Guardar PDF oficial del ANEXO II/1 (BOE-A-2026-21686)
+function printBoeAnexoII1() {
+  document.body.classList.add('printing-boe-anexo');
+  window.print();
+  setTimeout(() => {
+    document.body.classList.remove('printing-boe-anexo');
+  }, 500);
+}
+
+// 5) Copiar tabla BOE Anexo II/1 al portapapeles
+function copyBoeTableToClipboard() {
+  const boeList = getBoeFilteredPlazasArray();
+  const lines = [
+    `ANEXO II/1`,
+    `N.º ESCALAFÓN: ${fcState.escalafon || '-'}\tAPELLIDOS: ${fcState.userSurnames || '-'}\tNOMBRE: ${fcState.userName || '-'}`,
+    `ORDEN DE PREFERENCIA\tORDEN CONVOCATORIA\tNOTARÍA QUE SE SOLICITA (según convocatoria)\tTURNO`
+  ];
+  boeList.forEach((p, idx) => {
+    lines.push(`${idx + 1}\t${formatBoeOrdenConvocatoria(p)}\t${formatBoeNotariaSolicitada(p)}\t${p.turno}`);
+  });
+  navigator.clipboard.writeText(lines.join('\n')).then(() => {
+    const btn = document.getElementById('fc-btn-copy-boe');
+    if (btn) {
+      const orig = btn.textContent;
+      btn.textContent = '✅ ¡Copiado al portapapeles!';
+      setTimeout(() => { btn.textContent = orig; }, 2200);
+    }
+  });
 }
 
 function escapeCsvCell(val) {
@@ -892,48 +1051,162 @@ function escapeCsvCell(val) {
   return str;
 }
 
-// ================= RENDERING =================
+function handleImportFile(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    const content = e.target.result;
+    try {
+      if (file.name.endsWith('.json') || (typeof content === 'string' && content.trim().startsWith('{'))) {
+        const data = JSON.parse(content);
+        if (data && (data.orderedIds || data.ratings || data.groupOrders)) {
+          applyImportedFcData(data, true);
+          if (fcState.screen === 'welcome') {
+            fcState.screen = 'excel';
+            saveFcStateToStorage();
+            renderFcApp();
+          }
+          alert(`✅ Progreso y orden importados correctamente.`);
+          return;
+        }
+      }
+
+      const importedFromCsv = parseImportedCsvOrExcel(content, file.name.endsWith('.xlsx'));
+      if (importedFromCsv) {
+        alert(`✅ Orden de plazas importado correctamente.`);
+        renderFcApp();
+      } else {
+        alert('⚠️ El archivo seleccionado no tiene un formato válido de progreso (.json) o listado (.csv / .xlsx).');
+      }
+    } catch (err) {
+      console.error('Error importando archivo:', err);
+      alert('⚠️ Error al leer el archivo.');
+    }
+  };
+  if (file.name.endsWith('.xlsx')) {
+    reader.readAsArrayBuffer(file);
+  } else {
+    reader.readAsText(file, 'UTF-8');
+  }
+}
+
+function parseImportedCsvOrExcel(content, isBinary = false) {
+  try {
+    if (typeof XLSX === 'undefined') return false;
+    const wb = isBinary
+      ? XLSX.read(content, { type: 'array' })
+      : XLSX.read(content, { type: 'string' });
+    const firstSheet = wb.Sheets[wb.SheetNames[0]];
+    const rows = XLSX.utils.sheet_to_json(firstSheet, { defval: '' });
+    if (!rows || rows.length === 0) return false;
+
+    const importedOrder = [];
+    const newReadMap = {};
+    const newNotes = { ...fcState.notes };
+
+    rows.forEach(r => {
+      const loc = (r['Localidad / Plaza'] || r['Localidad'] || r['NOTARÍA QUE SE SOLICITA (según convocatoria)'] || r['Notaría Solicitada (según BOE)'] || '').toString().trim();
+      const prov = (r['Provincia'] || '').toString().trim();
+      const ant = (r['Notario Anterior'] || '').toString().trim();
+      const numConv = (r['Orden Convocatoria'] || r['Orden Convocatoria (BOE/DOGC)'] || r['ORDEN CONVOCATORIA'] || r['Número'] || '').toString().replace(/\(.*\)/, '').trim();
+
+      let match = null;
+      if (ant && loc) {
+        match = fcState.plazas.find(p =>
+          (normalize(p.localidad) === normalize(loc) || normalize(p.notariaSegunConvocatoria) === normalize(loc)) &&
+          normalize(p.notarioAnterior) === normalize(ant)
+        );
+      }
+      if (!match && numConv && loc) {
+        match = fcState.plazas.find(p =>
+          String(p.numero) === numConv &&
+          (normalize(p.localidad) === normalize(loc) || normalize(p.notariaSegunConvocatoria) === normalize(loc))
+        );
+      }
+      if (!match && loc && prov) {
+        match = fcState.plazas.find(p =>
+          normalize(p.localidad) === normalize(loc) &&
+          normalize(p.provincia) === normalize(prov) &&
+          !importedOrder.includes(p.fcId)
+        );
+      }
+      if (!match && loc) {
+        match = fcState.plazas.find(p =>
+          (normalize(p.localidad) === normalize(loc) || normalize(p.notariaSegunConvocatoria) === normalize(loc)) &&
+          !importedOrder.includes(p.fcId)
+        );
+      }
+
+      if (match && !importedOrder.includes(match.fcId)) {
+        importedOrder.push(match.fcId);
+        if (r['Revisada'] === 'Sí' || r['Valoración']) {
+          newReadMap[match.fcId] = true;
+        }
+        if (r['Notas Personales']) {
+          newNotes[match.fcId] = String(r['Notas Personales']);
+        }
+      }
+    });
+
+    if (importedOrder.length === 0) return false;
+
+    fcState.orderedIds = ensureCompleteOrderedIds(importedOrder);
+    if (Object.keys(newReadMap).length > 0) fcState.readMap = newReadMap;
+    fcState.notes = newNotes;
+    fcState.screen = 'excel';
+    saveFcStateToStorage();
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+// ================= RENDERIZADO DE LA APLICACIÓN =================
 
 function renderFcApp() {
   const container = document.getElementById('fc-app-container');
   if (!container) return;
 
   if (!fcState.unlocked && sessionStorage.getItem('fcUnlocked') !== 'true') {
+    container.classList.remove('fc-container-wide');
     container.innerHTML = renderPasswordScreen();
     attachPasswordEvents();
     return;
   }
   fcState.unlocked = true;
 
-  const ratedCount = Object.keys(fcState.ratings).length;
+  // En modo Excel y Final usamos todo el ancho disponible de la pantalla para que quepa mucha información
+  if (fcState.screen === 'excel' || fcState.screen === 'final') {
+    container.classList.add('fc-container-wide');
+  } else {
+    container.classList.remove('fc-container-wide');
+  }
+
+  const readCount = Object.keys(fcState.readMap).filter(k => fcState.readMap[k]).length;
   const totalCount = fcState.plazas.length;
 
-  // Persistent Top Bar (Always available to save/import progress or switch stages)
   const topBarHtml = `
-    <div class="fc-topbar">
+    <div class="fc-topbar no-print-boe">
       <div class="fc-topbar-left">
         <div class="fc-steps-nav">
           <button class="fc-step-pill ${fcState.screen === 'welcome' ? 'active' : ''}" id="fc-nav-welcome">
-            1. Inicio ${fcState.postalCode ? `(${escapeHTML(fcState.postalCode)})` : ''}
+            1. Datos e Inicio ${fcState.postalCode ? `(${escapeHTML(fcState.postalCode)})` : ''}
           </button>
-          <button class="fc-step-pill ${fcState.screen === 'flashcards' ? 'active' : ''}" id="fc-nav-flashcards">
-            2. Flashcards (${ratedCount}/${totalCount})
+          <button class="fc-step-pill ${fcState.screen === 'excel' ? 'active' : ''}" id="fc-nav-excel">
+            2. Tabla Excel Interactiva (${readCount}/${totalCount} leídas)
           </button>
-          <button class="fc-step-pill ${fcState.screen === 'ordering' ? 'active' : ''}" id="fc-nav-ordering" ${ratedCount === 0 ? 'disabled title="Clasifica al menos una plaza primero"' : ''}>
-            3. Ordenar Grupos
-          </button>
-          <button class="fc-step-pill ${fcState.screen === 'final' ? 'active' : ''}" id="fc-nav-final" ${ratedCount === 0 ? 'disabled title="Clasifica al menos una plaza primero"' : ''}>
-            4. Descargar CSV
+          <button class="fc-step-pill ${fcState.screen === 'final' ? 'active' : ''}" id="fc-nav-final">
+            3. Finalizar: Excel y BOE Anexo II/1
           </button>
         </div>
       </div>
       <div class="fc-topbar-right">
-        <button class="action-btn-secondary fc-btn-sm" id="fc-btn-save-progress" title="Descargar el progreso actual para continuar en otro momento o dispositivo">
-          💾 Guardar Progreso
+        <button class="action-btn-secondary fc-btn-sm" id="fc-btn-save-progress" title="Guardar progreso en archivo .json">
+          💾 Guardar Progreso (.json)
         </button>
-        <label class="action-btn-secondary fc-btn-sm" style="cursor:pointer; margin:0;" title="Importar un archivo de progreso guardado (.json o .csv)">
-          📂 Importar Progreso
-          <input type="file" id="fc-input-import-top" accept=".json,.csv" style="display:none;">
+        <label class="action-btn-secondary fc-btn-sm" style="cursor:pointer; margin:0;" title="Importar archivo .json, .csv o .xlsx">
+          📂 Importar (.json / .xlsx / .csv)
+          <input type="file" id="fc-input-import-top" accept=".json,.csv,.xlsx" style="display:none;">
         </label>
       </div>
     </div>
@@ -941,11 +1214,9 @@ function renderFcApp() {
 
   let bodyHtml = '';
   if (fcState.screen === 'welcome') {
-    bodyHtml = renderWelcomeScreen(ratedCount, totalCount);
-  } else if (fcState.screen === 'flashcards') {
-    bodyHtml = renderFlashcardScreen(ratedCount, totalCount);
-  } else if (fcState.screen === 'ordering') {
-    bodyHtml = renderOrderingScreen();
+    bodyHtml = renderWelcomeScreen(readCount, totalCount);
+  } else if (fcState.screen === 'excel') {
+    bodyHtml = renderExcelScreen(readCount, totalCount);
   } else if (fcState.screen === 'final') {
     bodyHtml = renderFinalScreen();
   }
@@ -959,9 +1230,9 @@ function renderPasswordScreen() {
     <div class="fc-welcome-wrapper">
       <div class="fc-welcome-card" style="max-width: 440px; text-align: center;">
         <div class="fc-welcome-badge">🔒 Acceso Restringido</div>
-        <h2 class="fc-welcome-title">Asistente Flashcards</h2>
+        <h2 class="fc-welcome-title">Asistente Excel + BOE</h2>
         <p class="fc-welcome-desc" style="margin-bottom: 20px;">
-          Introduce la contraseña para acceder a la herramienta de valoración e Informe Galo.
+          Introduce la contraseña para acceder a la tabla interactiva con el Informe Galo y el generador del Anexo II/1 del BOE.
         </p>
         <form id="fc-password-form" style="display: flex; flex-direction: column; gap: 12px;">
           <input type="password" id="fc-password-input" class="search-input" style="min-width: unset; text-align: center; font-size: 16px;" placeholder="Contraseña..." autocomplete="current-password" required>
@@ -997,60 +1268,63 @@ function attachPasswordEvents() {
   });
 }
 
-function renderWelcomeScreen(ratedCount, totalCount) {
-  const hasSavedProgress = ratedCount > 0;
+// ================= PANTALLA 1: DATOS E INICIO =================
 
+function renderWelcomeScreen(readCount, totalCount) {
   return `
     <div class="fc-welcome-wrapper">
-      <div class="fc-welcome-card">
-        <div class="fc-welcome-badge">🃏 Asistente de Elección de Vacantes</div>
-        <h2 class="fc-welcome-title">Clasifica y ordena tus Notarías Vacantes</h2>
+      <div class="fc-welcome-card" style="max-width: 740px;">
+        <div class="fc-welcome-badge">📊 Tabla Excel Interactiva + Modelo Oficial BOE-A-2026-21686</div>
+        <h2 class="fc-welcome-title">Ordena tus Notarías Vacantes desde el principio</h2>
         <p class="fc-welcome-desc">
-          Revisa una a una las <strong>${totalCount} plazas vacantes</strong> por orden alfabético con su <strong>Informe Galo</strong>, estadísticas de protocolos y pólizas de 2025, y tiempo en coche desde tu domicilio. Clasifícalas en 5 niveles y ordénalas fácilmente antes de descargar tu listado definitivo en CSV.
+          Lee directamente todas las <strong>${totalCount} plazas vacantes</strong> en una tabla tipo Excel con toda la información (<strong>Informe Galo completo, protocolos, pólizas, folios, desglose de actos, compañeros de plaza, demografía, renta y distancia en coche</strong>) y muévelas en tiempo real arrastrándolas o escribiendo el número de posición. Al terminar, obtendrás tu <strong>Excel completo</strong> y el <strong>Anexo II/1 oficial del BOE</strong> listo para presentar.
         </p>
 
-        <div class="fc-form-grid">
+        <div class="fc-form-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;">
           <div class="fc-form-group">
-            <label for="fc-user-name">👤 Tu Nombre</label>
-            <input type="text" id="fc-user-name" class="search-input" placeholder="Ej: Miguel" value="${escapeHTML(fcState.userName)}">
+            <label for="fc-user-name">👤 Nombre (para Anexo II/1 BOE)</label>
+            <input type="text" id="fc-user-name" class="search-input" style="min-width:unset;" placeholder="Ej: Miguel" value="${escapeHTML(fcState.userName)}">
           </div>
           <div class="fc-form-group">
-            <label for="fc-postal-code">📍 Código Postal o Localidad donde vives / deseas vivir</label>
-            <input type="text" id="fc-postal-code" class="search-input" placeholder="Ej: 28001 o Madrid" value="${escapeHTML(fcState.postalCode)}">
-            <small class="fc-field-hint">Se usará para calcular la distancia y tiempo en coche a cada notaría vacante.</small>
+            <label for="fc-user-surnames">👤 Apellidos (para Anexo II/1 BOE)</label>
+            <input type="text" id="fc-user-surnames" class="search-input" style="min-width:unset;" placeholder="Ej: García López" value="${escapeHTML(fcState.userSurnames)}">
+          </div>
+          <div class="fc-form-group">
+            <label for="fc-user-escalafon">🔢 N.º Escalafón (para Anexo II/1 BOE)</label>
+            <input type="text" id="fc-user-escalafon" class="search-input" style="min-width:unset;" placeholder="Ej: 1450" value="${escapeHTML(fcState.escalafon)}">
+          </div>
+          <div class="fc-form-group">
+            <label for="fc-postal-code">📍 Tu Código Postal o Ciudad (para distancias)</label>
+            <input type="text" id="fc-postal-code" class="search-input" style="min-width:unset;" placeholder="Ej: 28001 o Madrid" value="${escapeHTML(fcState.postalCode)}">
           </div>
         </div>
 
-        <div id="fc-dist-status" class="fc-dist-status">
+        <div id="fc-dist-status" class="fc-dist-status" style="margin-top: 8px;">
           ${fcState.locationName ? `✅ Ubicación configurada: ${escapeHTML(fcState.locationName)}` : ''}
         </div>
 
         <div class="fc-welcome-actions">
           <button id="fc-start-btn" class="action-btn fc-btn-lg">
-            ${hasSavedProgress ? `▶️ Continuar donde lo dejé (${ratedCount}/${totalCount})` : '🚀 Empezar con las Flashcards'}
+            📊 Abrir Tabla Excel de Elección (${totalCount} plazas)
           </button>
-          ${hasSavedProgress ? `
-            <button id="fc-restart-btn" class="action-btn-secondary fc-btn-lg" style="color:#ef4444; border-color:rgba(239,68,68,0.4);">
-              🔄 Reiniciar desde cero
-            </button>
-          ` : ''}
+          <button id="fc-reset-order-btn" class="action-btn-secondary fc-btn-lg" style="color:#ef4444; border-color:rgba(239,68,68,0.4);">
+            🔄 Restablecer orden alfabético inicial
+          </button>
         </div>
 
         <div class="fc-import-box">
           <div class="fc-import-box-header">
             <strong>📂 ¿Tienes un progreso o listado guardado anteriormente?</strong>
-            <p>Puedes importar tu archivo de progreso (<code>.json</code>) o un listado exportado (<code>.csv</code>) para retomar exactamente por donde ibas.</p>
+            <p>Puedes importar tu archivo de progreso (<code>.json</code>) o un listado en Excel/CSV (<code>.xlsx</code> / <code>.csv</code>) para retomar tu orden exacto.</p>
           </div>
           <div class="fc-import-box-actions">
             <label class="action-btn-secondary" style="cursor:pointer;">
-              ⬆️ Seleccionar archivo (.json / .csv)
-              <input type="file" id="fc-welcome-import-input" accept=".json,.csv" style="display:none;">
+              ⬆️ Importar archivo (.json / .xlsx / .csv)
+              <input type="file" id="fc-welcome-import-input" accept=".json,.csv,.xlsx" style="display:none;">
             </label>
-            ${hasSavedProgress ? `
-              <button id="fc-welcome-export-btn" class="action-btn-secondary">
-                💾 Descargar copia actual (${ratedCount}/${totalCount})
-              </button>
-            ` : ''}
+            <button id="fc-welcome-export-btn" class="action-btn-secondary">
+              💾 Descargar copia de seguridad (.json)
+            </button>
           </div>
         </div>
       </div>
@@ -1058,12 +1332,135 @@ function renderWelcomeScreen(ratedCount, totalCount) {
   `;
 }
 
-function renderFlashcardScreen(ratedCount, totalCount) {
-  const p = fcState.plazas[fcState.currentIndex];
-  if (!p) return `<div class="empty-state">No hay plazas disponibles.</div>`;
+// ================= PANTALLA 2: TABLA EXCEL INTERACTIVA =================
 
-  const currentRating = fcState.ratings[p.fcId] || null;
-  const pct = Math.round((ratedCount / totalCount) * 100);
+function renderExcelScreen(readCount, totalCount) {
+  const orderedPlazas = getOrderedPlazasArray();
+  const comunidades = [...new Set(fcState.plazas.map(p => p.comunidad))].sort((a, b) => a.localeCompare(b, 'es'));
+
+  const q = normalize(fcState.searchQuery);
+  const hasActiveFilter = Boolean(q || fcState.filterComunidad || fcState.filterCategoria || fcState.filterTurno || fcState.filterReadStatus);
+
+  // Filtrar manteniendo el índice global real (globalRank = 1..228)
+  const visibleRows = [];
+  orderedPlazas.forEach((p, idx) => {
+    const globalRank = idx + 1;
+    const isRead = Boolean(fcState.readMap[p.fcId]);
+
+    if (fcState.filterComunidad && p.comunidad !== fcState.filterComunidad) return;
+    if (fcState.filterCategoria && p.categoria !== fcState.filterCategoria) return;
+    if (fcState.filterTurno && p.turno !== fcState.filterTurno) return;
+    if (fcState.filterReadStatus === 'read' && !isRead) return;
+    if (fcState.filterReadStatus === 'unread' && isRead) return;
+    if (q) {
+      const hay = normalize(`${p.numero} ${p.localidad} ${p.notariaSegunConvocatoria} ${p.provincia} ${p.comunidad} ${p.distrito} ${p.notarioAnterior} ${p.motivo} ${p.informeGalo} ${fcState.notes[p.fcId] || ''}`);
+      if (!hay.includes(q)) return;
+    }
+
+    visibleRows.push({ p, globalRank, isRead });
+  });
+
+  return `
+    <div class="fc-excel-wrapper">
+      <!-- Barra de herramientas tipo Excel -->
+      <div class="fc-excel-toolbar">
+        <div class="fc-excel-toolbar-top">
+          <div>
+            <h2 class="fc-excel-title">📊 Tabla de Elección de Notarías (${visibleRows.length} de ${totalCount} mostradas)</h2>
+            <p class="fc-excel-subtitle">
+              Arrastra cualquier fila desde <strong>☰</strong> o escribe directamente el <strong>número de orden (#1 a #${totalCount})</strong> y pulsa <code>Enter</code> para moverla a esa posición. Se guarda automáticamente.
+            </p>
+          </div>
+          <div class="fc-excel-toolbar-actions">
+            <button type="button" class="action-btn-secondary fc-btn-sm" id="fc-excel-download-xlsx" style="border-color:#10b981; color:#10b981;">
+              📊 Descargar Excel (.xlsx)
+            </button>
+            <button type="button" class="action-btn fc-btn-sm" id="fc-go-final-btn">
+              ✅ Terminar: Ver Excel y BOE Anexo II/1 ➡️
+            </button>
+          </div>
+        </div>
+
+        <!-- Filtros y Pre-ordenación de la tabla -->
+        <div class="fc-excel-filters-row">
+          <input type="text" id="fc-excel-search" class="search-input fc-excel-filter-input" placeholder="🔍 Buscar localidad, provincia, notario, texto en Informe Galo..." value="${escapeHTML(fcState.searchQuery)}">
+
+          <select id="fc-excel-filter-com" class="filter-select fc-excel-select">
+            <option value="">Todas las Comunidades</option>
+            ${comunidades.map(c => `<option value="${escapeHTML(c)}" ${fcState.filterComunidad === c ? 'selected' : ''}>${escapeHTML(c)}</option>`).join('')}
+          </select>
+
+          <select id="fc-excel-filter-cat" class="filter-select fc-excel-select">
+            <option value="">Todas las Categorías</option>
+            <option value="Primera" ${fcState.filterCategoria === 'Primera' ? 'selected' : ''}>1.ª Categoría</option>
+            <option value="Segunda" ${fcState.filterCategoria === 'Segunda' ? 'selected' : ''}>2.ª Categoría</option>
+            <option value="Tercera" ${fcState.filterCategoria === 'Tercera' ? 'selected' : ''}>3.ª Categoría</option>
+          </select>
+
+          <select id="fc-excel-filter-turno" class="filter-select fc-excel-select">
+            <option value="">Todos los Turnos</option>
+            <option value="Antigüedad en la carrera" ${fcState.filterTurno === 'Antigüedad en la carrera' ? 'selected' : ''}>Antigüedad carrera</option>
+            <option value="Antigüedad en clase" ${fcState.filterTurno === 'Antigüedad en clase' ? 'selected' : ''}>Antigüedad clase</option>
+          </select>
+
+          <select id="fc-excel-filter-read" class="filter-select fc-excel-select">
+            <option value="">Todas (${totalCount})</option>
+            <option value="unread" ${fcState.filterReadStatus === 'unread' ? 'selected' : ''}>Pendientes de leer (${totalCount - readCount})</option>
+            <option value="read" ${fcState.filterReadStatus === 'read' ? 'selected' : ''}>Ya leídas / movidas (${readCount})</option>
+          </select>
+
+          ${hasActiveFilter ? `
+            <button type="button" class="action-btn-secondary fc-btn-sm" id="fc-excel-clear-filters">
+              ❌ Quitar filtros
+            </button>
+          ` : ''}
+        </div>
+      </div>
+
+      ${hasActiveFilter ? `
+        <div class="fc-filter-warning-banner">
+          <span>ℹ️ <strong>Filtro activo:</strong> Mostrando ${visibleRows.length} de ${totalCount} plazas. Puedes cambiar el puesto global de cualquier plaza escribiendo el número en la casilla <strong>Orden (#)</strong> y pulsando <code>Enter</code>. Quita el filtro para arrastrar con el ratón.</span>
+        </div>
+      ` : ''}
+
+      <!-- Tabla tipo Hoja de Cálculo de Alta Densidad -->
+      <div class="fc-spreadsheet-container">
+        <table class="fc-spreadsheet-table" id="fc-excel-table">
+          <thead>
+            <tr>
+              <th class="fc-col-order">Orden (#)</th>
+              <th class="fc-col-conv">Convocatoria / Turno</th>
+              <th class="fc-col-loc">Plaza / Localidad / Colegio</th>
+              <th class="fc-col-demo">Demografía y Entorno</th>
+              <th class="fc-col-dist">Distancia C.P.</th>
+              <th class="fc-col-work">Protocolos, Pólizas y Folios 2025</th>
+              <th class="fc-col-acts">Desglose de Actos 2025</th>
+              <th class="fc-col-peers">Compañeros en la Plaza</th>
+              <th class="fc-col-galo">Informe Galo Completo y Notas</th>
+            </tr>
+          </thead>
+          <tbody id="fc-excel-tbody">
+            ${visibleRows.length === 0 ? `
+              <tr>
+                <td colspan="9" class="empty-state">No hay plazas que coincidan con el filtro actual.</td>
+              </tr>
+            ` : visibleRows.map(({ p, globalRank, isRead }) => renderExcelRowHtml(p, globalRank, isRead, hasActiveFilter)).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
+}
+
+function renderExcelRowHtml(p, globalRank, isRead, hasActiveFilter) {
+  const isExcluded = Boolean(fcState.excludedBoe[p.fcId]);
+  const noteVal = fcState.notes[p.fcId] || '';
+
+  const badgeCat = p.categoria === 'Primera'
+    ? 'badge-primera'
+    : p.categoria === 'Segunda'
+      ? 'badge-segunda'
+      : 'badge-tercera';
 
   const badgeMotivo = p.motivo.includes('Jubilación')
     ? 'badge-jubilacion'
@@ -1073,475 +1470,430 @@ function renderFlashcardScreen(ratedCount, totalCount) {
         ? 'badge-excedencia'
         : 'badge-desierta';
 
-  const badgeCat = p.categoria === 'Primera'
-    ? 'badge-primera'
-    : p.categoria === 'Segunda'
-      ? 'badge-segunda'
-      : 'badge-tercera';
+  // Demografía y entorno
+  const pobStr = p.poblacion !== null ? p.poblacion.toLocaleString('es-ES') + ' hab.' : 's/d';
+  const ratioStr = p.ratioPobNot !== null ? p.ratioPobNot.toLocaleString('es-ES') + ' hab/not' : '';
+  const rentaStr = p.renta !== null ? p.renta.toLocaleString('es-ES') + ' €' : '';
+  const evolStr = p.evolucionPob !== null
+    ? `${p.evolucionPob > 0 ? '+' : ''}${p.evolucionPob}%`
+    : '';
+  const evolColor = p.evolucionPob !== null
+    ? (p.evolucionPob >= 0 ? '#16a34a' : '#dc2626')
+    : 'inherit';
 
-  const distText = p.distancia !== null && p.distancia !== undefined
-    ? `${p.distancia.toFixed(1)} km`
-    : (fcState.postalCode ? 'Calculando...' : 'Sin C.P.');
+  // Distancia
+  const distStr = p.distancia !== null ? `${p.distancia.toFixed(1)} km` : (fcState.postalCode ? '...' : 'Sin C.P.');
+  const timeStr = p.duration ? formatDuration(p.duration) : (p.distancia !== null ? '✈️ / Ferry' : '');
 
-  const timeText = p.duration
-    ? formatDuration(p.duration)
-    : (p.distancia !== null && p.distancia !== undefined ? '✈️ / Ferry o s/d' : (fcState.postalCode ? 'Calculando...' : 'Sin C.P.'));
+  // Actividad 2025
+  const protStr = p.protocolos2025 !== null ? p.protocolos2025.toLocaleString('es-ES') : '-';
+  const polStr = p.polizas2025 !== null ? p.polizas2025.toLocaleString('es-ES') : '-';
+  const foliosStr = p.foliosProt2025 !== null ? p.foliosProt2025.toLocaleString('es-ES') : '-';
+  const folPorProtStr = p.foliosPorProt !== null ? `${p.foliosPorProt} fol/prot` : '';
+  const totalGenStr = p.totalGeneral2025 !== null ? p.totalGeneral2025.toLocaleString('es-ES') : '-';
 
-  const protText = p.protocolos2025 !== null ? p.protocolos2025.toLocaleString('es-ES') : 'Sin datos';
-  const polText = p.polizas2025 !== null ? p.polizas2025.toLocaleString('es-ES') : 'Sin datos';
-
-  const galoText = p.informeGalo || '';
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
-  const isLongGalo = !isMobile && (galoText.length > 260 || galoText.split('\n').length > 4);
-
-  // Group counts summary
-  const groupCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
-  Object.values(fcState.ratings).forEach(g => {
-    if (groupCounts[g] !== undefined) groupCounts[g]++;
-  });
-
-  return `
-    <div class="fc-stage-wrapper">
-      <!-- Progress Header -->
-      <div class="fc-progress-panel">
-        <div class="fc-progress-info">
-          <span>Tarjeta <strong>${fcState.currentIndex + 1}</strong> de <strong>${totalCount}</strong></span>
-          <span class="fc-progress-Right">Clasificadas: <strong>${ratedCount} / ${totalCount}</strong> (${pct}%)</span>
-        </div>
-        <div class="fc-progress-bar-bg">
-          <div class="fc-progress-bar-fill" style="width: ${pct}%;"></div>
-        </div>
-        <div class="fc-mini-counters">
-          ${FC_GROUPS.map(g => `
-            <span class="fc-mini-pill" style="background:${g.bg}; color:${g.color}; border:1px solid ${g.border};">
-              ${g.shortLabel}: <strong>${groupCounts[g.id]}</strong>
-            </span>
-          `).join('')}
-        </div>
-      </div>
-
-      <!-- Navigation Controls -->
-      <div class="fc-card-nav-row">
-        <button class="action-btn-secondary fc-nav-btn" id="fc-prev-btn" ${fcState.currentIndex === 0 ? 'disabled' : ''}>
-          ⬅️ Anterior
-        </button>
-        <div class="fc-jump-selector">
-          <select id="fc-card-jump" class="filter-select" style="max-width: 280px; padding: 6px 10px; font-size: 13px;">
-            ${fcState.plazas.map((item, idx) => {
-              const r = fcState.ratings[item.fcId];
-              const mark = r ? `[${r}] ` : '• ';
-              const numLabel = item.numero ? `Nº ${item.numero} ` : '';
-              return `<option value="${idx}" ${idx === fcState.currentIndex ? 'selected' : ''}>${idx + 1}. ${mark}[${numLabel}] ${escapeHTML(item.comunidad)} - ${escapeHTML(item.provincia)} - ${escapeHTML(item.localidad)}</option>`;
-            }).join('')}
-          </select>
-        </div>
-        <button class="action-btn-secondary fc-nav-btn" id="fc-next-btn" ${fcState.currentIndex === totalCount - 1 ? 'disabled' : ''}>
-          Siguiente ➡️
-        </button>
-      </div>
-
-      <!-- Main Flashcard -->
-      <div class="fc-flashcard">
-        <div class="fc-card-header">
-          <div class="fc-card-location-hierarchy">
-            <span class="fc-crumb">${escapeHTML(p.comunidad)}</span>
-            <span class="fc-crumb-sep">›</span>
-            <span class="fc-crumb">${escapeHTML(p.provincia)}</span>
-          </div>
-          <div class="fc-card-title-row">
-            <h2 class="fc-card-locality">
-              <a href="#" data-action="openTownModal" data-localidad="${escapeHTML(p.localidad)}" data-provincia="${escapeHTML(p.provincia)}" class="town-link" title="Ver ficha de la localidad">
-                ${escapeHTML(p.localidad)}
-              </a>
-            </h2>
-            <div class="fc-card-badges">
-              <span class="badge" style="background:var(--color-primary); color:#fff;">Nº ${escapeHTML(p.numero)}${p.comunidad === 'Cataluña' ? ' (Cat.)' : ' (BOE)'}</span>
-              <span class="badge ${badgeMotivo}">${escapeHTML(p.motivo)}</span>
-              <span class="badge ${badgeCat}">Cat. ${escapeHTML(p.categoria)}</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Data Grid -->
-        <div class="fc-data-grid">
-          <div class="fc-data-item">
-            <span class="fc-data-label">🔢 Nº Convocatoria / Turno</span>
-            <span class="fc-data-value"><strong>Nº ${escapeHTML(p.numero)}</strong> (${p.comunidad === 'Cataluña' ? 'DOGC' : 'BOE'}) · ${escapeHTML(p.turno || '-')}</span>
-          </div>
-          <div class="fc-data-item">
-            <span class="fc-data-label">👤 Notario Anterior</span>
-            <span class="fc-data-value">${escapeHTML(p.notarioAnterior)}</span>
-          </div>
-          <div class="fc-data-item">
-            <span class="fc-data-label">🏛️ Notarios en Localidad</span>
-            <span class="fc-data-value">${p.numNotarias} ${p.numNotarias === 1 ? 'notario (Única)' : 'notarios'}</span>
-          </div>
-          <div class="fc-data-item fc-data-highlight">
-            <span class="fc-data-label">📜 Protocolos 2025</span>
-            <span class="fc-data-value">${protText}</span>
-          </div>
-          <div class="fc-data-item fc-data-highlight">
-            <span class="fc-data-label">📑 Pólizas 2025</span>
-            <span class="fc-data-value">${polText}</span>
-          </div>
-          <div class="fc-data-item">
-            <span class="fc-data-label">📍 Distancia ${fcState.postalCode ? `(${escapeHTML(fcState.postalCode)})` : ''}</span>
-            <span class="fc-data-value">${distText}</span>
-          </div>
-          <div class="fc-data-item">
-            <span class="fc-data-label">🚗 Tiempo estimado</span>
-            <span class="fc-data-value">${timeText}</span>
-          </div>
-        </div>
-
-        <!-- RESTO DE NOTARÍAS DE LA LOCALIDAD (Solo si hay más de 1 notaría) -->
-        ${renderPeersSectionHtml(p, false)}
-
-        <!-- INFORME GALO (Destacado y desplegable en escritorio, entero en móvil) -->
-        <div class="fc-galo-box">
-          <div class="fc-galo-header">
-            <div class="fc-galo-title">
-              <span>📋 Informe Galo</span>
-              <span class="fc-galo-important-tag">Destacado</span>
-            </div>
-            ${galoText ? `
-              <div class="fc-galo-actions">
-                ${isLongGalo ? `
-                  <button type="button" class="fc-galo-toggle-btn" id="fc-toggle-galo-inline">
-                    ${fcState.galoExpanded ? '🔼 Plegar' : '🔽 Desplegar todo'}
-                  </button>
-                ` : ''}
-                <button type="button" class="fc-galo-modal-btn" id="fc-open-galo-modal">
-                  🔍 Ver en pantalla completa
-                </button>
-              </div>
-            ` : ''}
-          </div>
-          <div class="fc-galo-body ${!fcState.galoExpanded && isLongGalo ? 'fc-galo-collapsed' : ''}" id="fc-galo-body-content">
-            ${formatInformeGaloHtml(galoText)}
-          </div>
-          ${!fcState.galoExpanded && isLongGalo ? `
-            <div class="fc-galo-fade-overlay" id="fc-galo-expand-overlay">
-              <span>👇 Toca para desplegar el Informe Galo completo</span>
+  // Compañeros en la plaza
+  let peersHtml = '';
+  if (p.numNotarias <= 1) {
+    peersHtml = `<div class="fc-cell-badge-unique">🏛️ Plaza Única (1 notario)</div>`;
+  } else {
+    const avgProt = p.mediaProtResto !== null ? p.mediaProtResto.toLocaleString('es-ES') : '-';
+    const avgPol = p.mediaPolResto !== null ? p.mediaPolResto.toLocaleString('es-ES') : '-';
+    const peersExpanded = Boolean(fcState.expandedPeersRows[p.fcId]);
+    peersHtml = `
+      <div class="fc-cell-peers-summary">
+        <div><strong>🏛️ ${p.numNotarias} notarios</strong> en municipio</div>
+        <div class="fc-cell-peers-avg">Media resto: <strong>${avgProt}</strong> prot. · <strong>${avgPol}</strong> pól.</div>
+        ${p.restoNotarias && p.restoNotarias.length > 0 ? `
+          <button type="button" class="fc-inline-link-btn" data-toggle-peers="${escapeHTML(p.fcId)}">
+            ${peersExpanded ? '🔼 Ocultar compañeros' : `🔽 Ver ${p.restoNotarias.length} compañero${p.restoNotarias.length !== 1 ? 's' : ''}`}
+          </button>
+          ${peersExpanded ? `
+            <div class="fc-cell-peers-dropdown">
+              ${p.restoNotarias.map(r => `
+                <div class="fc-cell-peer-row">
+                  <span class="fc-cell-peer-name">${escapeHTML(r.notario)}</span>
+                  <span class="fc-cell-peer-nums">📜 ${(r.protocolos || 0).toLocaleString('es-ES')} · 📑 ${(r.polizas || 0).toLocaleString('es-ES')}</span>
+                </div>
+              `).join('')}
             </div>
           ` : ''}
-        </div>
-
-        <!-- Rating Buttons (1 to 5) -->
-        <div class="fc-rating-section">
-          <div class="fc-rating-prompt">
-            ¿Cómo valoras esta notaría?
-            ${currentRating ? `<span class="fc-current-rating-note">(Actual: <strong>${FC_GROUPS.find(g => g.id === currentRating)?.name}</strong>)</span>` : ''}
-          </div>
-          <div class="fc-rating-buttons">
-            ${FC_GROUPS.map(g => {
-              const isSelected = currentRating === g.id;
-              return `
-                <button type="button" class="fc-rate-btn ${isSelected ? 'selected' : ''}" data-group="${g.id}" style="--btn-color:${g.color}; --btn-bg:${g.bg}; --btn-border:${g.border};">
-                  <span class="fc-rate-num">${g.id}</span>
-                  <span class="fc-rate-text">${g.name}</span>
-                </button>
-              `;
-            }).join('')}
-          </div>
-        </div>
+        ` : ''}
       </div>
+    `;
+  }
 
-      ${ratedCount === totalCount ? `
-        <div class="fc-all-rated-banner">
-          <span>🎉 ¡Has clasificado las ${totalCount} notarías!</span>
-          <button class="action-btn" id="fc-go-order-btn">Ir a ordenar mis listas ➡️</button>
+  return `
+    <tr data-id="${escapeHTML(p.fcId)}" class="fc-excel-row ${isRead ? 'fc-row-read' : ''} ${isExcluded ? 'fc-row-excluded' : ''}">
+      <!-- 1. ORDEN (#) -->
+      <td class="fc-cell-order">
+        <div class="fc-order-box">
+          <span class="fc-drag-handle ${hasActiveFilter ? 'disabled' : ''}" title="${hasActiveFilter ? 'Quita el filtro para arrastrar con el ratón' : 'Arrastra para mover esta fila'}">☰</span>
+          <input type="number" min="1" max="${fcState.plazas.length}" value="${globalRank}" class="fc-rank-input" data-rank-input="${escapeHTML(p.fcId)}" title="Escribe el puesto al que quieres mover esta plaza y pulsa Enter">
         </div>
-      ` : ''}
-    </div>
+        <div class="fc-order-checks">
+          <label class="fc-check-label" title="Marcar como ya leída / revisada">
+            <input type="checkbox" data-read-check="${escapeHTML(p.fcId)}" ${isRead ? 'checked' : ''}>
+            <span>Leída</span>
+          </label>
+          <label class="fc-check-label" title="Incluir esta plaza en la solicitud del BOE (Anexo II/1)">
+            <input type="checkbox" data-boe-check="${escapeHTML(p.fcId)}" ${!isExcluded ? 'checked' : ''}>
+            <span>Pedir BOE</span>
+          </label>
+        </div>
+      </td>
+
+      <!-- 2. CONVOCATORIA / TURNO -->
+      <td class="fc-cell-conv">
+        <div class="fc-conv-top">
+          <span class="badge" style="background:var(--color-primary); color:#fff; font-weight:700;">
+            Nº ${escapeHTML(p.numero)} ${p.origen === 'DOGC' ? '(Cat)' : '(BOE)'}
+          </span>
+          <span class="badge ${badgeCat}">Cat. ${escapeHTML(p.categoria)}</span>
+        </div>
+        <div class="fc-conv-turno" title="Turno de provisión">
+          ⚖️ ${escapeHTML(p.turno)}
+        </div>
+        <div class="fc-conv-motivo">
+          <span class="badge ${badgeMotivo}">${escapeHTML(p.motivo)}</span>
+        </div>
+        <div class="fc-conv-ant" title="Notario causante de la vacante">
+          👤 Ant.: <strong>${escapeHTML(p.notarioAnterior)}</strong>
+        </div>
+      </td>
+
+      <!-- 3. PLAZA / LOCALIDAD / COLEGIO -->
+      <td class="fc-cell-loc">
+        <div class="fc-loc-name">
+          <a href="#" data-action="openTownModal" data-localidad="${escapeHTML(p.localidad)}" data-provincia="${escapeHTML(p.provincia)}" class="town-link" title="Abrir ficha con Wikipedia, Google Maps, Street View e Idealista">
+            ${escapeHTML(p.localidad)}
+          </a>
+        </div>
+        ${p.notariaSegunConvocatoria !== p.localidad ? `
+          <div class="fc-loc-boe-name" title="Denominación literal en el Anexo I del BOE">
+            BOE: <em>${escapeHTML(p.notariaSegunConvocatoria)}</em>
+          </div>
+        ` : ''}
+        <div class="fc-loc-sub">
+          <strong>${escapeHTML(p.provincia)}</strong> · ${escapeHTML(p.comunidad)}
+        </div>
+        <div class="fc-loc-distrito">
+          Distrito: ${escapeHTML(p.distrito)}
+        </div>
+      </td>
+
+      <!-- 4. DEMOGRAFÍA Y ENTORNO -->
+      <td class="fc-cell-demo">
+        <div class="fc-demo-line">
+          <span title="Población del municipio">👥 <strong>${pobStr}</strong></span>
+          ${evolStr ? `<span style="color:${evolColor}; font-weight:600; font-size:11.5px;" title="Evolución de población (10 años)">(${evolStr})</span>` : ''}
+        </div>
+        ${ratioStr ? `<div class="fc-demo-line" title="Ratio habitantes por notario">📊 ${ratioStr}</div>` : ''}
+        ${rentaStr ? `<div class="fc-demo-line" style="color:#15803d; font-weight:600;" title="Renta neta media por persona">💰 ${rentaStr}</div>` : ''}
+        <div class="fc-demo-pois">
+          ${p.distCosta !== null ? `<span title="Distancia a la costa">🏖️ ${p.distCosta}km</span>` : ''}
+          ${p.distMontana !== null ? `<span title="Distancia a montaña">🏔️ ${p.distMontana}km</span>` : ''}
+          ${p.distAero !== null ? `<span title="Distancia al aeropuerto">✈️ ${p.distAero}km</span>` : ''}
+        </div>
+      </td>
+
+      <!-- 5. DISTANCIA AL C.P. -->
+      <td class="fc-cell-dist">
+        <div class="fc-dist-km"><strong>${distStr}</strong></div>
+        ${timeStr ? `<div class="fc-dist-time">🚗 ${timeStr}</div>` : ''}
+      </td>
+
+      <!-- 6. PROTOCOLOS, PÓLIZAS Y FOLIOS 2025 -->
+      <td class="fc-cell-work">
+        <div class="fc-work-main">
+          <span class="fc-work-prot" title="Instrumentos públicos 2025 (escrituras, actas y protestos)">📜 <strong>${protStr}</strong> prot.</span>
+        </div>
+        <div class="fc-work-pol" title="Pólizas 2025">
+          📑 <strong>${polStr}</strong> pólizas
+        </div>
+        <div class="fc-work-folios" title="Folios de los instrumentos públicos 2025">
+          📄 ${foliosStr} folios ${folPorProtStr ? `<span class="fc-work-ratio">(${folPorProtStr})</span>` : ''}
+        </div>
+        <div class="fc-work-total" title="Total general de asientos/instrumentos en estadística 2025">
+          ∑ Total: <strong>${totalGenStr}</strong>
+        </div>
+      </td>
+
+      <!-- 7. DESGLOSE DE ACTOS 2025 -->
+      <td class="fc-cell-acts">
+        <div class="fc-acts-grid">
+          <span title="Contratos traslativos (Compraventas)">🏠 Comprav.: <strong>${p.actCompraventas}</strong></span>
+          <span title="Créditos, préstamos y garantías hipotecarias">🏦 Hipot.: <strong>${p.actHipotecas}</strong></span>
+          <span title="Herencias">⚖️ Herenc.: <strong>${p.actHerencias}</strong></span>
+          <span title="Testamentos y última voluntad">✒️ Testam.: <strong>${p.actTestamentos}</strong></span>
+          <span title="Entidades con personalidad jurídica (Sociedades)">🏢 Socied.: <strong>${p.actSociedades}</strong></span>
+          <span title="Apoderamientos">🤝 Poderes: <strong>${p.actPoderes}</strong></span>
+          <span title="Actas notariales">📋 Actas: <strong>${p.actActas}</strong></span>
+          <span title="Cartas de pago y cancelaciones">🔓 Cancel.: <strong>${p.actCancelaciones}</strong></span>
+        </div>
+      </td>
+
+      <!-- 8. COMPAÑEROS EN LA PLAZA -->
+      <td class="fc-cell-peers">
+        ${peersHtml}
+      </td>
+
+      <!-- 9. INFORME GALO COMPLETO Y NOTAS -->
+      <td class="fc-cell-galo">
+        <div class="fc-cell-galo-content">
+          ${formatInformeGaloHtml(p.informeGalo)}
+        </div>
+        <div class="fc-cell-note-wrap">
+          <input type="text" class="fc-inline-note-input" data-note-input="${escapeHTML(p.fcId)}" placeholder="📝 Escribe aquí tu nota sobre esta plaza..." value="${escapeHTML(noteVal)}">
+          <button type="button" class="fc-icon-action" data-view-galo="${escapeHTML(p.fcId)}" title="Ver Informe Galo y compañeros en ventana grande">🔍</button>
+        </div>
+      </td>
+    </tr>
   `;
 }
 
-function renderOrderingScreen() {
-  syncGroupOrders();
-  const gId = fcState.currentOrderGroup;
-  const groupObj = FC_GROUPS.find(g => g.id === gId) || FC_GROUPS[0];
-  const groupPlazaIds = fcState.groupOrders[gId] || [];
+// ================= PANTALLA 3: FINALIZAR (EXCEL + BOE ANEXO II/1) =================
 
-  const mapPlaza = {};
-  fcState.plazas.forEach(p => { mapPlaza[p.fcId] = p; });
-
-  // Compute global starting rank offset before this group
-  let rankOffset = 0;
-  for (let prevG = 1; prevG < gId; prevG++) {
-    rankOffset += (fcState.groupOrders[prevG] || []).length;
-  }
-
-  const isMalaOrMuyMala = gId === 4 || gId === 5;
+function renderFinalScreen() {
+  const orderedPlazas = getOrderedPlazasArray();
+  const boePlazas = getBoeFilteredPlazasArray();
 
   return `
-    <div class="fc-ordering-wrapper">
-      <!-- Group Stepper Header -->
-      <div class="fc-group-stepper">
-        ${FC_GROUPS.map(g => {
-          const count = (fcState.groupOrders[g.id] || []).length;
-          const active = g.id === gId ? 'active' : '';
-          const done = g.id < gId ? 'done' : '';
-          return `
-            <button type="button" class="fc-group-step-btn ${active} ${done}" data-step-group="${g.id}" style="--g-color:${g.color};">
-              <span class="fc-gstep-title">${g.id}. ${g.name}</span>
-              <span class="fc-gstep-count">${count} plaza${count !== 1 ? 's' : ''}</span>
-            </button>
-          `;
-        }).join('')}
-      </div>
+    <div class="fc-final-wrapper">
+      <!-- Panel de Control de Exportación (Se oculta al imprimir el Anexo II/1) -->
+      <div class="fc-final-hero no-print-boe">
+        <h2 style="margin-top:0;">🎉 Listado de Elección y Solicitud Oficial BOE (BOE-A-2026-21686)</h2>
+        <p style="margin-bottom: 18px;">
+          Aquí tienes tus dos documentos listos: la <strong>Lista Completa en Excel</strong> con todas las estadísticas y el <strong>Modelo Oficial ANEXO II/1 del BOE</strong> exactamente como exige la convocatoria.
+        </p>
 
-      <div class="fc-ordering-header-card" style="border-left: 5px solid ${groupObj.color};">
-        <div>
-          <h2 style="margin:0; font-size: 1.4rem; color: var(--color-text);">
-            Ordenando grupo: <span style="color:${groupObj.color};">${groupObj.label}</span>
-          </h2>
-          <p style="margin: 4px 0 0; font-size: 13.5px; color: var(--color-text-muted);">
-            ${isMalaOrMuyMala
-              ? 'Elige cómo quieres colocar automáticamente estas plazas (por número de protocolos o por distancia) o ajústalas arrastrando.'
-              : 'Arrastra las filas desde el icono (☰) o usa las flechas (⬆️⬇️) para definir tu orden de preferencia dentro de este bloque.'}
-          </p>
-        </div>
-        <div class="fc-ordering-quick-actions">
-          <button type="button" class="action-btn-secondary fc-btn-sm" id="fc-sort-prot-desc" title="Ordenar de mayor a menor número de protocolos 2025">
-            📜 Más Protocolos
+        <!-- Botones principales de descarga -->
+        <div class="fc-final-actions" style="margin-bottom: 20px;">
+          <button type="button" class="action-btn fc-btn-lg" id="fc-btn-download-full-xlsx" style="background:#10b981; border-color:#10b981;">
+            📊 1. Descargar Lista Completa en Excel (.xlsx)
           </button>
-          <button type="button" class="action-btn-secondary fc-btn-sm" id="fc-sort-dist-asc" title="Ordenar de menor a mayor distancia a tu Código Postal">
-            🚗 Menor Distancia
+          <button type="button" class="action-btn fc-btn-lg" id="fc-btn-print-boe" style="background:#1d4ed8; border-color:#1d4ed8;">
+            🖨️ 2. Imprimir / Guardar PDF Oficial BOE (Anexo II/1)
+          </button>
+          <button type="button" class="action-btn-secondary fc-btn-lg" id="fc-btn-download-boe-xlsx">
+            📄 Descargar Anexo II/1 BOE en Excel (.xlsx)
+          </button>
+          <button type="button" class="action-btn-secondary fc-btn-lg" id="fc-btn-copy-boe">
+            📋 Copiar Tabla BOE
+          </button>
+          <button type="button" class="action-btn-secondary fc-btn-lg" id="fc-btn-back-excel">
+            ⬅️ Volver a la Tabla Excel
           </button>
         </div>
+
+        <!-- Configuración en vivo de los datos de cabecera del ANEXO II/1 -->
+        <div class="fc-boe-config-box">
+          <div class="fc-boe-config-title">⚙️ Datos para la cabecera y formato del <strong>ANEXO II/1 (BOE-A-2026-21686)</strong>:</div>
+          <div class="fc-boe-config-grid">
+            <div class="fc-form-group">
+              <label>N.º ESCALAFÓN</label>
+              <input type="text" id="fc-boe-escalafon" class="search-input" style="min-width:unset; padding:7px 10px;" value="${escapeHTML(fcState.escalafon)}" placeholder="Ej: 1450">
+            </div>
+            <div class="fc-form-group">
+              <label>APELLIDOS</label>
+              <input type="text" id="fc-boe-apellidos" class="search-input" style="min-width:unset; padding:7px 10px;" value="${escapeHTML(fcState.userSurnames)}" placeholder="Ej: GARCÍA LÓPEZ">
+            </div>
+            <div class="fc-form-group">
+              <label>NOMBRE</label>
+              <input type="text" id="fc-boe-nombre" class="search-input" style="min-width:unset; padding:7px 10px;" value="${escapeHTML(fcState.userName)}" placeholder="Ej: MIGUEL">
+            </div>
+            <div class="fc-form-group">
+              <label>Solicitar hasta el puesto Nº</label>
+              <input type="number" id="fc-boe-max" min="1" max="${orderedPlazas.length}" class="search-input" style="min-width:unset; padding:7px 10px;" value="${fcState.boeMaxCount}">
+            </div>
+            <div class="fc-form-group">
+              <label>Lugar de firma</label>
+              <input type="text" id="fc-boe-lugar" class="search-input" style="min-width:unset; padding:7px 10px;" value="${escapeHTML(fcState.lugarFirma)}" placeholder="Ej: Madrid">
+            </div>
+            <div class="fc-form-group">
+              <label>Día / Mes de 2026</label>
+              <div style="display:flex; gap:6px;">
+                <input type="text" id="fc-boe-dia" class="search-input" style="min-width:unset; width:60px; padding:7px 8px;" value="${escapeHTML(fcState.diaFirma)}" placeholder="Día">
+                <input type="text" id="fc-boe-mes" class="search-input" style="min-width:unset; flex:1; padding:7px 8px;" value="${escapeHTML(fcState.mesFirma)}" placeholder="octubre">
+              </div>
+            </div>
+          </div>
+          <div class="fc-boe-config-checks">
+            <label class="fc-check-label">
+              <input type="checkbox" id="fc-boe-cat-suffix" ${fcState.boeCatSuffix ? 'checked' : ''}>
+              <span>Añadir <code>(Cataluña)</code> al número de orden de convocatoria en las plazas del DOGC</span>
+            </label>
+            <label class="fc-check-label">
+              <input type="checkbox" id="fc-boe-show-motivo" ${fcState.boeShowMotivoDisambig ? 'checked' : ''}>
+              <span>Incluir motivo/protocolo entre paréntesis junto al nombre de la notaría</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Selector de vista previa -->
+        <div class="fc-final-view-tabs">
+          <button type="button" class="fc-view-tab-btn ${fcState.finalTab === 'boe' ? 'active' : ''}" data-final-tab="boe">
+            📜 Vista Oficial BOE: ANEXO II/1 (${boePlazas.length} plazas solicitadas)
+          </button>
+          <button type="button" class="fc-view-tab-btn ${fcState.finalTab === 'excel' ? 'active' : ''}" data-final-tab="excel">
+            📊 Vista Lista Excel Completa (${orderedPlazas.length} plazas)
+          </button>
+        </div>
       </div>
 
-      ${isMalaOrMuyMala && groupPlazaIds.length > 0 ? `
-        <div class="fc-mala-prompt-card">
-          <div class="fc-mala-prompt-title">
-            🤔 ¿Cómo prefieres colocar las notarías clasificadas como <strong>${groupObj.name}</strong>?
-          </div>
-          <div class="fc-mala-prompt-buttons">
-            <button type="button" class="fc-mala-choice-btn ${fcState.autoSortApplied[gId] === 'protocolos_desc' ? 'active' : ''}" id="fc-mala-prot-desc">
-              📜 Por número de protocolos (De mayor a menor)
-            </button>
-            <button type="button" class="fc-mala-choice-btn ${fcState.autoSortApplied[gId] === 'distancia_asc' ? 'active' : ''}" id="fc-mala-dist-asc">
-              📍 Por distancia a mi C.P. (De más cerca a más lejos)
-            </button>
-            <button type="button" class="fc-mala-choice-btn ${fcState.autoSortApplied[gId] === 'protocolos_asc' ? 'active' : ''}" id="fc-mala-prot-asc">
-              📉 Por número de protocolos (De menor a mayor)
-            </button>
-          </div>
-        </div>
-      ` : ''}
+      <!-- DOCUMENTO OFICIAL ANEXO II/1 DEL BOE (BOE-A-2026-21686, Pág. 139174) -->
+      <div id="fc-boe-anexo-sheet" class="fc-boe-sheet" style="${fcState.finalTab === 'boe' ? '' : 'display:none;'}">
+        <div class="fc-boe-sheet-title">ANEXO II/1</div>
 
-      ${groupPlazaIds.length === 0 ? `
-        <div class="empty-state" style="margin: 24px 0;">
-          No has clasificado ninguna notaría en el grupo <strong>${groupObj.name}</strong>. Puedes pasar directamente al siguiente grupo.
+        <div class="fc-boe-sheet-meta">
+          <div class="fc-boe-meta-row">
+            <div class="fc-boe-meta-item">
+              <span class="fc-boe-meta-label">N.º ESCALAFÓN</span>
+              <span class="fc-boe-meta-value">${escapeHTML(fcState.escalafon)}</span>
+            </div>
+            <div class="fc-boe-meta-item fc-boe-meta-wide">
+              <span class="fc-boe-meta-label">APELLIDOS</span>
+              <span class="fc-boe-meta-value">${escapeHTML(fcState.userSurnames)}</span>
+            </div>
+          </div>
+          <div class="fc-boe-meta-row">
+            <div class="fc-boe-meta-item fc-boe-meta-wide">
+              <span class="fc-boe-meta-label">NOMBRE</span>
+              <span class="fc-boe-meta-value">${escapeHTML(fcState.userName)}</span>
+            </div>
+          </div>
         </div>
-      ` : `
-        <div class="table-responsive fc-order-table-wrap">
-          <table class="table fc-order-table" id="fc-sortable-table">
+
+        <table class="fc-boe-official-table">
+          <thead>
+            <tr>
+              <th style="width: 18%;">ORDEN DE<br>PREFERENCIA</th>
+              <th style="width: 18%;">ORDEN<br>CONVOCATORIA</th>
+              <th style="width: 44%;">NOTARÍA QUE SE SOLICITA <em>(según convocatoria)</em></th>
+              <th style="width: 20%;">TURNO</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${boePlazas.map((p, idx) => `
+              <tr>
+                <td class="fc-boe-td-center">${idx + 1}</td>
+                <td class="fc-boe-td-center">${escapeHTML(formatBoeOrdenConvocatoria(p))}</td>
+                <td class="fc-boe-td-left">${escapeHTML(formatBoeNotariaSolicitada(p))}</td>
+                <td class="fc-boe-td-center">${escapeHTML(p.turno)}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+
+        <div class="fc-boe-sheet-footnote">
+          En caso necesario deberán utilizarse cuantas hojas sean precisas
+        </div>
+
+        <div class="fc-boe-sheet-signature">
+          <p>${escapeHTML(fcState.lugarFirma || '....................')} a ${escapeHTML(fcState.diaFirma || '......')} de ${escapeHTML(fcState.mesFirma || '....................')} de 2026</p>
+          <p class="fc-boe-sig-sub">(lugar, fecha y firma)</p>
+        </div>
+      </div>
+
+      <!-- VISTA TABLA EXCEL RESUMEN COMPLETA -->
+      <div id="fc-final-excel-preview" class="no-print-boe" style="${fcState.finalTab === 'excel' ? '' : 'display:none;'}">
+        <div class="table-responsive">
+          <table class="table fc-order-table">
             <thead>
               <tr>
-                <th class="center" style="width: 90px;">Orden</th>
-                <th class="center" style="width: 80px;">Nº Conv.</th>
-                <th>Provincia</th>
-                <th>Localidad</th>
+                <th class="center">Orden Pref.</th>
+                <th class="center">Orden Conv.</th>
+                <th>Notaría (según BOE)</th>
+                <th>Provincia / CCAA</th>
                 <th class="center">Categoría</th>
-                <th class="center">Núm. Protocolos 2025</th>
-                <th class="center">Núm. Pólizas 2025</th>
+                <th>Turno</th>
+                <th>Notario Anterior (Motivo)</th>
+                <th class="center">Protocolos 2025</th>
+                <th class="center">Pólizas 2025</th>
+                <th class="center">Población / Renta</th>
                 <th class="center">Distancia / Tiempo</th>
-                <th class="center">Informe / Mover</th>
+                <th>Notas Personales</th>
               </tr>
             </thead>
-            <tbody id="fc-order-tbody">
-              ${groupPlazaIds.map((id, idx) => {
-                const p = mapPlaza[id];
-                if (!p) return '';
+            <tbody>
+              ${orderedPlazas.map((p, idx) => {
                 const badgeCat = p.categoria === 'Primera' ? 'badge-primera' : p.categoria === 'Segunda' ? 'badge-segunda' : 'badge-tercera';
                 const protStr = p.protocolos2025 !== null ? p.protocolos2025.toLocaleString('es-ES') : '-';
                 const polStr = p.polizas2025 !== null ? p.polizas2025.toLocaleString('es-ES') : '-';
                 const distStr = p.distancia !== null ? `${p.distancia.toFixed(1)} km` : '-';
                 const timeStr = p.duration ? ` (${formatDuration(p.duration)})` : '';
+                const pobStr = p.poblacion !== null ? p.poblacion.toLocaleString('es-ES') + ' hab.' : '-';
+                const rentaStr = p.renta !== null ? p.renta.toLocaleString('es-ES') + ' €' : '';
 
                 return `
-                  <tr data-id="${escapeHTML(p.fcId)}" class="fc-sortable-row">
-                    <td class="center fc-drag-handle" data-label="Orden">
-                      <span class="fc-handle-icon">☰</span>
-                      <span class="fc-rank-badge" style="background:${groupObj.bg}; color:${groupObj.color};">#${rankOffset + idx + 1}</span>
-                    </td>
-                    <td class="center" data-label="Nº Conv."><span class="badge" style="background:var(--color-surface-hover); color:var(--color-text); font-weight:700;">${escapeHTML(p.numero)}${p.comunidad === 'Cataluña' ? ' (Cat)' : ''}</span></td>
-                    <td data-label="Provincia">${escapeHTML(p.provincia)}</td>
-                    <td data-label="Localidad">
-                      <strong>${escapeHTML(p.localidad)}</strong>
-                      <div style="font-size:11px; color:var(--color-text-muted);">${escapeHTML(p.notarioAnterior)} (${escapeHTML(p.motivo)})</div>
-                    </td>
-                    <td class="center" data-label="Categoría"><span class="badge ${badgeCat}">${escapeHTML(p.categoria)}</span></td>
-                    <td class="center" data-label="Protocolos 2025"><strong>${protStr}</strong></td>
-                    <td class="center" data-label="Pólizas 2025">${polStr}</td>
-                    <td class="center" data-label="Distancia">${distStr}<small style="color:var(--color-text-muted);">${timeStr}</small></td>
-                    <td class="center" data-label="Acciones">
-                      <div class="fc-row-actions">
-                        <button type="button" class="fc-icon-action" data-view-galo="${escapeHTML(p.fcId)}" title="Ver Informe Galo">📋</button>
-                        <button type="button" class="fc-icon-action" data-move-up="${idx}" ${idx === 0 ? 'disabled' : ''} title="Subir posición">⬆️</button>
-                        <button type="button" class="fc-icon-action" data-move-down="${idx}" ${idx === groupPlazaIds.length - 1 ? 'disabled' : ''} title="Bajar posición">⬇️</button>
-                      </div>
-                    </td>
+                  <tr>
+                    <td class="center"><strong>#${idx + 1}</strong></td>
+                    <td class="center"><span class="badge" style="background:var(--color-surface-hover); color:var(--color-text); font-weight:700;">${escapeHTML(formatBoeOrdenConvocatoria(p))}</span></td>
+                    <td><strong>${escapeHTML(p.notariaSegunConvocatoria)}</strong></td>
+                    <td>${escapeHTML(p.provincia)} <small style="color:var(--color-text-muted);">(${escapeHTML(p.comunidad)})</small></td>
+                    <td class="center"><span class="badge ${badgeCat}">${escapeHTML(p.categoria)}</span></td>
+                    <td><small>${escapeHTML(p.turno)}</small></td>
+                    <td><small>${escapeHTML(p.notarioAnterior)} (${escapeHTML(p.motivo)})</small></td>
+                    <td class="center"><strong>${protStr}</strong></td>
+                    <td class="center">${polStr}</td>
+                    <td class="center"><small>${pobStr}${rentaStr ? `<br>${rentaStr}` : ''}</small></td>
+                    <td class="center">${distStr}<small style="color:var(--color-text-muted);">${timeStr}</small></td>
+                    <td><small>${escapeHTML(fcState.notes[p.fcId] || '')}</small></td>
                   </tr>
                 `;
               }).join('')}
             </tbody>
           </table>
         </div>
-      `}
-
-      <div class="fc-ordering-footer">
-        <button type="button" class="action-btn-secondary fc-btn-lg" id="fc-order-prev-btn">
-          ${gId === 1 ? '⬅️ Volver a las Flashcards' : `⬅️ Anterior (${FC_GROUPS[gId - 2].name})`}
-        </button>
-        <button type="button" class="action-btn fc-btn-lg" id="fc-order-next-btn">
-          ${gId < 5 ? `Confirmar ${groupObj.name} y pasar a "${FC_GROUPS[gId].name}" ➡️` : '✅ Finalizar y ver listado completo'}
-        </button>
       </div>
     </div>
   `;
 }
 
-function renderFinalScreen() {
-  syncGroupOrders();
-  const mapPlaza = {};
-  fcState.plazas.forEach(p => { mapPlaza[p.fcId] = p; });
-
-  const finalItems = [];
-  for (let g = 1; g <= 5; g++) {
-    const gObj = FC_GROUPS.find(x => x.id === g);
-    (fcState.groupOrders[g] || []).forEach(id => {
-      if (mapPlaza[id]) {
-        finalItems.push({ p: mapPlaza[id], gObj });
-      }
-    });
-  }
-
-  return `
-    <div class="fc-final-wrapper">
-      <div class="fc-final-hero">
-        <div class="fc-final-icon">🎉</div>
-        <h2>¡Listado de Elección de Notarías Completado!</h2>
-        <p>
-          ${fcState.userName ? `Enhorabuena, <strong>${escapeHTML(fcState.userName)}</strong>. ` : ''}
-          Has clasificado y ordenado <strong>${finalItems.length} notarías vacantes</strong>${fcState.postalCode ? ` calculando distancias desde <strong>${escapeHTML(fcState.postalCode)}</strong>` : ''}.
-        </p>
-        <div class="fc-final-actions">
-          <button type="button" class="action-btn fc-btn-lg" id="fc-download-final-csv" style="background:#10b981; border-color:#10b981;">
-            ⬇️ Descargar Listado Completo en CSV
-          </button>
-          <button type="button" class="action-btn-secondary fc-btn-lg" id="fc-final-save-json">
-            💾 Descargar copia de seguridad (.json)
-          </button>
-          <button type="button" class="action-btn-secondary fc-btn-lg" id="fc-final-back-order">
-            ✏️ Modificar el orden
-          </button>
-        </div>
-      </div>
-
-      <div class="fc-final-preview-header">
-        <h3>Vista previa del orden final de elección (${finalItems.length} plazas)</h3>
-      </div>
-
-      <div class="table-responsive">
-        <table class="table fc-order-table">
-          <thead>
-            <tr>
-              <th class="center">Orden</th>
-              <th class="center">Nº Conv.</th>
-              <th class="center">Valoración</th>
-              <th>Comunidad</th>
-              <th>Provincia</th>
-              <th>Localidad</th>
-              <th class="center">Categoría</th>
-              <th class="center">Protocolos 2025</th>
-              <th class="center">Pólizas 2025</th>
-              <th class="center">Distancia / Tiempo</th>
-              <th class="center">Informe Galo</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${finalItems.map((item, idx) => {
-              const p = item.p;
-              const g = item.gObj;
-              const badgeCat = p.categoria === 'Primera' ? 'badge-primera' : p.categoria === 'Segunda' ? 'badge-segunda' : 'badge-tercera';
-              const protStr = p.protocolos2025 !== null ? p.protocolos2025.toLocaleString('es-ES') : '-';
-              const polStr = p.polizas2025 !== null ? p.polizas2025.toLocaleString('es-ES') : '-';
-              const distStr = p.distancia !== null ? `${p.distancia.toFixed(1)} km` : '-';
-              const timeStr = p.duration ? ` (${formatDuration(p.duration)})` : '';
-
-              return `
-                <tr>
-                  <td class="center" data-label="Orden"><strong>#${idx + 1}</strong></td>
-                  <td class="center" data-label="Nº Conv."><span class="badge" style="background:var(--color-surface-hover); color:var(--color-text); font-weight:700;">${escapeHTML(p.numero)}${p.comunidad === 'Cataluña' ? ' (Cat)' : ''}</span></td>
-                  <td class="center" data-label="Valoración">
-                    <span class="badge" style="background:${g.bg}; color:${g.color}; border:1px solid ${g.border};">${g.id} - ${g.name}</span>
-                  </td>
-                  <td data-label="Comunidad">${escapeHTML(p.comunidad)}</td>
-                  <td data-label="Provincia">${escapeHTML(p.provincia)}</td>
-                  <td data-label="Localidad">
-                    <strong>${escapeHTML(p.localidad)}</strong>
-                    <div style="font-size:11px; color:var(--color-text-muted);">${escapeHTML(p.notarioAnterior)}</div>
-                  </td>
-                  <td class="center" data-label="Categoría"><span class="badge ${badgeCat}">${escapeHTML(p.categoria)}</span></td>
-                  <td class="center" data-label="Protocolos 2025"><strong>${protStr}</strong></td>
-                  <td class="center" data-label="Pólizas 2025">${polStr}</td>
-                  <td class="center" data-label="Distancia">${distStr}<small style="color:var(--color-text-muted);">${timeStr}</small></td>
-                  <td class="center" data-label="Informe Galo">
-                    <button type="button" class="fc-icon-action" data-view-galo="${escapeHTML(p.fcId)}" title="Ver Informe Galo">📋 Ver</button>
-                  </td>
-                </tr>
-              `;
-            }).join('')}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  `;
-}
-
-// ================= EVENT BINDING =================
+// ================= EVENTOS =================
 
 function attachFcEvents() {
-  // Topbar navigation
+  // Navegación barra superior
   document.getElementById('fc-nav-welcome')?.addEventListener('click', () => {
     fcState.screen = 'welcome';
     saveFcStateToStorage();
     renderFcApp();
   });
-  document.getElementById('fc-nav-flashcards')?.addEventListener('click', () => {
-    fcState.screen = 'flashcards';
+  document.getElementById('fc-nav-excel')?.addEventListener('click', () => {
+    fcState.screen = 'excel';
     saveFcStateToStorage();
     renderFcApp();
-  });
-  document.getElementById('fc-nav-ordering')?.addEventListener('click', () => {
-    goToOrderingScreen(fcState.currentOrderGroup || 1);
   });
   document.getElementById('fc-nav-final')?.addEventListener('click', () => {
     fcState.screen = 'final';
     saveFcStateToStorage();
     renderFcApp();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  // Topbar save/import
+  // Guardar / Importar en barra superior
   document.getElementById('fc-btn-save-progress')?.addEventListener('click', exportFcProgressJSON);
   document.getElementById('fc-input-import-top')?.addEventListener('change', (e) => {
     if (e.target.files?.[0]) handleImportFile(e.target.files[0]);
   });
 
-  // Welcome screen events
+  // Eventos Pantalla 1 (Inicio)
   if (fcState.screen === 'welcome') {
     const nameInput = document.getElementById('fc-user-name');
+    const surnamesInput = document.getElementById('fc-user-surnames');
+    const escInput = document.getElementById('fc-user-escalafon');
     const cpInput = document.getElementById('fc-postal-code');
 
     document.getElementById('fc-start-btn')?.addEventListener('click', async () => {
       const newName = nameInput ? nameInput.value.trim() : '';
+      const newSurnames = surnamesInput ? surnamesInput.value.trim() : '';
+      const newEsc = escInput ? escInput.value.trim() : '';
       const newCp = cpInput ? cpInput.value.trim() : '';
       const cpChanged = newCp !== fcState.postalCode;
 
       fcState.userName = newName;
+      fcState.userSurnames = newSurnames;
+      fcState.escalafon = newEsc;
       fcState.postalCode = newCp;
       saveFcStateToStorage();
 
@@ -1549,29 +1901,21 @@ function attachFcEvents() {
         const btn = document.getElementById('fc-start-btn');
         if (btn) {
           btn.disabled = true;
-          btn.textContent = '⏳ Calculando distancias...';
+          btn.textContent = '⏳ Calculando distancias en coche...';
         }
         await geocodeAndCalculateFcDistances(newCp);
       }
 
-      // Start or resume flashcards
-      const ratedCount = Object.keys(fcState.ratings).length;
-      if (ratedCount > 0 && ratedCount < fcState.plazas.length) {
-        const firstUnrated = fcState.plazas.findIndex(p => !fcState.ratings[p.fcId]);
-        if (firstUnrated !== -1) fcState.currentIndex = firstUnrated;
-      }
-      fcState.screen = 'flashcards';
+      fcState.screen = 'excel';
       saveFcStateToStorage();
       renderFcApp();
     });
 
-    document.getElementById('fc-restart-btn')?.addEventListener('click', () => {
-      if (confirm('¿Estás seguro de que quieres borrar tu progreso actual y empezar desde la primera tarjeta?')) {
-        fcState.ratings = {};
-        fcState.groupOrders = { 1: [], 2: [], 3: [], 4: [], 5: [] };
-        fcState.currentIndex = 0;
-        fcState.currentOrderGroup = 1;
-        fcState.autoSortApplied = { 4: null, 5: null };
+    document.getElementById('fc-reset-order-btn')?.addEventListener('click', () => {
+      if (confirm('¿Quieres restablecer el orden de las 228 plazas al orden alfabético inicial (Comunidad > Provincia > Localidad)?')) {
+        fcState.orderedIds = fcState.plazas.map(p => p.fcId);
+        fcState.readMap = {};
+        fcState.excludedBoe = {};
         saveFcStateToStorage();
         renderFcApp();
       }
@@ -1584,126 +1928,208 @@ function attachFcEvents() {
     document.getElementById('fc-welcome-export-btn')?.addEventListener('click', exportFcProgressJSON);
   }
 
-  // Flashcards screen events
-  if (fcState.screen === 'flashcards') {
-    document.getElementById('fc-prev-btn')?.addEventListener('click', prevFlashcard);
-    document.getElementById('fc-next-btn')?.addEventListener('click', nextFlashcard);
+  // Eventos Pantalla 2 (Tabla Excel)
+  if (fcState.screen === 'excel') {
+    document.getElementById('fc-excel-download-xlsx')?.addEventListener('click', downloadFullExcelXLSX);
+    document.getElementById('fc-go-final-btn')?.addEventListener('click', () => {
+      fcState.screen = 'final';
+      saveFcStateToStorage();
+      renderFcApp();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
-    document.getElementById('fc-card-jump')?.addEventListener('change', (e) => {
-      fcState.currentIndex = parseInt(e.target.value) || 0;
-      fcState.galoExpanded = false;
+    // Filtros
+    const searchInput = document.getElementById('fc-excel-search');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const pos = e.target.selectionStart;
+        fcState.searchQuery = e.target.value;
+        renderFcApp();
+        const newSearch = document.getElementById('fc-excel-search');
+        if (newSearch) {
+          newSearch.focus();
+          try { newSearch.setSelectionRange(pos, pos); } catch (err) {}
+        }
+      });
+    }
+
+    document.getElementById('fc-excel-filter-com')?.addEventListener('change', (e) => {
+      fcState.filterComunidad = e.target.value;
+      renderFcApp();
+    });
+    document.getElementById('fc-excel-filter-cat')?.addEventListener('change', (e) => {
+      fcState.filterCategoria = e.target.value;
+      renderFcApp();
+    });
+    document.getElementById('fc-excel-filter-turno')?.addEventListener('change', (e) => {
+      fcState.filterTurno = e.target.value;
+      renderFcApp();
+    });
+    document.getElementById('fc-excel-filter-read')?.addEventListener('change', (e) => {
+      fcState.filterReadStatus = e.target.value;
+      renderFcApp();
+    });
+    document.getElementById('fc-excel-clear-filters')?.addEventListener('click', () => {
+      fcState.searchQuery = '';
+      fcState.filterComunidad = '';
+      fcState.filterCategoria = '';
+      fcState.filterTurno = '';
+      fcState.filterReadStatus = '';
+      renderFcApp();
+    });
+
+    // Cambio de posición escribiendo el número de orden (#1..#228)
+    document.querySelectorAll('[data-rank-input]').forEach(inp => {
+      const commitRank = () => {
+        const id = inp.getAttribute('data-rank-input');
+        const val = parseInt(inp.value, 10);
+        if (!isNaN(val) && val >= 1) {
+          movePlazaToGlobalPosition(id, val);
+        }
+      };
+      inp.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          commitRank();
+        }
+      });
+      inp.addEventListener('change', commitRank);
+    });
+
+    // Casilla "Leída"
+    document.querySelectorAll('[data-read-check]').forEach(chk => {
+      chk.addEventListener('change', () => {
+        const id = chk.getAttribute('data-read-check');
+        if (chk.checked) {
+          fcState.readMap[id] = true;
+        } else {
+          delete fcState.readMap[id];
+        }
+        saveFcStateToStorage();
+        const tr = chk.closest('tr');
+        if (tr) tr.classList.toggle('fc-row-read', chk.checked);
+      });
+    });
+
+    // Casilla "Pedir BOE"
+    document.querySelectorAll('[data-boe-check]').forEach(chk => {
+      chk.addEventListener('change', () => {
+        const id = chk.getAttribute('data-boe-check');
+        if (!chk.checked) {
+          fcState.excludedBoe[id] = true;
+        } else {
+          delete fcState.excludedBoe[id];
+        }
+        saveFcStateToStorage();
+        const tr = chk.closest('tr');
+        if (tr) tr.classList.toggle('fc-row-excluded', !chk.checked);
+      });
+    });
+
+    // Notas en línea
+    document.querySelectorAll('[data-note-input]').forEach(inp => {
+      inp.addEventListener('input', () => {
+        const id = inp.getAttribute('data-note-input');
+        fcState.notes[id] = inp.value;
+        saveFcStateToStorage();
+      });
+    });
+
+    // Desplegar compañeros de plaza en línea
+    document.querySelectorAll('[data-toggle-peers]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-toggle-peers');
+        fcState.expandedPeersRows[id] = !fcState.expandedPeersRows[id];
+        renderFcApp();
+      });
+    });
+
+    // SortableJS Drag & Drop en la tabla (cuando no hay filtro activo)
+    const hasActiveFilter = Boolean(fcState.searchQuery || fcState.filterComunidad || fcState.filterCategoria || fcState.filterTurno || fcState.filterReadStatus);
+    const tbody = document.getElementById('fc-excel-tbody');
+    if (tbody && window.Sortable) {
+      if (fcState.sortableInstance) {
+        try { fcState.sortableInstance.destroy(); } catch (e) {}
+        fcState.sortableInstance = null;
+      }
+      if (!hasActiveFilter) {
+        fcState.sortableInstance = new Sortable(tbody, {
+          handle: '.fc-drag-handle',
+          animation: 150,
+          ghostClass: 'fc-sortable-ghost',
+          onEnd: function (evt) {
+            const movedRow = evt.item;
+            const movedId = movedRow?.getAttribute('data-id');
+            if (movedId) {
+              fcState.readMap[movedId] = true;
+            }
+            const rows = Array.from(tbody.querySelectorAll('.fc-excel-row'));
+            const newOrder = rows.map(r => r.getAttribute('data-id')).filter(Boolean);
+            fcState.orderedIds = ensureCompleteOrderedIds(newOrder);
+            saveFcStateToStorage();
+            renderFcApp();
+          }
+        });
+      }
+    }
+  }
+
+  // Eventos Pantalla 3 (Final: Excel + BOE Anexo II/1)
+  if (fcState.screen === 'final') {
+    document.getElementById('fc-btn-download-full-xlsx')?.addEventListener('click', downloadFullExcelXLSX);
+    document.getElementById('fc-btn-print-boe')?.addEventListener('click', printBoeAnexoII1);
+    document.getElementById('fc-btn-download-boe-xlsx')?.addEventListener('click', downloadBoeAnexoExcelXLSX);
+    document.getElementById('fc-btn-copy-boe')?.addEventListener('click', copyBoeTableToClipboard);
+    document.getElementById('fc-btn-back-excel')?.addEventListener('click', () => {
+      fcState.screen = 'excel';
       saveFcStateToStorage();
       renderFcApp();
     });
 
-    document.getElementById('fc-toggle-galo-inline')?.addEventListener('click', () => {
-      fcState.galoExpanded = !fcState.galoExpanded;
+    // Campos de cabecera del Anexo II/1 en vivo
+    const bindLiveField = (id, key) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('change', () => {
+        fcState[key] = el.value.trim();
+        saveFcStateToStorage();
+        renderFcApp();
+      });
+    };
+    bindLiveField('fc-boe-escalafon', 'escalafon');
+    bindLiveField('fc-boe-apellidos', 'userSurnames');
+    bindLiveField('fc-boe-nombre', 'userName');
+    bindLiveField('fc-boe-lugar', 'lugarFirma');
+    bindLiveField('fc-boe-dia', 'diaFirma');
+    bindLiveField('fc-boe-mes', 'mesFirma');
+
+    document.getElementById('fc-boe-max')?.addEventListener('change', (e) => {
+      fcState.boeMaxCount = Math.max(1, Math.min(fcState.plazas.length, parseInt(e.target.value, 10) || fcState.plazas.length));
+      saveFcStateToStorage();
       renderFcApp();
     });
 
-    document.getElementById('fc-galo-expand-overlay')?.addEventListener('click', () => {
-      fcState.galoExpanded = true;
+    document.getElementById('fc-boe-cat-suffix')?.addEventListener('change', (e) => {
+      fcState.boeCatSuffix = e.target.checked;
+      saveFcStateToStorage();
       renderFcApp();
     });
 
-    document.getElementById('fc-open-galo-modal')?.addEventListener('click', () => {
-      openFullGaloModal(fcState.plazas[fcState.currentIndex]);
+    document.getElementById('fc-boe-show-motivo')?.addEventListener('change', (e) => {
+      fcState.boeShowMotivoDisambig = e.target.checked;
+      saveFcStateToStorage();
+      renderFcApp();
     });
 
-    document.querySelectorAll('.fc-rate-btn').forEach(btn => {
+    document.querySelectorAll('[data-final-tab]').forEach(btn => {
       btn.addEventListener('click', () => {
-        const g = parseInt(btn.getAttribute('data-group'));
-        rateCurrentCard(g);
-      });
-    });
-
-    document.getElementById('fc-go-order-btn')?.addEventListener('click', () => {
-      goToOrderingScreen(1);
-    });
-  }
-
-  // Ordering screen events
-  if (fcState.screen === 'ordering') {
-    document.querySelectorAll('.fc-group-step-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const g = parseInt(btn.getAttribute('data-step-group'));
-        goToOrderingScreen(g);
-      });
-    });
-
-    document.getElementById('fc-sort-prot-desc')?.addEventListener('click', () => sortCurrentGroupBy('protocolos', 'desc'));
-    document.getElementById('fc-sort-dist-asc')?.addEventListener('click', () => sortCurrentGroupBy('distancia', 'asc'));
-
-    document.getElementById('fc-mala-prot-desc')?.addEventListener('click', () => sortCurrentGroupBy('protocolos', 'desc'));
-    document.getElementById('fc-mala-dist-asc')?.addEventListener('click', () => sortCurrentGroupBy('distancia', 'asc'));
-    document.getElementById('fc-mala-prot-asc')?.addEventListener('click', () => sortCurrentGroupBy('protocolos', 'asc'));
-
-    document.querySelectorAll('[data-move-up]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const idx = parseInt(btn.getAttribute('data-move-up'));
-        moveItemInCurrentGroup(idx, -1);
-      });
-    });
-
-    document.querySelectorAll('[data-move-down]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const idx = parseInt(btn.getAttribute('data-move-down'));
-        moveItemInCurrentGroup(idx, 1);
-      });
-    });
-
-    document.getElementById('fc-order-prev-btn')?.addEventListener('click', () => {
-      if (fcState.currentOrderGroup > 1) {
-        goToOrderingScreen(fcState.currentOrderGroup - 1);
-      } else {
-        fcState.screen = 'flashcards';
-        saveFcStateToStorage();
+        fcState.finalTab = btn.getAttribute('data-final-tab');
         renderFcApp();
-      }
-    });
-
-    document.getElementById('fc-order-next-btn')?.addEventListener('click', () => {
-      if (fcState.currentOrderGroup < 5) {
-        goToOrderingScreen(fcState.currentOrderGroup + 1);
-      } else {
-        fcState.screen = 'final';
-        saveFcStateToStorage();
-        renderFcApp();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    });
-
-    // Initialize SortableJS on #fc-order-tbody
-    const tbody = document.getElementById('fc-order-tbody');
-    if (tbody && window.Sortable) {
-      if (fcState.sortableInstance) {
-        try { fcState.sortableInstance.destroy(); } catch (e) {}
-      }
-      fcState.sortableInstance = new Sortable(tbody, {
-        handle: '.fc-drag-handle',
-        animation: 150,
-        ghostClass: 'fc-sortable-ghost',
-        onEnd: function () {
-          const rows = Array.from(tbody.querySelectorAll('.fc-sortable-row'));
-          const newOrder = rows.map(r => r.getAttribute('data-id'));
-          fcState.groupOrders[fcState.currentOrderGroup] = newOrder;
-          saveFcStateToStorage();
-          renderFcApp();
-        }
       });
-    }
-  }
-
-  // Final screen events
-  if (fcState.screen === 'final') {
-    document.getElementById('fc-download-final-csv')?.addEventListener('click', downloadFinalOrderedCSV);
-    document.getElementById('fc-final-save-json')?.addEventListener('click', exportFcProgressJSON);
-    document.getElementById('fc-final-back-order')?.addEventListener('click', () => {
-      goToOrderingScreen(1);
     });
   }
 
-  // Shared "Ver Informe Galo" buttons in ordering & final tables
+  // Botón lupa para ver Informe Galo en modal
   document.querySelectorAll('[data-view-galo]').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = btn.getAttribute('data-view-galo');

@@ -810,31 +810,47 @@ mark {
 /* IMPRESIÓN (PDF) */
 @media print {
   /* Ocultar elementos innecesarios */
-  header, .tabs, .controls, #tab-mapa, #duel-bar, .modal-overlay, #duel-page, .distance-box {
+  header, .tabs, .controls, #tab-mapa, #duel-bar, .modal-overlay, #duel-page, .distance-box, .footer, .no-print-boe {
     display: none !important;
   }
   
   /* Ajustar la página */
   body {
-    background: white;
+    background: white !important;
+    color: black !important;
     padding: 0;
     margin: 0;
   }
   
-  .main-content {
-    padding: 0;
-    margin: 0;
-    box-shadow: none;
-    border-radius: 0;
-    border: none;
+  .main-content, .container {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    border: none !important;
   }
 
-  /* Mostrar solo la pestaña de Preferencias al imprimir (o la activa) */
+  /* Mostrar solo la pestaña de Preferencias al imprimir, salvo que estemos imprimiendo el Anexo II/1 del BOE */
   .tab-content {
     display: none !important;
   }
-  #tab-preferencias {
+  body:not(.printing-boe-anexo) #tab-preferencias {
     display: block !important;
+  }
+  body.printing-boe-anexo #tab-flashcards,
+  #tab-flashcards.active {
+    display: block !important;
+  }
+
+  body.printing-boe-anexo #fc-boe-anexo-sheet {
+    display: block !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
   }
 
   /* Ajustar tabla para que entre bien */
@@ -878,11 +894,15 @@ mark {
   text-decoration: underline;
 }
 
-/* ================= ASISTENTE FLASHCARDS ================= */
+/* ================= ASISTENTE EXCEL + BOE ANEXO II/1 ================= */
 
 .fc-container {
   max-width: 960px;
   margin: 0 auto;
+}
+
+.fc-container.fc-container-wide {
+  max-width: 100%;
 }
 
 .fc-topbar {
@@ -895,7 +915,7 @@ mark {
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .fc-steps-nav {
@@ -944,8 +964,8 @@ mark {
 }
 
 .fc-btn-lg {
-  padding: 12px 22px !important;
-  font-size: 15px !important;
+  padding: 11px 20px !important;
+  font-size: 14.5px !important;
 }
 
 /* Welcome Screen */
@@ -1003,8 +1023,8 @@ mark {
 }
 
 .fc-form-group label {
-  font-size: 13.5px;
-  font-weight: 600;
+  font-size: 12.5px;
+  font-weight: 700;
   color: var(--color-text);
 }
 
@@ -1053,247 +1073,406 @@ mark {
   flex-wrap: wrap;
 }
 
-/* Flashcard Stage */
-.fc-stage-wrapper {
-  max-width: 760px;
-  margin: 0 auto;
-}
+/* ================= MODO HOJA DE CÁLCULO (EXCEL INTERACTIVO) ================= */
 
-.fc-progress-panel {
+.fc-excel-toolbar {
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: 10px;
-  padding: 14px 18px;
-  margin-bottom: 16px;
-}
-
-.fc-progress-info {
-  display: flex;
-  justify-content: space-between;
-  font-size: 13.5px;
-  margin-bottom: 8px;
-  color: var(--color-text);
-}
-
-.fc-progress-bar-bg {
-  width: 100%;
-  height: 8px;
-  background: var(--color-border);
-  border-radius: 999px;
-  overflow: hidden;
-  margin-bottom: 10px;
-}
-
-.fc-progress-bar-fill {
-  height: 100%;
-  background: var(--color-accent);
-  border-radius: 999px;
-  transition: width 0.25s ease;
-}
-
-.fc-mini-counters {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.fc-mini-pill {
-  font-size: 11.5px;
-  padding: 2px 10px;
-  border-radius: 999px;
-}
-
-.fc-card-nav-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
+  padding: 14px 16px;
   margin-bottom: 14px;
 }
 
-.fc-nav-btn {
-  padding: 8px 14px !important;
+.fc-excel-toolbar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.fc-excel-title {
+  margin: 0 0 4px 0;
+  font-size: 18px;
+  color: var(--color-text);
+}
+
+.fc-excel-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.fc-excel-toolbar-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.fc-excel-filters-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.fc-excel-filter-input {
+  flex: 1;
+  min-width: 240px;
+  padding: 8px 12px !important;
   font-size: 13px !important;
 }
 
-/* Flashcard Box */
-.fc-flashcard {
-  background: var(--color-surface);
+.fc-excel-select {
+  padding: 8px 10px !important;
+  font-size: 12.5px !important;
+}
+
+.fc-filter-warning-banner {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  color: var(--color-text);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.fc-spreadsheet-container {
+  width: 100%;
+  overflow-x: auto;
+  max-height: 78vh;
+  overflow-y: auto;
   border: 1px solid var(--color-border);
-  border-radius: 14px;
-  padding: 24px;
-  box-shadow: var(--box-shadow-hover);
-  margin-bottom: 20px;
+  border-radius: 8px;
+  background: var(--color-surface);
+  box-shadow: var(--box-shadow);
 }
 
-.fc-card-header {
-  border-bottom: 1px solid var(--color-border);
-  padding-bottom: 14px;
-  margin-bottom: 16px;
-}
-
-.fc-card-location-hierarchy {
+.fc-spreadsheet-table {
+  width: 100%;
+  border-collapse: collapse;
   font-size: 12.5px;
-  font-weight: 600;
+  min-width: 1320px;
+}
+
+.fc-spreadsheet-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 15;
+  background: #1e293b;
+  color: #f8fafc;
+  font-weight: 700;
+  font-size: 11.5px;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
+  padding: 10px 8px;
+  border: 1px solid #334155;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.fc-spreadsheet-table tbody td {
+  border: 1px solid var(--color-border);
+  padding: 8px 9px;
+  vertical-align: top;
+  line-height: 1.38;
+}
+
+.fc-excel-row {
+  background: var(--color-surface);
+  transition: background 0.12s ease;
+}
+
+.fc-excel-row:nth-child(even) {
+  background: rgba(148, 163, 184, 0.05);
+}
+
+.fc-excel-row:hover {
+  background: rgba(var(--color-accent-rgb), 0.06);
+}
+
+.fc-excel-row.fc-row-read {
+  background: rgba(16, 185, 129, 0.07);
+}
+
+.fc-excel-row.fc-row-excluded {
+  opacity: 0.52;
+  background: rgba(239, 68, 68, 0.05);
+}
+
+/* Column widths & specific cell layouts */
+.fc-col-order { width: 95px; text-align: center !important; }
+.fc-col-conv { width: 145px; }
+.fc-col-loc { width: 170px; }
+.fc-col-demo { width: 145px; }
+.fc-col-dist { width: 95px; }
+.fc-col-work { width: 145px; }
+.fc-col-acts { width: 175px; }
+.fc-col-peers { width: 175px; }
+.fc-col-galo { min-width: 310px; }
+
+.fc-cell-order {
+  text-align: center;
+  background: rgba(148, 163, 184, 0.08);
+}
+
+.fc-order-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 6px;
+}
+
+.fc-drag-handle {
+  cursor: grab;
+  user-select: none;
+  font-size: 16px;
   color: var(--color-text-muted);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.fc-drag-handle:hover:not(.disabled) {
+  background: var(--color-border);
+  color: var(--color-text);
+}
+
+.fc-drag-handle.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.fc-rank-input {
+  width: 54px;
+  padding: 4px 5px;
+  font-size: 13.5px;
+  font-weight: 800;
+  text-align: center;
+  border: 1.5px solid var(--color-accent);
+  border-radius: 6px;
+  background: var(--color-surface);
+  color: var(--color-primary);
+}
+
+.fc-rank-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(var(--color-accent-rgb), 0.25);
+}
+
+.fc-order-checks {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  font-size: 11px;
+  color: var(--color-text-muted);
+  padding-left: 4px;
+}
+
+.fc-check-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.fc-conv-top {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
   margin-bottom: 4px;
 }
 
-.fc-crumb-sep {
-  margin: 0 6px;
-  opacity: 0.6;
-}
-
-.fc-card-title-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.fc-card-locality {
-  font-size: 26px;
-  font-weight: 700;
-  margin: 0;
-  line-height: 1.2;
-}
-
-.fc-card-badges {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-/* Data Grid inside Flashcard */
-.fc-data-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-bottom: 18px;
-}
-
-.fc-data-item {
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  padding: 10px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.fc-data-item.fc-data-highlight {
-  border-color: rgba(var(--color-accent-rgb), 0.35);
-  background: rgba(var(--color-accent-rgb), 0.04);
-}
-
-.fc-data-label {
+.fc-conv-turno {
   font-size: 11.5px;
   font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 4px;
+}
+
+.fc-conv-motivo {
+  margin-bottom: 4px;
+}
+
+.fc-conv-ant {
+  font-size: 11px;
   color: var(--color-text-muted);
 }
 
-.fc-data-value {
-  font-size: 15px;
+.fc-loc-name {
+  font-size: 14px;
   font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.fc-loc-boe-name {
+  font-size: 11px;
+  color: var(--color-accent);
+  margin-bottom: 2px;
+}
+
+.fc-loc-sub {
+  font-size: 11.5px;
   color: var(--color-text);
-  word-break: break-word;
 }
 
-/* Informe Galo Box */
-.fc-galo-box {
-  background: linear-gradient(180deg, rgba(var(--color-accent-rgb), 0.06), rgba(var(--color-accent-rgb), 0.02));
-  border: 2px solid rgba(var(--color-accent-rgb), 0.35);
-  border-radius: 10px;
-  padding: 16px;
-  margin-bottom: 22px;
-  position: relative;
+.fc-loc-distrito {
+  font-size: 11px;
+  color: var(--color-text-muted);
 }
 
-.fc-galo-header {
+.fc-demo-line {
+  margin-bottom: 2px;
+  font-size: 12px;
+}
+
+.fc-demo-pois {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
   flex-wrap: wrap;
-  margin-bottom: 10px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(var(--color-accent-rgb), 0.2);
+  gap: 6px;
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--color-text-muted);
 }
 
-.fc-galo-title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 700;
-  font-size: 15px;
+.fc-cell-dist {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.fc-dist-km {
+  font-size: 13.5px;
+  color: var(--color-text);
+}
+
+.fc-dist-time {
+  font-size: 11.5px;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.fc-work-prot {
+  font-size: 14px;
+  color: var(--color-primary);
+}
+
+.fc-work-pol {
+  font-size: 12.5px;
+  margin-top: 2px;
+}
+
+.fc-work-folios {
+  font-size: 11.5px;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.fc-work-ratio {
+  font-weight: 600;
   color: var(--color-accent);
 }
 
-.fc-galo-important-tag {
-  background: var(--color-accent);
-  color: #fff;
-  font-size: 10.5px;
-  padding: 2px 7px;
-  border-radius: 999px;
-  text-transform: uppercase;
+.fc-work-total {
+  font-size: 11.5px;
+  margin-top: 3px;
+  padding-top: 3px;
+  border-top: 1px dashed var(--color-border);
 }
 
-.fc-galo-actions {
-  display: flex;
-  gap: 8px;
+.fc-acts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 6px;
+  font-size: 11px;
+  color: var(--color-text-muted);
 }
 
-.fc-galo-toggle-btn, .fc-galo-modal-btn {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+.fc-acts-grid strong {
   color: var(--color-text);
-  font-size: 12px;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.15s ease;
 }
 
-.fc-galo-toggle-btn:hover, .fc-galo-modal-btn:hover {
+.fc-cell-badge-unique {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+  font-weight: 700;
+  font-size: 11.5px;
+}
+
+.fc-cell-peers-summary {
+  font-size: 11.5px;
+}
+
+.fc-cell-peers-avg {
+  color: var(--color-accent);
+  margin-top: 2px;
+  margin-bottom: 4px;
+}
+
+.fc-inline-link-btn {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+.fc-inline-link-btn:hover {
   border-color: var(--color-accent);
   color: var(--color-accent);
 }
 
-.fc-galo-body {
-  font-size: 14px;
-  line-height: 1.55;
-  color: var(--color-text);
+.fc-cell-peers-dropdown {
+  margin-top: 5px;
+  padding: 5px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  max-height: 150px;
+  overflow-y: auto;
 }
 
-.fc-galo-body.fc-galo-collapsed {
-  max-height: 140px;
-  overflow: hidden;
+.fc-cell-peer-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 10.5px;
+  padding: 2px 0;
+  border-bottom: 1px solid var(--color-border);
 }
 
-.fc-galo-fade-overlay {
-  margin-top: 6px;
-  padding: 8px;
-  text-align: center;
-  background: var(--color-surface);
-  border: 1px dashed var(--color-accent);
-  border-radius: 6px;
-  color: var(--color-accent);
-  font-size: 12.5px;
+.fc-cell-peer-row:last-child {
+  border-bottom: none;
+}
+
+.fc-cell-peer-nums {
+  white-space: nowrap;
   font-weight: 600;
-  cursor: pointer;
 }
 
-.fc-galo-fade-overlay:hover {
-  background: rgba(var(--color-accent-rgb), 0.08);
+.fc-cell-galo-content {
+  font-size: 12px;
+  line-height: 1.45;
+  max-height: 125px;
+  overflow-y: auto;
+  padding: 6px 8px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  margin-bottom: 6px;
 }
 
 .fc-galo-line {
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .fc-galo-line:last-child {
@@ -1305,6 +1484,47 @@ mark {
   font-style: italic;
 }
 
+.fc-cell-note-wrap {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.fc-inline-note-input {
+  flex: 1;
+  padding: 4px 8px;
+  font-size: 11.5px;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.fc-inline-note-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.fc-icon-action {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 3px 7px;
+  font-size: 12px;
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+.fc-icon-action:hover {
+  border-color: var(--color-accent);
+}
+
+.fc-sortable-ghost {
+  opacity: 0.4;
+  background: rgba(var(--color-accent-rgb), 0.15) !important;
+}
+
+/* Modal Informe Galo */
 .fc-galo-full-text {
   font-size: 15px;
   line-height: 1.65;
@@ -1315,293 +1535,12 @@ mark {
   border: 1px solid var(--color-border);
 }
 
-/* Rating Buttons */
-.fc-rating-section {
-  border-top: 1px solid var(--color-border);
-  padding-top: 16px;
-}
-
-.fc-rating-prompt {
-  text-align: center;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--color-text);
-  margin-bottom: 12px;
-}
-
-.fc-current-rating-note {
-  color: var(--color-accent);
-  margin-left: 6px;
-}
-
-.fc-rating-buttons {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
-}
-
-.fc-rate-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 8px;
-  border-radius: 10px;
-  border: 2px solid var(--btn-border);
-  background: var(--btn-bg);
-  color: var(--color-text);
-  cursor: pointer;
-  transition: all 0.15s ease;
-  font-family: var(--font-family);
-}
-
-.fc-rate-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.fc-rate-btn.selected {
-  background: var(--btn-color);
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
-}
-
-.fc-rate-num {
-  font-size: 18px;
-  font-weight: 800;
-  line-height: 1.1;
-  color: var(--btn-color);
-}
-
-.fc-rate-btn.selected .fc-rate-num {
-  color: #ffffff;
-}
-
-.fc-rate-text {
-  font-size: 12.5px;
-  font-weight: 700;
-  margin-top: 4px;
-}
-
-.fc-all-rated-banner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  padding: 16px 20px;
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid #10b981;
-  border-radius: 10px;
-  font-weight: 600;
-}
-
-/* Ordering Screen */
-.fc-group-stepper {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 8px;
-  margin-bottom: 18px;
-}
-
-.fc-group-step-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px 8px;
-  border-radius: 8px;
-  border: 1px solid var(--color-border);
-  background: var(--color-bg);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-family: var(--font-family);
-}
-
-.fc-group-step-btn.active {
-  border: 2px solid var(--g-color);
-  background: var(--color-surface);
-  box-shadow: var(--box-shadow);
-}
-
-.fc-gstep-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--color-text);
-}
-
-.fc-gstep-count {
-  font-size: 11px;
-  color: var(--color-text-muted);
-}
-
-.fc-ordering-header-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  background: var(--color-bg);
-  padding: 16px 20px;
-  border-radius: 8px;
-  border: 1px solid var(--color-border);
-  margin-bottom: 16px;
-}
-
-.fc-ordering-quick-actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.fc-mala-prompt-card {
-  background: rgba(245, 158, 11, 0.1);
-  border: 1px solid #f59e0b;
-  border-radius: 10px;
-  padding: 16px 20px;
-  margin-bottom: 18px;
-}
-
-.fc-mala-prompt-title {
-  font-size: 14.5px;
-  margin-bottom: 12px;
-  color: var(--color-text);
-}
-
-.fc-mala-prompt-buttons {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.fc-mala-choice-btn {
-  padding: 10px 16px;
-  border-radius: 8px;
-  border: 1px solid #f59e0b;
-  background: var(--color-surface);
-  color: var(--color-text);
-  font-weight: 600;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.fc-mala-choice-btn:hover, .fc-mala-choice-btn.active {
-  background: #f59e0b;
-  color: #ffffff;
-}
-
-.fc-drag-handle {
-  cursor: grab;
-  user-select: none;
-  white-space: nowrap;
-}
-
-.fc-drag-handle:active {
-  cursor: grabbing;
-}
-
-.fc-handle-icon {
-  font-size: 16px;
-  color: var(--color-text-muted);
-  margin-right: 6px;
-  vertical-align: middle;
-}
-
-.fc-rank-badge {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 6px;
-  font-weight: 700;
-  font-size: 12px;
-}
-
-.fc-row-actions {
-  display: inline-flex;
-  gap: 6px;
-  align-items: center;
-}
-
-.fc-icon-action {
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: 6px;
-  padding: 4px 8px;
-  font-size: 13px;
-  cursor: pointer;
-  color: var(--color-text);
-}
-
-.fc-icon-action:hover:not(:disabled) {
-  border-color: var(--color-accent);
-}
-
-.fc-icon-action:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-}
-
-.fc-sortable-ghost {
-  opacity: 0.4;
-  background: rgba(var(--color-accent-rgb), 0.15) !important;
-}
-
-.fc-ordering-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 20px;
-}
-
-/* Final Screen */
-.fc-final-hero {
-  text-align: center;
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
-  padding: 32px 20px;
-  margin-bottom: 24px;
-}
-
-.fc-final-icon {
-  font-size: 42px;
-  margin-bottom: 8px;
-}
-
-.fc-final-hero h2 {
-  margin-bottom: 8px;
-}
-
-.fc-final-hero p {
-  color: var(--color-text-muted);
-  margin-bottom: 20px;
-}
-
-.fc-final-actions {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.fc-final-preview-header {
-  margin-bottom: 12px;
-}
-
-/* Resto de Notarías de la Localidad Box */
 .fc-peers-box {
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: 10px;
   padding: 14px 16px;
-  margin-bottom: 18px;
-}
-
-.fc-peers-box.fc-peers-in-modal {
   margin-top: 16px;
-  margin-bottom: 0;
-  background: var(--color-surface);
 }
 
 .fc-peers-header {
@@ -1618,16 +1557,11 @@ mark {
 .fc-peers-title {
   font-size: 13.5px;
   font-weight: 700;
-  color: var(--color-text);
 }
 
 .fc-peers-avg {
   font-size: 12px;
   color: var(--color-accent);
-  background: rgba(var(--color-accent-rgb), 0.1);
-  border: 1px solid rgba(var(--color-accent-rgb), 0.25);
-  padding: 3px 10px;
-  border-radius: 999px;
 }
 
 .fc-peers-list {
@@ -1636,7 +1570,6 @@ mark {
   gap: 6px;
   max-height: 240px;
   overflow-y: auto;
-  padding-right: 4px;
 }
 
 .fc-peer-item {
@@ -1651,96 +1584,183 @@ mark {
   font-size: 13px;
 }
 
-.fc-peers-in-modal .fc-peer-item {
+/* ================= PANTALLA FINAL Y DOCUMENTO OFICIAL BOE ANEXO II/1 ================= */
+
+.fc-final-hero {
   background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 24px 20px;
+  margin-bottom: 24px;
 }
 
-.fc-peer-name {
-  font-weight: 600;
+.fc-final-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.fc-boe-config-box {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 14px;
+}
+
+.fc-boe-config-title {
+  font-size: 13.5px;
+  margin-bottom: 12px;
   color: var(--color-text);
+}
+
+.fc-boe-config-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.fc-boe-config-checks {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  color: var(--color-text-muted);
+  padding-top: 8px;
+  border-top: 1px dashed var(--color-border);
+}
+
+.fc-final-view-tabs {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.fc-view-tab-btn {
+  padding: 9px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.fc-view-tab-btn.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #ffffff;
+}
+
+/* Hoja Oficial ANEXO II/1 (Réplica exacta de BOE-A-2026-21686 pág. 139174) */
+.fc-boe-sheet {
+  max-width: 860px;
+  margin: 0 auto 32px auto;
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 36px 42px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.fc-boe-sheet-title {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 22px;
+  color: #000;
+}
+
+.fc-boe-sheet-meta {
+  margin-bottom: 18px;
+  font-size: 12.5px;
+  color: #000;
+}
+
+.fc-boe-meta-row {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 10px;
+  align-items: baseline;
+}
+
+.fc-boe-meta-item {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  min-width: 210px;
+}
+
+.fc-boe-meta-item.fc-boe-meta-wide {
+  flex: 1;
+}
+
+.fc-boe-meta-label {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.fc-boe-meta-value {
+  flex: 1;
+  border-bottom: 1px dotted #333;
+  min-height: 18px;
+  padding: 0 4px;
+  font-weight: 600;
+}
+
+.fc-boe-official-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1.5px solid #000000;
+  font-size: 12px;
+  color: #000000;
+}
+
+.fc-boe-official-table thead th {
+  border: 1px solid #000000;
+  padding: 8px 6px;
+  text-align: center;
+  font-weight: 700;
+  background: #ffffff;
+  color: #000000;
   line-height: 1.3;
 }
 
-.fc-peer-subloc {
-  font-weight: 400;
+.fc-boe-official-table tbody td {
+  border: 1px solid #000000;
+  padding: 6px 8px;
+  height: 26px;
+  color: #000000;
+}
+
+.fc-boe-td-center {
+  text-align: center;
+}
+
+.fc-boe-td-left {
+  text-align: left;
+}
+
+.fc-boe-sheet-footnote {
+  margin-top: 8px;
   font-size: 11.5px;
-  color: var(--color-text-muted);
+  color: #000000;
 }
 
-.fc-peer-stats {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  white-space: nowrap;
-  flex-shrink: 0;
-  font-size: 12.5px;
-  color: var(--color-text-muted);
+.fc-boe-sheet-signature {
+  margin-top: 28px;
+  text-align: center;
+  font-size: 13px;
+  color: #000000;
 }
 
-.fc-peer-Stats strong,
-.fc-peer-stat-prot strong,
-.fc-peer-stat-pol strong {
-  color: var(--color-text);
+.fc-boe-sig-sub {
+  margin-top: 14px;
+  font-size: 12px;
 }
 
-/* Responsive Mobile for Flashcards */
-@media (max-width: 768px) {
-  .fc-welcome-card {
-    padding: 20px 16px;
-  }
-  .fc-flashcard {
-    padding: 16px;
-  }
-  .fc-data-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-  }
-  /* En móvil, mostrar el Informe Galo entero directamente sin desplegar */
-  .fc-galo-body.fc-galo-collapsed {
-    max-height: none !important;
-    overflow: visible !important;
-  }
-  .fc-galo-toggle-btn,
-  .fc-galo-fade-overlay {
-    display: none !important;
-  }
-  .fc-peers-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-  }
-  .fc-peer-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-  }
-  .fc-peer-stats {
-    width: 100%;
-    justify-content: flex-start;
-    gap: 14px;
-  }
-  .fc-rating-buttons {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-  .fc-rate-btn {
-    flex-direction: row;
-    justify-content: flex-start;
-    gap: 12px;
-    padding: 12px 16px;
-  }
-  .fc-group-stepper {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .fc-card-nav-row {
-    flex-wrap: wrap;
-  }
-  .fc-jump-selector {
-    order: 3;
-    width: 100%;
-  }
-  .fc-jump-selector select {
-    max-width: 100% !important;
-    width: 100%;
-  }
-}
