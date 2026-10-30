@@ -48,6 +48,7 @@ function initPreferencias() {
 function renderPreferencias() {
   const listEl = document.getElementById('preferencias-list');
   if (!listEl) return;
+  const prevScrollY = window.scrollY;
   
   if (favOrder.length === 0) {
     listEl.innerHTML = '<tr><td colspan="20" class="empty-state">No tienes ninguna plaza guardada en favoritos. Ve a "Plazas Vacantes" y marca la estrella en las notarías que te interesen.</td></tr>';
@@ -124,6 +125,7 @@ function renderPreferencias() {
   });
   
   listEl.innerHTML = html;
+  window.scrollTo(0, prevScrollY);
   
   // Asignar evento borrar
   listEl.querySelectorAll('.pref-remove').forEach(btn => {
@@ -146,7 +148,7 @@ function renderPreferencias() {
       handle: '.pref-handle',
       animation: 150,
       ghostClass: 'sortable-ghost',
-      onEnd: function (evt) {
+      onEnd: function () {
         // Reordenar array basado en DOM
         const items = Array.from(listEl.querySelectorAll('.pref-item'));
         const newOrder = items.map(el => el.getAttribute('data-id'));
@@ -156,8 +158,11 @@ function renderPreferencias() {
         favOrder.push(...newOrder);
         localStorage.setItem('favVacantes', JSON.stringify(favOrder));
         
-        // Refrescar para actualizar los números
-        renderPreferencias();
+        // Actualizar numeración en el DOM sin perder la posición de scroll
+        items.forEach((item, idx) => {
+          const handleEl = item.querySelector('.pref-handle');
+          if (handleEl) handleEl.textContent = `☰ ${idx + 1}`;
+        });
       }
     });
   }

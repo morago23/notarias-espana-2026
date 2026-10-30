@@ -1021,9 +1021,15 @@ function parseImportedCsvOrExcel(content, isBinary = false) {
 
 // ================= RENDERIZADO DE LA APLICACIÓN (PANTALLA COMPLETA) =================
 
-function renderFcApp() {
+function renderFcApp(options = {}) {
   const container = document.getElementById('fc-app-container');
   if (!container) return;
+
+  const prevScrollArea = container.querySelector('.fc-main-scroll-area');
+  const prevScrollTop = prevScrollArea ? prevScrollArea.scrollTop : 0;
+  const prevSpreadScroll = document.getElementById('fc-spreadsheet-scroll');
+  const prevSpreadLeft = prevSpreadScroll ? prevSpreadScroll.scrollLeft : 0;
+  const prevWindowScrollY = window.scrollY;
 
   const tabEl = document.getElementById('tab-flashcards');
   const isTabActive = tabEl && tabEl.classList.contains('active');
@@ -1090,6 +1096,20 @@ function renderFcApp() {
 
   container.innerHTML = topBarHtml + `<div class="fc-main-scroll-area">${bodyHtml}</div>`;
   attachFcEvents();
+
+  if (!options.resetScroll) {
+    const newScrollArea = container.querySelector('.fc-main-scroll-area');
+    if (newScrollArea) {
+      newScrollArea.scrollTop = prevScrollTop;
+    }
+    const newSpreadScroll = document.getElementById('fc-spreadsheet-scroll');
+    if (newSpreadScroll) {
+      newSpreadScroll.scrollLeft = prevSpreadLeft;
+    }
+    if (!fcState.isFullscreenOverlay) {
+      window.scrollTo(0, prevWindowScrollY);
+    }
+  }
 }
 
 function renderPasswordScreen() {
@@ -1642,17 +1662,17 @@ function attachFcEvents() {
   document.getElementById('fc-nav-welcome')?.addEventListener('click', () => {
     fcState.screen = 'welcome';
     saveFcStateToStorage();
-    renderFcApp();
+    renderFcApp({ resetScroll: true });
   });
   document.getElementById('fc-nav-excel')?.addEventListener('click', () => {
     fcState.screen = 'excel';
     saveFcStateToStorage();
-    renderFcApp();
+    renderFcApp({ resetScroll: true });
   });
   document.getElementById('fc-nav-final')?.addEventListener('click', () => {
     fcState.screen = 'final';
     saveFcStateToStorage();
-    renderFcApp();
+    renderFcApp({ resetScroll: true });
   });
 
   // Guardar / Importar / Pantalla Completa en barra superior
@@ -1702,7 +1722,7 @@ function attachFcEvents() {
 
       fcState.screen = 'excel';
       saveFcStateToStorage();
-      renderFcApp();
+      renderFcApp({ resetScroll: true });
     });
 
     document.getElementById('fc-reset-order-btn')?.addEventListener('click', () => {
@@ -1713,7 +1733,7 @@ function attachFcEvents() {
         fcState.excludedBoe = {};
         fcState.screen = 'excel';
         saveFcStateToStorage();
-        renderFcApp();
+        renderFcApp({ resetScroll: true });
       }
     });
 
@@ -1734,17 +1754,20 @@ function attachFcEvents() {
       fcState.boeMaxCount = fcState.revealedCount;
       fcState.screen = 'final';
       saveFcStateToStorage();
-      renderFcApp();
+      renderFcApp({ resetScroll: true });
     };
     document.getElementById('fc-go-final-btn')?.addEventListener('click', goFinal);
     document.getElementById('fc-btn-finish-bottom')?.addEventListener('click', goFinal);
 
     // Cambio de posición escribiendo el número de orden (#1..#revealedCount)
     document.querySelectorAll('[data-rank-input]').forEach(inp => {
+      let committed = false;
       const commitRank = () => {
+        if (committed) return;
         const id = inp.getAttribute('data-rank-input');
         const val = parseInt(inp.value, 10);
         if (!isNaN(val) && val >= 1) {
+          committed = true;
           movePlazaWithinRevealed(id, val);
         }
       };
@@ -1807,7 +1830,11 @@ function attachFcEvents() {
           const unrevealedPart = fcState.orderedIds.slice(fcState.revealedCount);
           fcState.orderedIds = ensureCompleteOrderedIds([...newRevealedOrder, ...unrevealedPart]);
           saveFcStateToStorage();
-          renderFcApp();
+          // Actualizar los números de orden en el DOM sin reconstruir ni mover el scroll
+          rows.forEach((row, idx) => {
+            const rankInp = row.querySelector('[data-rank-input]');
+            if (rankInp) rankInp.value = idx + 1;
+          });
         }
       });
     }
@@ -1822,7 +1849,7 @@ function attachFcEvents() {
     document.getElementById('fc-btn-back-excel')?.addEventListener('click', () => {
       fcState.screen = 'excel';
       saveFcStateToStorage();
-      renderFcApp();
+      renderFcApp({ resetScroll: true });
     });
 
     const bindLiveField = (id, key) => {
