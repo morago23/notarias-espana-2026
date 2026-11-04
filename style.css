@@ -1275,13 +1275,64 @@ body.printing-boe-anexo .fc-main-scroll-area {
   background: rgba(239, 68, 68, 0.05);
 }
 
-/* Column widths (6 columnas exactas) */
-.fc-col-order { width: 105px; text-align: center !important; }
+/* Column widths (8 columnas) */
+.fc-col-order { width: 100px; text-align: center !important; }
 .fc-col-loc { width: 220px; }
-.fc-col-work { width: 170px; }
-.fc-col-galo { min-width: 380px; }
-.fc-col-peers { width: 200px; }
-.fc-col-dist { width: 115px; text-align: center !important; }
+.fc-col-work { width: 165px; }
+.fc-col-local { width: 80px; text-align: center !important; }
+.fc-col-emp { width: 95px; text-align: center !important; }
+.fc-col-galo { min-width: 360px; }
+.fc-col-peers { width: 195px; }
+.fc-col-dist { width: 110px; text-align: center !important; }
+
+.fc-cell-local,
+.fc-cell-emp {
+  text-align: center;
+  vertical-align: middle !important;
+  white-space: nowrap;
+}
+
+.fc-badge-status {
+  display: inline-block;
+  min-width: 40px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.fc-badge-local-si {
+  background: rgba(16, 185, 129, 0.16);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.fc-badge-local-no {
+  background: rgba(239, 68, 68, 0.14);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+.fc-badge-local-ns,
+.fc-badge-emp-ns {
+  background: rgba(148, 163, 184, 0.16);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+}
+
+.fc-badge-emp-zero {
+  background: rgba(245, 158, 11, 0.15);
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.38);
+}
+
+.fc-badge-emp-num {
+  background: rgba(59, 130, 246, 0.15);
+  color: #2563eb;
+  border: 1px solid rgba(59, 130, 246, 0.38);
+}
 
 .fc-cell-order {
   text-align: center;

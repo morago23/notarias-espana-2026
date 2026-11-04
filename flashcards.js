@@ -55,7 +55,7 @@ const fcState = {
 
 function buildOfficialMotivoText(motivo, notarioAnterior) {
   const m = (motivo || '').trim();
-  const ant = (notarioAnterior || '').trim();
+  const ant = (notarioAnterior || '').replace(/\s*\([^)]*\)\s*$/, '').trim();
   if (!ant || ant === '-') return m;
   if (m === 'Desierta') return `Desierta en concurso precedente (protocolo de ${ant})`;
   if (m === 'Jubilación') return `Jubilación de ${ant}`;
@@ -76,6 +76,8 @@ function initFlashcardsApp() {
     let categoria = (raw['Categoría'] || '').trim();
     const turno = (raw['Turno'] || '').trim();
     const notarioAnterior = (raw['Notario Anterior'] || '').trim() || '-';
+    const local = (raw['Local'] || 'NS').toString().trim() || 'NS';
+    const empleados = (raw['Empleados'] !== undefined && raw['Empleados'] !== '') ? String(raw['Empleados']).trim() : 'NS';
     const colegio = (raw['Colegio'] || comunidad || '').trim();
     const distrito = (raw['Distrito'] || localidad || '').trim();
     const informeGalo = (raw['Informe Galo'] || '').trim();
@@ -85,7 +87,7 @@ function initFlashcardsApp() {
       ? BOE_LITERAL_NOTARIA_MAP[numero]
       : localidad;
 
-    const motivoSegunConvocatoria = buildOfficialMotivoText(motivo, notarioAnterior);
+    const motivoSegunConvocatoria = buildOfficialMotivoText(motivo, raw['Notario'] || notarioAnterior);
 
     // Datos de actividad 2025
     const rawProt = raw['Instrumentos públicos (escrituras, actas y protestos)'];
@@ -146,6 +148,8 @@ function initFlashcardsApp() {
       motivo,
       categoria,
       notarioAnterior,
+      local,
+      empleados,
       numNotarias,
       protocolos2025,
       polizasA2025,
@@ -291,8 +295,10 @@ function getCoordsForGalo(localidad, provincia) {
 }
 
 function isSameNotaryName(n1, n2) {
-  const a = normalize(n1 || '');
-  const b = normalize(n2 || '');
+  const clean1 = (n1 || '').toString().replace(/\s*\([^)]*\)\s*$/, '');
+  const clean2 = (n2 || '').toString().replace(/\s*\([^)]*\)\s*$/, '');
+  const a = normalize(clean1);
+  const b = normalize(clean2);
   if (!a || !b || a === '-') return false;
   if (a === b) return true;
   const ta = a.split(/[\s-]+/).filter(t => t.length > 2);
@@ -797,6 +803,8 @@ function downloadFullExcelXLSX() {
       'Colegio Notarial': p.colegio,
       'Motivo Vacante': p.motivo,
       'Notario Anterior': p.notarioAnterior,
+      'Local': p.local || 'NS',
+      'Empleados': p.empleados !== undefined ? p.empleados : 'NS',
       'Protocolos 2025': p.protocolos2025 !== null ? p.protocolos2025 : '',
       'Pólizas 2025': p.polizas2025 !== null ? p.polizas2025 : '',
       'Folios Instrumentos 2025': p.foliosProt2025 !== null ? p.foliosProt2025 : '',
@@ -1291,9 +1299,11 @@ function renderExcelScreen(revCount, totalCount) {
               <th class="fc-col-order">1. Orden (#)</th>
               <th class="fc-col-loc">2. Plaza / Convocatoria / Turno</th>
               <th class="fc-col-work">3. Protocolos y Pólizas 2025</th>
-              <th class="fc-col-galo">4. Informe Galo</th>
-              <th class="fc-col-peers">5. Compañeros en la Plaza</th>
-              <th class="fc-col-dist">6. Distancia C.P.</th>
+              <th class="fc-col-local">4. Local</th>
+              <th class="fc-col-emp">5. Empleados</th>
+              <th class="fc-col-galo">6. Informe Galo</th>
+              <th class="fc-col-peers">7. Compañeros en la Plaza</th>
+              <th class="fc-col-dist">8. Distancia C.P.</th>
             </tr>
           </thead>
           <tbody id="fc-excel-tbody">
@@ -1344,7 +1354,22 @@ function renderExcelRowHtml(p, rank, revCount) {
   const folPorProtStr = p.foliosPorProt !== null ? `${p.foliosPorProt} fol/prot` : '';
   const totalGenStr = p.totalGeneral2025 !== null ? p.totalGeneral2025.toLocaleString('es-ES') : '-';
 
-  // Columna 5: Compañeros en la plaza
+  // Columnas 4 y 5: Local (SI / NO / NS) y Empleados (Número / NS)
+  const localVal = (p.local || 'NS').toUpperCase();
+  const localBadgeClass = localVal === 'SI'
+    ? 'fc-badge-local-si'
+    : localVal === 'NO'
+      ? 'fc-badge-local-no'
+      : 'fc-badge-local-ns';
+
+  const empVal = (p.empleados !== undefined && p.empleados !== '') ? String(p.empleados) : 'NS';
+  const empBadgeClass = empVal === 'NS'
+    ? 'fc-badge-emp-ns'
+    : empVal === '0'
+      ? 'fc-badge-emp-zero'
+      : 'fc-badge-emp-num';
+
+  // Columna 7: Compañeros en la plaza
   let peersHtml = '';
   if (p.numNotarias <= 1) {
     peersHtml = `<div class="fc-cell-badge-unique">🏛️ Plaza Única (1 notario)</div>`;
@@ -1375,7 +1400,7 @@ function renderExcelRowHtml(p, rank, revCount) {
     `;
   }
 
-  // Columna 6: Distancia
+  // Columna 8: Distancia
   const distStr = p.distancia !== null ? `${p.distancia.toFixed(1)} km` : (fcState.postalCode ? '...' : 'Sin C.P.');
   const timeStr = p.duration ? formatDuration(p.duration) : (p.distancia !== null ? '✈️ / Ferry' : '');
 
@@ -1442,7 +1467,17 @@ function renderExcelRowHtml(p, rank, revCount) {
         </div>
       </td>
 
-      <!-- COLUMNA 4: INFORME GALO -->
+      <!-- COLUMNA 4: LOCAL (SI / NO / NS) -->
+      <td class="fc-cell-local">
+        <span class="fc-badge-status ${localBadgeClass}">${escapeHTML(localVal)}</span>
+      </td>
+
+      <!-- COLUMNA 5: EMPLEADOS (NÚMERO / NS) -->
+      <td class="fc-cell-emp">
+        <span class="fc-badge-status ${empBadgeClass}">${escapeHTML(empVal)}</span>
+      </td>
+
+      <!-- COLUMNA 6: INFORME GALO -->
       <td class="fc-cell-galo">
         <div class="fc-cell-galo-content">
           ${formatInformeGaloHtml(p.informeGalo)}
@@ -1453,12 +1488,12 @@ function renderExcelRowHtml(p, rank, revCount) {
         </div>
       </td>
 
-      <!-- COLUMNA 5: COMPAÑEROS EN LA PLAZA -->
+      <!-- COLUMNA 7: COMPAÑEROS EN LA PLAZA -->
       <td class="fc-cell-peers">
         ${peersHtml}
       </td>
 
-      <!-- COLUMNA 6: DISTANCIA C.P. -->
+      <!-- COLUMNA 8: DISTANCIA C.P. -->
       <td class="fc-cell-dist">
         <div class="fc-dist-km"><strong>${distStr}</strong></div>
         ${timeStr ? `<div class="fc-dist-time">🚗 ${timeStr}</div>` : ''}
@@ -1618,6 +1653,8 @@ function renderFinalScreen() {
                 <th>Provincia / CCAA</th>
                 <th class="center">Protocolos 2025</th>
                 <th class="center">Pólizas 2025</th>
+                <th class="center">Local</th>
+                <th class="center">Empleados</th>
                 <th>Informe Galo</th>
                 <th>Compañeros</th>
                 <th class="center">Distancia / Tiempo</th>
@@ -1629,6 +1666,8 @@ function renderFinalScreen() {
                 const polStr = p.polizas2025 !== null ? p.polizas2025.toLocaleString('es-ES') : '-';
                 const distStr = p.distancia !== null ? `${p.distancia.toFixed(1)} km` : '-';
                 const timeStr = p.duration ? ` (${formatDuration(p.duration)})` : '';
+                const localVal = (p.local || 'NS').toUpperCase();
+                const empVal = (p.empleados !== undefined && p.empleados !== '') ? String(p.empleados) : 'NS';
 
                 return `
                   <tr>
@@ -1641,6 +1680,8 @@ function renderFinalScreen() {
                     <td>${escapeHTML(p.provincia)} <small style="color:var(--color-text-muted);">(${escapeHTML(p.comunidad)})</small></td>
                     <td class="center"><strong>${protStr}</strong></td>
                     <td class="center">${polStr}</td>
+                    <td class="center"><strong>${escapeHTML(localVal)}</strong></td>
+                    <td class="center"><strong>${escapeHTML(empVal)}</strong></td>
                     <td style="max-width:340px;"><small>${escapeHTML((p.informeGalo || '').slice(0, 160))}${(p.informeGalo || '').length > 160 ? '...' : ''}</small></td>
                     <td class="center"><small>${p.numNotarias === 1 ? 'Única' : `${p.numNotarias} not. (Media: ${p.mediaProtResto ?? '-'})`}</small></td>
                     <td class="center">${distStr}<small style="color:var(--color-text-muted);">${timeStr}</small></td>

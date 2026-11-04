@@ -1,5 +1,5 @@
 // Datos completos de Plazas Filtradas con Informe Galo (228 vacantes definitivas BOE + Cataluña)
-const DATA_GALO_HEADERS = ["Número", "Comunidad", "Provincia", "Localidad / Plaza", "Motivo", "Categoría", "Turno", "Notario Anterior", "Provincia (Informe)", "Colegio", "Distrito", "Municipio", "Notaria", "Notario", "Informe Galo", "Instrumentos públicos (escrituras, actas y protestos)", "Folios de los instrumentos públicos", "Pólizas Sección A", "Folios de pólizas Sección A", "Pólizas Sección B", "Folios de pólizas Sección B", "Protocolos reservados", "Folios de los protocolos reservados", "Actos de orden familiar y personal", "Testamentos y disposiciones de ultima voluntad", "Contratos por razon de matrimonio y actos relativos a uniones o separaciones de hecho", "Actos que implican modificacion fisica sobre las fincas", "Contratos traslativos sobre todo tipo de bienes y derechos", "Contratos de arrendamiento y cesiones de uso", "Donaciones y transmisiones gratuitas inter vivos", "Pactos acumulables a negocios juridicos principales, independientes o no", "Actos urbanisticos", "Otros actos y contratos", "Herencias", "Creditos, prestamos y garantias hipotecarias", "Cartas de pago y cancelaciones", "Apoderamientos", "Protestos", "Actas", "Polizas y otros documentos mercantiles sujetos al antiguo arancel de corredores", "Entidades sin personalidad juridica", "Entidades con personalidad juridica", "Actuaciones notariales en caso de catástrofes", "Total general"];
+const DATA_GALO_HEADERS = ["Número","Comunidad","Provincia","Localidad / Plaza","Motivo","Categoría","Turno","Notario Anterior","Local","Empleados","Provincia (Informe)","Colegio","Distrito","Municipio","Notaria","Notario","Informe Galo","Instrumentos públicos (escrituras, actas y protestos)","Folios de los instrumentos públicos","Pólizas Sección A","Folios de pólizas Sección A","Pólizas Sección B","Folios de pólizas Sección B","Protocolos reservados","Folios de los protocolos reservados","Actos de orden familiar y personal","Testamentos y disposiciones de ultima voluntad","Contratos por razon de matrimonio y actos relativos a uniones o separaciones de hecho","Actos que implican modificacion fisica sobre las fincas","Contratos traslativos sobre todo tipo de bienes y derechos","Contratos de arrendamiento y cesiones de uso","Donaciones y transmisiones gratuitas inter vivos","Pactos acumulables a negocios juridicos principales, independientes o no","Actos urbanisticos","Otros actos y contratos","Herencias","Creditos, prestamos y garantias hipotecarias","Cartas de pago y cancelaciones","Apoderamientos","Protestos","Actas","Polizas y otros documentos mercantiles sujetos al antiguo arancel de corredores","Entidades sin personalidad juridica","Entidades con personalidad juridica","Actuaciones notariales en caso de catástrofes","Total general"];
 const DATA_GALO = [
   {
     "Número": "1",
@@ -9,7 +9,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Sofía Trapote González",
+    "Notario Anterior": "Sofía Trapote González (Chinchilla)",
     "Provincia (Informe)": "Araba/Álava",
     "Colegio": "País Vasco",
     "Distrito": "VITORIA-GASTEIZ",
@@ -45,7 +45,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "90.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2187.0"
+    "Total general": "2187.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "2",
@@ -55,7 +57,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Alfonso Pascual De Miguel",
+    "Notario Anterior": "Alfonso Pascual de Miguel (Jubilación)",
     "Provincia (Informe)": "Valencia",
     "Colegio": "Valencia",
     "Distrito": "VALENCIA",
@@ -91,7 +93,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "18.0",
     "Entidades con personalidad juridica": "582.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2628.0"
+    "Total general": "2628.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "3",
@@ -101,7 +105,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Delfín Martínez Pérez",
+    "Notario Anterior": "Delfín Martínez Pérez (Jubilación)",
     "Provincia (Informe)": "Alicante",
     "Colegio": "Valencia",
     "Distrito": "ALICANTE",
@@ -137,7 +141,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "272.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2690.0"
+    "Total general": "2690.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "4",
@@ -147,7 +153,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Francisco de Borja Igartua Fesser",
+    "Notario Anterior": "Francisco de Borja Igartua Fesser (Jubilación)",
     "Provincia (Informe)": "Badajoz",
     "Colegio": "Extremadura",
     "Distrito": "MERIDA",
@@ -183,7 +189,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "1.0",
     "Entidades con personalidad juridica": "58.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1689.0"
+    "Total general": "1689.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "5",
@@ -193,7 +201,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Francisco Mata Botella",
+    "Notario Anterior": "Francisco Mata Botella (Jubilación)",
     "Provincia (Informe)": "Madrid",
     "Colegio": "Madrid",
     "Distrito": "MADRID",
@@ -229,7 +237,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "1.0",
     "Entidades con personalidad juridica": "407.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2616.0"
+    "Total general": "2616.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "6",
@@ -239,7 +249,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "José Manuel Lois Puente",
+    "Notario Anterior": "José Manuel Lois Puente (Jubilación)",
     "Provincia (Informe)": "A Coruña",
     "Colegio": "Galicia",
     "Distrito": "CORUÑA (A)",
@@ -275,7 +285,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "284.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2833.0"
+    "Total general": "2833.0",
+    "Local": "NO",
+    "Empleados": "0"
   },
   {
     "Número": "7",
@@ -285,7 +297,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Juan Antonio Escudero García",
+    "Notario Anterior": "Juan Antonio Escudero García (Jubilación)",
     "Provincia (Informe)": "Asturias",
     "Colegio": "Asturias",
     "Distrito": "OVIEDO",
@@ -321,7 +333,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "3.0",
     "Entidades con personalidad juridica": "206.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2196.0"
+    "Total general": "2196.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "8",
@@ -331,7 +345,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Juan Manuel Lozano Carreras",
+    "Notario Anterior": "Juan Manuel Lozano Carreras (Jubilación)",
     "Provincia (Informe)": "Madrid",
     "Colegio": "Madrid",
     "Distrito": "MADRID",
@@ -367,7 +381,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "4.0",
     "Entidades con personalidad juridica": "241.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "3245.0"
+    "Total general": "3245.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "9",
@@ -377,7 +393,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Juan Polvorosa Mies",
+    "Notario Anterior": "Juan Polvorosa Mies (Jubilación)",
     "Provincia (Informe)": "Palencia",
     "Colegio": "Castilla y León",
     "Distrito": "PALENCIA",
@@ -413,7 +429,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "1.0",
     "Entidades con personalidad juridica": "136.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2357.0"
+    "Total general": "2357.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "10",
@@ -423,7 +441,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María del Pilar De Prada Solaesa",
+    "Notario Anterior": "María Pilar De Prada Solaesa (Jubilación)",
     "Provincia (Informe)": "Madrid",
     "Colegio": "Madrid",
     "Distrito": "MADRID",
@@ -459,7 +477,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "12.0",
     "Entidades con personalidad juridica": "196.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2609.0"
+    "Total general": "2609.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "11",
@@ -469,7 +489,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Miguel Vicente-Almazán Pérez de Petinto",
+    "Notario Anterior": "Miguel Vicente-Almazán Pérez de Petinto (Jubilación)",
     "Provincia (Informe)": "Madrid",
     "Colegio": "Madrid",
     "Distrito": "MADRID",
@@ -505,7 +525,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "63.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2818.0"
+    "Total general": "2818.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "12",
@@ -515,7 +537,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Ricardo Isaias Pérez Ballarín",
+    "Notario Anterior": "Ricardo Pérez Ballarín (Jubilación)",
     "Provincia (Informe)": "Madrid",
     "Colegio": "Madrid",
     "Distrito": "MADRID",
@@ -551,7 +573,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "5.0",
     "Entidades con personalidad juridica": "189.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1123.0"
+    "Total general": "1123.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "13",
@@ -561,7 +585,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Santiago Mora Velarde",
+    "Notario Anterior": "Santiago Mora Velarde (Jubilación)",
     "Provincia (Informe)": "Madrid",
     "Colegio": "Madrid",
     "Distrito": "MADRID",
@@ -597,7 +621,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "226.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "3754.0"
+    "Total general": "3754.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "14",
@@ -607,7 +633,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Teresa Trinidad Cruz Gisbert",
+    "Notario Anterior": "Teresa Cruz Gisbert (Jubilación)",
     "Provincia (Informe)": "Zaragoza",
     "Colegio": "Aragón",
     "Distrito": "ZARAGOZA",
@@ -643,7 +669,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "2.0",
     "Entidades con personalidad juridica": "237.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2241.0"
+    "Total general": "2241.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "15",
@@ -653,7 +681,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Francisco Antonio Arriola Garrote",
+    "Notario Anterior": "Francisco Arriola Garrote (Chinchón)",
     "Provincia (Informe)": "Bizkaia",
     "Colegio": "País Vasco",
     "Distrito": "BILBAO/BILBO",
@@ -689,7 +717,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "36.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1474.0"
+    "Total general": "1474.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "16",
@@ -699,7 +729,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "José Antonio Pérez Álvarez",
+    "Notario Anterior": "José Antonio Pérez Álvarez (Alicante)",
     "Provincia (Informe)": "Alicante",
     "Colegio": "Valencia",
     "Distrito": "ORIHUELA",
@@ -735,7 +765,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "45.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "3531.0"
+    "Total general": "3531.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "17",
@@ -745,7 +777,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Sara Jimena Unceta De La Cruz",
+    "Notario Anterior": "Sara Jimena Unceta de la Cruz (Valladolid)",
     "Provincia (Informe)": "Asturias",
     "Colegio": "Asturias",
     "Distrito": "GIJON",
@@ -781,7 +813,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "64.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1492.0"
+    "Total general": "1492.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "18",
@@ -791,14 +825,14 @@ const DATA_GALO = [
     "Motivo": "Excedencia",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Alfonso García-Perrote Latorre",
+    "Notario Anterior": "Alfonso García-Perrote Latorre (Excedencia (protocolo jubilación de Rodríguez Boix))",
     "Provincia (Informe)": "",
     "Colegio": "Madrid",
     "Distrito": "Madrid",
     "Municipio": "",
     "Notaria": "",
     "Notario": "",
-    "Informe Galo": "",
+    "Informe Galo": "NOTA GESTORÍA: El Sr. García-Perrote Latorre solicitó la excedencia nada más tomar posesión, por lo que el protocolo que se anuncia es la jubilación del Sr. Rodríguez Boix. Domicilio de la Notaría: Parque Nujaruelo 23, local.",
     "Instrumentos públicos (escrituras, actas y protestos)": "",
     "Folios de los instrumentos públicos": "",
     "Pólizas Sección A": "",
@@ -827,7 +861,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "19",
@@ -837,7 +873,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Primera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Luis Sobrino González",
+    "Notario Anterior": "Luis Sobrino González (Jubilación)",
     "Provincia (Informe)": "Asturias",
     "Colegio": "Asturias",
     "Distrito": "AVILES",
@@ -873,7 +909,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "29.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1557.0"
+    "Total general": "1557.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "20",
@@ -883,7 +921,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Primera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "María del Camino López De Heredia San Julián",
+    "Notario Anterior": "María del Camino López de Heredia San Julián (Defunción)",
     "Provincia (Informe)": "Araba/Álava",
     "Colegio": "País Vasco",
     "Distrito": "VITORIA-GASTEIZ",
@@ -919,7 +957,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "0.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "60.0"
+    "Total general": "60.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "21",
@@ -929,7 +969,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Primera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Alfonso Argüelles Luis",
+    "Notario Anterior": "Alfonso Argüelles Luis (Jubilación)",
     "Provincia (Informe)": "Jaén",
     "Colegio": "Andalucía",
     "Distrito": "JAEN",
@@ -965,7 +1005,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "5.0",
     "Entidades con personalidad juridica": "209.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "3437.0"
+    "Total general": "3437.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "22",
@@ -975,7 +1017,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Primera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Enrique Miguel María García-Jalón de La Lama",
+    "Notario Anterior": "Enrique Miguel García-Jalón de la Lama (Jubilación)",
     "Provincia (Informe)": "Gipuzkoa",
     "Colegio": "País Vasco",
     "Distrito": "SAN SEBASTIÁN - DONOSTIA",
@@ -1011,7 +1053,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "6.0",
     "Entidades con personalidad juridica": "592.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "4422.0"
+    "Total general": "4422.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "23",
@@ -1021,7 +1065,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Primera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "José Julio Barrenechea García",
+    "Notario Anterior": "José Julio Barrenechea García (Jubilación)",
     "Provincia (Informe)": "Alicante",
     "Colegio": "Valencia",
     "Distrito": "ORIHUELA",
@@ -1057,7 +1101,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "151.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "5471.0"
+    "Total general": "5471.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "24",
@@ -1067,7 +1113,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Primera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "José María Rivas Díaz",
+    "Notario Anterior": "José María Rivas Díaz (Jubilación)",
     "Provincia (Informe)": "Madrid",
     "Colegio": "Madrid",
     "Distrito": "MADRID",
@@ -1103,7 +1149,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "3.0",
     "Entidades con personalidad juridica": "874.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "4364.0"
+    "Total general": "4364.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "25",
@@ -1113,7 +1161,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Primera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Miguel Ángel De La Fuente Del Real",
+    "Notario Anterior": "Miguel Ángel de la Fuente del Real (Jubilación)",
     "Provincia (Informe)": "Málaga",
     "Colegio": "Andalucía",
     "Distrito": "MARBELLA",
@@ -1149,7 +1197,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "471.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "4521.0"
+    "Total general": "4521.0",
+    "Local": "NO",
+    "Empleados": "0"
   },
   {
     "Número": "26",
@@ -1159,7 +1209,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Primera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Rafael Thode Garrido",
+    "Notario Anterior": "Rafael Thode Garrido (Jubilación)",
     "Provincia (Informe)": "Madrid",
     "Colegio": "Madrid",
     "Distrito": "MADRID",
@@ -1195,7 +1245,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "132.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "3631.0"
+    "Total general": "3631.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "27",
@@ -1205,7 +1257,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Primera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Ricardo Ferrer Giménez",
+    "Notario Anterior": "Ricardo Ferrer Giménez (Jubilación)",
     "Provincia (Informe)": "Madrid",
     "Colegio": "Madrid",
     "Distrito": "MADRID",
@@ -1241,7 +1293,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "17.0",
     "Entidades con personalidad juridica": "829.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "3045.0"
+    "Total general": "3045.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "28",
@@ -1251,7 +1305,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Primera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Carlos León Matorras",
+    "Notario Anterior": "Carlos León Matorras (Cuéllar)",
     "Provincia (Informe)": "Valladolid",
     "Colegio": "Castilla y León",
     "Distrito": "VALLADOLID",
@@ -1287,7 +1341,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "4.0",
     "Entidades con personalidad juridica": "222.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1549.0"
+    "Total general": "1549.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "29",
@@ -1297,7 +1353,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Primera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Fermín Moreno Ayguadé",
+    "Notario Anterior": "Fermín Moreno Ayguadé (Zaragoza)",
     "Provincia (Informe)": "Zaragoza",
     "Colegio": "Aragón",
     "Distrito": "ZARAGOZA",
@@ -1333,7 +1389,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "2.0",
     "Entidades con personalidad juridica": "113.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2634.0"
+    "Total general": "2634.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "30",
@@ -1343,7 +1401,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Bernardo Martínez López",
+    "Notario Anterior": "Bernardo Martínez López (Jubilación)",
     "Provincia (Informe)": "León",
     "Colegio": "Castilla y León",
     "Distrito": "PONFERRADA",
@@ -1379,7 +1437,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "136.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2080.0"
+    "Total general": "2080.0",
+    "Local": "NO",
+    "Empleados": "0"
   },
   {
     "Número": "31",
@@ -1389,7 +1449,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Jorge Luis Sánchez Carballo",
+    "Notario Anterior": "Jorge Luis Sánchez Carballo (Jubilación)",
     "Provincia (Informe)": "León",
     "Colegio": "Castilla y León",
     "Distrito": "PONFERRADA",
@@ -1425,7 +1485,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "7.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "191.0"
+    "Total general": "191.0",
+    "Local": "NO",
+    "Empleados": "0"
   },
   {
     "Número": "32",
@@ -1435,7 +1497,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Carlos Andrés Mosquera Delgado",
+    "Notario Anterior": "Carlos Andrés Mosquera Delgado (Jubilación)",
     "Provincia (Informe)": "A Coruña",
     "Colegio": "Galicia",
     "Distrito": "CARBALLO",
@@ -1471,7 +1533,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "82.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2449.0"
+    "Total general": "2449.0",
+    "Local": "SI",
+    "Empleados": "5"
   },
   {
     "Número": "33",
@@ -1481,14 +1545,14 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Macrina García Moreno",
+    "Notario Anterior": "Macrina García Moreno (Jubilación)",
     "Provincia (Informe)": "Guadalajara",
     "Colegio": "Castilla-La Mancha",
     "Distrito": "GUADALAJARA",
     "Municipio": "Azuqueca de Henares",
     "Notaria": "Azuqueca de Henares",
     "Notario": "Macrina García Moreno",
-    "Informe Galo": "VACANTE: Azuqueca de Henares\nNúmero de firmas: 1683, pólizas 333. Según gestoría\nComunicación: a 1 hora de Madrid",
+    "Informe Galo": "VACANTE: Azuqueca de Henares\nNúmero de firmas: 1683, pólizas 333. Según gestoría\nComunicación: a 1 hora de Madrid\n\nNOTA GESTORÍA: Si desea hablar con la saliente, disponemos del número de teléfono. Al parecer la titular que queda (Raquel Alcocer Ballesteros) estaría dispuesta a dejar instalarse en el mismo local de la saliente.",
     "Instrumentos públicos (escrituras, actas y protestos)": "1687.0",
     "Folios de los instrumentos públicos": "39679.0",
     "Pólizas Sección A": "333.0",
@@ -1517,7 +1581,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "192.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2237.0"
+    "Total general": "2237.0",
+    "Local": "SI",
+    "Empleados": "NS"
   },
   {
     "Número": "34",
@@ -1527,7 +1593,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Pedro Facundo Garré Navarro",
+    "Notario Anterior": "Pedro Facundo Garre Navarro (Jubilación)",
     "Provincia (Informe)": "Murcia",
     "Colegio": "Murcia",
     "Distrito": "MURCIA",
@@ -1563,7 +1629,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "7.0",
     "Entidades con personalidad juridica": "158.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "3946.0"
+    "Total general": "3946.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "35",
@@ -1573,7 +1641,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Alma María Carbajal De La Iglesia",
+    "Notario Anterior": "Alma María Carbajal de la Iglesia (Outes)",
     "Provincia (Informe)": "Pontevedra",
     "Colegio": "Galicia",
     "Distrito": "PONTEAREAS",
@@ -1609,7 +1677,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "3.0",
     "Entidades con personalidad juridica": "149.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "3262.0"
+    "Total general": "3262.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "36",
@@ -1619,7 +1689,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Javier Pichel Pichel",
+    "Notario Anterior": "Javier Pichel Pichel (Icod de los Vinos)",
     "Provincia (Informe)": "Santa Cruz de Tenerife",
     "Colegio": "Las Islas Canarias",
     "Distrito": "LA OROTAVA",
@@ -1655,7 +1725,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "1.0",
     "Entidades con personalidad juridica": "180.0",
     "Actuaciones notariales en caso de catástrofes": "1.0",
-    "Total general": "2954.0"
+    "Total general": "2954.0",
+    "Local": "NO",
+    "Empleados": "0"
   },
   {
     "Número": "37",
@@ -1665,14 +1737,14 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Juan Luis Millet Sancho",
+    "Notario Anterior": "Juan Luis Millet Sancho (Madrid)",
     "Provincia (Informe)": "Alicante",
     "Colegio": "Valencia",
     "Distrito": "DENIA",
     "Municipio": "Xàbia/Jávea",
     "Notaria": "Jávea/Xàbia",
     "Notario": "Juan Luis Millet Sancho",
-    "Informe Galo": "VACANTE: JAVEA\nNúmero de firmas: Sobre los 1500. Hay otros dos notarios enel pueblo.\nComunicación: Zona muy demandada. No va a llegar a la promocion. Lugar al que van a jubilarse los que pueden.",
+    "Informe Galo": "VACANTE: JAVEA\nNúmero de firmas: Sobre los 1500. Hay otros dos notarios enel pueblo.\nComunicación: Zona muy demandada. No va a llegar a la promocion. Lugar al que van a jubilarse los que pueden.\n\nNOTA DEL SALIENTE: El saliente informa que es IMPRESCINDIBLE hablar con él (teléfono en su actual destino: 914-441212).",
     "Instrumentos públicos (escrituras, actas y protestos)": "1523.0",
     "Folios de los instrumentos públicos": "25414.0",
     "Pólizas Sección A": "81.0",
@@ -1701,7 +1773,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "197.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1789.0"
+    "Total general": "1789.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "38",
@@ -1711,7 +1785,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Manuel Pozuelo Vázquez De Agredos",
+    "Notario Anterior": "Manuel Pozuelo Vázquez de Agredos (Manzanares)",
     "Provincia (Informe)": "Córdoba",
     "Colegio": "Andalucía",
     "Distrito": "CABRA",
@@ -1747,7 +1821,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "18.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1127.0"
+    "Total general": "1127.0",
+    "Local": "SI",
+    "Empleados": "6"
   },
   {
     "Número": "39",
@@ -1757,7 +1833,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María Ángeles Santamaría Juan",
+    "Notario Anterior": "María Ángeles Santamaría Juan (Elda)",
     "Provincia (Informe)": "Alicante",
     "Colegio": "Valencia",
     "Distrito": "ELDA",
@@ -1793,7 +1869,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "212.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2589.0"
+    "Total general": "2589.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "40",
@@ -1803,7 +1881,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María Aránzazu Amorós Buqueras",
+    "Notario Anterior": "María Aránzazu Amorós Buqueras (La Rambla)",
     "Provincia (Informe)": "Sevilla",
     "Colegio": "Andalucía",
     "Distrito": "LORA DEL RIO",
@@ -1839,7 +1917,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "3.0",
     "Entidades con personalidad juridica": "41.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1082.0"
+    "Total general": "1082.0",
+    "Local": "SI",
+    "Empleados": "5"
   },
   {
     "Número": "41",
@@ -1849,7 +1929,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María Isabel Martí Del Moral",
+    "Notario Anterior": "Isabel Martí del Moral (Almuñécar)",
     "Provincia (Informe)": "Jaén",
     "Colegio": "Andalucía",
     "Distrito": "ALCALA LA REAL",
@@ -1885,7 +1965,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "25.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1138.0"
+    "Total general": "1138.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "42",
@@ -1895,7 +1977,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María José Perelló Agustina",
+    "Notario Anterior": "María José Perelló Agustina (Valencia)",
     "Provincia (Informe)": "Valencia",
     "Colegio": "Valencia",
     "Distrito": "GANDIA",
@@ -1931,7 +2013,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "25.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2486.0"
+    "Total general": "2486.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "43",
@@ -1941,7 +2025,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Miguel Ildefonso Gallut Ortega",
+    "Notario Anterior": "Miguel Ildefonso Gallut Ortega (Valencia)",
     "Provincia (Informe)": "Valencia",
     "Colegio": "Valencia",
     "Distrito": "ALCIRA",
@@ -1977,7 +2061,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "70.0",
     "Actuaciones notariales en caso de catástrofes": "5.0",
-    "Total general": "2868.0"
+    "Total general": "2868.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "44",
@@ -1987,7 +2073,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Pedro Horcajada Fernández-Quero",
+    "Notario Anterior": "Pedro Horcajada Fernández-Quero (Galapagar)",
     "Provincia (Informe)": "Madrid",
     "Colegio": "Madrid",
     "Distrito": "ARANJUEZ",
@@ -2023,7 +2109,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "184.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2455.0"
+    "Total general": "2455.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "45",
@@ -2033,7 +2121,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Fernando Agustín Bonaga",
+    "Notario Anterior": "Fernando Agustín Bonaga (Zaragoza)",
     "Provincia (Informe)": "Zaragoza",
     "Colegio": "Aragón",
     "Distrito": "CALATAYUD",
@@ -2069,7 +2157,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "98.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1998.0"
+    "Total general": "1998.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "46",
@@ -2079,7 +2169,7 @@ const DATA_GALO = [
     "Motivo": "Excedencia",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "María Jesús Arcos Domínguez",
+    "Notario Anterior": "María Jesús Arcos Domínguez (Excedencia)",
     "Provincia (Informe)": "Madrid",
     "Colegio": "Madrid",
     "Distrito": "ALCOBENDAS",
@@ -2115,7 +2205,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "4.0",
     "Entidades con personalidad juridica": "428.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "6685.0"
+    "Total general": "6685.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "47",
@@ -2125,7 +2217,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "María Lourdes Zaragoza Tafalla",
+    "Notario Anterior": "María Lourdes Zaragoza Tafalla (Jubilación)",
     "Provincia (Informe)": "Cádiz",
     "Colegio": "Andalucía",
     "Distrito": "CHICLANA FRONTERA",
@@ -2161,7 +2253,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "47.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1478.0"
+    "Total general": "1478.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "48",
@@ -2171,14 +2265,14 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Marta Domínguez Merino",
+    "Notario Anterior": "Marta Domínguez Merino (Balaguer)",
     "Provincia (Informe)": "Ávila",
     "Colegio": "Castilla y León",
     "Distrito": "PIEDRAHITA",
     "Municipio": "Barco de Ávila, El",
     "Notaria": "El Barco de Avila",
     "Notario": "Marta Domínguez Merino",
-    "Informe Galo": "VACANTE: El Barco de Ávila\nComunicación: Desierta. Sustituye María Ruiz Aldanondo (pendiente de contacto)",
+    "Informe Galo": "VACANTE: El Barco de Ávila\nComunicación: Desierta. Sustituye María Ruiz Aldanondo (pendiente de contacto)\n\nINFORME REMITIDO POR LA SALIENTE: Hay tres empleadas, se firman unos 700-800 números y entre 80-100 pólizas. Desde Madrid hay autobús que va directo y tarda dos horas y quince o treinta minutos pero lo más cómodo es ir en coche que se tarda 2h. Se abre un sábado al mes porque viene gente de Madrid a firmar. Teléfono de la saliente en su actual destino: 973-446266.",
     "Instrumentos públicos (escrituras, actas y protestos)": "714.0",
     "Folios de los instrumentos públicos": "10427.0",
     "Pólizas Sección A": "76.0",
@@ -2207,7 +2301,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "10.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "820.0"
+    "Total general": "820.0",
+    "Local": "SI",
+    "Empleados": "3"
   },
   {
     "Número": "49",
@@ -2217,7 +2313,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Ricardo Viana Ruiz",
+    "Notario Anterior": "Ricardo Viana Ruiz (Burlada)",
     "Provincia (Informe)": "Navarra",
     "Colegio": "Navarra",
     "Distrito": "ESTELLA",
@@ -2253,7 +2349,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "6.0",
     "Entidades con personalidad juridica": "139.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1982.0"
+    "Total general": "1982.0",
+    "Local": "NO",
+    "Empleados": "0"
   },
   {
     "Número": "50",
@@ -2263,7 +2361,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Alejandro Jaime Sauca Núñez de Prado",
+    "Notario Anterior": "Alejandro Jaime Sauca Núñez de Prado (Begur (act. Terrassa))",
     "Provincia (Informe)": "",
     "Colegio": "Galicia",
     "Distrito": "Chantada",
@@ -2299,7 +2397,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "51",
@@ -2309,14 +2409,14 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Álvaro Romero García",
+    "Notario Anterior": "Álvaro Romero García (Barcelona (act. La Puebla de Cazalla))",
     "Provincia (Informe)": "",
     "Colegio": "Galicia",
     "Distrito": "Bande",
     "Municipio": "",
     "Notaria": "",
     "Notario": "",
-    "Informe Galo": "VACANTE: Bande\nNúmero de firmas: No se saben los números que hace (el sustituto los presenta junto con los de su notaría)\nComunicación: Lleva mucho tiempo vacante",
+    "Informe Galo": "VACANTE: Bande\nNúmero de firmas: No se saben los números que hace (el sustituto los presenta junto con los de su notaría)\nComunicación: Lleva mucho tiempo vacante\n\nINFORME GESTORÍA / SALIENTE: El domicilio de la Notaría es San Roque, 2-2º, es un despacho gratuito en el Ayuntamiento (preguntar, ya que esta información es del anterior titular). No tiene teléfono. Los documentos más frecuentes son: Actas declaración de herederos. Notaría única en la localidad y el Distrito. No hay oficiales. No tiene estación de FF.CC. siendo Orense a 35 km la más próxima. Dista unos 600 km de Madrid y 35 de la capital. Notaría abandonada, sin oficiales y sin continuidad en la atención a la clientela lo que hace que vayan a Celanova. Desierta desde 2005. Las salidas serán las que uno quiere, así como el horario de atención al público. Notaría de entrada. El saliente está actualmente en Puebla de Cazalla (tlno: 95-5843108).",
     "Instrumentos públicos (escrituras, actas y protestos)": "",
     "Folios de los instrumentos públicos": "",
     "Pólizas Sección A": "",
@@ -2345,7 +2445,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "52",
@@ -2355,7 +2457,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Ana Sulleiro Avendaño",
+    "Notario Anterior": "Ana Sulleiro Avendaño (Moral de Calatrava (act. Alcázar de San Juan))",
     "Provincia (Informe)": "",
     "Colegio": "Castilla y León",
     "Distrito": "León",
@@ -2391,7 +2493,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "53",
@@ -2401,7 +2505,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Carmen Alicia Graíño Calaza",
+    "Notario Anterior": "Carmen Alicia Graíño Calaza (Ágreda)",
     "Provincia (Informe)": "Soria",
     "Colegio": "Castilla y León",
     "Distrito": "ALMAZAN",
@@ -2437,7 +2541,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "0.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "80.0"
+    "Total general": "80.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "54",
@@ -2447,7 +2553,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Carmen Solís Pino",
+    "Notario Anterior": "Carmen Solís Pino (Hornachuelos)",
     "Provincia (Informe)": "",
     "Colegio": "Castilla y León",
     "Distrito": "Burgos",
@@ -2483,7 +2589,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "55",
@@ -2493,7 +2601,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Daniel Villagrá Morán",
+    "Notario Anterior": "Daniel Villagrá Morán (Ripoll (act. Ávila))",
     "Provincia (Informe)": "",
     "Colegio": "Castilla y León",
     "Distrito": "Palencia",
@@ -2529,7 +2637,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "56",
@@ -2539,7 +2649,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "David Fiol Busquets",
+    "Notario Anterior": "David Fiol Busquets (Inca)",
     "Provincia (Informe)": "Illes Balears",
     "Colegio": "Las Islas Baleares",
     "Distrito": "INCA",
@@ -2575,7 +2685,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "6.0",
     "Entidades con personalidad juridica": "124.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2824.0"
+    "Total general": "2824.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "57",
@@ -2585,14 +2697,14 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Diego Aparicio Mourelo",
+    "Notario Anterior": "Diego Aparicio Mourelo (Villablino (act. Ávila))",
     "Provincia (Informe)": "",
     "Colegio": "Asturias",
     "Distrito": "Valdés",
     "Municipio": "",
     "Notaria": "",
     "Notario": "",
-    "Informe Galo": "VACANTE: Trevías\nComunicación: Vacante desde hace mucho tiempo, no hay contacto",
+    "Informe Galo": "VACANTE: Trevías\nComunicación: Vacante desde hace mucho tiempo, no hay contacto\n\nINFORME GESTORÍA / SALIENTE: Domicilio: Carretera General, 67-1º B, tlno.- 985-647360. Los documentos más frecuentes son: las compraventas rústicas, testamentos y actas. Sustituye a Luarca. Notaría única en la localidad. No hay salidas. Cercanía de Luarca. Oficialidad: hablar con el saliente. Desierta desde septiembre de 2006. No tiene estación de FF.CC., medios de transporte y comunicación: coche, imprescindible. Teléfono de su actual destino en Ávila: 920-213416.",
     "Instrumentos públicos (escrituras, actas y protestos)": "",
     "Folios de los instrumentos públicos": "",
     "Pólizas Sección A": "",
@@ -2621,7 +2733,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "58",
@@ -2631,7 +2745,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Encarnación García Campos",
+    "Notario Anterior": "Encarnación García Campos (Bermillo de Sayago)",
     "Provincia (Informe)": "Salamanca",
     "Colegio": "Castilla y León",
     "Distrito": "VITIGUDINO",
@@ -2667,7 +2781,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "3.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "528.0"
+    "Total general": "528.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "59",
@@ -2677,14 +2793,14 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Eva María Esteras Aure",
+    "Notario Anterior": "Eva María Esteras Aure (Ateca (act. Muro))",
     "Provincia (Informe)": "",
     "Colegio": "Aragón",
     "Distrito": "Ejea de los Caballeros",
     "Municipio": "",
     "Notaria": "",
     "Notario": "",
-    "Informe Galo": "",
+    "Informe Galo": "INFORME GESTORÍA / SALIENTE: Domicilio: Plaza de la Villa, 1, tlno.- 948-888261. Los documentos más frecuentes son: Ventas y actas, inmatriculaciones. Sustituye a Sádaba y Ejea de los Caballeros. Hay salidas: se visitan 3 pueblos, una vez al mes. No hay oficialidad. Parador, hotel Las Coronas, Fonda y viviendas rurales. No tiene estación de FF.CC. Para mayor información de la vacante el teléfono de la saliente en su actual destino (Muro) es: 971-537064.",
     "Instrumentos públicos (escrituras, actas y protestos)": "",
     "Folios de los instrumentos públicos": "",
     "Pólizas Sección A": "",
@@ -2713,7 +2829,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NS",
+    "Empleados": "0"
   },
   {
     "Número": "60",
@@ -2723,7 +2841,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Faustino Rodríguez-Segade Vázquez",
+    "Notario Anterior": "Faustino Rodríguez-Segade Vázquez (Chantada)",
     "Provincia (Informe)": "Lugo",
     "Colegio": "Galicia",
     "Distrito": "CHANTADA",
@@ -2759,7 +2877,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "16.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "668.0"
+    "Total general": "668.0",
+    "Local": "NO",
+    "Empleados": "0"
   },
   {
     "Número": "61",
@@ -2769,7 +2889,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Fernando Martínez Segura",
+    "Notario Anterior": "Fernando Martínez Segura (Tolosa)",
     "Provincia (Informe)": "Cáceres",
     "Colegio": "Extremadura",
     "Distrito": "TRUJILLO",
@@ -2805,7 +2925,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "9.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "345.0"
+    "Total general": "345.0",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "62",
@@ -2815,7 +2937,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Jesús Sen Salles",
+    "Notario Anterior": "Jesús Sen Salles (Orgaz)",
     "Provincia (Informe)": "León",
     "Colegio": "Castilla y León",
     "Distrito": "CISTIERNA",
@@ -2851,7 +2973,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "24.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1414.0"
+    "Total general": "1414.0",
+    "Local": "SI",
+    "Empleados": "2"
   },
   {
     "Número": "63",
@@ -2861,7 +2985,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Jorge Ron Latas",
+    "Notario Anterior": "Jorge Ron Latas (Viveiro (act. Redondela))",
     "Provincia (Informe)": "",
     "Colegio": "Castilla y León",
     "Distrito": "Ponferrada",
@@ -2897,7 +3021,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "64",
@@ -2907,7 +3033,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "José Ángel Ramírez Díaz",
+    "Notario Anterior": "José Ángel Ramírez Diaz (Cervera de Pisuerga)",
     "Provincia (Informe)": "Palencia",
     "Colegio": "Castilla y León",
     "Distrito": "CARRION DE LOS CONDES",
@@ -2943,7 +3069,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "14.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "890.0"
+    "Total general": "890.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "65",
@@ -2953,7 +3081,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "José Ignacio de Solas Rodríguez-Hermida",
+    "Notario Anterior": "José Ignacio de Solas Rodríguez-Hermida (Llanes)",
     "Provincia (Informe)": "Cantabria",
     "Colegio": "Cantabria",
     "Distrito": "SANTANDER",
@@ -2989,7 +3117,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "15.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "240.0"
+    "Total general": "240.0",
+    "Local": "SI",
+    "Empleados": "2"
   },
   {
     "Número": "66",
@@ -2999,7 +3129,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "José Luis Meana Valdés",
+    "Notario Anterior": "José Luis Meana Valdés (Colunga (act. Mieres del Camino))",
     "Provincia (Informe)": "",
     "Colegio": "Asturias",
     "Distrito": "Llanes",
@@ -3035,7 +3165,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "67",
@@ -3045,14 +3177,14 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "José Millaruelo Frontela",
+    "Notario Anterior": "José Millaruelo Frontela (Elizondo)",
     "Provincia (Informe)": "Burgos",
     "Colegio": "Castilla y León",
     "Distrito": "VILLARCAYO",
     "Municipio": "Villarcayo de Merindad de Castilla la Vieja",
     "Notaria": "Villarcayo de Merindad de Castilla la Vieja",
     "Notario": "José Millaruelo Frontela",
-    "Informe Galo": "VACANTE: Villarcayo\nNúmero de firmas: 700 aprox. (aparece como 1446 porque sustituía varias notarías de la zona)\nEmpleados: 2\nPosibilidad de alquiler: Sí",
+    "Informe Galo": "VACANTE: Villarcayo\nNúmero de firmas: 700 aprox. (aparece como 1446 porque sustituía varias notarías de la zona)\nEmpleados: 2\nPosibilidad de alquiler: Sí\n\nINFORME REMITIDO POR EL SALIENTE: Domicilio: Pza Joaquín Fernández Villarán 1, 1ºC, Villarcayo 09550, Burgos. DOCUMENTOS MÁS CORRIENTES: 1.- Compraventas de inmuebles, tanto rústicos como urbanos. En cuanto a los urbanos, hay mucho movimiento de compraventa para segunda residencia, actualmente hay 5 inmobiliarias. La cuantía de las mismas suele ser baja, por lo que no suelen estar financiadas con hipoteca. En cuanto a los rústicos, prima la explotación de tierras de pequeño tamaño, aún cuando sean de concentración parcelaria. En cualquier caso, se trata de documentos que, a pesar de la cuantía, son económicamente rentables. 2.- Herencias: Documento de cuantía también frecuente. No es extraño que haya otorgantes extranjeros, hijos de emigrantes, actualmente residentes en Francia, fundamentalmente. O causante, residente en el extranjero, con bienes inmuebles en la localidad. En todos los casos hay multitud de fincas rústicas, con amplios inventarios de bienes. 3.- Hipotecas: No van en proporción al número de compraventas, una media de unas 40 al año. 4.- Documentos sin cuantía, Poderes y testamentos: También frecuentes. 5.- En los últimos meses, han empezado a tramitarse expedientes de dominio así como reanudaciones de tracto interrumpido, cuya demanda ha ido en aumento en el último año. 6.- Mercantil: pocos documentos mercantiles, fundamentalmente constituciones y disoluciones de sociedades limitadas, y nombramientos de administradores. 7.- Pólizas: No hay gran volumen de intervención de pólizas, se mantienen constantes. La notaría ha estado en función de sustitución de otras 3 por vacantes desde diciembre (Valle de Mena y Espinosa de los Monteros) y desde finales de enero de 2025, Medina de Pomar, hasta mediados de mayo de 2025. En 2023 (desde finales de febrero) se autorizaron 784 instrumentos; en 2024 (sustituyendo dos notarías en diciembre), 985 instrumentos; en 2025 (sustituyendo todo el distrito hasta mayo), 1492 instrumentos. Estimo que podrían autorizarse unos 800-900 instrumentos propios. Sustituciones: Es la última notaría del cuadro de sustituciones (5 notarías en el distrito). Salidas: No son frecuentes, pero existiendo muchas pedanías y población dispersa, puede darse, fundamentalmente para testamentos o actas de presencia. La notaría se mantiene estable, con una zona de expansión donde se está comenzando a edificar viviendas unifamiliares. OFICIALIDAD: La notaría cuenta actualmente con 3 empleadas: Una oficial, que se jubila en Abril de 2026 (de gran capacidad y conocimiento). Una auxiliar, que ha adquirido gran competencia en escrituras, facturación y liquidación de impuestos, llamada a ser la sustituta natural de la oficial. La tercera empleada realiza funciones de recepción, copias y pólizas. Además hay una persona que durante una baja de maternidad ha estado trabajando como sustituta y que podría hacer labores de auxiliar (elabora documentos sin cuantía, compraventas, copias y liquidaciones de TPO). Buen ambiente de trabajo. LOCALIZACIÓN: Dista 1 hora en coche de Bilbao y de Burgos, y hora y media de Santander, Vitoria y Logroño. Cuenta con todos los servicios, Registro de la Propiedad, Juzgados 1 y 2, y el archivo general de Protocolos (el notario titular es archivero).",
     "Instrumentos públicos (escrituras, actas y protestos)": "1446.0",
     "Folios de los instrumentos públicos": "22996.0",
     "Pólizas Sección A": "122.0",
@@ -3081,7 +3213,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "27.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1712.0"
+    "Total general": "1712.0",
+    "Local": "SI",
+    "Empleados": "3"
   },
   {
     "Número": "68",
@@ -3091,7 +3225,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "José Rodrigo Nieto Basarán",
+    "Notario Anterior": "José Rodrigo Nieto Basarán (Béjar)",
     "Provincia (Informe)": "León",
     "Colegio": "Castilla y León",
     "Distrito": "PONFERRADA",
@@ -3127,7 +3261,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "21.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "990.0"
+    "Total general": "990.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "69",
@@ -3137,7 +3273,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Macarena Riquelme Sánchez de la Viña",
+    "Notario Anterior": "Macarena Riquelme Sánchez de la Viña (Olesa de Montserrat (act. Torrejón de Ardoz))",
     "Provincia (Informe)": "",
     "Colegio": "La Rioja",
     "Distrito": "Logroño",
@@ -3173,7 +3309,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "70",
@@ -3183,14 +3321,14 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María Concepción Granado Fernández de la Pradilla",
+    "Notario Anterior": "María Concepción Granado Fernández de la Pradilla (Vitoria)",
     "Provincia (Informe)": "",
     "Colegio": "Aragón",
     "Distrito": "Huesca",
     "Municipio": "",
     "Notaria": "",
     "Notario": "",
-    "Informe Galo": "VACANTE: Ayerbe\nComunicación: Desierta desde 2020",
+    "Informe Galo": "VACANTE: Ayerbe\nComunicación: Desierta desde 2020\n\nINFORME REMITIDO POR LA SALIENTE: Domicilio: Plaza de Aragón, 61, tlno.- 974-380256. Población de unos 1000 habitantes (en invierno 800). Dista 408 Km de Madrid y 33 Km de Huesca por carretera Nacional (28 minutos). COMUNICACIONES: Tren regional (\"Canfranero\"). Huesca y Zaragoza (a 99 km) tienen estación de AVE. VIVIENDA Y LOCAL: La vivienda que deja el Notario queda para el que le sustituya y el despacho está separado de la vivienda. DATOS ESTADÍSTICOS: 2018 (de 26/09 a 31/12): 27 protocolos.- 2019 (año completo): 170 protocolos. Salidas no frecuentes. Sirve a numerosos pueblos en la zona de la Hoya de Huesca. Personal empleado en esta Notaría: Ninguno. Nº de teléfono de la saliente: 650604299 / 945-210-172. OTROS DATOS DE ORIENTACIÓN: Es una Notaría muy agradable, en una zona preciosa en el pre-Pirineo aragonés, muy cerca de Huesca. Ayerbe es el centro de la comarca de la Hoya de Huesca, zona agrícola y turística, con servicios escolares, médicos, ferrocarril y tres oficinas bancarias. Se puede vivir en el propio pueblo o en Huesca ciudad. No hay oficiales ni empleados. Recomendable para aprender, como Notaría de entrada. Trato directo con los particulares. Llevaba años vacante y el protocolo es pequeño, pero el trabajo va aumentando.",
     "Instrumentos públicos (escrituras, actas y protestos)": "",
     "Folios de los instrumentos públicos": "",
     "Pólizas Sección A": "",
@@ -3219,7 +3357,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "71",
@@ -3229,7 +3369,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María de La O del Río Aguiar",
+    "Notario Anterior": "María de la O del Río Aguiar (Brunete)",
     "Provincia (Informe)": "Guadalajara",
     "Colegio": "Castilla-La Mancha",
     "Distrito": "GUADALAJARA",
@@ -3265,7 +3405,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "9.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "511.0"
+    "Total general": "511.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "72",
@@ -3275,7 +3417,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María del Carmen Retamar García",
+    "Notario Anterior": "María del Carmen Retamar García (Zalamea de la Serena (act. Montijo))",
     "Provincia (Informe)": "",
     "Colegio": "País Vasco",
     "Distrito": "Balmaseda",
@@ -3311,7 +3453,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "73",
@@ -3321,7 +3465,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María Longarte Ulacia",
+    "Notario Anterior": "María Longarte Ulacia (Eibar)",
     "Provincia (Informe)": "Gipuzkoa",
     "Colegio": "País Vasco",
     "Distrito": "BERGARA",
@@ -3357,7 +3501,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "1.0",
     "Entidades con personalidad juridica": "65.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1279.0"
+    "Total general": "1279.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "74",
@@ -3367,7 +3513,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María Ruiz Aldanondo",
+    "Notario Anterior": "María Ruiz Aldanondo (Valoria la Buena (act. Piedrahíta))",
     "Provincia (Informe)": "",
     "Colegio": "Castilla y León",
     "Distrito": "Salamanca",
@@ -3403,7 +3549,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "75",
@@ -3413,7 +3561,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María Victoria Huertas Martín del Olmo",
+    "Notario Anterior": "María Victoria Huertas Martín del Olmo (Jumilla)",
     "Provincia (Informe)": "Albacete",
     "Colegio": "Castilla-La Mancha",
     "Distrito": "ALBACETE",
@@ -3449,7 +3597,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "16.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "628.0"
+    "Total general": "628.0",
+    "Local": "NS",
+    "Empleados": "1"
   },
   {
     "Número": "76",
@@ -3459,7 +3609,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Mónica María Jurjo García",
+    "Notario Anterior": "Mónica María Jurjo García (Betanzos (act. A Coruña))",
     "Provincia (Informe)": "",
     "Colegio": "Castilla y León",
     "Distrito": "Palencia",
@@ -3495,7 +3645,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NO",
+    "Empleados": "0"
   },
   {
     "Número": "77",
@@ -3505,7 +3657,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Patricia Olivencia Cerezo",
+    "Notario Anterior": "Patricia Olivencia Cerezo (Calzada de Calatrava (fallecida en 2013))",
     "Provincia (Informe)": "",
     "Colegio": "Castilla y León",
     "Distrito": "Carrión de los Condes",
@@ -3541,7 +3693,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "78",
@@ -3551,7 +3705,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Rebeca Pueyo Cajal",
+    "Notario Anterior": "Rebeca Pueyo Cajal (Graus (act. Logroño))",
     "Provincia (Informe)": "",
     "Colegio": "Aragón",
     "Distrito": "Jaca",
@@ -3587,7 +3741,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "79",
@@ -3597,7 +3753,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Rita Mercedes Martínez Pérez",
+    "Notario Anterior": "Rita Mercedes Martínez Pérez (Los Arcos (act. Lodosa))",
     "Provincia (Informe)": "",
     "Colegio": "País Vasco",
     "Distrito": "Aoiz/Agoitz",
@@ -3633,7 +3789,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "80",
@@ -3643,7 +3801,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Rosalía Priego Sancho",
+    "Notario Anterior": "Rosalía Priego Sancho (Doña Mencía (act. Bujalance))",
     "Provincia (Informe)": "",
     "Colegio": "Galicia",
     "Distrito": "Mondoñedo",
@@ -3679,7 +3837,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "81",
@@ -3689,7 +3849,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Sergio Cardona Costa",
+    "Notario Anterior": "Sergio Cardona Costa (Petra (act. Roses))",
     "Provincia (Informe)": "",
     "Colegio": "Asturias",
     "Distrito": "Valdés",
@@ -3725,7 +3885,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "82",
@@ -3735,7 +3897,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Víctor Gas Ferrer",
+    "Notario Anterior": "Víctor Gas Ferrer (Callosa d'en Sarrià)",
     "Provincia (Informe)": "Zaragoza",
     "Colegio": "Aragón",
     "Distrito": "CASPE",
@@ -3771,7 +3933,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "0.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "120.0"
+    "Total general": "120.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "83",
@@ -3781,7 +3945,7 @@ const DATA_GALO = [
     "Motivo": "Excedencia",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Fernando Martínez Segura",
+    "Notario Anterior": "Fernando Martínez Segura (Excedencia)",
     "Provincia (Informe)": "Gipuzkoa/Guipúzcoa",
     "Colegio": "País Vasco",
     "Distrito": "Tolosa",
@@ -3817,7 +3981,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "84",
@@ -3827,7 +3993,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Carlos Alberto Muley Posso",
+    "Notario Anterior": "Carlos Alberto Muley Posso (Jubilación)",
     "Provincia (Informe)": "Bizkaia",
     "Colegio": "País Vasco",
     "Distrito": "BALMASEDA",
@@ -3863,7 +4029,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "1.0",
     "Entidades con personalidad juridica": "71.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1969.0"
+    "Total general": "1969.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "85",
@@ -3873,7 +4041,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Miguel Enrique Estella Garbayo",
+    "Notario Anterior": "Miguel Estella Garbayo (Jubilación)",
     "Provincia (Informe)": "Madrid",
     "Colegio": "Madrid",
     "Distrito": "LEGANES",
@@ -3909,7 +4077,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "427.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2917.0"
+    "Total general": "2917.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "86",
@@ -3919,14 +4089,14 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Alfonso Ansola Horcajo",
+    "Notario Anterior": "Alfonso Ansola Horcajo (Burgos)",
     "Provincia (Informe)": "Bizkaia",
     "Colegio": "País Vasco",
     "Distrito": "GERNIKA-LUMO",
     "Municipio": "Gernika-Lumo",
     "Notaria": "Guernica y Lumo/Gernika-Lumo",
     "Notario": "Alfonso Ansola Horcajo",
-    "Informe Galo": "VACANTE: GUERNICA Y LUMO II\nNúmero de firmas: 1100 números\nComunicación: Hay competencia. Otro notario, pero suelen estar equiparadas. La otra de guernica lumo tambien está vacante.",
+    "Informe Galo": "VACANTE: GUERNICA Y LUMO II\nNúmero de firmas: 1100 números\nComunicación: Hay competencia. Otro notario, pero suelen estar equiparadas. La otra de guernica lumo tambien está vacante.\n\nINFORME REMITIDO POR EL SALIENTE: Gernika-Lumo es una población de unos 16.000 habitantes situada a unos 35 km de Bilbao, que dadas las comunicaciones actuales de la Villa pueden suponer unos 35-40 minutos en coche. Ha estado tradicionalmente atendida por dos notarías muy equiparadas en cuanto a su documentación, lo que ha venido a suponer, durante el año 2025, una media de unas 1.100 escrituras y 100 pólizas, por cada notario. La documentación es bastante variada y completa, no requiere de salidas a otros municipios y se ha mantenido bastante estable durante los últimos años. La calidad profesional de la plantilla es extraordinaria. Para más detalles, conviene ponerse en contacto con los salientes (tlno: 947-788-080).",
     "Instrumentos públicos (escrituras, actas y protestos)": "1025.0",
     "Folios de los instrumentos públicos": "18286.0",
     "Pólizas Sección A": "81.0",
@@ -3955,7 +4125,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "69.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1241.0"
+    "Total general": "1241.0",
+    "Local": "SI",
+    "Empleados": "NS"
   },
   {
     "Número": "87",
@@ -3965,14 +4137,14 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Álvaro Álvarez Guerra",
+    "Notario Anterior": "Álvaro Álvarez Guerra (A Coruña)",
     "Provincia (Informe)": "Ourense",
     "Colegio": "Galicia",
     "Distrito": "POBRA DE TRIVES (A)",
     "Municipio": "Viana do Bolo",
     "Notaria": "Viana del Bollo/Viana do Bolo",
     "Notario": "Álvaro Álvarez Guerra",
-    "Informe Galo": "VACANTE: Viana do Bolo\nNúmero de firmas: El notario saliente que no estuvo el año entero hizo 331\nEmpleados: No deja\nPosibilidad de alquiler: Deja local sin muebles, alquiler aprox. 400 euros\nComunicación: Testamentos, declaraciones de herederos, adjudicaciones de herencia y rústica",
+    "Informe Galo": "VACANTE: Viana do Bolo\nNúmero de firmas: El notario saliente que no estuvo el año entero hizo 331\nEmpleados: No deja\nPosibilidad de alquiler: Deja local sin muebles, alquiler aprox. 400 euros\nComunicación: Testamentos, declaraciones de herederos, adjudicaciones de herencia y rústica\n\nINFORME REMITIDO POR EL SALIENTE: Lo que a bien puedo decir de la plaza es la buena comunicación que tiene, ya que cuenta a 15 km con una parada de AVE (A Gudiña – Porta de Galicia). Predominan los documentos sucesorios, desde declaraciones de herederos, herencias y pactos de mejora. Se hacen subsanaciones de discrepancias catastrales por el 18.2 cada vez más a menudo. El pueblo es muy acogedor y la gente tiene ganas de que haya Notario. Las plazas más próximas están a 45 minutos en coche y pueblos como Verín o El Barco de Valdeorras están bastante saturadas. En Viana do Bolo se prevé la apertura de la mina de Penouta este año, lo que traerá trabajo y movimiento como consecuencia del mismo. En medio año hemos firmado unos 300 protocolos, trabajando prácticamente todos los días. En un año completo unas 600. Teléfono saliente: 981.226.385.",
     "Instrumentos públicos (escrituras, actas y protestos)": "331.0",
     "Folios de los instrumentos públicos": "4274.0",
     "Pólizas Sección A": "26.0",
@@ -4001,7 +4173,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "4.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "394.0"
+    "Total general": "394.0",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "88",
@@ -4011,7 +4185,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Ana María Gómez Alonso",
+    "Notario Anterior": "Ana María Gómez Alonso (Segovia)",
     "Provincia (Informe)": "Segovia",
     "Colegio": "Castilla y León",
     "Distrito": "SEGOVIA",
@@ -4047,7 +4221,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "209.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2655.0"
+    "Total general": "2655.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "89",
@@ -4057,14 +4233,14 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Andrés García-Bengochea Hernández",
+    "Notario Anterior": "Andrés García-Bengochea Hernández (Vimianzo)",
     "Provincia (Informe)": "A Coruña",
     "Colegio": "Galicia",
     "Distrito": "CORCUBIÓN",
     "Municipio": "Muxía",
     "Notaria": "Muxía",
     "Notario": "Andrés García-Bengochea Hernández",
-    "Informe Galo": "VACANTE: Muxía\nNúmero de firmas: El notario saliente sin llegar a completar el año hizo 160\nEmpleados: No hay\nPosibilidad de alquiler: Deja local en buenas condiciones, no es muy grande pero suficiente\nComunicación: Rústica y sucesoria (testamentos, pactos de mejora, herederos, herencias) y marítimo. El saliente se ha ido a Vimianzo (al lado) y probablemente clientes se queden con él",
+    "Informe Galo": "VACANTE: Muxía\nNúmero de firmas: El notario saliente sin llegar a completar el año hizo 160\nEmpleados: No hay\nPosibilidad de alquiler: Deja local en buenas condiciones, no es muy grande pero suficiente\nComunicación: Rústica y sucesoria (testamentos, pactos de mejora, herederos, herencias) y marítimo. El saliente se ha ido a Vimianzo (al lado) y probablemente clientes se queden con él\n\nINFORME REMITIDO POR EL SALIENTE: Notaría que en 2025 generó 160 escrituras, muchas de ellas testamentos (60 partes testamentarios). Lo más habitual han sido compraventas de fincas rústicas, pactos de mejora y adjudicaciones de herencia. Hubo pocas hipotecas (4) y pólizas (7). Tiene muy poca actividad a principios de año y a partir de mayo se va incrementando. Hay pocas salidas (para hacer algún testamento o poder), en los que es necesario desplazarse en coche. Es una notaría sin empleados, con el local en un primer piso en el paseo marítimo y amueblado, situado en la Avenida López Abente número 1 primero A. Fácil para aparcar en los alrededores. A más de 20 minutos se encuentran las notarías de Vimianzo y de Corcubión. Hay una buena relación con los notarios de la zona que son Corcubión, Muros y Santa Comba. Teléfono saliente: 981.716.007.",
     "Instrumentos públicos (escrituras, actas y protestos)": "160.0",
     "Folios de los instrumentos públicos": "1488.0",
     "Pólizas Sección A": "7.0",
@@ -4093,7 +4269,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "2.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "206.0"
+    "Total general": "206.0",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "90",
@@ -4103,7 +4281,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Arantxa Campillo Guillén",
+    "Notario Anterior": "Arantxa Campillo Guillén (Morro Jable)",
     "Provincia (Informe)": "Zaragoza",
     "Colegio": "Aragón",
     "Distrito": "EJEA DE LOS CABALLEROS",
@@ -4139,7 +4317,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "7.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "366.0"
+    "Total general": "366.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "91",
@@ -4149,7 +4329,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Begoña Lozano Vera",
+    "Notario Anterior": "Begoña Lozano Vera (Caudete)",
     "Provincia (Informe)": "Valencia",
     "Colegio": "Valencia",
     "Distrito": "ONTENIENTE",
@@ -4185,7 +4365,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "5.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "262.0"
+    "Total general": "262.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "92",
@@ -4195,14 +4377,14 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Blanca Sapena Gotor",
+    "Notario Anterior": "Blanca Sapena Gotor (Moncada)",
     "Provincia (Informe)": "Valencia",
     "Colegio": "Valencia",
     "Distrito": "GANDIA",
     "Municipio": "Font d'en Carròs, La",
     "Notaria": "Font d En Carròs (La)",
     "Notario": "Blanca Sapena Gotor",
-    "Informe Galo": "VACANTE: FONT D'ENCARROS\nNúmero de firmas: RESUEMEN: 1000 NUMEROS -- Instrumentos públicos (escrituras, actas y protestos): 983.- Folios de instrumentos públicos: 17731.- Polizas: 41.- Folios de polizas: 422.- Ultimas Voluntades: 198.- Actos que implican modificación fisica sobre las fincas: 53.- Contratos translativos sobre todo tipo de bienes y Derechos, 236.- Herencias: 159.- Creditos, prestamos y garantias hipotecarias, 44.- Cartas de pagos y cancelaciones 41.- Apoderamientos: 125.-  (se ignora si en la misma hubo sustituciones).\nEmpleados: 3 empleados buenos, que piensan seguir con el nuevo Notario.\nPosibilidad de alquiler: Local con alquiler bajo, pero posibilidad de que suba\nComunicación: muy bien con Valencia (a 1 hora por autovia y luego nacional) y 1/2 de Javea o Denia. poca competencia",
+    "Informe Galo": "VACANTE: FONT D'ENCARROS\nNúmero de firmas: RESUEMEN: 1000 NUMEROS -- Instrumentos públicos (escrituras, actas y protestos): 983.- Folios de instrumentos públicos: 17731.- Polizas: 41.- Folios de polizas: 422.- Ultimas Voluntades: 198.- Actos que implican modificación fisica sobre las fincas: 53.- Contratos translativos sobre todo tipo de bienes y Derechos, 236.- Herencias: 159.- Creditos, prestamos y garantias hipotecarias, 44.- Cartas de pagos y cancelaciones 41.- Apoderamientos: 125.-  (se ignora si en la misma hubo sustituciones).\nEmpleados: 3 empleados buenos, que piensan seguir con el nuevo Notario.\nPosibilidad de alquiler: Local con alquiler bajo, pero posibilidad de que suba\nComunicación: muy bien con Valencia (a 1 hora por autovia y luego nacional) y 1/2 de Javea o Denia. poca competencia\n\nINFORME REMITIDO POR LA SALIENTE: Se suelen hacer 1000 números, 3 empleados buenos, que piensan seguir con el nuevo Notario. Pocas pólizas. Bien comunicada, dista 1 hora de Valencia y media hora de Jávea, buen local, poca competencia. Teléfono saliente: 961.300.819.",
     "Instrumentos públicos (escrituras, actas y protestos)": "983.0",
     "Folios de los instrumentos públicos": "17731.0",
     "Pólizas Sección A": "41.0",
@@ -4231,7 +4413,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "37.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1204.0"
+    "Total general": "1204.0",
+    "Local": "SI",
+    "Empleados": "3"
   },
   {
     "Número": "93",
@@ -4241,7 +4425,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Carlos Giovanni Collados Serrano",
+    "Notario Anterior": "Carlos Giovanni Collados Serrano (El Puerto de Santa María)",
     "Provincia (Informe)": "Sevilla",
     "Colegio": "Andalucía",
     "Distrito": "UTRERA",
@@ -4277,7 +4461,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "173.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1826.0"
+    "Total general": "1826.0",
+    "Local": "SI",
+    "Empleados": "2"
   },
   {
     "Número": "94",
@@ -4287,7 +4473,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Carlos Nadal Pérez-Marsá",
+    "Notario Anterior": "Carlos Nadal Pérez-Marsa (Mansilla de las Mulas)",
     "Provincia (Informe)": "Palencia",
     "Colegio": "Castilla y León",
     "Distrito": "PALENCIA",
@@ -4323,7 +4509,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "1.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "207.0"
+    "Total general": "207.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "95",
@@ -4333,7 +4521,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Claudia Navarro Pascual",
+    "Notario Anterior": "Claudia Navarro Pascual (Sant Celoni)",
     "Provincia (Informe)": "Castellón",
     "Colegio": "Valencia",
     "Distrito": "CASTELLON",
@@ -4369,7 +4557,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "5.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "175.0"
+    "Total general": "175.0",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "96",
@@ -4379,7 +4569,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Coral González García",
+    "Notario Anterior": "Coral González García (Barcelona)",
     "Provincia (Informe)": "Asturias",
     "Colegio": "Asturias",
     "Distrito": "LUARCA",
@@ -4415,7 +4605,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "1.0",
     "Entidades con personalidad juridica": "17.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "516.0"
+    "Total general": "516.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "97",
@@ -4425,7 +4617,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Cristina Rocío Lleonart Castro",
+    "Notario Anterior": "Cristina Rocío Lleonart Castro (Montcada i Reixac)",
     "Provincia (Informe)": "Badajoz",
     "Colegio": "Extremadura",
     "Distrito": "LLERENA",
@@ -4461,7 +4653,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "13.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "284.0"
+    "Total general": "284.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "98",
@@ -4471,7 +4665,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Eduardo Anaya Echevarría",
+    "Notario Anterior": "Eduardo Anaya Echevarría (Lora del Río)",
     "Provincia (Informe)": "Córdoba",
     "Colegio": "Andalucía",
     "Distrito": "AGUILAR",
@@ -4507,7 +4701,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "44.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "822.0"
+    "Total general": "822.0",
+    "Local": "NS",
+    "Empleados": "0"
   },
   {
     "Número": "99",
@@ -4517,7 +4713,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Enrique Moreno González",
+    "Notario Anterior": "Enrique Moreno González (Alcántara)",
     "Provincia (Informe)": "Asturias",
     "Colegio": "Asturias",
     "Distrito": "GRADO",
@@ -4553,7 +4749,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "2.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "188.0"
+    "Total general": "188.0",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "100",
@@ -4563,7 +4761,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Fermín Madrid Pelegrí",
+    "Notario Anterior": "Fermín Madrid Pelegrí (Novelda)",
     "Provincia (Informe)": "Soria",
     "Colegio": "Castilla y León",
     "Distrito": "SORIA",
@@ -4599,7 +4797,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "3.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "217.0"
+    "Total general": "217.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "101",
@@ -4609,7 +4809,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Héctor Alonso González",
+    "Notario Anterior": "Héctor Alonso González (Santa Cruz de Mudela)",
     "Provincia (Informe)": "Jaén",
     "Colegio": "Andalucía",
     "Distrito": "ANDUJAR",
@@ -4645,7 +4845,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "18.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "251.0"
+    "Total general": "251.0",
+    "Local": "NS",
+    "Empleados": "0"
   },
   {
     "Número": "102",
@@ -4655,14 +4857,14 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Igor Ispizua Omar",
+    "Notario Anterior": "Igor Ispizua Omar (Bilbao)",
     "Provincia (Informe)": "Bizkaia",
     "Colegio": "País Vasco",
     "Distrito": "GERNIKA-LUMO",
     "Municipio": "Gernika-Lumo",
     "Notaria": "Guernica y Lumo/Gernika-Lumo",
     "Notario": "Igor Ispizua Omar",
-    "Informe Galo": "VACANTE: GUERNICA Y LUMO II\nNúmero de firmas: 1100 números\nComunicación: Hay competencia. Otro notario, pero suelen estar equiparadas. La otra de guernica lumo tambien está vacante.",
+    "Informe Galo": "VACANTE: GUERNICA Y LUMO II\nNúmero de firmas: 1100 números\nComunicación: Hay competencia. Otro notario, pero suelen estar equiparadas. La otra de guernica lumo tambien está vacante.\n\nINFORME REMITIDO POR EL SALIENTE: Gernika-Lumo es una población de unos 16.000 habitantes situada a unos 35 km de Bilbao, que dadas las comunicaciones actuales de la Villa pueden suponer unos 35-40 minutos en coche. Ha estado tradicionalmente atendida por dos notarías muy equiparadas en cuanto a su documentación, lo que ha venido a suponer, durante el año 2025, una media de unas 1.100 escrituras y 100 pólizas, por cada notario. La documentación es bastante variada y completa, no requiere de salidas a otros municipios y se ha mantenido bastante estable durante los últimos años. La calidad profesional de la plantilla es extraordinaria. Para más detalles, conviene ponerse en contacto con los salientes (tlno: 944.793.660).",
     "Instrumentos públicos (escrituras, actas y protestos)": "1215.0",
     "Folios de los instrumentos públicos": "19747.0",
     "Pólizas Sección A": "112.0",
@@ -4691,7 +4893,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "57.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1496.0"
+    "Total general": "1496.0",
+    "Local": "SI",
+    "Empleados": "NS"
   },
   {
     "Número": "103",
@@ -4701,7 +4905,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Jesús Carlos Pérez Pericacho",
+    "Notario Anterior": "Jesús Carlos Pérez Pericacho (Sahagún)",
     "Provincia (Informe)": "Palencia",
     "Colegio": "Castilla y León",
     "Distrito": "PALENCIA",
@@ -4737,7 +4941,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "5.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "425.0"
+    "Total general": "425.0",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "104",
@@ -4747,7 +4953,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Jorge Pérez Álvarez",
+    "Notario Anterior": "Jorge Pérez Álvarez (Benidorm)",
     "Provincia (Informe)": "Alicante",
     "Colegio": "Valencia",
     "Distrito": "ELCHE",
@@ -4783,7 +4989,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "256.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2901.0"
+    "Total general": "2901.0",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "105",
@@ -4793,7 +5001,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "José Ángel Soto Pérez-Cortés",
+    "Notario Anterior": "José Ángel Soto Pérez-Cortés (Hoyos)",
     "Provincia (Informe)": "Cáceres",
     "Colegio": "Extremadura",
     "Distrito": "CORIA",
@@ -4829,7 +5037,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "8.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "281.0"
+    "Total general": "281.0",
+    "Local": "SI",
+    "Empleados": "2"
   },
   {
     "Número": "106",
@@ -4839,7 +5049,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "José Francisco Bódalo Lorente",
+    "Notario Anterior": "José Francisco Bódalo Lorente (Ferrol)",
     "Provincia (Informe)": "A Coruña",
     "Colegio": "Galicia",
     "Distrito": "FERROL",
@@ -4875,7 +5085,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "11.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "523.0"
+    "Total general": "523.0",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "107",
@@ -4885,7 +5097,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Juan José Álvarez Álvarez",
+    "Notario Anterior": "Juan José Álvarez Álvarez (San Vicente de la Barquera)",
     "Provincia (Informe)": "Asturias",
     "Colegio": "Asturias",
     "Distrito": "GIJON",
@@ -4921,7 +5133,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "2.0",
     "Entidades con personalidad juridica": "24.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1148.0"
+    "Total general": "1148.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "108",
@@ -4931,7 +5145,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Juan José Pedraza Guerrero",
+    "Notario Anterior": "Juan José Pedraza Guerrero (Málaga)",
     "Provincia (Informe)": "Córdoba",
     "Colegio": "Andalucía",
     "Distrito": "PEÑARROLLA-PUEBLONUEVO",
@@ -4967,7 +5181,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "1.0",
     "Entidades con personalidad juridica": "90.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2206.0"
+    "Total general": "2206.0",
+    "Local": "SI",
+    "Empleados": "2"
   },
   {
     "Número": "109",
@@ -4977,7 +5193,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Lirios Gisbert Cantó",
+    "Notario Anterior": "Lirios Gisbert Cantó (Alcoi)",
     "Provincia (Informe)": "Castellón",
     "Colegio": "Valencia",
     "Distrito": "VINAROZ",
@@ -5013,7 +5229,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "34.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "440.0"
+    "Total general": "440.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "110",
@@ -5023,7 +5241,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Manuel Tejuca González",
+    "Notario Anterior": "Manuel Tejuca González (Oropesa)",
     "Provincia (Informe)": "Guadalajara",
     "Colegio": "Castilla-La Mancha",
     "Distrito": "GUADALAJARA",
@@ -5059,7 +5277,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "5.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "507.0"
+    "Total general": "507.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "111",
@@ -5069,14 +5289,14 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María Begoña Vallejo Catalina",
+    "Notario Anterior": "María Begoña Vallejo Catalina (Segura)",
     "Provincia (Informe)": "Ciudad Real",
     "Colegio": "Castilla-La Mancha",
     "Distrito": "CIUDAD REAL",
     "Municipio": "Almagro",
     "Notaria": "Almagro",
     "Notario": "María Begoña Vallejo Catalina",
-    "Informe Galo": "VACANTE: Almagro\nNúmero de firmas: 900\nEmpleados: Tres empleadas, dos son oficiales\nPosibilidad de alquiler: Si\nComunicación: Buena conexión con tren Cuidad Real. Compraventas y declaraciones de obre nueva. No hay muchas operaciones mercantiles ni herencias. Hay cuatro bancos en la localidad. El local lleva alquilado desde el 2017 y tiene algunos inconvenientes. Dos oficiales y una copista a media ornada, funcionan bien juntas y son una buena plantilla. Buena relacion con el Registro y los compañeros del trito. Puede sustituirse con Bolaños de Calatrava. Notaría tranquila que puede llevarse con 3 o 4 días de firmas.",
+    "Informe Galo": "VACANTE: Almagro\nNúmero de firmas: 900\nEmpleados: Tres empleadas, dos son oficiales\nPosibilidad de alquiler: Si\nComunicación: Buena conexión con tren Cuidad Real. Compraventas y declaraciones de obre nueva. No hay muchas operaciones mercantiles ni herencias. Hay cuatro bancos en la localidad. El local lleva alquilado desde el 2017 y tiene algunos inconvenientes. Dos oficiales y una copista a media ornada, funcionan bien juntas y son una buena plantilla. Buena relacion con el Registro y los compañeros del trito. Puede sustituirse con Bolaños de Calatrava. Notaría tranquila que puede llevarse con 3 o 4 días de firmas.\n\nINFORME REMITIDO POR LA SALIENTE: La notaría tiene capacidad para hacer aproximadamente unos 800-900 números al año. Ese es más o menos el límite de la plaza y no hay mucho margen para crecer por encima de esa cifra de manera significativa, pero tampoco hace falta. Con el volumen que tiene, los números salen bien y puedes trabajar con bastante tranquilidad. La mayor parte de operaciones son compraventas o declaraciones de obra con hipoteca, no hay mucha herencia ni operaciones mercantiles. Es una plaza que depende mucho de la situación del mercado inmobiliario, las entidades bancarias y las gestorías. Hay 4 bancos: EUROCAJA RURAL, CAIXABANK, GLOBALCAJA y BBVA (más 2 oficinas de agentes delegados). También hay 2 inmobiliarias que traen muchas operaciones, y alguna gestoría. No se lleva tradicionalmente la gestión por evitar conflicto. La notaría está en el mismo local desde 2017, es un local correcto pero tiene varios inconvenientes, probablemente lo hubiera cambiado de haberlo conocido desde el principio. Hay 3 empleadas y funcionan bien juntas: dos son oficiales a tiempo completo (una con 18 años de experiencia en el pueblo y otra que lleva 2 años en la notaría) y una copista a media jornada. Es una plantilla muy buena para el volumen que tiene la notaría. Varios de los notarios que han ejercido en Almagro han vivido en Madrid y han hecho el desplazamiento diario: tren AVE (1h) de Madrid a Ciudad Real, y después unos 25 minutos en coche desde Ciudad Real (dejando el coche en el parking de la estación). El ambiente con los compañeros (como Bolaños de Calatrava) y con el Registro ha sido excelente. Es una plaza muy tranquila que se puede llevar con 3 o 4 días de firmas por las mañanas.",
     "Instrumentos públicos (escrituras, actas y protestos)": "898.0",
     "Folios de los instrumentos públicos": "18861.0",
     "Pólizas Sección A": "252.0",
@@ -5105,7 +5325,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "24.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1315.0"
+    "Total general": "1315.0",
+    "Local": "SI",
+    "Empleados": "3"
   },
   {
     "Número": "112",
@@ -5115,14 +5337,14 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María Del Pilar Baraza Domene",
+    "Notario Anterior": "María del Pilar Baraza Domene (Águilas)",
     "Provincia (Informe)": "Almería",
     "Colegio": "Andalucía",
     "Distrito": "HUERCAL-OVERA",
     "Municipio": "Vélez-Blanco",
     "Notaria": "Vélez-Blanco",
     "Notario": "María del Pilar Baraza Domene",
-    "Informe Galo": "VACANTE: Velez Blanco\nNúmero de firmas: 1100\nEmpleados: Una empleada\nPosibilidad de alquiler: Apartamento en el local de la Notaría, tambien hoteles y viviendas rurales\nComunicación: Tren a 40 km, en Puerto Lumbreras. Autovía. Hay salidas, se visitan 3 pueblos, uno de ellos 1 vez al mes y losotros dos a requerimiento. Hay 1 oficial que se marcha conla saliente y un copista que se encarga de copias, polizas, telefono, lo basico, la copista es del pueblo, es deesperar que quiera seguir con el compañero que vaya. El local de la Notaria es nuevo y esta completamente montado, con aparcamiento y ademas dispone de un apartamento para el Notario independiente. Es propiedad de la saliente.  Los ingresos son muy buenos, principalmente herencias de bastante cuantía, con muchasfincas, rectificaciones de superficie, compraventas, declaraciones de obra nueva, etc..",
+    "Informe Galo": "VACANTE: Velez Blanco\nNúmero de firmas: 1100\nEmpleados: Una empleada\nPosibilidad de alquiler: Apartamento en el local de la Notaría, tambien hoteles y viviendas rurales\nComunicación: Tren a 40 km, en Puerto Lumbreras. Autovía. Hay salidas, se visitan 3 pueblos, uno de ellos 1 vez al mes y losotros dos a requerimiento. Hay 1 oficial que se marcha conla saliente y un copista que se encarga de copias, polizas, telefono, lo basico, la copista es del pueblo, es deesperar que quiera seguir con el compañero que vaya. El local de la Notaria es nuevo y esta completamente montado, con aparcamiento y ademas dispone de un apartamento para el Notario independiente. Es propiedad de la saliente.  Los ingresos son muy buenos, principalmente herencias de bastante cuantía, con muchasfincas, rectificaciones de superficie, compraventas, declaraciones de obra nueva, etc..\n\nINFORME REMITIDO POR LA SALIENTE: Sobre beneficios líquidos que pueden superarse, informará la saliente (tlno: 868.490.054). Hay salidas, se visitan 3 pueblos, uno de ellos 1 vez al mes y los otros dos a requerimiento. Notaría en auge, cada año aumentan los números. Hay 1 oficial que se marcha con la saliente y un copista que se encarga de copias, pólizas, teléfono, lo básico; la copista es del pueblo, es de esperar que quiera seguir con el compañero que vaya, y hay nueva gente interesada en aprender que se le puede formar para hacer escrituras. El local de la Notaría es nuevo y está completamente montado, con aparcamiento y además dispone de un apartamento independiente para el Notario (es propiedad de la saliente). No tiene estación de FF.CC., siendo Puerto Lumbreras (Murcia) a 40 Km la más próxima (o Lorca a 50 Km). Dista 75 Km del mar. Notaría con gastos muy controlados e ingresos muy buenos, principalmente herencias de bastante cuantía, con muchas fincas, rectificaciones de superficie, compraventas, declaraciones de obra nueva, etc. Se trata de una Notaría de toda la comarca de los Vélez (unos 10.000 habitantes entre todos los pueblos; Vélez-Rubio cuenta con 6.700 habitantes con notaría demarcada). Principalmente los clientes quieren que les atienda el Notario, tener un trato directo con él, por eso es una notaría muy cercana.",
     "Instrumentos públicos (escrituras, actas y protestos)": "1112.0",
     "Folios de los instrumentos públicos": "19127.0",
     "Pólizas Sección A": "199.0",
@@ -5151,7 +5373,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "4.0",
     "Entidades con personalidad juridica": "89.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1663.0"
+    "Total general": "1663.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "113",
@@ -5161,7 +5385,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María Elena Muñoz Molinero",
+    "Notario Anterior": "María Elena Múñoz Molinero (San Vicente de Alcántara)",
     "Provincia (Informe)": "Asturias",
     "Colegio": "Asturias",
     "Distrito": "CANGAS DE ONIS",
@@ -5197,7 +5421,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "22.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "703.0"
+    "Total general": "703.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "114",
@@ -5207,7 +5433,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María Encarnación Cáliz Talavera",
+    "Notario Anterior": "María Encarnación Cáliz Talavera (Campillo de Arenas)",
     "Provincia (Informe)": "Badajoz",
     "Colegio": "Extremadura",
     "Distrito": "ALMENDRALEJO",
@@ -5243,7 +5469,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "11.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "291.0"
+    "Total general": "291.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "115",
@@ -5253,7 +5481,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María Enriqueta Saucedo García",
+    "Notario Anterior": "María Enriqueta Saucedo García (La Palma del Condado)",
     "Provincia (Informe)": "Badajoz",
     "Colegio": "Extremadura",
     "Distrito": "ZAFRA",
@@ -5289,7 +5517,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "29.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "842.0"
+    "Total general": "842.0",
+    "Local": "SI",
+    "Empleados": "2"
   },
   {
     "Número": "116",
@@ -5299,7 +5529,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María Isabel Díaz Plaza",
+    "Notario Anterior": "María Isabel Díaz Plaza (Cuenca)",
     "Provincia (Informe)": "Ciudad Real",
     "Colegio": "Castilla-La Mancha",
     "Distrito": "CIUDAD REAL",
@@ -5335,7 +5565,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "12.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "321.0"
+    "Total general": "321.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "117",
@@ -5345,7 +5577,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María Pizarro Caballero",
+    "Notario Anterior": "María Pizarro Caballero (Fuente del Maestre)",
     "Provincia (Informe)": "Sevilla",
     "Colegio": "Andalucía",
     "Distrito": "SEVILLA",
@@ -5381,7 +5613,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "15.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "766.0"
+    "Total general": "766.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "118",
@@ -5391,7 +5625,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María Socías Alemany",
+    "Notario Anterior": "María Socías Alemany (Alcúdia)",
     "Provincia (Informe)": "Ciudad Real",
     "Colegio": "Castilla-La Mancha",
     "Distrito": "VALDEPEÑAS",
@@ -5427,7 +5661,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "17.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "812.0"
+    "Total general": "812.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "119",
@@ -5437,7 +5673,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María Teresa de Almansa Garrido",
+    "Notario Anterior": "María Teresa de Almansa Garrido (Algeciras)",
     "Provincia (Informe)": "Toledo",
     "Colegio": "Castilla-La Mancha",
     "Distrito": "TALAVERA",
@@ -5473,7 +5709,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "4.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "520.0"
+    "Total general": "520.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "120",
@@ -5483,7 +5721,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Marta García Zorrilla",
+    "Notario Anterior": "Marta García Zorrilla (Cazalla de la Sierra)",
     "Provincia (Informe)": "Almería",
     "Colegio": "Andalucía",
     "Distrito": "HUERCAL-OVERA",
@@ -5519,7 +5757,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "1.0",
     "Entidades con personalidad juridica": "99.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "884.0"
+    "Total general": "884.0",
+    "Local": "NS",
+    "Empleados": "2"
   },
   {
     "Número": "121",
@@ -5529,7 +5769,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Marta García-Jalón Luzuriaga",
+    "Notario Anterior": "Marta García-Jalón Luzuriaga (San Sebastián)",
     "Provincia (Informe)": "Gipuzkoa",
     "Colegio": "País Vasco",
     "Distrito": "BERGARA",
@@ -5565,7 +5805,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "14.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1442.0"
+    "Total general": "1442.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "122",
@@ -5575,7 +5817,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Marta Rovira Fernández-Arche",
+    "Notario Anterior": "Marta Rovira Fernández-Arche (Almazán)",
     "Provincia (Informe)": "León",
     "Colegio": "Castilla y León",
     "Distrito": "ASTORGA",
@@ -5611,7 +5853,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "29.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1443.0"
+    "Total general": "1443.0",
+    "Local": "NO",
+    "Empleados": "0"
   },
   {
     "Número": "123",
@@ -5621,14 +5865,14 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Mireya Cristina Martínez Badás",
+    "Notario Anterior": "Mireya Cristina Martínez Badás (Santander)",
     "Provincia (Informe)": "Asturias",
     "Colegio": "Asturias",
     "Distrito": "LUARCA",
     "Municipio": "Castropol",
     "Notaria": "Castropol",
     "Notario": "Mireya Cristina Martínez Badás",
-    "Informe Galo": "VACANTE: Castropol\nNúmero de firmas: 800 aprox\nEmpleados: 4 empleados (necesarios para llevar la notaría, salario según convenio)\nPosibilidad de alquiler: Deja local amueblado, alquiler 570 €/mes (+ luz 70-80€, línea ANCERT 12€/mes)\nComunicación: Compraventas, herencias, testamentos y poco mercantil. Programa Notarnet. Salida fija los martes a La Caridad (12:30-13:30) y sustituye Boal cada 15 días. Se vive en Castropol o Ribadeo",
+    "Informe Galo": "VACANTE: Castropol\nNúmero de firmas: 800 aprox\nEmpleados: 4 empleados (necesarios para llevar la notaría, salario según convenio)\nPosibilidad de alquiler: Deja local amueblado, alquiler 570 €/mes (+ luz 70-80€, línea ANCERT 12€/mes)\nComunicación: Compraventas, herencias, testamentos y poco mercantil. Programa Notarnet. Salida fija los martes a La Caridad (12:30-13:30) y sustituye Boal cada 15 días. Se vive en Castropol o Ribadeo\n\nINFORME REMITIDO POR LA SALIENTE: Sustituye a la de Boal. Hay salidas, se visita La Caridad todos los martes. Notaría estable. Oficialidad: Dos oficiales, copista y 1 subalterno, todos buenas personas, resolutivas y competentes. Es una Notaría muy cómoda, muy buenos empleados, la gente es muy amable, pagan sin problemas, hay Registro de la Propiedad, cuya relación es muy buena. Complicado en viviendas y hospedajes, se suele vivir en Ribadeo. Hay guardería y un colegio. Teléfono saliente: 942-993838.",
     "Instrumentos públicos (escrituras, actas y protestos)": "811.0",
     "Folios de los instrumentos públicos": "13021.0",
     "Pólizas Sección A": "180.0",
@@ -5657,7 +5901,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "20.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1246.0"
+    "Total general": "1246.0",
+    "Local": "SI",
+    "Empleados": "4"
   },
   {
     "Número": "124",
@@ -5667,7 +5913,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Natalia García-Lozano Olmedo",
+    "Notario Anterior": "Natalia García-Lozano Olmedo (Olmedo)",
     "Provincia (Informe)": "Ciudad Real",
     "Colegio": "Castilla-La Mancha",
     "Distrito": "ALCAZAR DE S. JUAN",
@@ -5703,7 +5949,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "46.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1087.0"
+    "Total general": "1087.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "125",
@@ -5713,7 +5961,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Pedro José López-Amo Saus",
+    "Notario Anterior": "Pedro José López-Amo Saus (Malgrat de Mar)",
     "Provincia (Informe)": "Illes Balears",
     "Colegio": "Las Islas Baleares",
     "Distrito": "PALMA DE MALLORCA",
@@ -5749,7 +5997,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "3.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "250.0"
+    "Total general": "250.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "126",
@@ -5759,7 +6009,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Roberto Follía Martínez",
+    "Notario Anterior": "Roberto Follía Martínez (Santoña)",
     "Provincia (Informe)": "Cantabria",
     "Colegio": "Cantabria",
     "Distrito": "LAREDO",
@@ -5795,7 +6045,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "19.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "780.0"
+    "Total general": "780.0",
+    "Local": "NO",
+    "Empleados": "0"
   },
   {
     "Número": "127",
@@ -5805,7 +6057,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Rosalía Priego Sancho",
+    "Notario Anterior": "Rosalia Priego Sancho (Bujalance)",
     "Provincia (Informe)": "Córdoba",
     "Colegio": "Andalucía",
     "Distrito": "CORDOBA",
@@ -5841,7 +6093,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "43.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1600.0"
+    "Total general": "1600.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "128",
@@ -5851,7 +6105,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Laura Trescolí Valls",
+    "Notario Anterior": "Laura Trescolí Valls (Sant Vicenç de Castellet)",
     "Provincia (Informe)": "Córdoba",
     "Colegio": "Andalucía",
     "Distrito": "PEÑARROLLA-PUEBLONUEVO",
@@ -5887,7 +6141,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "0.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "196.0"
+    "Total general": "196.0",
+    "Local": "NS",
+    "Empleados": "1"
   },
   {
     "Número": "129",
@@ -5897,14 +6153,14 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Macarena Placed Lerma",
+    "Notario Anterior": "Macarena Placed Lerma (Montblanc)",
     "Provincia (Informe)": "Burgos",
     "Colegio": "Castilla y León",
     "Distrito": "VILLARCAYO",
     "Municipio": "Valle de Mena",
     "Notaria": "Valle de Mena",
     "Notario": "Macarena Placed Lerma",
-    "Informe Galo": "VACANTE: Valle de Mena\nNúmero de firmas: 296 (puede alcanzar 450)\nEmpleados: 1, hace escrituras sencillas, lo demás lo tiene que hacer el notario\nPosibilidad de alquiler: Sí hay\nComunicación: No hay mucho margen de aumentar los números, pero es una notaría cómoda de entrada. Está cerca de Bilbao",
+    "Informe Galo": "VACANTE: Valle de Mena\nNúmero de firmas: 296 (puede alcanzar 450)\nEmpleados: 1, hace escrituras sencillas, lo demás lo tiene que hacer el notario\nPosibilidad de alquiler: Sí hay\nComunicación: No hay mucho margen de aumentar los números, pero es una notaría cómoda de entrada. Está cerca de Bilbao\n\nINFORME REMITIDO POR LA SALIENTE: Notaría pequeña pero muy adecuada para empezar y aprender. Es una notaría estable, a lo largo del año se firman alrededor de 450 números, la mayoría son documentos de cuantía, como compraventas y herencias. También se lleva la gestión de prácticamente todos los documentos de cuantía. Hay una trabajadora que lleva mucho tiempo, aún así el Notario redacta las escrituras más complicadas, y otras para adelantar trabajo, se dividen las funciones, es conveniente revisar toda la documentación antes de firmar. La gente de la zona es amable y cercana. Está muy cerca de Bilbao, 35 minutos en coche. Teléfono saliente: 977.860.062.",
     "Instrumentos públicos (escrituras, actas y protestos)": "296.0",
     "Folios de los instrumentos públicos": "3334.0",
     "Pólizas Sección A": "6.0",
@@ -5933,7 +6189,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "12.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "320.0"
+    "Total general": "320.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "130",
@@ -5943,7 +6201,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María Alicia Oliveros Montañés",
+    "Notario Anterior": "María Alicia Oliveros Montañes (Albarracín)",
     "Provincia (Informe)": "Valencia",
     "Colegio": "Valencia",
     "Distrito": "JATIVA",
@@ -5979,7 +6237,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "11.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "160.0"
+    "Total general": "160.0",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "131",
@@ -5989,7 +6249,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Alfonso García-Perrote Latorre",
+    "Notario Anterior": "Alfonso García-Perrote Latorre (Alcorcón (en excedencia))",
     "Provincia (Informe)": "Jaén",
     "Colegio": "Andalucía",
     "Distrito": "LA CAROLINA",
@@ -6025,7 +6285,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "56.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1580.0"
+    "Total general": "1580.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "132",
@@ -6035,14 +6297,14 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Fernando Viguría Alday",
+    "Notario Anterior": "Fernando Viguria Alday (Murcia)",
     "Provincia (Informe)": "Murcia",
     "Colegio": "Murcia",
     "Distrito": "MURCIA",
     "Municipio": "Beniel",
     "Notaria": "Beniel",
     "Notario": "Fernando Viguria Alday",
-    "Informe Galo": "",
+    "Informe Galo": "INFORME REMITIDO POR EL SALIENTE: La notaría de Beniel está ubicada en la calle Doctor Marañón, 5 bajo derecha (tlno: 968600748). Los documentos más corrientes de cuantía son la venta de viviendas y terrenos, hipotecas y herencias, poderes y testamentos. Sobre beneficios que se pueden superar, pueden llamar a estas oficinas o al saliente (968-215759). No hay posibilidad de convenio, es plaza única. La notaría se creó en 2007 y ha ido subiendo poco a poco el número de protocolos autorizados. Las pólizas han descendido, por causas no relacionadas con el funcionamiento de la notaría. Sustituye a la notaría de Abanilla. Pertenece al distrito de Murcia. No hay salidas. No cabe firmar fuera de despacho. Notaría en auge si se trabaja. No hay zurupetos. En la notaría hay 4 empleadas, que en principio continúan con el sustituto. En 2025 se firmaron más de 1800 protocolos y en 2026 se va camino de 2000 (a finales de junio unos 1000).",
     "Instrumentos públicos (escrituras, actas y protestos)": "1844.0",
     "Folios de los instrumentos públicos": "37453.0",
     "Pólizas Sección A": "309.0",
@@ -6071,7 +6333,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "2.0",
     "Entidades con personalidad juridica": "156.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2850.0"
+    "Total general": "2850.0",
+    "Local": "SI",
+    "Empleados": "4"
   },
   {
     "Número": "133",
@@ -6081,7 +6345,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Iago Alciturri Sexto",
+    "Notario Anterior": "Iago Alciturri Sexto (Oñati)",
     "Provincia (Informe)": "Burgos",
     "Colegio": "Castilla y León",
     "Distrito": "VILLARCAYO",
@@ -6117,7 +6381,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "9.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "370.0"
+    "Total general": "370.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "134",
@@ -6127,7 +6393,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Manuel Barrera Sierra",
+    "Notario Anterior": "Manuel Barrera Sierra (Bembibre)",
     "Provincia (Informe)": "León",
     "Colegio": "Castilla y León",
     "Distrito": "PONFERRADA",
@@ -6163,7 +6429,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "9.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "482.0"
+    "Total general": "482.0",
+    "Local": "SI",
+    "Empleados": "2"
   },
   {
     "Número": "135",
@@ -6173,7 +6441,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Adela María Solís García",
+    "Notario Anterior": "Adela Solís García (Cuenca)",
     "Provincia (Informe)": "Burgos",
     "Colegio": "Castilla y León",
     "Distrito": "ARANDA DE DUERO",
@@ -6209,7 +6477,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "10.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "583.0"
+    "Total general": "583.0",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "136",
@@ -6219,14 +6489,14 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Álvaro Cordero Taborda",
+    "Notario Anterior": "Álvaro Cordero Taborda (Valladolid)",
     "Provincia (Informe)": "Valladolid",
     "Colegio": "Castilla y León",
     "Distrito": "VALLADOLID",
     "Municipio": "Valoria la Buena",
     "Notaria": "Valoria la Buena",
     "Notario": "Álvaro Cordero Taborda",
-    "Informe Galo": "VACANTE: Valoria la Buena\nNúmero de firmas: Entre 900 y 1000 números\nEmpleados: Hay que contratar oficial (poner anuncio)\nFacturacion: Ingresos limpios: entre 14.000 y 20.000 €/mes (normal unos 15.000 €). Gastos: 8.500 €/mes\nPosibilidad de alquiler: Local en Valoria (400 €) enfrente del registro y oficina auxiliar en Cigales (320 €) + IVA\nComunicación: Apoderados de bancos centralizados en Cigales (Unicaja, Caixabank, Cajamar). Mucha parcelación urbanística",
+    "Informe Galo": "VACANTE: Valoria la Buena\nNúmero de firmas: Entre 900 y 1000 números\nEmpleados: Hay que contratar oficial (poner anuncio)\nFacturacion: Ingresos limpios: entre 14.000 y 20.000 €/mes (normal unos 15.000 €). Gastos: 8.500 €/mes\nPosibilidad de alquiler: Local en Valoria (400 €) enfrente del registro y oficina auxiliar en Cigales (320 €) + IVA\nComunicación: Apoderados de bancos centralizados en Cigales (Unicaja, Caixabank, Cajamar). Mucha parcelación urbanística\n\nINFORME REMITIDO POR EL SALIENTE: Notaría sita a 27 km al norte de Valladolid por autovía (A-62). Cuenta con despacho auxiliar en la localidad de Cigales (requiere dos líneas RENO). Su estadística en el año 2024 fue: Protocolos: 930. Pólizas: 43. Contratos traslativos: 179. Modificaciones físicas sobre fincas: 54. Donaciones: 51. Herencias: 86. Hipotecas: 43. Cancelaciones hipotecarias: 55. Testamentos: 149. Apoderamientos: 151. No hubo sustituciones. El saliente llevaba en la plaza desde 2018 y se ha trasladado a Valladolid. Los tres empleados que había se han ido con él. Se ha llevado, asimismo, los equipos y buena parte del mobiliario, por ser de su propiedad. Los alquileres de los despachos son moderados. Notaría satisfactoria en cuanto a volumen de operaciones y cuantías. Compleja en los asuntos, pues su espacio es el alfoz norte de Valladolid, a medio camino entre lo rústico y lo urbano, con varias urbanizaciones. Indispensable desenvolverse con los expedientes del Título VI de la Ley Hipotecaria y en materia urbanística. Magnífica relación con los Ayuntamientos de la zona, siempre colaborativos. Por la cercanía a Valladolid es fundamental, para mantener la numeración, acudir todos los días y dar servicio en horario de tarde, pues es fácil la fuga de documentación, sobre todo en herencias y operaciones bancarias, donde la capital ejerce vis atractiva. El trato es casi siempre con el ciudadano; no es costumbre acudir con letrado o gestor. El Notario que lleva la sustitución es José Antonio Gutiérrez Enríquez, con residencia en Tudela de Duero (983 52 00 72). Teléfono del saliente en su nuevo destino: 983 50 22 84.",
     "Instrumentos públicos (escrituras, actas y protestos)": "894.0",
     "Folios de los instrumentos públicos": "13033.0",
     "Pólizas Sección A": "34.0",
@@ -6255,7 +6525,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "16.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1061.0"
+    "Total general": "1061.0",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "137",
@@ -6265,14 +6537,14 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Álvaro Obando Viada",
+    "Notario Anterior": "Álvaro Obando Viada (Llucmajor)",
     "Provincia (Informe)": "Illes Balears",
     "Colegio": "Las Islas Baleares",
     "Distrito": "MANACOR",
     "Municipio": "Petra",
     "Notaria": "Petra",
     "Notario": "Álvaro Obando Viada",
-    "Informe Galo": "",
+    "Informe Galo": "INFORMACIÓN OFRECIDA POR EL SALIENTE: Domicilio: Plaza Fray Junípero Serra, 3-B, tlno.- 971-561152. Notaría que tiene potencial para llegar a hacer 900 números, económicamente buena, pocos gastos, recomendable (esta numeración anula a la anterior estadística). La compañera que lleva la sustitución es Dª Paula Llompart Riutort (Porreres, tlno: 971-647299). Teléfono del saliente en su actual destino: 971660359.",
     "Instrumentos públicos (escrituras, actas y protestos)": "698.0",
     "Folios de los instrumentos públicos": "11837.0",
     "Pólizas Sección A": "56.0",
@@ -6301,7 +6573,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "50.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "815.0"
+    "Total general": "815.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "138",
@@ -6311,7 +6585,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Ariel Sultán Benguigui",
+    "Notario Anterior": "Ariel Sultán Benguigui (Barcelona)",
     "Provincia (Informe)": "",
     "Colegio": "Castilla y León",
     "Distrito": "Salamanca",
@@ -6347,7 +6621,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "139",
@@ -6357,7 +6633,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Carlos Ibáñez López",
+    "Notario Anterior": "Carlos Ibáñez López (Alsasua)",
     "Provincia (Informe)": "Navarra",
     "Colegio": "Navarra",
     "Distrito": "PAMPLONA",
@@ -6393,7 +6669,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "37.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1632.0"
+    "Total general": "1632.0",
+    "Local": "NS",
+    "Empleados": "2"
   },
   {
     "Número": "140",
@@ -6403,7 +6681,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Clara Castillón Porqueras",
+    "Notario Anterior": "Clara Castillón Porqueras (Almenar (act. Tàrrega))",
     "Provincia (Informe)": "Huesca",
     "Colegio": "Aragón",
     "Distrito": "BOLTAÑA",
@@ -6439,7 +6717,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "6.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "210.0"
+    "Total general": "210.0",
+    "Local": "SI",
+    "Empleados": "2"
   },
   {
     "Número": "141",
@@ -6449,14 +6729,14 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Elena Dacal Rodríguez",
+    "Notario Anterior": "Elena Dacal Rodríguez (Viver)",
     "Provincia (Informe)": "Castellón",
     "Colegio": "Valencia",
     "Distrito": "VINAROZ",
     "Municipio": "Sant Mateu",
     "Notaria": "San Mateo",
     "Notario": "Elena Dacal Rodríguez",
-    "Informe Galo": "VACANTE: SAN MATEO\nNúmero de firmas: NO DAN INFORMES. Eso sí cuentan las malas lenguas que la última lo dejó un poco mal porque tuvo movida con los empleados que se le revelaron y llegaron a ir a Juicio. Al ser pueblo el empleado es vecino y por tanto los clientes bajaron mucho",
+    "Informe Galo": "VACANTE: SAN MATEO\nNúmero de firmas: NO DAN INFORMES. Eso sí cuentan las malas lenguas que la última lo dejó un poco mal porque tuvo movida con los empleados que se le revelaron y llegaron a ir a Juicio. Al ser pueblo el empleado es vecino y por tanto los clientes bajaron mucho\n\nNOTA EMITIDA POR LA SALIENTE: IMPRESCINDIBLE hablar con ella para obtener información de la plaza, ya sea llamando al teléfono de su actual destino (964141138), o enviando un e-mail a edacal@notariado.org y ella contactará con los interesados cuando le sea posible.",
     "Instrumentos públicos (escrituras, actas y protestos)": "479.0",
     "Folios de los instrumentos públicos": "10534.0",
     "Pólizas Sección A": "60.0",
@@ -6485,7 +6765,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "16.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "756.0"
+    "Total general": "756.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "142",
@@ -6495,14 +6777,14 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Francisco Echávarri López",
+    "Notario Anterior": "Francisco Echávarri López (Madrid-Valdezarza)",
     "Provincia (Informe)": "Salamanca",
     "Colegio": "Castilla y León",
     "Distrito": "CIUDAD RODRIGO",
     "Municipio": "Ciudad Rodrigo",
     "Notaria": "Ciudad Rodrigo",
     "Notario": "Francisco Echávarri López",
-    "Informe Galo": "",
+    "Informe Galo": "INFORME REMITIDO POR EL SALIENTE: Domicilio: Calle Velayos, 4, 1º (923460147). Notario sustituto de la plaza: Don Pablo Fernández-Prida Casado, calle Velayos, número 1 Bajo (teléfono 923 38 55 55). Documentos corrientes: Testamentos, Contratos, Herencias. También hay algo de Mercantil. Bastantes expedientes de dominio de inmatriculación y cabida. Año 2025, unos 3000 números (toda la plaza); unas 400 pólizas (ídem). Muy estable a lo largo del tiempo la numeración: no baja pero es muy difícil que suba. El más joven de la plaza sustituye Tamames, que está a unos 40 minutos de Ciudad Rodrigo. Hasta ahora, sustitución entre los de la plaza (2 notarías en distrito, ambas en la localidad). No hay competencia más que con Salamanca, al no haber Notario en las cercanías, por la despoblación de la zona. Salidas: Las habituales de zonas rurales (taxi, vehículo propio). Notaría estable, si bien la disminución de población es lenta y paulatina. Oficialidad: En virtud de lo comentado, reservado. Muy buena relación con el Registro de la Propiedad. Dista 82 km de Salamanca capital, unos 3/4 de hora en coche (única comunicación). Vivienda fácil de encontrar, si bien apenas hay construcciones de menos de 15 años. 13.000 habitantes en el municipio, pero el distrito es muy extenso (unos 30.000) y en verano la población sube. Centros de enseñanza públicos y concertados, incluido bachillerato. Consideración destacable al Notario. Conveniente, más bien imprescindible, hablar con el Notario que queda en la plaza, Don Pablo Fernández-Prida Casado (tlno: 923385555).",
     "Instrumentos públicos (escrituras, actas y protestos)": "2187.0",
     "Folios de los instrumentos públicos": "46829.0",
     "Pólizas Sección A": "227.0",
@@ -6531,7 +6813,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "142.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2692.0"
+    "Total general": "2692.0",
+    "Local": "SI",
+    "Empleados": "NS"
   },
   {
     "Número": "143",
@@ -6541,14 +6825,14 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Gabriela Victoria Marqués Mosquera",
+    "Notario Anterior": "Gabriela Marqués Mosquera (Miraflores de la Sierra)",
     "Provincia (Informe)": "Ourense",
     "Colegio": "Galicia",
     "Distrito": "BARCO DE VALDEORRAS (O)",
     "Municipio": "Barco de Valdeorras, O",
     "Notaria": "Barco de Valdeorras",
     "Notario": "Gabriela Marqués Mosquera",
-    "Informe Galo": "VACANTE: O Barco de Valdeorras\nNúmero de firmas: 1200\nEmpleados: No deja empleados (se los queda la notaria de la demarcación con la que estaba convenida)\nPosibilidad de alquiler: No deja local (se lo queda la notaria de la demarcación)\nComunicación: Hace de todo, mucha sucesión y mucho mercantil (empresas, pólizas). La otra notaría de la demarcación no da convenio a notario de entrada",
+    "Informe Galo": "VACANTE: O Barco de Valdeorras\nNúmero de firmas: 1200\nEmpleados: No deja empleados (se los queda la notaria de la demarcación con la que estaba convenida)\nPosibilidad de alquiler: No deja local (se lo queda la notaria de la demarcación)\nComunicación: Hace de todo, mucha sucesión y mucho mercantil (empresas, pólizas). La otra notaría de la demarcación no da convenio a notario de entrada\n\nINFORME REMITIDO POR LA SALIENTE: Notaría estable, con documentación muy variada: herencias, compraventas, hipotecas, pactos de mejora, testamentos, abintestato y bastante mercantil porque hay muchas empresas. Empleados muy eficientes, implicados y de confianza que la saben llevar casi solos: notaría muy cómoda. Interesados hablar con la Notario saliente para darles información de algunas particularidades (tlno en su actual destino: 91-8449092). Compañera que queda en la localidad: Dª María Luisa Diz Amor (tlno: 988-320061).",
     "Instrumentos públicos (escrituras, actas y protestos)": "1205.0",
     "Folios de los instrumentos públicos": "19473.0",
     "Pólizas Sección A": "175.0",
@@ -6577,7 +6861,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "72.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1535.0"
+    "Total general": "1535.0",
+    "Local": "NO",
+    "Empleados": "0"
   },
   {
     "Número": "144",
@@ -6587,7 +6873,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Ignacio Capitán Sierra",
+    "Notario Anterior": "Ignacio Capitán Sierra (Montánchez)",
     "Provincia (Informe)": "Cáceres",
     "Colegio": "Extremadura",
     "Distrito": "CACERES",
@@ -6623,7 +6909,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "462.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1522.0"
+    "Total general": "1522.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "145",
@@ -6633,14 +6921,14 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Ignacio Garrido García",
+    "Notario Anterior": "Ignacio Garrido García (Fiñana)",
     "Provincia (Informe)": "Lugo",
     "Colegio": "Galicia",
     "Distrito": "LUGO",
     "Municipio": "Meira",
     "Notaria": "Meira",
     "Notario": "Ignacio Garrido García",
-    "Informe Galo": "",
+    "Informe Galo": "INFORME REMITIDO POR EL SALIENTE: Domicilio de Notaría: Avenida de Lugo 23-25, Entreplanta, Local 2 (27240-Meira). Documentos más corrientes: Compraventas de rústica, herencias, pactos de mejora, testamentos. Son frecuentes también actas de subsanación de discrepancias catastrales y expedientes de dominio, importante familiarización con expedientes de concentración parcelaria. Sin posibilidad de convenio al ser Notaría única en la localidad. Competencia sana, pertenece al distrito de LUGO. Muy buena relación con Notaría de Castro de Rei, con la que se sustituye recíprocamente. No hay salidas (salvo acudir puntualmente por competencia territorial al municipio colindante de Pol). Notaría a unos 35 km de LUGO CAPITAL (unos 35 minutos por carretera nacional llana y de muy buenas prestaciones), donde se recomienda vivir por su tranquilidad, comodidad, servicios y moderado coste de vida. El pueblo carece de estación de ferrocarril y tiene en torno a 1700 habitantes, con centros de enseñanza, supermercados, tres oficinas bancarias, dos farmacias, bares y restaurantes. Buena consideración al Notario. En el mismo edificio de la Notaría hay una gestoría y una abogada; en el pueblo hay una inmobiliaria que suele traer expedientes y un estudio técnico de ingeniería agrícola muy competente que aporta muchos expedientes. Carece de oficial, aunque cuenta con una empleada absolutamente competente en todo tipo de trámites pre y post-firma, con la que se recomienda encarecidamente contar. En el último año firmó unos 800 números de protocolo y unas 200/220 pólizas (promediará unas 15-20 hipotecas anuales). Notaría estable si se trabaja. Muy recomendable el cambio de local, dado que se halla en entreplanta sin ascensor (problemas de accesibilidad para personas mayores). Teléfono del saliente en su actual destino: 950-352203.",
     "Instrumentos públicos (escrituras, actas y protestos)": "800.0",
     "Folios de los instrumentos públicos": "11111.0",
     "Pólizas Sección A": "205.0",
@@ -6669,7 +6957,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "39.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1118.0"
+    "Total general": "1118.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "146",
@@ -6679,7 +6969,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Javier Valverde Cuevas",
+    "Notario Anterior": "Javier Valverde Cuevas (Vegadeo (act. La Algaba))",
     "Provincia (Informe)": "",
     "Colegio": "Galicia",
     "Distrito": "Oviedo",
@@ -6715,7 +7005,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "147",
@@ -6725,14 +7017,14 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Lucas Braquehais Conesa",
+    "Notario Anterior": "Lucas Braquehais Conesa (Ayora (act. Madrid))",
     "Provincia (Informe)": "",
     "Colegio": "Galicia",
     "Distrito": "Lugo",
     "Municipio": "",
     "Notaria": "",
     "Notario": "",
-    "Informe Galo": "VACANTE: Friol\nNúmero de firmas: No se saben números específicos de Friol\nPosibilidad de alquiler: No tiene despacho en Friol\nComunicación: La lleva el notario de Guitiriz desde hace muchos años y la gente se desplaza a firmar a Guitiriz",
+    "Informe Galo": "VACANTE: Friol\nNúmero de firmas: No se saben números específicos de Friol\nPosibilidad de alquiler: No tiene despacho en Friol\nComunicación: La lleva el notario de Guitiriz desde hace muchos años y la gente se desplaza a firmar a Guitiriz\n\nINFORME GESTORÍA / SALIENTE: Se encuentra desierta desde octubre de 2006. IMPRESCINDIBLE HABLAR CON EL SALIENTE. Notaría muy modesta económicamente y que requiere gran dedicación a la documentación por parte del Notario. Zona gallego parlante al cien por cien. Notaría única en la localidad. Actualmente la está sustituyendo la Notario de Guitiriz, Dª Andrea Ibarra Blanco (tlno: 982-370034).",
     "Instrumentos públicos (escrituras, actas y protestos)": "",
     "Folios de los instrumentos públicos": "",
     "Pólizas Sección A": "",
@@ -6761,7 +7053,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NO",
+    "Empleados": "0"
   },
   {
     "Número": "148",
@@ -6771,7 +7065,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Manuel Pulgar Malo de Molina",
+    "Notario Anterior": "Manuel Pulgar Malo de Molina (Valdepeñas (act. Alhaurín el Grande))",
     "Provincia (Informe)": "",
     "Colegio": "Galicia",
     "Distrito": "Lugo",
@@ -6807,7 +7101,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "149",
@@ -6817,7 +7113,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "María Magdalena Sans Gelabert",
+    "Notario Anterior": "María Magdalena Sans Gelabert (Manacor)",
     "Provincia (Informe)": "Illes Balears",
     "Colegio": "Las Islas Baleares",
     "Distrito": "MANACOR",
@@ -6853,7 +7149,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "1.0",
     "Entidades con personalidad juridica": "167.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2659.0"
+    "Total general": "2659.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "150",
@@ -6863,7 +7161,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "María Teresa García Ludeña",
+    "Notario Anterior": "María Teresa García Ludeña (Campos)",
     "Provincia (Informe)": "Huesca",
     "Colegio": "Aragón",
     "Distrito": "BARBASTRO",
@@ -6899,7 +7197,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "17.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "970.0"
+    "Total general": "970.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "151",
@@ -6909,7 +7209,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "María Teresa Pérez Dapena",
+    "Notario Anterior": "María Teresa Pérez Dapena (Lesaka (act. Mollerussa))",
     "Provincia (Informe)": "",
     "Colegio": "Castilla y León",
     "Distrito": "León",
@@ -6945,7 +7245,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "152",
@@ -6955,7 +7257,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Marta Muñagorri Eceiza",
+    "Notario Anterior": "Marta Muñagorri Eceiza (Almendral)",
     "Provincia (Informe)": "Córdoba",
     "Colegio": "Andalucía",
     "Distrito": "LUCENA",
@@ -6991,7 +7293,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "0.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "275.0"
+    "Total general": "275.0",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "153",
@@ -7001,7 +7305,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Paloma López de Uralde Alcoba",
+    "Notario Anterior": "Paloma López de Uralde Alcoba (Villafranca de Navarra)",
     "Provincia (Informe)": "Navarra",
     "Colegio": "Navarra",
     "Distrito": "AOIZ",
@@ -7037,7 +7341,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "0.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "225.0"
+    "Total general": "225.0",
+    "Local": "NS",
+    "Empleados": "1"
   },
   {
     "Número": "154",
@@ -7047,14 +7353,14 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Patricia Martínez Calderón",
+    "Notario Anterior": "Patricia Martínez Calderón (Moratalla)",
     "Provincia (Informe)": "",
     "Colegio": "Aragón",
     "Distrito": "Teruel",
     "Municipio": "",
     "Notaria": "",
     "Notario": "",
-    "Informe Galo": "VACANTE: Mosqueruela\nComunicación: No coge el teléfono (Martínez Calderón)",
+    "Informe Galo": "VACANTE: Mosqueruela\nComunicación: No coge el teléfono (Martínez Calderón)\n\nINFORME REMITIDO POR LA SALIENTE: Domicilio de la Notaría: Plaza Mayor, 1 bajo (200 € de alquiler al mes). No hay empleados, la Notaria se encargaba de todo. Documentos más corrientes: compraventas de fincas rústicas y herencias. Aunque se aplica básicamente el derecho foral aragonés, hay que tener en cuenta la cercanía con Castellón y la aplicación en muchas ocasiones de Derecho Común. ESTADÍSTICA 2024: 100 protocolos, 25 pólizas. Relaciones con el distrito: Distrito de Teruel, donde hay siete notarías demarcadas (3 en Teruel, 1 de Mora de Rubielos, 1 de Albarracín, 1 de Aliaga y la de Mosqueruela). La Notaría de Mosqueruela se sustituye tradicionalmente con la de Mora de Rubielos (relaciones estupendas con la Notario de Mora, Loyola García-Cueco, tlno: 978.800.435, así como con el Registro de Mora de Rubielos-Aliaga). NO hay salidas periódicas porque la gente de aquí y de los pueblos cercanos suele venir a la notaría. La notaría estuvo vacante durante 17 años; una vez dada a conocer, ha ido en auge y el trabajo no ha faltado. Localidad situada en plena sierra de Gúdar, en la frontera entre Teruel y Castellón (unos 500 habitantes; se recomienda aprovechar verano, puentes y festividades). Dista 90 km de Teruel, 82 de Castellón de la Plana, 400 km de Madrid y 300 de Barcelona. La Notaria anterior residía en el pueblo, y también se puede teletrabajar y reunir las firmas uno o dos días a la semana. Cualquier duda contactar con la Notario anterior, Patricia Martínez, tlf 659 87 07 05 / 968-730-226.",
     "Instrumentos públicos (escrituras, actas y protestos)": "",
     "Folios de los instrumentos públicos": "",
     "Pólizas Sección A": "",
@@ -7083,7 +7389,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "155",
@@ -7093,7 +7401,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Pedro Álvarez Blanco",
+    "Notario Anterior": "Pedro Álvarez Blanco (Llodio)",
     "Provincia (Informe)": "Bizkaia",
     "Colegio": "País Vasco",
     "Distrito": "DURANGO",
@@ -7129,7 +7437,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "1.0",
     "Entidades con personalidad juridica": "27.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1037.0"
+    "Total general": "1037.0",
+    "Local": "NS",
+    "Empleados": "0"
   },
   {
     "Número": "156",
@@ -7139,7 +7449,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Sara Riesco Gacho",
+    "Notario Anterior": "Sara Riesco Gacho (Madrigal de las Altas Torres)",
     "Provincia (Informe)": "Ávila",
     "Colegio": "Castilla y León",
     "Distrito": "AREVALO",
@@ -7175,7 +7485,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "3.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "156.0"
+    "Total general": "156.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "157",
@@ -7185,7 +7497,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Susana Garzón Echevarría",
+    "Notario Anterior": "Susana Garzón Echevarría (Logroño)",
     "Provincia (Informe)": "La Rioja",
     "Colegio": "La Rioja",
     "Distrito": "CALAHORRA",
@@ -7221,7 +7533,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "3.0",
     "Entidades con personalidad juridica": "105.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1598.0"
+    "Total general": "1598.0",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "158",
@@ -7231,7 +7545,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Tamara Casal Esperanza",
+    "Notario Anterior": "Tamara Casal Esperanza (Marín)",
     "Provincia (Informe)": "Pontevedra",
     "Colegio": "Galicia",
     "Distrito": "PONTEAREAS",
@@ -7267,7 +7581,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "24.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "476.0"
+    "Total general": "476.0",
+    "Local": "SI",
+    "Empleados": "3"
   },
   {
     "Número": "159",
@@ -7277,7 +7593,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Ana Santamarina Martínez",
+    "Notario Anterior": "Ana Santamarina Martínez (Bilbao)",
     "Provincia (Informe)": "Bizkaia",
     "Colegio": "País Vasco",
     "Distrito": "DURANGO",
@@ -7313,7 +7629,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "208.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "4414.0"
+    "Total general": "4414.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "160",
@@ -7323,7 +7641,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Ana Sulleiro Avendaño",
+    "Notario Anterior": "Ana Sulleiro Avendaño (Alcázar de San Juan)",
     "Provincia (Informe)": "Ciudad Real",
     "Colegio": "Castilla-La Mancha",
     "Distrito": "ALCAZAR DE S. JUAN",
@@ -7359,7 +7677,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "81.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1620.0"
+    "Total general": "1620.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "161",
@@ -7369,14 +7689,14 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Carmen Estevan Cuenca",
+    "Notario Anterior": "Carmen Estevan Cuenca (Santa Bàrbara)",
     "Provincia (Informe)": "La Rioja",
     "Colegio": "La Rioja",
     "Distrito": "CALAHORRA",
     "Municipio": "Cervera del Río Alhama",
     "Notaria": "Cervera del Río Alhama",
     "Notario": "Carmen Estevan Cuenca",
-    "Informe Galo": "VACANTE: Cervera del Río Alhama\nNúmero de firmas: Trabajando unos 300 números, pero suele ser una notaría de paso\nEmpleados: No empleados\nPosibilidad de alquiler: Sí local\nComunicación: Agradecida, poco trabajo. Ignacio hace sustitución",
+    "Informe Galo": "VACANTE: Cervera del Río Alhama\nNúmero de firmas: Trabajando unos 300 números, pero suele ser una notaría de paso\nEmpleados: No empleados\nPosibilidad de alquiler: Sí local\nComunicación: Agradecida, poco trabajo. Ignacio hace sustitución\n\nINFORME REMITIDO POR LA SALIENTE: ESTADÍSTICA: 2025 (MAYO-DICIEMBRE): 162 escrituras y 8 pólizas.- 2026 (ENERO-JUNIO): 151 escrituras y 12 pólizas. OPERACIONES MÁS FRECUENTES: compraventas y herencias; algunos expedientes de dominio y poderes. En general muchos documentos de cuantía. SUSTITUCIONES: muy poco probables porque de todo el distrito solo esta plaza es única por localidad, las demás tienen 2 notarios que se sustituyen recíprocamente. Arnedo sustituye a Cervera. SALIDAS: No hay salidas como tal pero sí pueblos que se recomienda visitar. INDISPENSABLE TENER COCHE. VIDA EN EL PUEBLO: muy recomendable vivir en el pueblo porque está bastante aislado de las ciudades grandes (Logroño: 1h 15m; Zaragoza: 1h 30m; Soria: 1h). Pueblo muy bonito y con bastante vida, colegio e instituto, centro de salud, pequeños comercios y hoteles rurales. OFICIALIDAD: no hay. Históricamente tenía una empleada pero se fue hace 2 años. El volumen de trabajo permite tener un empleado pero lo difícil es encontrar a alguien. RELACIONES: buenas relaciones con el distrito y con el registro. COMENTARIOS: es una plaza muy rentable porque tiene unos gastos mínimos. La única pega es la falta de empleado; se puede llevar sin contar con nadie aunque implica hacerlo todo. Es una muy buena plaza para empezar y aprender la profesión en todos los aspectos. Teléfono saliente: 977.718.105.",
     "Instrumentos públicos (escrituras, actas y protestos)": "162.0",
     "Folios de los instrumentos públicos": "2268.0",
     "Pólizas Sección A": "8.0",
@@ -7405,7 +7725,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "2.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "190.0"
+    "Total general": "190.0",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "162",
@@ -7415,7 +7737,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Daniel Alonso Carrasco",
+    "Notario Anterior": "Daniel Alonso Carrasco (Segovia)",
     "Provincia (Informe)": "Cáceres",
     "Colegio": "Extremadura",
     "Distrito": "NAVALMORAL DE LA MATA",
@@ -7451,7 +7773,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "52.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2245.0"
+    "Total general": "2245.0",
+    "Local": "SI",
+    "Empleados": "5"
   },
   {
     "Número": "163",
@@ -7461,7 +7785,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Ignacio García Viciana",
+    "Notario Anterior": "Ignacio García Viciana (Barcelona)",
     "Provincia (Informe)": "Asturias",
     "Colegio": "Asturias",
     "Distrito": "GIJON",
@@ -7497,7 +7821,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "23.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "356.0"
+    "Total general": "356.0",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "164",
@@ -7507,7 +7833,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Ignacio Martínez de la Torre",
+    "Notario Anterior": "Ignacio Martínez de la Torre (Castalla)",
     "Provincia (Informe)": "Alicante",
     "Colegio": "Valencia",
     "Distrito": "VILLENA",
@@ -7543,7 +7869,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "131.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1987.0"
+    "Total general": "1987.0",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "165",
@@ -7553,7 +7881,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Itziar Celestino Esteban",
+    "Notario Anterior": "Itziar Celestino Esteban (Mungia)",
     "Provincia (Informe)": "Ciudad Real",
     "Colegio": "Castilla-La Mancha",
     "Distrito": "VILLANUEVA DE LOS INFANTES",
@@ -7589,7 +7917,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "3.0",
     "Entidades con personalidad juridica": "33.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "712.0"
+    "Total general": "712.0",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "166",
@@ -7599,7 +7929,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "John Pérez Sánchez",
+    "Notario Anterior": "John Pérez Sánchez (Becerreá)",
     "Provincia (Informe)": "Lugo",
     "Colegio": "Galicia",
     "Distrito": "MONFORTE DE LEMOS",
@@ -7635,7 +7965,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "7.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "348.0"
+    "Total general": "348.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "167",
@@ -7645,7 +7977,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "José María Botella Pedraza",
+    "Notario Anterior": "José María Botella Pedraza (Segovia)",
     "Provincia (Informe)": "Valladolid",
     "Colegio": "Castilla y León",
     "Distrito": "MEDINA DE RIOSECO",
@@ -7681,7 +8013,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "38.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1527.0"
+    "Total general": "1527.0",
+    "Local": "SI",
+    "Empleados": "3"
   },
   {
     "Número": "168",
@@ -7691,14 +8025,14 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Lorenzo Talens Grau",
+    "Notario Anterior": "Lorenzo Talens Grau (Massamagrell)",
     "Provincia (Informe)": "Valencia",
     "Colegio": "Valencia",
     "Distrito": "ALCIRA",
     "Municipio": "Benifaió",
     "Notaria": "Benifayó",
     "Notario": "Lorenzo Talens Grau",
-    "Informe Galo": "VACANTE: BENIFAYO\nComunicación: Es buena plaza. Zona muy demandada. No va a llegar a la promocion.",
+    "Informe Galo": "VACANTE: BENIFAYO\nComunicación: Es buena plaza. Zona muy demandada. No va a llegar a la promocion.\n\nINFORME REMITIDO POR EL SALIENTE: Notaría cómoda cerca de Valencia (a 25km). Se puede llegar por la autovía o en tren porque la estación está dentro de la población. El año pasado se llegó a los 1020 números. En este año se están firmando unos 100 y pico números por mes, con lo que se hubiera llegado a los 1200-1300 números. Hay margen de mejora porque algunas gestorías están empezando ahora a trabajar más con la notaría. Hasta la fecha el Notario iba sólo una tarde y en casos puntuales alguna tarde adicional. Se quedan en la notaría las 2 empleadas: sacan todo el trabajo que sale, trabajan muy bien en equipo, llevan gestión que presentan puntualmente y se preocupan de la notaría como si fuera suya. Los gastos están muy controlados. El local donde se ubica la Notaría (Calle Mayor, 78 bajo) es un local amplio y moderno con 3 despachos grandes, 2 salas de firmas y una recepción que puede albergar hasta 4 puestos de trabajo, 2 espacios separados de espera, 1 office con 2 cuartos de baño y un baño aparte para los clientes adaptado a personas con movilidad reducida. El local muy luminoso está a pie de calle, cerca de los bancos, fácil de aparcar y dispone de placas solares por lo que se paga muy poco de luz. Las salidas son solo dentro del mismo municipio. Compañerismo y buen ambiente en el distrito. Teléfono del saliente en su actual destino: 962.329.148.",
     "Instrumentos públicos (escrituras, actas y protestos)": "1020.0",
     "Folios de los instrumentos públicos": "14973.0",
     "Pólizas Sección A": "83.0",
@@ -7727,7 +8061,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "45.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1143.0"
+    "Total general": "1143.0",
+    "Local": "SI",
+    "Empleados": "2"
   },
   {
     "Número": "169",
@@ -7737,7 +8073,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Lucía Latorre Navarro",
+    "Notario Anterior": "Lucía Latorre Navarro (Chelva)",
     "Provincia (Informe)": "Castellón",
     "Colegio": "Valencia",
     "Distrito": "CASTELLON",
@@ -7773,7 +8109,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "11.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1016.0"
+    "Total general": "1016.0",
+    "Local": "SI",
+    "Empleados": "7"
   },
   {
     "Número": "170",
@@ -7783,7 +8121,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "María Angélica Delgado Majada",
+    "Notario Anterior": "María Angélica Delgado Majada (Chiva)",
     "Provincia (Informe)": "Huelva",
     "Colegio": "Andalucía",
     "Distrito": "MOGUER",
@@ -7819,7 +8157,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "15.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "796.0"
+    "Total general": "796.0",
+    "Local": "SI",
+    "Empleados": "2"
   },
   {
     "Número": "171",
@@ -7829,7 +8169,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "María del Pilar Portellano Salamanca",
+    "Notario Anterior": "María del Pilar Portellano Salamanca (Bolaños de Calatrava)",
     "Provincia (Informe)": "León",
     "Colegio": "Castilla y León",
     "Distrito": "LEON",
@@ -7865,7 +8205,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "2.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "581.0"
+    "Total general": "581.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "172",
@@ -7875,7 +8217,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "María Isabel Viruel León",
+    "Notario Anterior": "María Isabel Viruel León (La Mojonera)",
     "Provincia (Informe)": "Granada",
     "Colegio": "Andalucía",
     "Distrito": "ORGIVA",
@@ -7911,7 +8253,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "25.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "960.0"
+    "Total general": "960.0",
+    "Local": "SI",
+    "Empleados": "2"
   },
   {
     "Número": "173",
@@ -7921,7 +8265,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Paula Breva Calatayud",
+    "Notario Anterior": "Paula Breva Calatayud (Castellón)",
     "Provincia (Informe)": "Castellón",
     "Colegio": "Valencia",
     "Distrito": "CASTELLON",
@@ -7957,7 +8301,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "121.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2642.0"
+    "Total general": "2642.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "174",
@@ -7967,7 +8313,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Paula Llompart Riutort",
+    "Notario Anterior": "Paula Llompart Riutort (Inca)",
     "Provincia (Informe)": "Illes Balears",
     "Colegio": "Las Islas Baleares",
     "Distrito": "MANACOR",
@@ -8003,7 +8349,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "130.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2175.0"
+    "Total general": "2175.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "175",
@@ -8013,7 +8361,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Sara Pedrero Muñoz",
+    "Notario Anterior": "Sara Pedrero Muñoz (Vitigudino)",
     "Provincia (Informe)": "Salamanca",
     "Colegio": "Castilla y León",
     "Distrito": "SALAMANCA",
@@ -8049,7 +8397,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "20.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "900.0"
+    "Total general": "900.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "176",
@@ -8059,7 +8409,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Paloma Gemma Benito Orduño",
+    "Notario Anterior": "Paloma Gemma Benito Orduña (Ulldecona)",
     "Provincia (Informe)": "Cuenca",
     "Colegio": "Castilla-La Mancha",
     "Distrito": "CUENCA",
@@ -8095,7 +8445,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "8.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "630.0"
+    "Total general": "630.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "1",
@@ -8105,7 +8457,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Fernando Bautista Pérez",
+    "Notario Anterior": "Fernando Bautista Pérez (Jubilación)",
     "Provincia (Informe)": "Barcelona",
     "Colegio": "Cataluña",
     "Distrito": "BARCELONA",
@@ -8141,7 +8493,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "201.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "991.0"
+    "Total general": "991.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "2",
@@ -8151,7 +8505,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Teresa María Villazán Tovar",
+    "Notario Anterior": "Teresa María Villazán Tovar (Montgat)",
     "Provincia (Informe)": "Barcelona",
     "Colegio": "Cataluña",
     "Distrito": "BARCELONA",
@@ -8187,7 +8541,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "3.0",
     "Entidades con personalidad juridica": "176.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1125.0"
+    "Total general": "1125.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "3",
@@ -8197,7 +8553,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "José Lorenzo Iribarne Blanco",
+    "Notario Anterior": "José Lorenzo Iribarne Blanco (El Ejido)",
     "Provincia (Informe)": "Lleida",
     "Colegio": "Cataluña",
     "Distrito": "LLEIDA",
@@ -8233,7 +8589,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "156.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1311.0"
+    "Total general": "1311.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "4",
@@ -8243,7 +8601,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Carlos Manuel Parejo-Merino Parejo",
+    "Notario Anterior": "Carlos Manuel Parejo-Merino Parejo (Boadilla del Monte)",
     "Provincia (Informe)": "Barcelona",
     "Colegio": "Cataluña",
     "Distrito": "L'HOSPITALET DE LLOBREGAT",
@@ -8279,7 +8637,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "89.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1872.0"
+    "Total general": "1872.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "5",
@@ -8289,7 +8649,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María Mercedes Martínez Parra",
+    "Notario Anterior": "María Mercedes Martínez Parra (Jubilación)",
     "Provincia (Informe)": "Barcelona",
     "Colegio": "Cataluña",
     "Distrito": "BARCELONA",
@@ -8325,7 +8685,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "6.0",
     "Entidades con personalidad juridica": "392.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2499.0"
+    "Total general": "2499.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "6",
@@ -8335,7 +8697,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Primera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "José Antonio Simón Hernández",
+    "Notario Anterior": "José Antonio Simón Hernández (Jubilación)",
     "Provincia (Informe)": "Barcelona",
     "Colegio": "Cataluña",
     "Distrito": "SABADELL",
@@ -8371,7 +8733,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "347.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "3036.0"
+    "Total general": "3036.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "7",
@@ -8381,7 +8745,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Primera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Marcos Sansalvado Chalaux",
+    "Notario Anterior": "Marc Sansalvadó Chalaux (Jubilación)",
     "Provincia (Informe)": "Barcelona",
     "Colegio": "Cataluña",
     "Distrito": "BARCELONA",
@@ -8417,7 +8781,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "255.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1359.0"
+    "Total general": "1359.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "8",
@@ -8427,7 +8793,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Primera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "María Sánchez García",
+    "Notario Anterior": "María Sánchez García (Algeciras)",
     "Provincia (Informe)": "Barcelona",
     "Colegio": "Cataluña",
     "Distrito": "L'HOSPITALET DE LLOBREGAT",
@@ -8463,7 +8829,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "7.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "516.0"
+    "Total general": "516.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "9",
@@ -8473,7 +8841,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "José Poyatos Díaz",
+    "Notario Anterior": "José Poyatos Diaz (Jubilación)",
     "Provincia (Informe)": "Barcelona",
     "Colegio": "Cataluña",
     "Distrito": "GRANOLLERS",
@@ -8509,7 +8877,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "28.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "442.0"
+    "Total general": "442.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "10",
@@ -8519,7 +8889,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Luis Fort López-Barajas",
+    "Notario Anterior": "Luis Fort López-Barajas (Jubilación)",
     "Provincia (Informe)": "Barcelona",
     "Colegio": "Cataluña",
     "Distrito": "TERRASSA",
@@ -8555,7 +8925,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "1.0",
     "Entidades con personalidad juridica": "291.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2413.0"
+    "Total general": "2413.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "11",
@@ -8565,7 +8937,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Javier Salas Ramos",
+    "Notario Anterior": "Javier Salas Ramos (Teba)",
     "Provincia (Informe)": "Girona",
     "Colegio": "Cataluña",
     "Distrito": "SANTA COLOMA DE FARNERS",
@@ -8601,7 +8973,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "20.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "272.0"
+    "Total general": "272.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "12",
@@ -8611,7 +8985,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Sonia Sánchez Ruiz",
+    "Notario Anterior": "Sonia Sánchez Ruiz (Teulada)",
     "Provincia (Informe)": "Barcelona",
     "Colegio": "Cataluña",
     "Distrito": "ARENYS DE MAR",
@@ -8647,7 +9021,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "235.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2719.0"
+    "Total general": "2719.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "13",
@@ -8657,7 +9033,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Víctor Mateu Prades",
+    "Notario Anterior": "Víctor Mateu Prades (Calafell)",
     "Provincia (Informe)": "Barcelona",
     "Colegio": "Cataluña",
     "Distrito": "SANTA COLOMA DE GRAMENET",
@@ -8693,7 +9069,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "67.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1943.0"
+    "Total general": "1943.0",
+    "Local": "SI",
+    "Empleados": "NS"
   },
   {
     "Número": "14",
@@ -8703,7 +9081,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María del Carmen Parra Martínez",
+    "Notario Anterior": "María del Carmen Parra Martínez (Sant Cugat del Vallès)",
     "Provincia (Informe)": "Barcelona",
     "Colegio": "Cataluña",
     "Distrito": "SANT FELIU DE LLOBREGAT",
@@ -8739,7 +9117,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "116.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1945.0"
+    "Total general": "1945.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "15",
@@ -8749,7 +9129,7 @@ const DATA_GALO = [
     "Motivo": "Jubilación",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Francesc Torrent Cufi",
+    "Notario Anterior": "Francesc Torrent Cufí (Jubilación)",
     "Provincia (Informe)": "Barcelona",
     "Colegio": "Cataluña",
     "Distrito": "MATARO",
@@ -8785,7 +9165,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "2.0",
     "Entidades con personalidad juridica": "99.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1838.0"
+    "Total general": "1838.0",
+    "Local": "SI",
+    "Empleados": "8"
   },
   {
     "Número": "16",
@@ -8795,14 +9177,14 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Juan Fortaner Torrent",
+    "Notario Anterior": "Joan Fortaner i Torrent (Manlleu)",
     "Provincia (Informe)": "Girona",
     "Colegio": "Cataluña",
     "Distrito": "FIGUERES",
     "Municipio": "Figueres",
     "Notaria": "Figueres",
     "Notario": "Joan Fortaner i Torrent",
-    "Informe Galo": "VACANTE: Figueres\nNúmero de firmas: Remitido por amigo 2018; llegó a firmar 3000 nums,\nFacturacion: 10 empleados, 300k facturación sin impuestos, no sé alquiler, vivir allí, lejos de Barna.",
+    "Informe Galo": "VACANTE: Figueres\nNúmero de firmas: Remitido por amigo 2018; llegó a firmar 3000 nums,\nFacturacion: 10 empleados, 300k facturación sin impuestos, no sé alquiler, vivir allí, lejos de Barna.\n\nINFORME REMITIDO POR EL SALIENTE: El domicilio de la Notaría es Plaza Josep Pla, s/n, y el teléfono 972.500.555. Los documentos más corrientes son herencias, sociedades, testamentos, compraventas y poderes. Hay que hablar con Miguel-Ángel Vera Moreno, compañero de despacho, sobre la posibilidad de convenio, aunque en principio va a continuar solo. La Notaría se sustituye recíprocamente con otras de la localidad. Hay pocas salidas, si bien cabe tener presente que existe una prisión que demanda con cierta frecuencia servicios notariales. Los desplazamientos son en coche, la Notaría es estable y no existe zurupetismo. La Oficialidad es excelente; para la estadística me remito al anuario. Es una Notaría exigente, por la proximidad con Francia, lo que acarrea una documentación más compleja. A modo de ver por el saliente, no es una Notaría de ingreso, exige un cierto rodaje. El Distrito es Figueres, provincia de Girona, y la ciudad cuenta unos 50.000 habitantes. Tiene estación de Ferrocarril (AVE incluido), distando unos 750 kms de Madrid, y 30 del mar (Costa Brava). Existen centros de enseñanza, recreo y el famoso Museo Dalí. Al Notario se le considera un profesional serio y eficaz. Teléfono del saliente en su actual destino: 93-8511861.",
     "Instrumentos públicos (escrituras, actas y protestos)": "2232.0",
     "Folios de los instrumentos públicos": "24088.0",
     "Pólizas Sección A": "233.0",
@@ -8831,7 +9213,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "1.0",
     "Entidades con personalidad juridica": "314.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2754.0"
+    "Total general": "2754.0",
+    "Local": "SI",
+    "Empleados": "10"
   },
   {
     "Número": "17",
@@ -8841,7 +9225,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "María Gracia Criado Fernández",
+    "Notario Anterior": "María Gracia Criado Fernández (Baena)",
     "Provincia (Informe)": "Barcelona",
     "Colegio": "Cataluña",
     "Distrito": "SANT FELIU DE LLOBREGAT",
@@ -8877,7 +9261,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "14.0",
     "Entidades con personalidad juridica": "53.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "979.0"
+    "Total general": "979.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "18",
@@ -8887,7 +9273,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Jaime Fernández Tussy",
+    "Notario Anterior": "Jaime Fernández Tussy (Salamanca)",
     "Provincia (Informe)": "Girona",
     "Colegio": "Cataluña",
     "Distrito": "LA BISBAL D'EMPORDA",
@@ -8923,7 +9309,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "131.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2037.0"
+    "Total general": "2037.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "19",
@@ -8933,7 +9321,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Segunda",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Gonzalo Quiralte Moreno",
+    "Notario Anterior": "Gonzalo Quiralte Moreno (Zumarraga)",
     "Provincia (Informe)": "Barcelona",
     "Colegio": "Cataluña",
     "Distrito": "SANT FELIU DE LLOBREGAT",
@@ -8969,7 +9357,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "1.0",
     "Entidades con personalidad juridica": "68.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1267.0"
+    "Total general": "1267.0",
+    "Local": "NO",
+    "Empleados": "0"
   },
   {
     "Número": "20",
@@ -8979,7 +9369,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Rocío Ramírez López-Frías",
+    "Notario Anterior": "Rocio Ramírez López-Frías (Girona)",
     "Provincia (Informe)": "Girona",
     "Colegio": "Cataluña",
     "Distrito": "LA BISBAL D'EMPORDA",
@@ -9015,7 +9405,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "154.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "952.0"
+    "Total general": "952.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "21",
@@ -9025,7 +9417,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Jezabel Rodríguez Jato",
+    "Notario Anterior": "Jezabel Rodríguez Jato (Vega de San Mateo (act. Puerto de la Cruz))",
     "Provincia (Informe)": "",
     "Colegio": "Cataluña",
     "Distrito": "Tortosa",
@@ -9061,7 +9453,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "22",
@@ -9071,7 +9465,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Santiago Javier Castillo Gutiérrez",
+    "Notario Anterior": "Santiago Javier Castillo Gutierrez (Cardedeu)",
     "Provincia (Informe)": "Lleida",
     "Colegio": "Cataluña",
     "Distrito": "TREMP",
@@ -9107,7 +9501,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "93.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2213.0"
+    "Total general": "2213.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "23",
@@ -9117,7 +9513,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Sara Indurain Tornos",
+    "Notario Anterior": "Sara Indurain Tornos (Argentona (act. Pamplona))",
     "Provincia (Informe)": "",
     "Colegio": "Cataluña",
     "Distrito": "Sabadell",
@@ -9153,7 +9549,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "24",
@@ -9163,14 +9561,14 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "María de los Ángeles Picado Moreno",
+    "Notario Anterior": "María de los Ángeles Picado Moreno (Barcelona)",
     "Provincia (Informe)": "Tarragona",
     "Colegio": "Cataluña",
     "Distrito": "REUS",
     "Municipio": "Selva del Camp, La",
     "Notaria": "Selva del Camp (La)",
     "Notario": "María de los Ángeles Picado Moreno",
-    "Informe Galo": "VACANTE: La Selva del camp\nNúmero de firmas: 2023 (empezo a trabajar en febrero): 710, 2024: 876\nEmpleados: 2 empleadas (cpista) y la oficial (trabaja media jornada porque es abogada)\nComunicación: Situada a 20k de Tarragona, 110 de Barcelona. Dice que se puede vivir en el pueblo pero la oferta de vivienda es inexistente. Documentos mas habituales: poderes, testamentos, herencias, mercantil no muy complicado. No es una notaria para estar 2/3 dias, requiere DEDICACION",
+    "Informe Galo": "VACANTE: La Selva del camp\nNúmero de firmas: 2023 (empezo a trabajar en febrero): 710, 2024: 876\nEmpleados: 2 empleadas (cpista) y la oficial (trabaja media jornada porque es abogada)\nComunicación: Situada a 20k de Tarragona, 110 de Barcelona. Dice que se puede vivir en el pueblo pero la oferta de vivienda es inexistente. Documentos mas habituales: poderes, testamentos, herencias, mercantil no muy complicado. No es una notaria para estar 2/3 dias, requiere DEDICACION\n\nINFORME REMITIDO POR LA SALIENTE: Domicilio notaría: Av. Puig i Ferreter, 4, bajo (Teléfono: 977844849). Teléfono actual de la saliente: 931591832 / 93-1593218. DATOS LOCALIDAD: Distrito Reus, Provincia Tarragona, unos 5700 habitantes. Situada a 20km de Tarragona capital, 110km de Barcelona y 530km de Madrid. Vivienda: la oferta en el pueblo es casi inexistente y muy mala; sale más a cuenta vivir en Reus (a 6km), Cambrils o Tarragona. Medios de transporte: recomendable tener coche para todo, porque el transporte público funciona fatal (estación del AVE a 18km). OFICIALIDAD: La notaría cuenta con dos empleadas: La copista, que es multifunción (hace desde recepción hasta copias, pólizas, índices; lo único que no hace es matrices e impuestos). La oficial, que trabaja media jornada (19 horas, no viene ni martes ni jueves), sólo hace matrices e impuestos y tiene flexibilidad horaria porque es abogada y hace el turno de oficio. Ninguna de las empleadas sabe hacer nada de lo que hace la otra, por lo que cuando alguna falta todo el trabajo recae sobre el Notario. TRABAJO: Hay muchos poderes y testamentos, volumen razonable de compraventas, hipotecas y herencias, bastante mercantil y mucha rústica (modificaciones físicas farragosas). Buen volumen de pólizas. Se sustituye recíprocamente con Falset. Salidas: no hay, salvo algún testamento, actas de fotos o requerimiento. Estadísticas: 2023 (desde 20 de febrero): 710 protocolos y 144 pólizas; 2024: 884 protocolos y 238 pólizas; 2025 (11 meses): 876 protocolos y 198 pólizas. La notaría podría hacer tranquilamente más de 900 números al año, pero el ritmo se frena por la distribución del trabajo entre las empleadas y clientes que aplazan firmas. No es una notaría para estar dos o tres días, requiere dedicación continua y mucho trabajo por parte del notario.",
     "Instrumentos públicos (escrituras, actas y protestos)": "876.0",
     "Folios de los instrumentos públicos": "14886.0",
     "Pólizas Sección A": "198.0",
@@ -9199,7 +9597,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "61.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1246.0"
+    "Total general": "1246.0",
+    "Local": "SI",
+    "Empleados": "2"
   },
   {
     "Número": "25",
@@ -9209,7 +9609,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Fernando Pascual González Barranca",
+    "Notario Anterior": "Fernando Pascual González-Barranca (Rubí)",
     "Provincia (Informe)": "Barcelona",
     "Colegio": "Cataluña",
     "Distrito": "IGUALADA",
@@ -9245,7 +9645,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "2.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "307.0"
+    "Total general": "307.0",
+    "Local": "SI",
+    "Empleados": "NS"
   },
   {
     "Número": "26",
@@ -9255,7 +9657,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Carla Castillón Porqueras",
+    "Notario Anterior": "Clara Castillón Porqueras (Tàrrega)",
     "Provincia (Informe)": "Lleida",
     "Colegio": "Cataluña",
     "Distrito": "BALAGUER",
@@ -9291,7 +9693,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "12.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "689.0"
+    "Total general": "689.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "27",
@@ -9301,14 +9705,14 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Carola Irene Sevilla Pitarch",
+    "Notario Anterior": "Carola Irene Sevilla Pitarch (Barcelona)",
     "Provincia (Informe)": "Girona",
     "Colegio": "Cataluña",
     "Distrito": "GIRONA",
     "Municipio": "Amer",
     "Notaria": "Amer",
     "Notario": "Carola Irene Sevilla Pitarch",
-    "Informe Galo": "VACANTE: Amer\nNúmero de firmas: 1295\nEmpleados: 3 muy buenos\nFacturacion: BUENA\nPosibilidad de alquiler: sí\nComunicación: Muy Cerca de GIRONA. MUCHO CATALÁN",
+    "Informe Galo": "VACANTE: Amer\nNúmero de firmas: 1295\nEmpleados: 3 muy buenos\nFacturacion: BUENA\nPosibilidad de alquiler: sí\nComunicación: Muy Cerca de GIRONA. MUCHO CATALÁN\n\nINFORME REMITIDO POR LA SALIENTE: A pesar de que la población de Amer no llegue a los 2500 habitantes es una plaza con bastante volumen de trabajo, lo que se justifica tanto por su enclave geográfico (rodeada de poblaciones carentes de Notaría, siendo las más cercanas Olot y Santa Coloma de Farners), como por su oficialidad que ha permitido consolidar clientela a lo largo del tiempo. Cuenta con tres empleados magníficos a nivel tanto profesional como personal, lo que también hace que sea una notaría de muy cómoda llevanza. La Notaría está ubicada en el tercer piso de un edificio (Avda. de Barcelona, 2), siendo propiedad del Colegio de Cataluña y cumpliendo su función. La documentación es variada y la práctica totalidad de los documentos se autorizan en catalán. Dista unos 25 km / 30 minutos de Girona. Teléfono saliente: 933.011.000.",
     "Instrumentos públicos (escrituras, actas y protestos)": "1295.0",
     "Folios de los instrumentos públicos": "23044.0",
     "Pólizas Sección A": "121.0",
@@ -9337,7 +9741,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "103.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1658.0"
+    "Total general": "1658.0",
+    "Local": "SI",
+    "Empleados": "3"
   },
   {
     "Número": "28",
@@ -9347,7 +9753,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Marta Alcover Delgado",
+    "Notario Anterior": "Marta Alcover Delgado (Rubí)",
     "Provincia (Informe)": "Girona",
     "Colegio": "Cataluña",
     "Distrito": "SANTA COLOMA DE FARNERS",
@@ -9383,7 +9789,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "61.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1840.0"
+    "Total general": "1840.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "29",
@@ -9393,7 +9801,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Andrés García Molina",
+    "Notario Anterior": "Andrés García Molina (Hellín)",
     "Provincia (Informe)": "Lleida",
     "Colegio": "Cataluña",
     "Distrito": "BALAGUER",
@@ -9429,7 +9837,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "1.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "144.0"
+    "Total general": "144.0",
+    "Local": "NO",
+    "Empleados": "0"
   },
   {
     "Número": "30",
@@ -9439,7 +9849,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Pedro Luis García de los Huertos",
+    "Notario Anterior": "Pedro Luis García de los Huertos Sánchez (A Coruña)",
     "Provincia (Informe)": "Girona",
     "Colegio": "Cataluña",
     "Distrito": "FIGUERES",
@@ -9475,7 +9885,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "24.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "264.0"
+    "Total general": "264.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "31",
@@ -9485,7 +9897,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Blanca Camacho Lopez-Baraja",
+    "Notario Anterior": "Blanca Camacho López-Barajas (Sant Joan Despí)",
     "Provincia (Informe)": "Barcelona",
     "Colegio": "Cataluña",
     "Distrito": "IGUALADA",
@@ -9521,7 +9933,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "8.0",
     "Entidades con personalidad juridica": "21.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "502.0"
+    "Total general": "502.0",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "32",
@@ -9531,7 +9945,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Jose Luis Ballestín González",
+    "Notario Anterior": "José Luis Ballestín González (Tordera)",
     "Provincia (Informe)": "Barcelona",
     "Colegio": "Cataluña",
     "Distrito": "ARENYS DE MAR",
@@ -9567,7 +9981,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "126.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2714.0"
+    "Total general": "2714.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "33",
@@ -9577,7 +9993,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Alexandre Lafraga Mas",
+    "Notario Anterior": "Alexandre Lafarga Mas (Castelló d'Empúries)",
     "Provincia (Informe)": "Tarragona",
     "Colegio": "Cataluña",
     "Distrito": "VALLS",
@@ -9613,7 +10029,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "7.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "372.0"
+    "Total general": "372.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "34",
@@ -9623,7 +10041,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Hans Alexander Braunschweig Leott",
+    "Notario Anterior": "Hans Alexander Braunschweig Leotte (Barcelona)",
     "Provincia (Informe)": "Barcelona",
     "Colegio": "Cataluña",
     "Distrito": "GRANOLLERS",
@@ -9659,7 +10077,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "1.0",
     "Entidades con personalidad juridica": "91.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1520.0"
+    "Total general": "1520.0",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "35",
@@ -9669,7 +10089,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Raquel Doval Ganuza",
+    "Notario Anterior": "Raquel Doval Ganuza (Peralta)",
     "Provincia (Informe)": "Tarragona",
     "Colegio": "Cataluña",
     "Distrito": "VALLS",
@@ -9705,7 +10125,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "16.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "353.0"
+    "Total general": "353.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "36",
@@ -9715,7 +10137,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Luis Felipe Álvarez de Sotomayor Rodríguez",
+    "Notario Anterior": "Luis Felipe Álvarez de Sotomayor Rodríguez (L'Hospitalet de Llobregat)",
     "Provincia (Informe)": "Barcelona",
     "Colegio": "Cataluña",
     "Distrito": "IGUALADA",
@@ -9751,7 +10173,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "7.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "390.0"
+    "Total general": "390.0",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "37",
@@ -9761,7 +10185,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Jorge Fort Canals",
+    "Notario Anterior": "Jorge Fort Canals (Guissona)",
     "Provincia (Informe)": "Lleida",
     "Colegio": "Cataluña",
     "Distrito": "BALAGUER",
@@ -9797,7 +10221,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "10.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "134.0"
+    "Total general": "134.0",
+    "Local": "SI",
+    "Empleados": "0"
   },
   {
     "Número": "38",
@@ -9807,7 +10233,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en la carrera",
-    "Notario Anterior": "Lluís Colomé Serra",
+    "Notario Anterior": "Lluis Colomé Serra (Sabadell)",
     "Provincia (Informe)": "Barcelona",
     "Colegio": "Cataluña",
     "Distrito": "BERGA",
@@ -9843,7 +10269,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "23.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "328.0"
+    "Total general": "328.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "39",
@@ -9853,7 +10281,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Guillermo Martín-Riva Ruiz",
+    "Notario Anterior": "Guillermo Martín-Riva Ruiz (Barcelona)",
     "Provincia (Informe)": "Girona",
     "Colegio": "Cataluña",
     "Distrito": "PUIGCERDA",
@@ -9889,7 +10317,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "45.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "922.0"
+    "Total general": "922.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "40",
@@ -9899,7 +10329,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Dulce María Pascual Pardo",
+    "Notario Anterior": "Dulce María Pascual Pardo (Puerto Lumbreras)",
     "Provincia (Informe)": "Tarragona",
     "Colegio": "Cataluña",
     "Distrito": "TARRAGONA",
@@ -9935,7 +10365,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "0.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "113.0"
+    "Total general": "113.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "41",
@@ -9945,7 +10377,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "María José Solís de la Fuente",
+    "Notario Anterior": "María José Solís de la Fuente (Girona)",
     "Provincia (Informe)": "Girona",
     "Colegio": "Cataluña",
     "Distrito": "GIRONA",
@@ -9981,7 +10413,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "0.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "95.0"
+    "Total general": "95.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "42",
@@ -9991,14 +10425,14 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Creada pel Reial decret 173/2007",
+    "Notario Anterior": "Creada pel Reial decret 173/2007 (Nueva creación (Demarcación 2007))",
     "Provincia (Informe)": "",
     "Colegio": "Cataluña",
     "Distrito": "Tortosa",
     "Municipio": "",
     "Notaria": "",
     "Notario": "",
-    "Informe Galo": "VACANTE: Flix\nNúmero de firmas: NUNCA HA TENIDO NOTARIO. Se creó en la demarcacion de 2015 y jamas ha tenido. M",
+    "Informe Galo": "VACANTE: Flix\nNúmero de firmas: NUNCA HA TENIDO NOTARIO. Se creó en la demarcacion de 2015 y jamas ha tenido. M\n\nINFORME GESTORÍA: Notaría de nueva creación en la Demarcación de 2007, al día de la fecha no se ha cubierto desde su creación. No la sustituye ningún Notario al no tener protocolo alguno.",
     "Instrumentos públicos (escrituras, actas y protestos)": "",
     "Folios de los instrumentos públicos": "",
     "Pólizas Sección A": "",
@@ -10027,7 +10461,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NO",
+    "Empleados": "0"
   },
   {
     "Número": "43",
@@ -10037,14 +10473,14 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Juan Fortaner Torrent",
+    "Notario Anterior": "Juan Fortaner Torrent (Calella (act. Manlleu))",
     "Provincia (Informe)": "",
     "Colegio": "Cataluña",
     "Distrito": "Santa Coloma de Farners",
     "Municipio": "",
     "Notaria": "",
     "Notario": "",
-    "Informe Galo": "VACANTE: Hostalric\nNúmero de firmas: Nunc ha tenido notario, plaza procedente del traslado de Arbucies",
+    "Informe Galo": "VACANTE: Hostalric\nNúmero de firmas: Nunc ha tenido notario, plaza procedente del traslado de Arbucies\n\nINFORME GESTORÍA: Vacante de nueva creación. Procede de una de las de Arbúcies, que conforme a la Demarcación Notarial de 2007 se traslada al quedar vacante por traslado del Sr. Fortaner Torrent a Calella, hoy en Manlleu. Zona fuerte y severamente castigada por la crisis de 2008, tanto en el sector inmobiliario como en el ámbito metalúrgico y textil, con agudo descenso de la contratación civil y mercantil. Existen además 8 Notarías demarcadas en un radio de unos 15-20 Km. MUY IMPORTANTE: Imprescindible contactar con la Notario de Arbúcies, Dª Marta Faura Carreras (trasladada a Manlleu, tlno: 93-8511861). Sustituye D. Jordi Josep Fugardo Pellicer (Lloret de Mar, tlno: 972-362-625).",
     "Instrumentos públicos (escrituras, actas y protestos)": "",
     "Folios de los instrumentos públicos": "",
     "Pólizas Sección A": "",
@@ -10073,7 +10509,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "",
     "Entidades con personalidad juridica": "",
     "Actuaciones notariales en caso de catástrofes": "",
-    "Total general": ""
+    "Total general": "",
+    "Local": "NO",
+    "Empleados": "0"
   },
   {
     "Número": "44",
@@ -10083,7 +10521,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Juan Ignacio Sorigué Abel",
+    "Notario Anterior": "Joan Ignasi Sorigue Abel (Jubilación)",
     "Provincia (Informe)": "Girona",
     "Colegio": "Cataluña",
     "Distrito": "LA BISBAL D'EMPORDA",
@@ -10119,7 +10557,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "13.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "125.0"
+    "Total general": "125.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "45",
@@ -10129,7 +10569,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "María del Pilar Navarro Fraile",
+    "Notario Anterior": "María del Pilar Navarro Fraile (Sant Just Desvern)",
     "Provincia (Informe)": "Lleida",
     "Colegio": "Cataluña",
     "Distrito": "TREMP",
@@ -10165,7 +10605,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "7.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "392.0"
+    "Total general": "392.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "46",
@@ -10175,7 +10617,7 @@ const DATA_GALO = [
     "Motivo": "Desierta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Pedro Pablo Albiol Ballesteros",
+    "Notario Anterior": "Pedro Pablo Albiol Ballesteros (Pineda de Mar)",
     "Provincia (Informe)": "Barcelona",
     "Colegio": "Cataluña",
     "Distrito": "MANRESA",
@@ -10211,7 +10653,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "8.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "253.0"
+    "Total general": "253.0",
+    "Local": "SI",
+    "Empleados": "1"
   },
   {
     "Número": "47",
@@ -10221,14 +10665,14 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Laura Blázquez Blázquez",
+    "Notario Anterior": "Laura Blázquez Blázquez (Roda de Barà)",
     "Provincia (Informe)": "Tarragona",
     "Colegio": "Cataluña",
     "Distrito": "EL VENDRELL",
     "Municipio": "Arboç, L'",
     "Notaria": "Arboç, L'",
     "Notario": "Laura Blázquez Blázquez",
-    "Informe Galo": "VACANTE: L´Arboç\nNúmero de firmas: 600 num reales\nEmpleados: 1\nFacturacion: ns\nComunicación: bien comunicado a Barcelona",
+    "Informe Galo": "VACANTE: L´Arboç\nNúmero de firmas: 600 num reales\nEmpleados: 1\nFacturacion: ns\nComunicación: bien comunicado a Barcelona\n\nINFORME GESTORÍA: La estadística de 2025, de Mayo a Diciembre (la saliente es de la promoción de Cataluña 2023/2024), es de 300 a 325 números; de Mayo de 2025 a Mayo de 2026 se han hecho de 600 a 650 números (se han llegado a hacer 1000 números, pero con sustitución). Sustituye la propia saliente Dª Laura Blázquez Blázquez desde Roda de Barà (tlno: 977.657.726).",
     "Instrumentos públicos (escrituras, actas y protestos)": "1163.0",
     "Folios de los instrumentos públicos": "18602.0",
     "Pólizas Sección A": "77.0",
@@ -10257,7 +10701,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "51.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1306.0"
+    "Total general": "1306.0",
+    "Local": "NS",
+    "Empleados": "1"
   },
   {
     "Número": "48",
@@ -10267,7 +10713,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Jessica Castro Salguero",
+    "Notario Anterior": "Jessica Castro Salguero (Valverde del Camino)",
     "Provincia (Informe)": "Lleida",
     "Colegio": "Cataluña",
     "Distrito": "CERVERA",
@@ -10303,7 +10749,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "64.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "1180.0"
+    "Total general": "1180.0",
+    "Local": "SI",
+    "Empleados": "2"
   },
   {
     "Número": "49",
@@ -10313,7 +10761,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Marco Ciani García",
+    "Notario Anterior": "Marco Ciani García (Begur)",
     "Provincia (Informe)": "Girona",
     "Colegio": "Cataluña",
     "Distrito": "LA BISBAL D'EMPORDA",
@@ -10349,7 +10797,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "43.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "390.0"
+    "Total general": "390.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "50",
@@ -10359,7 +10809,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Mónica de Blas Esteban",
+    "Notario Anterior": "Mónica de Blas Esteban (Badalona)",
     "Provincia (Informe)": "Barcelona",
     "Colegio": "Cataluña",
     "Distrito": "ARENYS DE MAR",
@@ -10395,7 +10845,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "247.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "2593.0"
+    "Total general": "2593.0",
+    "Local": "NS",
+    "Empleados": "NS"
   },
   {
     "Número": "51",
@@ -10405,14 +10857,14 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "Juan Sánchez Oriola",
+    "Notario Anterior": "Juan Sánchez Oriola (Burriana)",
     "Provincia (Informe)": "Tarragona",
     "Colegio": "Cataluña",
     "Distrito": "TORTOSA",
     "Municipio": "Deltebre",
     "Notaria": "Deltebre",
     "Notario": "Juan Sánchez Oriola",
-    "Informe Galo": "VACANTE: Deltebre\nNúmero de firmas: más de 1000 números, muy variado, bastantes pólizas\nEmpleados: 4 (2 nuevas, 1 oficial muy buena, 1 antigua)\nPosibilidad de alquiler: Sí.\nComunicación: Cerca de Benicarló.. Buena para empezar.",
+    "Informe Galo": "VACANTE: Deltebre\nNúmero de firmas: más de 1000 números, muy variado, bastantes pólizas\nEmpleados: 4 (2 nuevas, 1 oficial muy buena, 1 antigua)\nPosibilidad de alquiler: Sí.\nComunicación: Cerca de Benicarló.. Buena para empezar.\n\nINFORME REMITIDO POR EL SALIENTE: La numeración de los instrumentos públicos de 2025 corresponde casi toda a la Notaría de Deltebre, si bien a partir de la segunda quincena de noviembre me correspondió la sustitución de la Notaría de L'Ametlla de Mar (desde el 13 de noviembre). La numeración de 2024 es sólo de Deltebre. En 2023 también me correspondió sustituir la Notaría de L'Ametlla de Mar unos cuatro meses. Y lo más importante, van a producirse cambios de algunas empleadas de la Notaría, por lo que es conveniente hablar sobre este tema conmigo, como Notario saliente (tlno: 964.515.524), y sobre todo con el Notario de L'Ametlla de Mar, Don Eloy Rodríguez (tlno: 977-456618), a quien corresponderá la sustitución.",
     "Instrumentos públicos (escrituras, actas y protestos)": "1433.0",
     "Folios de los instrumentos públicos": "19753.0",
     "Pólizas Sección A": "361.0",
@@ -10441,7 +10893,9 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "1.0",
     "Entidades con personalidad juridica": "101.0",
     "Actuaciones notariales en caso de catástrofes": "2.0",
-    "Total general": "2010.0"
+    "Total general": "2010.0",
+    "Local": "SI",
+    "Empleados": "4"
   },
   {
     "Número": "52",
@@ -10451,7 +10905,7 @@ const DATA_GALO = [
     "Motivo": "Resulta",
     "Categoría": "Tercera",
     "Turno": "Antigüedad en clase",
-    "Notario Anterior": "María Cotillas Funes",
+    "Notario Anterior": "María Cotillas Funes (Les Borges Blanques)",
     "Provincia (Informe)": "Tarragona",
     "Colegio": "Cataluña",
     "Distrito": "REUS",
@@ -10487,4134 +10941,8 @@ const DATA_GALO = [
     "Entidades sin personalidad juridica": "0.0",
     "Entidades con personalidad juridica": "7.0",
     "Actuaciones notariales en caso de catástrofes": "0.0",
-    "Total general": "334.0"
+    "Total general": "334.0",
+    "Local": "SI",
+    "Empleados": "1"
   }
 ];
-
-// Protocolos y pólizas 2025 de todas las notarías en localidades con más de una notaría
-const DATA_LOCALIDAD_PEERS_2025 = {
-  "araba/alava|vitoria-gasteiz": [
-    {
-      "notario": "Blanca Palacios Guillén",
-      "protocolos": 10451,
-      "polizas": 951
-    },
-    {
-      "notario": "Francisco Rodríguez-Poyo Segura",
-      "protocolos": 6427,
-      "polizas": 415
-    },
-    {
-      "notario": "Ángel Fernández-Reyes Luis",
-      "protocolos": 3698,
-      "polizas": 229
-    },
-    {
-      "notario": "Francisco Javier de las Fuentes Abad",
-      "protocolos": 3254,
-      "polizas": 239
-    },
-    {
-      "notario": "Fernando Ramos Alcazar",
-      "protocolos": 2652,
-      "polizas": 101
-    },
-    {
-      "notario": "Félix Ignacio Torres Cía",
-      "protocolos": 2538,
-      "polizas": 108
-    },
-    {
-      "notario": "María Concepción Granado Fernández de la Pradilla",
-      "protocolos": 1978,
-      "polizas": 20
-    },
-    {
-      "notario": "Sofía Trapote González",
-      "protocolos": 1935,
-      "polizas": 65
-    },
-    {
-      "notario": "José Manuel Jiménez del Cerro",
-      "protocolos": 1916,
-      "polizas": 840
-    },
-    {
-      "notario": "Luis Pérez de Lazárraga Villanueva",
-      "protocolos": 1765,
-      "polizas": 963
-    },
-    {
-      "notario": "Enara Basabe Belaustegui",
-      "protocolos": 1202,
-      "polizas": 94
-    },
-    {
-      "notario": "Teresa María del Pilar Cano Marco",
-      "protocolos": 727,
-      "polizas": 19
-    },
-    {
-      "notario": "María del Camino López de Heredia San Julián",
-      "protocolos": 55,
-      "polizas": 3
-    }
-  ],
-  "valencia/valencia|valencia": [
-    {
-      "notario": "Luis Calabuig de Leyva",
-      "protocolos": 10830,
-      "polizas": 491
-    },
-    {
-      "notario": "Federico Ortells Pérez",
-      "protocolos": 10298,
-      "polizas": 219
-    },
-    {
-      "notario": "Vicente Juan Escrivá Rubio",
-      "protocolos": 8815,
-      "polizas": 542
-    },
-    {
-      "notario": "Alfonso Maldonado Rubio",
-      "protocolos": 8522,
-      "polizas": 1063
-    },
-    {
-      "notario": "César Belda Casanova",
-      "protocolos": 7357,
-      "polizas": 1110
-    },
-    {
-      "notario": "Alejandro Cervera Taulet",
-      "protocolos": 7322,
-      "polizas": 1559
-    },
-    {
-      "notario": "Clara Barberá Pichó",
-      "protocolos": 6661,
-      "polizas": 603
-    },
-    {
-      "notario": "Jorge Barberá Pichó",
-      "protocolos": 6574,
-      "polizas": 656
-    },
-    {
-      "notario": "José Vicente Roig Dalmau",
-      "protocolos": 6145,
-      "polizas": 244
-    },
-    {
-      "notario": "José Manuel Valiente Cabadés",
-      "protocolos": 5613,
-      "polizas": 523
-    },
-    {
-      "notario": "Jorge Antonio Milz Ramón",
-      "protocolos": 5555,
-      "polizas": 1004
-    },
-    {
-      "notario": "Joaquín Borrell García",
-      "protocolos": 4414,
-      "polizas": 306
-    },
-    {
-      "notario": "José Alicarte Domingo",
-      "protocolos": 4189,
-      "polizas": 543
-    },
-    {
-      "notario": "José Manuel Rodrigo Paradells",
-      "protocolos": 3723,
-      "polizas": 310
-    },
-    {
-      "notario": "José María Fuster Muñoz",
-      "protocolos": 3316,
-      "polizas": 338
-    },
-    {
-      "notario": "Jorge Cano Rico",
-      "protocolos": 3300,
-      "polizas": 0
-    },
-    {
-      "notario": "Diego Simó Sevilla",
-      "protocolos": 3252,
-      "polizas": 184
-    },
-    {
-      "notario": "Emilio Vicente Orts Calabuig",
-      "protocolos": 3249,
-      "polizas": 320
-    },
-    {
-      "notario": "Ricardo Monllor González",
-      "protocolos": 3137,
-      "polizas": 367
-    },
-    {
-      "notario": "Francisco Badia Escriche",
-      "protocolos": 3134,
-      "polizas": 333
-    },
-    {
-      "notario": "Javier Máximo Juárez González",
-      "protocolos": 3127,
-      "polizas": 343
-    },
-    {
-      "notario": "Santiago José Méndez Ureña",
-      "protocolos": 3085,
-      "polizas": 385
-    },
-    {
-      "notario": "Juan Piquer Belloch",
-      "protocolos": 3061,
-      "polizas": 591
-    },
-    {
-      "notario": "Ubaldo Nieto Carol",
-      "protocolos": 2971,
-      "polizas": 415
-    },
-    {
-      "notario": "Máximo Catalán Pardo",
-      "protocolos": 2892,
-      "polizas": 129
-    },
-    {
-      "notario": "Rafael Estevan Gordo",
-      "protocolos": 2811,
-      "polizas": 130
-    },
-    {
-      "notario": "Fernando Corbí Coloma",
-      "protocolos": 2784,
-      "polizas": 416
-    },
-    {
-      "notario": "Simeón Ribelles Durá",
-      "protocolos": 2544,
-      "polizas": 184
-    },
-    {
-      "notario": "María Isabel Merino Cubells",
-      "protocolos": 2475,
-      "polizas": 71
-    },
-    {
-      "notario": "Ana Julia Roselló García",
-      "protocolos": 2447,
-      "polizas": 231
-    },
-    {
-      "notario": "Salvador Eduardo García Parra",
-      "protocolos": 2425,
-      "polizas": 244
-    },
-    {
-      "notario": "Juan Francisco Baixauli Alonso",
-      "protocolos": 2414,
-      "polizas": 82
-    },
-    {
-      "notario": "José Manuel Fuertes Vidal",
-      "protocolos": 2379,
-      "polizas": 967
-    },
-    {
-      "notario": "Víctor Manuel Noguera Marí",
-      "protocolos": 2378,
-      "polizas": 401
-    },
-    {
-      "notario": "Alfonso Pascual de Miguel",
-      "protocolos": 2266,
-      "polizas": 0
-    },
-    {
-      "notario": "Santiago Mompó Gimeno",
-      "protocolos": 2086,
-      "polizas": 0
-    },
-    {
-      "notario": "Fernando Pérez Narbón",
-      "protocolos": 2059,
-      "polizas": 1798
-    },
-    {
-      "notario": "Enrique Robles Perea",
-      "protocolos": 2002,
-      "polizas": 1799
-    },
-    {
-      "notario": "Salvador Moratal Margarit",
-      "protocolos": 1939,
-      "polizas": 140
-    },
-    {
-      "notario": "Eduardo Lluna Aparisi",
-      "protocolos": 1933,
-      "polizas": 1076
-    },
-    {
-      "notario": "Fernando Olaizola Martínez",
-      "protocolos": 1855,
-      "polizas": 86
-    },
-    {
-      "notario": "Joaquín Sapena Davó",
-      "protocolos": 1781,
-      "polizas": 75
-    },
-    {
-      "notario": "Miguel Roca Bermúdez de Castro",
-      "protocolos": 1666,
-      "polizas": 104
-    },
-    {
-      "notario": "Francisco José Sapena Davó",
-      "protocolos": 1633,
-      "polizas": 159
-    },
-    {
-      "notario": "María Isabel Menéndez-Valdés Tauroni",
-      "protocolos": 1600,
-      "polizas": 72
-    },
-    {
-      "notario": "Fernando Pascual Senent Ana",
-      "protocolos": 1522,
-      "polizas": 347
-    },
-    {
-      "notario": "Francisco Cantos Viñals",
-      "protocolos": 1222,
-      "polizas": 25
-    },
-    {
-      "notario": "Francisco Moret Martínez",
-      "protocolos": 854,
-      "polizas": 21
-    },
-    {
-      "notario": "Ángel López-Amo Calatayud",
-      "protocolos": 813,
-      "polizas": 120
-    },
-    {
-      "notario": "Manuel Mínguez Jiménez",
-      "protocolos": 467,
-      "polizas": 23
-    },
-    {
-      "notario": "Manuel José Chirivella Bonet",
-      "protocolos": 467,
-      "polizas": 14
-    },
-    {
-      "notario": "Vicente Tomás Bernat",
-      "protocolos": 204,
-      "polizas": 11
-    }
-  ],
-  "alicante/alacant|alicante/alacant": [
-    {
-      "notario": "José Perfecto Verdú Beltrán",
-      "protocolos": 4982,
-      "polizas": 344,
-      "notaria": "Alicante/Alacant"
-    },
-    {
-      "notario": "Alejandro Fernández Toro",
-      "protocolos": 4785,
-      "polizas": 394,
-      "notaria": "Alicante/Alacant"
-    },
-    {
-      "notario": "María Cristina Clemente Buendía",
-      "protocolos": 4631,
-      "polizas": 136,
-      "notaria": "Alicante/Alacant"
-    },
-    {
-      "notario": "Antonio Ripoll Soler",
-      "protocolos": 3593,
-      "polizas": 259,
-      "notaria": "Alicante/Alacant"
-    },
-    {
-      "notario": "José Luis López Orozco",
-      "protocolos": 3561,
-      "polizas": 234,
-      "notaria": "Alicante/Alacant"
-    },
-    {
-      "notario": "José Nieto Sánchez",
-      "protocolos": 3221,
-      "polizas": 135,
-      "notaria": "Alicante/Alacant"
-    },
-    {
-      "notario": "Miguel Ángel Robles Perea",
-      "protocolos": 2989,
-      "polizas": 118,
-      "notaria": "Alicante/Alacant"
-    },
-    {
-      "notario": "José Antonio Pérez Ramos",
-      "protocolos": 2901,
-      "polizas": 283,
-      "notaria": "Alicante/Alacant"
-    },
-    {
-      "notario": "Francisco Benítez Ortiz",
-      "protocolos": 2747,
-      "polizas": 540,
-      "notaria": "Alicante/Alacant"
-    },
-    {
-      "notario": "Juan Manuel Clemente González",
-      "protocolos": 2586,
-      "polizas": 53,
-      "notaria": "Alicante/Alacant"
-    },
-    {
-      "notario": "Antonio Luis Mira Cantó",
-      "protocolos": 2550,
-      "polizas": 451,
-      "notaria": "Alicante/Alacant"
-    },
-    {
-      "notario": "Gaspar Peral Bernat",
-      "protocolos": 2504,
-      "polizas": 460,
-      "notaria": "Alicante/Alacant"
-    },
-    {
-      "notario": "Augusto Pérez-Coca Crespo",
-      "protocolos": 2488,
-      "polizas": 309,
-      "notaria": "Alicante/Alacant"
-    },
-    {
-      "notario": "Cristina López Esteve",
-      "protocolos": 2441,
-      "polizas": 45,
-      "notaria": "Alicante/Alacant"
-    },
-    {
-      "notario": "Mario Signes Pascual",
-      "protocolos": 2374,
-      "polizas": 231,
-      "notaria": "Alicante/Alacant"
-    },
-    {
-      "notario": "Delfín Martínez Pérez",
-      "protocolos": 2162,
-      "polizas": 226,
-      "notaria": "Alicante/Alacant"
-    },
-    {
-      "notario": "Rafael Sebastián Ferrer Molina",
-      "protocolos": 2016,
-      "polizas": 168,
-      "notaria": "Alicante/Alacant"
-    },
-    {
-      "notario": "Francisco Javier Garach Aguado",
-      "protocolos": 1986,
-      "polizas": 14,
-      "notaria": "Alicante/Alacant"
-    },
-    {
-      "notario": "María de los Reyes Sánchez Moreno",
-      "protocolos": 1937,
-      "polizas": 161,
-      "notaria": "Alicante/Alacant"
-    },
-    {
-      "notario": "María Dolores Signes Verdera",
-      "protocolos": 1717,
-      "polizas": 121,
-      "notaria": "Alicante/Alacant"
-    }
-  ],
-  "badajoz|merida": [
-    {
-      "notario": "Francisco Javier Hernández Téllez",
-      "protocolos": 2974,
-      "polizas": 524
-    },
-    {
-      "notario": "Fernando Gutiérrez Valdenebro",
-      "protocolos": 2551,
-      "polizas": 524
-    },
-    {
-      "notario": "Gonzalo Rafael Fernández Pugnaire",
-      "protocolos": 2262,
-      "polizas": 384
-    },
-    {
-      "notario": "Francisco de Borja Igartua Fesser",
-      "protocolos": 1332,
-      "polizas": 201
-    }
-  ],
-  "madrid|madrid": [
-    {
-      "notario": "Alberto Navarro-Rubio Serres",
-      "protocolos": 26704,
-      "polizas": 0
-    },
-    {
-      "notario": "José María Mateos Salgado",
-      "protocolos": 12658,
-      "polizas": 1539
-    },
-    {
-      "notario": "José Ortiz Rodríguez",
-      "protocolos": 11893,
-      "polizas": 864
-    },
-    {
-      "notario": "Antonio Luis Reina Gutiérrez",
-      "protocolos": 11347,
-      "polizas": 3089
-    },
-    {
-      "notario": "Tomás Pérez Ramos",
-      "protocolos": 10406,
-      "polizas": 460
-    },
-    {
-      "notario": "Juan Luis Guijarro de Miguel",
-      "protocolos": 9854,
-      "polizas": 360
-    },
-    {
-      "notario": "Jaime Recarte Casanova",
-      "protocolos": 9720,
-      "polizas": 520
-    },
-    {
-      "notario": "Francisco Miras Ortiz",
-      "protocolos": 9006,
-      "polizas": 1342
-    },
-    {
-      "notario": "José Miguel García Lombardía",
-      "protocolos": 8978,
-      "polizas": 2747
-    },
-    {
-      "notario": "Andrés Domínguez Nafría",
-      "protocolos": 8674,
-      "polizas": 1672
-    },
-    {
-      "notario": "Alejandro Ruiz-Ayucar Seifert",
-      "protocolos": 8548,
-      "polizas": 85
-    },
-    {
-      "notario": "José Periel Martín",
-      "protocolos": 8383,
-      "polizas": 282
-    },
-    {
-      "notario": "Antonio Pérez-Coca Crespo",
-      "protocolos": 8192,
-      "polizas": 1584
-    },
-    {
-      "notario": "Esteban Sánchez Sánchez",
-      "protocolos": 7971,
-      "polizas": 230,
-      "notaria": "Madrid - Palomeras"
-    },
-    {
-      "notario": "Gregorio Javier Sierra Martínez",
-      "protocolos": 7786,
-      "polizas": 292
-    },
-    {
-      "notario": "Carlos Alcocer Torra",
-      "protocolos": 7675,
-      "polizas": 0
-    },
-    {
-      "notario": "Pablo Matias de la Esperanza Rodríguez",
-      "protocolos": 7603,
-      "polizas": 777
-    },
-    {
-      "notario": "Valerio Pérez de Madrid Carreras",
-      "protocolos": 7505,
-      "polizas": 354
-    },
-    {
-      "notario": "Juan Aznar de la Haza",
-      "protocolos": 7134,
-      "polizas": 376
-    },
-    {
-      "notario": "Ángel Almoguera Gómez",
-      "protocolos": 6959,
-      "polizas": 227
-    },
-    {
-      "notario": "Ignacio Gil-Antuñano Vizcaíno",
-      "protocolos": 6889,
-      "polizas": 500
-    },
-    {
-      "notario": "Miguel Ruiz-Gallardón García-Rasilla",
-      "protocolos": 6797,
-      "polizas": 0
-    },
-    {
-      "notario": "Celso Méndez Ureña",
-      "protocolos": 6771,
-      "polizas": 850
-    },
-    {
-      "notario": "Pedro Antonio Mateos Salgado",
-      "protocolos": 6608,
-      "polizas": 198
-    },
-    {
-      "notario": "Francisco Calderón Alvarez",
-      "protocolos": 6475,
-      "polizas": 763
-    },
-    {
-      "notario": "Antonio de la Esperanza Rodríguez",
-      "protocolos": 6409,
-      "polizas": 596
-    },
-    {
-      "notario": "Emilio Leal Labrador",
-      "protocolos": 6401,
-      "polizas": 372
-    },
-    {
-      "notario": "José Blanco Losada",
-      "protocolos": 6283,
-      "polizas": 613
-    },
-    {
-      "notario": "Javier de Lucas Cadenas",
-      "protocolos": 6177,
-      "polizas": 478
-    },
-    {
-      "notario": "José Manuel Hernández Antolín",
-      "protocolos": 6163,
-      "polizas": 513,
-      "notaria": "Madrid - Vista Alegre"
-    },
-    {
-      "notario": "Francisco Javier Gardeazábal del Río",
-      "protocolos": 6155,
-      "polizas": 765
-    },
-    {
-      "notario": "Rocío Rodríguez Martín",
-      "protocolos": 6053,
-      "polizas": 1039
-    },
-    {
-      "notario": "Ana López-Monís Gallego",
-      "protocolos": 6052,
-      "polizas": 1128
-    },
-    {
-      "notario": "Luis Ángel Jesús María Garay Cuadros",
-      "protocolos": 5928,
-      "polizas": 681
-    },
-    {
-      "notario": "Pablo Jacinto Ramallo Taboada",
-      "protocolos": 5875,
-      "polizas": 0
-    },
-    {
-      "notario": "Carlos Pérez Ramos",
-      "protocolos": 5769,
-      "polizas": 179
-    },
-    {
-      "notario": "José Ignacio Rivas Guardo",
-      "protocolos": 5756,
-      "polizas": 301
-    },
-    {
-      "notario": "Miguel Yuste Rojas",
-      "protocolos": 5669,
-      "polizas": 1787
-    },
-    {
-      "notario": "Juan José de Palacio Rodríguez",
-      "protocolos": 5663,
-      "polizas": 0
-    },
-    {
-      "notario": "Enrique Javier de Bernardo Martínez-Piñeiro",
-      "protocolos": 5553,
-      "polizas": 497
-    },
-    {
-      "notario": "Enrique Augusto Franch Quiralte",
-      "protocolos": 5474,
-      "polizas": 472
-    },
-    {
-      "notario": "Ignacio Paz-Ares Rodríguez",
-      "protocolos": 5472,
-      "polizas": 3491
-    },
-    {
-      "notario": "Eduardo Ávila Rodríguez",
-      "protocolos": 5381,
-      "polizas": 400
-    },
-    {
-      "notario": "Manuel Richi Alberti",
-      "protocolos": 5221,
-      "polizas": 0
-    },
-    {
-      "notario": "José Luis López de Garayo y Gallardo",
-      "protocolos": 5155,
-      "polizas": 1155
-    },
-    {
-      "notario": "Alaitz Macarena Alvarez de Zuriarrain",
-      "protocolos": 4998,
-      "polizas": 24
-    },
-    {
-      "notario": "Francisco Consegal García",
-      "protocolos": 4972,
-      "polizas": 576
-    },
-    {
-      "notario": "Fernando Pérez Alcalá del Olmo",
-      "protocolos": 4963,
-      "polizas": 529
-    },
-    {
-      "notario": "Eduardo Díez Fernández-Barbé",
-      "protocolos": 4961,
-      "polizas": 360
-    },
-    {
-      "notario": "Isabel Estapé Tous",
-      "protocolos": 4958,
-      "polizas": 4701
-    },
-    {
-      "notario": "José María García Pedraza",
-      "protocolos": 4921,
-      "polizas": 732
-    },
-    {
-      "notario": "Ignacio Martínez-Gil Vich",
-      "protocolos": 4902,
-      "polizas": 437
-    },
-    {
-      "notario": "Cristina Caballería Martel",
-      "protocolos": 4893,
-      "polizas": 299
-    },
-    {
-      "notario": "José Enrique Cachón Blanco",
-      "protocolos": 4853,
-      "polizas": 2486
-    },
-    {
-      "notario": "Javier Fernández-Merino Rodríguez-Bustamante",
-      "protocolos": 4846,
-      "polizas": 449
-    },
-    {
-      "notario": "Manuel Lora-Tamayo Villacieros",
-      "protocolos": 4794,
-      "polizas": 942,
-      "notaria": "Madrid - Concepción"
-    },
-    {
-      "notario": "Eduardo Jiménez García",
-      "protocolos": 4747,
-      "polizas": 297
-    },
-    {
-      "notario": "Rafael Bonardell Lenzano",
-      "protocolos": 4584,
-      "polizas": 219
-    },
-    {
-      "notario": "Ignacio García-Noblejas Santa-Olalla",
-      "protocolos": 4568,
-      "polizas": 462
-    },
-    {
-      "notario": "Ignacio Manrique Plaza",
-      "protocolos": 4565,
-      "polizas": 178
-    },
-    {
-      "notario": "Francisco Javier Monedero San Martín",
-      "protocolos": 4555,
-      "polizas": 0
-    },
-    {
-      "notario": "Luis Enrique García Labajo",
-      "protocolos": 4549,
-      "polizas": 289
-    },
-    {
-      "notario": "Francisco López Colmenarejo",
-      "protocolos": 4521,
-      "polizas": 383,
-      "notaria": "Madrid - Quintana"
-    },
-    {
-      "notario": "Rafael González Gozalo",
-      "protocolos": 4490,
-      "polizas": 1048
-    },
-    {
-      "notario": "Manuel de Cueto García",
-      "protocolos": 4480,
-      "polizas": 0
-    },
-    {
-      "notario": "José Luis Martínez-Gil Vich",
-      "protocolos": 4430,
-      "polizas": 333
-    },
-    {
-      "notario": "Segismundo Álvarez Royo-Villanova",
-      "protocolos": 4423,
-      "polizas": 199
-    },
-    {
-      "notario": "Aurora Ruiz Alonso",
-      "protocolos": 4381,
-      "polizas": 238
-    },
-    {
-      "notario": "María Rosario de Miguel Roses",
-      "protocolos": 4300,
-      "polizas": 339
-    },
-    {
-      "notario": "Miriam Herrando Deprit",
-      "protocolos": 4291,
-      "polizas": 302
-    },
-    {
-      "notario": "Eloisa López-Monís Gallego",
-      "protocolos": 4259,
-      "polizas": 500
-    },
-    {
-      "notario": "Maria Amanay Rivas Ruiz",
-      "protocolos": 4242,
-      "polizas": 309
-    },
-    {
-      "notario": "Fernando Gomá Lanzón",
-      "protocolos": 4215,
-      "polizas": 621
-    },
-    {
-      "notario": "Luis Quiroga Gutiérrez",
-      "protocolos": 4179,
-      "polizas": 487,
-      "notaria": "Madrid - Canillas"
-    },
-    {
-      "notario": "Juan Pérez Hereza",
-      "protocolos": 4171,
-      "polizas": 775
-    },
-    {
-      "notario": "Manuel Soler Lluch",
-      "protocolos": 4167,
-      "polizas": 966
-    },
-    {
-      "notario": "José Gregorio Juncos Martínez",
-      "protocolos": 4151,
-      "polizas": 622
-    },
-    {
-      "notario": "Luis Calatayud Gallego",
-      "protocolos": 4056,
-      "polizas": 245
-    },
-    {
-      "notario": "Jorge Sáez-Santurtún Prieto",
-      "protocolos": 4041,
-      "polizas": 210
-    },
-    {
-      "notario": "Rocío Lora-Tamayo Villacieros",
-      "protocolos": 4022,
-      "polizas": 504,
-      "notaria": "Madrid - Usera"
-    },
-    {
-      "notario": "Luis Alejandro Pérez-Escolar Hernando",
-      "protocolos": 4012,
-      "polizas": 287
-    },
-    {
-      "notario": "Alejandro Miguel Velasco Gómez",
-      "protocolos": 4000,
-      "polizas": 71
-    },
-    {
-      "notario": "Sandra María Medina Gonzálvez",
-      "protocolos": 3978,
-      "polizas": 1189
-    },
-    {
-      "notario": "Íñigo Casla Uriarte",
-      "protocolos": 3976,
-      "polizas": 456
-    },
-    {
-      "notario": "Blanca Consuelo Valenzuela Fernández",
-      "protocolos": 3918,
-      "polizas": 399
-    },
-    {
-      "notario": "Carlos María García Ortíz",
-      "protocolos": 3901,
-      "polizas": 647,
-      "notaria": "Madrid - Embajadores"
-    },
-    {
-      "notario": "María Heredero Caballería",
-      "protocolos": 3889,
-      "polizas": 218
-    },
-    {
-      "notario": "Almudena Zamora Ipas",
-      "protocolos": 3867,
-      "polizas": 122
-    },
-    {
-      "notario": "Eva María Fernández Medina",
-      "protocolos": 3846,
-      "polizas": 394
-    },
-    {
-      "notario": "Ignacio Maldonado Ramos",
-      "protocolos": 3842,
-      "polizas": 0
-    },
-    {
-      "notario": "Augusto Gómez-Martinho Cruz",
-      "protocolos": 3804,
-      "polizas": 109
-    },
-    {
-      "notario": "Ricardo Vilas Escauriaza",
-      "protocolos": 3739,
-      "polizas": 645
-    },
-    {
-      "notario": "Fernando Sánchez-Arjona Bonilla",
-      "protocolos": 3700,
-      "polizas": 326
-    },
-    {
-      "notario": "Ana Fernández-Tresguerres García",
-      "protocolos": 3692,
-      "polizas": 196
-    },
-    {
-      "notario": "Jesús Manuel Pérez Yuste",
-      "protocolos": 3607,
-      "polizas": 705,
-      "notaria": "Madrid - Palos de Moguer"
-    },
-    {
-      "notario": "Alfonso Madridejos Fernández",
-      "protocolos": 3591,
-      "polizas": 342
-    },
-    {
-      "notario": "Rafael de la Fuente García",
-      "protocolos": 3568,
-      "polizas": 186
-    },
-    {
-      "notario": "Jorge Luis García Llorente",
-      "protocolos": 3477,
-      "polizas": 58
-    },
-    {
-      "notario": "Alicia Velarde Valiente",
-      "protocolos": 3410,
-      "polizas": 210
-    },
-    {
-      "notario": "Norberto González Sobrino",
-      "protocolos": 3386,
-      "polizas": 1174
-    },
-    {
-      "notario": "Santiago Mora Velarde",
-      "protocolos": 3385,
-      "polizas": 86
-    },
-    {
-      "notario": "Jesús María Ortega Fernández",
-      "protocolos": 3384,
-      "polizas": 2651
-    },
-    {
-      "notario": "Francisco Javier Barreiros Fernández",
-      "protocolos": 3336,
-      "polizas": 263
-    },
-    {
-      "notario": "Agustín María Daniel Pérez-Bustamante de Monasterio",
-      "protocolos": 3303,
-      "polizas": 264
-    },
-    {
-      "notario": "Jesús Roa Martínez",
-      "protocolos": 3276,
-      "polizas": 819
-    },
-    {
-      "notario": "Santiago Alfonso González López",
-      "protocolos": 3264,
-      "polizas": 513
-    },
-    {
-      "notario": "Fernando Fernández Medina",
-      "protocolos": 3241,
-      "polizas": 205
-    },
-    {
-      "notario": "Nunilo Pérez Fernández",
-      "protocolos": 3225,
-      "polizas": 694
-    },
-    {
-      "notario": "Miguel Ángel Mestanza Iturmendi",
-      "protocolos": 3184,
-      "polizas": 224
-    },
-    {
-      "notario": "Pedro José Bartolomé Fuentes",
-      "protocolos": 3155,
-      "polizas": 214
-    },
-    {
-      "notario": "Pedro Luis Gutiérrez Moreno",
-      "protocolos": 3149,
-      "polizas": 867
-    },
-    {
-      "notario": "Ignacio Gomá Lanzón",
-      "protocolos": 3083,
-      "polizas": 204
-    },
-    {
-      "notario": "Ignacio Ramos Covarrubias",
-      "protocolos": 3070,
-      "polizas": 647
-    },
-    {
-      "notario": "José María Rivas Díaz",
-      "protocolos": 3062,
-      "polizas": 75
-    },
-    {
-      "notario": "Patricia Sotillos Fueyo",
-      "protocolos": 3060,
-      "polizas": 49
-    },
-    {
-      "notario": "José María Recio del Campo",
-      "protocolos": 3056,
-      "polizas": 0
-    },
-    {
-      "notario": "Eva María Sanz del Real",
-      "protocolos": 3047,
-      "polizas": 319
-    },
-    {
-      "notario": "Juan Barrios Alvarez",
-      "protocolos": 3028,
-      "polizas": 133
-    },
-    {
-      "notario": "María Eugenia Reviriego Picón",
-      "protocolos": 3027,
-      "polizas": 213
-    },
-    {
-      "notario": "Federico Garayalde Niño",
-      "protocolos": 3018,
-      "polizas": 1715
-    },
-    {
-      "notario": "Gonzalo de la Mata Posadas",
-      "protocolos": 3003,
-      "polizas": 268,
-      "notaria": "Madrid - Barrio del Pilar"
-    },
-    {
-      "notario": "Rafael Thode Garrido",
-      "protocolos": 3003,
-      "polizas": 241,
-      "notaria": "Madrid - Puerta del Ángel"
-    },
-    {
-      "notario": "Juan Pablo Sánchez Eguinoa",
-      "protocolos": 2995,
-      "polizas": 406
-    },
-    {
-      "notario": "María Blanca Entrena Palomero",
-      "protocolos": 2982,
-      "polizas": 6747
-    },
-    {
-      "notario": "Carlos Arriola Garrote",
-      "protocolos": 2927,
-      "polizas": 25
-    },
-    {
-      "notario": "Álvaro Fernández Piera",
-      "protocolos": 2899,
-      "polizas": 153
-    },
-    {
-      "notario": "José Carlos Sánchez González",
-      "protocolos": 2884,
-      "polizas": 278
-    },
-    {
-      "notario": "Javier Mejías Gómez",
-      "protocolos": 2877,
-      "polizas": 201
-    },
-    {
-      "notario": "Fernando José Rivero Sánchez-Covisa",
-      "protocolos": 2821,
-      "polizas": 311,
-      "notaria": "Madrid - Villaverde"
-    },
-    {
-      "notario": "Enrique Rafael García Romero",
-      "protocolos": 2817,
-      "polizas": 368,
-      "notaria": "Madrid - Valverde"
-    },
-    {
-      "notario": "Susana Ortega Fernández",
-      "protocolos": 2806,
-      "polizas": 91
-    },
-    {
-      "notario": "Antonio Domínguez Mena",
-      "protocolos": 2791,
-      "polizas": 241
-    },
-    {
-      "notario": "Cruz Gonzalo López-Müller Gómez",
-      "protocolos": 2781,
-      "polizas": 548
-    },
-    {
-      "notario": "Tatiana Pilar Martín Ruiz",
-      "protocolos": 2755,
-      "polizas": 0
-    },
-    {
-      "notario": "José Juan de Ibarrondo y Guerrica-Echevarría",
-      "protocolos": 2710,
-      "polizas": 0
-    },
-    {
-      "notario": "Lucía María Serrano de Haro Martínez",
-      "protocolos": 2673,
-      "polizas": 296
-    },
-    {
-      "notario": "Ramón Luis Aparicio Núñez",
-      "protocolos": 2672,
-      "polizas": 350,
-      "notaria": "Madrid - Entrevias"
-    },
-    {
-      "notario": "Eduardo Hijas Cid",
-      "protocolos": 2658,
-      "polizas": 180
-    },
-    {
-      "notario": "Antonio Francisco Peralta Esperilla",
-      "protocolos": 2656,
-      "polizas": 0,
-      "notaria": "Madrid - Barajas"
-    },
-    {
-      "notario": "Alberto Bravo Olaciregui",
-      "protocolos": 2644,
-      "polizas": 1576
-    },
-    {
-      "notario": "José María Marín Vázquez",
-      "protocolos": 2641,
-      "polizas": 78,
-      "notaria": "Madrid - Vinateros"
-    },
-    {
-      "notario": "Carlos Mateo Martínez de Bartolomé",
-      "protocolos": 2627,
-      "polizas": 370
-    },
-    {
-      "notario": "Santiago Cháfer Rudilla",
-      "protocolos": 2613,
-      "polizas": 152,
-      "notaria": "Madrid - Mirasierra"
-    },
-    {
-      "notario": "Manuel González-Meneses García-Valdecasas",
-      "protocolos": 2585,
-      "polizas": 481
-    },
-    {
-      "notario": "Pedro José Garrido Chamorro",
-      "protocolos": 2578,
-      "polizas": 43
-    },
-    {
-      "notario": "Reina de los Ángeles Freijedo Alvarez",
-      "protocolos": 2559,
-      "polizas": 266,
-      "notaria": "Madrid - Villa de Vallecas"
-    },
-    {
-      "notario": "José Manuel García-Lozano Zulueta",
-      "protocolos": 2552,
-      "polizas": 0
-    },
-    {
-      "notario": "Elena Turiel Ibañez",
-      "protocolos": 2529,
-      "polizas": 410,
-      "notaria": "Madrid-Peña Grande"
-    },
-    {
-      "notario": "Juan Manuel Lozano Carreras",
-      "protocolos": 2519,
-      "polizas": 138
-    },
-    {
-      "notario": "Luis Núñez Boluda",
-      "protocolos": 2500,
-      "polizas": 181
-    },
-    {
-      "notario": "José Ángel Martínez Sanchiz",
-      "protocolos": 2499,
-      "polizas": 170
-    },
-    {
-      "notario": "Juan Manuel Perelló Font",
-      "protocolos": 2493,
-      "polizas": 328
-    },
-    {
-      "notario": "Miguel Vicente-Almazán Pérez de Petinto",
-      "protocolos": 2489,
-      "polizas": 117,
-      "notaria": "Madrid - San Isidro"
-    },
-    {
-      "notario": "Carmen Boulet Alonso",
-      "protocolos": 2466,
-      "polizas": 206
-    },
-    {
-      "notario": "Juan José Álvarez-Sala Walther",
-      "protocolos": 2456,
-      "polizas": 809
-    },
-    {
-      "notario": "Rodrigo Antonio Tena Arregui",
-      "protocolos": 2437,
-      "polizas": 134
-    },
-    {
-      "notario": "Álvaro Lucini Mateo",
-      "protocolos": 2432,
-      "polizas": 0
-    },
-    {
-      "notario": "Luis Rueda Esteban",
-      "protocolos": 2422,
-      "polizas": 232
-    },
-    {
-      "notario": "Pedro Armas Omedes",
-      "protocolos": 2405,
-      "polizas": 948
-    },
-    {
-      "notario": "Alfredo Barrau Moreno",
-      "protocolos": 2392,
-      "polizas": 0
-    },
-    {
-      "notario": "Paloma Consuelo Mozo García",
-      "protocolos": 2380,
-      "polizas": 15
-    },
-    {
-      "notario": "Miguel Núñez Caballero",
-      "protocolos": 2368,
-      "polizas": 0,
-      "notaria": "Madrid - San Chinarro"
-    },
-    {
-      "notario": "Fernando Molina Stranz",
-      "protocolos": 2359,
-      "polizas": 3706
-    },
-    {
-      "notario": "Juan Carlos García Cortés",
-      "protocolos": 2317,
-      "polizas": 262,
-      "notaria": "Madrid - Opañel"
-    },
-    {
-      "notario": "Eusebio Javier González Lasso de la Vega",
-      "protocolos": 2296,
-      "polizas": 1376
-    },
-    {
-      "notario": "Juan Kutz Azqueta",
-      "protocolos": 2292,
-      "polizas": 208
-    },
-    {
-      "notario": "María del Pilar Lorán Herrero",
-      "protocolos": 2278,
-      "polizas": 195,
-      "notaria": "Madrid - Vicálvaro"
-    },
-    {
-      "notario": "Ricardo Ferrer Giménez",
-      "protocolos": 2274,
-      "polizas": 264
-    },
-    {
-      "notario": "María Pilar De Prada Solaesa",
-      "protocolos": 2260,
-      "polizas": 91,
-      "notaria": "Madrid - Valdeacederas"
-    },
-    {
-      "notario": "Emilio Sánchez-Carpintero Abad",
-      "protocolos": 2258,
-      "polizas": 113
-    },
-    {
-      "notario": "María del Pilar López-Contreras Conde",
-      "protocolos": 2248,
-      "polizas": 0
-    },
-    {
-      "notario": "Emilio Esteban-Hanza Navarro",
-      "protocolos": 2174,
-      "polizas": 1372
-    },
-    {
-      "notario": "Francisco Mata Botella",
-      "protocolos": 2141,
-      "polizas": 87
-    },
-    {
-      "notario": "Carmen Carolina Crespo Alvarez",
-      "protocolos": 2138,
-      "polizas": 191
-    },
-    {
-      "notario": "José María Madridejos Fernández",
-      "protocolos": 2119,
-      "polizas": 348
-    },
-    {
-      "notario": "Almudena Santiago Charlán",
-      "protocolos": 2106,
-      "polizas": 197,
-      "notaria": "Madrid - Canillejas"
-    },
-    {
-      "notario": "Manuel Mellado Rodríguez",
-      "protocolos": 2078,
-      "polizas": 522
-    },
-    {
-      "notario": "Fernando de la Cámara García",
-      "protocolos": 2072,
-      "polizas": 56
-    },
-    {
-      "notario": "Vicente María de Prada Guaita",
-      "protocolos": 2069,
-      "polizas": 105
-    },
-    {
-      "notario": "María Luisa Saura Fischer",
-      "protocolos": 2068,
-      "polizas": 18
-    },
-    {
-      "notario": "Ana María Carrión Abedul",
-      "protocolos": 2050,
-      "polizas": 198,
-      "notaria": "Madrid - Valdebebas"
-    },
-    {
-      "notario": "María Teresa González Heredia",
-      "protocolos": 2041,
-      "polizas": 109,
-      "notaria": "Madrid - Aluche"
-    },
-    {
-      "notario": "Javier Vinader Carracedo",
-      "protocolos": 1993,
-      "polizas": 1282
-    },
-    {
-      "notario": "Ana María Mahiques Miret",
-      "protocolos": 1963,
-      "polizas": 0
-    },
-    {
-      "notario": "Antonio Huerta Trólez",
-      "protocolos": 1951,
-      "polizas": 108
-    },
-    {
-      "notario": "Martín González-Moral García",
-      "protocolos": 1918,
-      "polizas": 99
-    },
-    {
-      "notario": "Carlos Huidobro y Arreba",
-      "protocolos": 1866,
-      "polizas": 1937
-    },
-    {
-      "notario": "Miguel Bañuls Ribas",
-      "protocolos": 1809,
-      "polizas": 312
-    },
-    {
-      "notario": "José María de Prada Guaita",
-      "protocolos": 1801,
-      "polizas": 159
-    },
-    {
-      "notario": "María Eva Mateo González",
-      "protocolos": 1800,
-      "polizas": 414,
-      "notaria": "Madrid -  Aravaca"
-    },
-    {
-      "notario": "Carlos Olona Schüller",
-      "protocolos": 1800,
-      "polizas": 158
-    },
-    {
-      "notario": "María de las Mercedes Pérez Hereza",
-      "protocolos": 1774,
-      "polizas": 53,
-      "notaria": "Madrid - Valdezarza"
-    },
-    {
-      "notario": "Antonio Enrique Magraner Duart",
-      "protocolos": 1773,
-      "polizas": 92,
-      "notaria": "Madrid - Chopera"
-    },
-    {
-      "notario": "Patricio Monzón Moreno",
-      "protocolos": 1763,
-      "polizas": 22
-    },
-    {
-      "notario": "Pedro Carrión García de Parada",
-      "protocolos": 1666,
-      "polizas": 78
-    },
-    {
-      "notario": "Carlos María De Prada Guaita",
-      "protocolos": 1661,
-      "polizas": 102
-    },
-    {
-      "notario": "María del Rosario Algora Wesolowski",
-      "protocolos": 1608,
-      "polizas": 273
-    },
-    {
-      "notario": "Javier Navarro-Rubio Serrés",
-      "protocolos": 1561,
-      "polizas": 170
-    },
-    {
-      "notario": "Hugo Lincoln Pascual",
-      "protocolos": 1467,
-      "polizas": 62,
-      "notaria": "Madrid - Pueblo Nuevo"
-    },
-    {
-      "notario": "Jesús Alberto Lleonart Castro",
-      "protocolos": 1456,
-      "polizas": 102
-    },
-    {
-      "notario": "Tomás Salve Martínez",
-      "protocolos": 1456,
-      "polizas": 72,
-      "notaria": "Madrid - Fuencarral"
-    },
-    {
-      "notario": "María del Pilar Bermúdez de Castro Fernández",
-      "protocolos": 1416,
-      "polizas": 160
-    },
-    {
-      "notario": "Concepción Pilar Barrio Del Olmo",
-      "protocolos": 1416,
-      "polizas": 19
-    },
-    {
-      "notario": "Luis López de Paz",
-      "protocolos": 1260,
-      "polizas": 217
-    },
-    {
-      "notario": "Manuel Gerardo Tarrío Berjano",
-      "protocolos": 1195,
-      "polizas": 13
-    },
-    {
-      "notario": "Carlos Rodríguez-Viña Cancio",
-      "protocolos": 1157,
-      "polizas": 32,
-      "notaria": "Madrid - Pinar del Rey"
-    },
-    {
-      "notario": "Julia Sanz López",
-      "protocolos": 1123,
-      "polizas": 105
-    },
-    {
-      "notario": "Palmira Delgado Martín",
-      "protocolos": 1084,
-      "polizas": 62
-    },
-    {
-      "notario": "Andrés Santiago Guervós",
-      "protocolos": 1055,
-      "polizas": 220,
-      "notaria": "Madrid - Fontarrón"
-    },
-    {
-      "notario": "Jorge Prades López",
-      "protocolos": 879,
-      "polizas": 68
-    },
-    {
-      "notario": "Ricardo Pérez Ballarín",
-      "protocolos": 847,
-      "polizas": 76
-    },
-    {
-      "notario": "Esperanza Prados Velasco",
-      "protocolos": 770,
-      "polizas": 170
-    },
-    {
-      "notario": "Juan Díez Herrera",
-      "protocolos": 655,
-      "polizas": 137
-    },
-    {
-      "notario": "Carlos Ruiz-Rivas Hernando",
-      "protocolos": 523,
-      "polizas": 81
-    },
-    {
-      "notario": "Pedro de Elizalde y Aymerich",
-      "protocolos": 424,
-      "polizas": 272
-    },
-    {
-      "notario": "María Pilar Boulet Alonso",
-      "protocolos": 418,
-      "polizas": 15
-    },
-    {
-      "notario": "Joaquín Martín Rovira Perea",
-      "protocolos": 372,
-      "polizas": 20
-    },
-    {
-      "notario": "Andrés de la Fuente O'Connor",
-      "protocolos": 312,
-      "polizas": 0
-    },
-    {
-      "notario": "Francisco Javier Oñate Cuadros",
-      "protocolos": 96,
-      "polizas": 4,
-      "notaria": "Madrid - Chopera"
-    },
-    {
-      "notario": "Carmelo Lacaci de la Peña",
-      "protocolos": 35,
-      "polizas": 0
-    }
-  ],
-  "a coruna|a coruna": [
-    {
-      "notario": "Raúl Muñoz Maestre",
-      "protocolos": 10762,
-      "polizas": 2099
-    },
-    {
-      "notario": "Manuel Mariño Vila",
-      "protocolos": 5182,
-      "polizas": 781
-    },
-    {
-      "notario": "Gonzalo Emilio Freire Barral",
-      "protocolos": 3175,
-      "polizas": 674
-    },
-    {
-      "notario": "Juan Manuel Cora Guerreiro",
-      "protocolos": 3050,
-      "polizas": 383
-    },
-    {
-      "notario": "Francisco Manuel Ordóñez Armán",
-      "protocolos": 2824,
-      "polizas": 253
-    },
-    {
-      "notario": "Víctor José Peón Rama",
-      "protocolos": 2704,
-      "polizas": 445
-    },
-    {
-      "notario": "Pablo Carbajo Martínez",
-      "protocolos": 2475,
-      "polizas": 285
-    },
-    {
-      "notario": "José Manuel Lois Puente",
-      "protocolos": 2254,
-      "polizas": 261
-    },
-    {
-      "notario": "Mónica María Jurjo García",
-      "protocolos": 2109,
-      "polizas": 258
-    },
-    {
-      "notario": "Francisco Javier Castromil Dotras",
-      "protocolos": 1481,
-      "polizas": 128
-    },
-    {
-      "notario": "María Mercedes Bermejo Pumar",
-      "protocolos": 1421,
-      "polizas": 66
-    },
-    {
-      "notario": "Enrique Santiago Rajoy Feijoo",
-      "protocolos": 1418,
-      "polizas": 137
-    },
-    {
-      "notario": "José Guillermo Rodicio Rodicio",
-      "protocolos": 1386,
-      "polizas": 173
-    },
-    {
-      "notario": "Isidoro Antonio Calvo Vidal",
-      "protocolos": 1050,
-      "polizas": 71
-    },
-    {
-      "notario": "María José Gil Caballero",
-      "protocolos": 757,
-      "polizas": 67
-    },
-    {
-      "notario": "Fernando Máiz Cal",
-      "protocolos": 344,
-      "polizas": 23
-    }
-  ],
-  "asturias|oviedo": [
-    {
-      "notario": "Francisco Javier Ramos Calles",
-      "protocolos": 6039,
-      "polizas": 624
-    },
-    {
-      "notario": "Javier Merino Gutierrez",
-      "protocolos": 5443,
-      "polizas": 1014
-    },
-    {
-      "notario": "Jesús María García Martínez",
-      "protocolos": 3949,
-      "polizas": 677
-    },
-    {
-      "notario": "Manuel Jesús Tuero Tuero",
-      "protocolos": 3804,
-      "polizas": 571
-    },
-    {
-      "notario": "Manuel Rodríguez de la Paz Guijarro",
-      "protocolos": 3304,
-      "polizas": 2015
-    },
-    {
-      "notario": "María Rosa Igay Merino",
-      "protocolos": 2985,
-      "polizas": 124
-    },
-    {
-      "notario": "Joaquín Tejerina Nuño",
-      "protocolos": 2457,
-      "polizas": 176
-    },
-    {
-      "notario": "Ángel María Martínez Ceyanes",
-      "protocolos": 2174,
-      "polizas": 229
-    },
-    {
-      "notario": "Cristina Herrero Fernández",
-      "protocolos": 2107,
-      "polizas": 518
-    },
-    {
-      "notario": "Vicente Martorell García",
-      "protocolos": 2047,
-      "polizas": 82
-    },
-    {
-      "notario": "Elena García-Argüelles Farpón",
-      "protocolos": 1816,
-      "polizas": 187
-    },
-    {
-      "notario": "Juan Antonio Escudero García",
-      "protocolos": 1777,
-      "polizas": 190
-    },
-    {
-      "notario": "María Isabel Valdés-Solís Cecchini",
-      "protocolos": 1389,
-      "polizas": 115
-    }
-  ],
-  "palencia|palencia": [
-    {
-      "notario": "Juan Carlos Villamuza Rodríguez",
-      "protocolos": 4114,
-      "polizas": 466
-    },
-    {
-      "notario": "Raquel Rodríguez Repiso",
-      "protocolos": 2291,
-      "polizas": 1212
-    },
-    {
-      "notario": "Juan Polvorosa Mies",
-      "protocolos": 1966,
-      "polizas": 254
-    },
-    {
-      "notario": "Francisco Prudencio Cubillas Triana",
-      "protocolos": 1841,
-      "polizas": 126
-    },
-    {
-      "notario": "Luz Romero Cabello de Alba",
-      "protocolos": 1726,
-      "polizas": 86
-    }
-  ],
-  "zaragoza|zaragoza": [
-    {
-      "notario": "Juan Antonio Yuste González de Rueda",
-      "protocolos": 5805,
-      "polizas": 996
-    },
-    {
-      "notario": "Simón Alfonso Pobes Layunta",
-      "protocolos": 5293,
-      "polizas": 454
-    },
-    {
-      "notario": "José Manuel Martínez Sánchez",
-      "protocolos": 5172,
-      "polizas": 1060
-    },
-    {
-      "notario": "Tomás García Cano",
-      "protocolos": 5104,
-      "polizas": 441
-    },
-    {
-      "notario": "José María Navarro Viñuales",
-      "protocolos": 4838,
-      "polizas": 218
-    },
-    {
-      "notario": "Fernando Giménez Villar",
-      "protocolos": 4591,
-      "polizas": 395
-    },
-    {
-      "notario": "Augusto Ariño García-Belenguer",
-      "protocolos": 4355,
-      "polizas": 654
-    },
-    {
-      "notario": "Francisco de Asís Pizarro Moreno",
-      "protocolos": 3997,
-      "polizas": 410
-    },
-    {
-      "notario": "Jesús Ángel Pérez Espuelas",
-      "protocolos": 3972,
-      "polizas": 487
-    },
-    {
-      "notario": "Luis Arturo Pérez Collados",
-      "protocolos": 3788,
-      "polizas": 249
-    },
-    {
-      "notario": "Dámaso Cruz Gimeno",
-      "protocolos": 3610,
-      "polizas": 84
-    },
-    {
-      "notario": "María Luisa Lorén Rosas",
-      "protocolos": 3592,
-      "polizas": 608
-    },
-    {
-      "notario": "Pedro Martínez Viamonte",
-      "protocolos": 3188,
-      "polizas": 173
-    },
-    {
-      "notario": "Francisco Javier Hernaiz Corrales",
-      "protocolos": 3002,
-      "polizas": 229
-    },
-    {
-      "notario": "Luis Ignacio Leach Ros",
-      "protocolos": 2969,
-      "polizas": 1022
-    },
-    {
-      "notario": "Adolfo Calatayud Sierra",
-      "protocolos": 2954,
-      "polizas": 173
-    },
-    {
-      "notario": "María del Pilar García Lamarca",
-      "protocolos": 2819,
-      "polizas": 696
-    },
-    {
-      "notario": "Fernando Usón Valero",
-      "protocolos": 2813,
-      "polizas": 323
-    },
-    {
-      "notario": "Carlos Gesali Val",
-      "protocolos": 2742,
-      "polizas": 1009
-    },
-    {
-      "notario": "Juan Ramón Allué Segura",
-      "protocolos": 2634,
-      "polizas": 445
-    },
-    {
-      "notario": "Luis de Codes Díaz-Quetcuti",
-      "protocolos": 2514,
-      "polizas": 149
-    },
-    {
-      "notario": "Leopoldo Périz Navarrete",
-      "protocolos": 2498,
-      "polizas": 121
-    },
-    {
-      "notario": "Juan Pardo Defez",
-      "protocolos": 2458,
-      "polizas": 128
-    },
-    {
-      "notario": "Fermín Moreno Ayguadé",
-      "protocolos": 2167,
-      "polizas": 279,
-      "notaria": "Zaragoza - Actur"
-    },
-    {
-      "notario": "Víctor Fernando Alconchel Puértolas",
-      "protocolos": 2110,
-      "polizas": 676
-    },
-    {
-      "notario": "Vicente Morató Izquierdo",
-      "protocolos": 1885,
-      "polizas": 862
-    },
-    {
-      "notario": "Teresa Cruz Gisbert",
-      "protocolos": 1878,
-      "polizas": 172
-    },
-    {
-      "notario": "Julio Boned Juliani",
-      "protocolos": 1868,
-      "polizas": 723
-    },
-    {
-      "notario": "María Jesús Pinedo Úbeda",
-      "protocolos": 1864,
-      "polizas": 337
-    },
-    {
-      "notario": "Elisa Calzada Castaño",
-      "protocolos": 1360,
-      "polizas": 64
-    },
-    {
-      "notario": "Juan Bautista Gómez Opic",
-      "protocolos": 1254,
-      "polizas": 14
-    },
-    {
-      "notario": "Silvia Toquero Cariello",
-      "protocolos": 1095,
-      "polizas": 64
-    },
-    {
-      "notario": "María Jesús Lacruz Pérez",
-      "protocolos": 290,
-      "polizas": 10
-    }
-  ],
-  "bizkaia/vizcaya|bilbao": [
-    {
-      "notario": "Eduardo Ares de Parga y Saldias",
-      "protocolos": 6802,
-      "polizas": 334
-    },
-    {
-      "notario": "Fernando Varela Uría",
-      "protocolos": 5565,
-      "polizas": 433
-    },
-    {
-      "notario": "Nicolás Almarza Ayarza",
-      "protocolos": 4685,
-      "polizas": 517
-    },
-    {
-      "notario": "Miguel Ángel Martínez Urroz",
-      "protocolos": 4511,
-      "polizas": 256
-    },
-    {
-      "notario": "Raquel Ruiz Torres",
-      "protocolos": 4477,
-      "polizas": 514
-    },
-    {
-      "notario": "Juan Ignacio Bustamante Esparza",
-      "protocolos": 4412,
-      "polizas": 50
-    },
-    {
-      "notario": "Miguel Llorente Gonzalvo",
-      "protocolos": 3978,
-      "polizas": 246
-    },
-    {
-      "notario": "Manuel Garcés Pérez",
-      "protocolos": 3630,
-      "polizas": 613
-    },
-    {
-      "notario": "Juan Benguria Cortabitarte",
-      "protocolos": 3619,
-      "polizas": 891
-    },
-    {
-      "notario": "María del Carmen Velasco Ramírez",
-      "protocolos": 3537,
-      "polizas": 555
-    },
-    {
-      "notario": "Manuel López Pardiñas",
-      "protocolos": 3469,
-      "polizas": 407
-    },
-    {
-      "notario": "Ignacio Alonso Salazar",
-      "protocolos": 3052,
-      "polizas": 239
-    },
-    {
-      "notario": "Andrés María Urrutia Badiola",
-      "protocolos": 2959,
-      "polizas": 224
-    },
-    {
-      "notario": "José María de la Peña Cadenato",
-      "protocolos": 2760,
-      "polizas": 0
-    },
-    {
-      "notario": "Vicente María del Arenal Otero",
-      "protocolos": 2696,
-      "polizas": 326
-    },
-    {
-      "notario": "Enrique Arana Ruiz-Cámara",
-      "protocolos": 2548,
-      "polizas": 220
-    },
-    {
-      "notario": "Lorena Lamana Riesco",
-      "protocolos": 2502,
-      "polizas": 215
-    },
-    {
-      "notario": "Juan Ignacio Gomeza Villa",
-      "protocolos": 2298,
-      "polizas": 343
-    },
-    {
-      "notario": "Ramón Múgica Alcorta",
-      "protocolos": 2184,
-      "polizas": 257
-    },
-    {
-      "notario": "José Ignacio Garriga Gamarra",
-      "protocolos": 2172,
-      "polizas": 227
-    },
-    {
-      "notario": "Alfonso Batalla de Antonio",
-      "protocolos": 1876,
-      "polizas": 1192
-    },
-    {
-      "notario": "Ignacio Jesús Gomeza Eleizalde",
-      "protocolos": 1707,
-      "polizas": 181
-    },
-    {
-      "notario": "Jaime Alfonso Fernández Ostolaza",
-      "protocolos": 1685,
-      "polizas": 872
-    },
-    {
-      "notario": "Jesús Sánchez Vigil de la Villa",
-      "protocolos": 1651,
-      "polizas": 118
-    },
-    {
-      "notario": "Almudena Fernández Ostolaza",
-      "protocolos": 1268,
-      "polizas": 66
-    },
-    {
-      "notario": "Francisco Arriola Garrote",
-      "protocolos": 1221,
-      "polizas": 74
-    },
-    {
-      "notario": "Francisco Regalado Marichalar",
-      "protocolos": 1209,
-      "polizas": 259
-    },
-    {
-      "notario": "María Josefa Gomeza Villa",
-      "protocolos": 377,
-      "polizas": 3
-    },
-    {
-      "notario": "Íñigo Guillermo Revilla Fernández",
-      "protocolos": 256,
-      "polizas": 17
-    }
-  ],
-  "alicante/alacant|torrevieja": [
-    {
-      "notario": "Juan Elías Margarit Robles",
-      "protocolos": 7373,
-      "polizas": 182
-    },
-    {
-      "notario": "Jorge Mínguez Balaguer",
-      "protocolos": 7237,
-      "polizas": 142
-    },
-    {
-      "notario": "Clara González Gómez",
-      "protocolos": 5742,
-      "polizas": 115
-    },
-    {
-      "notario": "José Julio Barrenechea García",
-      "protocolos": 4849,
-      "polizas": 59
-    },
-    {
-      "notario": "María Luz Hernández Imbernón",
-      "protocolos": 3178,
-      "polizas": 191
-    },
-    {
-      "notario": "José Antonio Pérez Álvarez",
-      "protocolos": 2728,
-      "polizas": 146
-    },
-    {
-      "notario": "María Dolores Alburquerque Rodríguez",
-      "protocolos": 2176,
-      "polizas": 74
-    },
-    {
-      "notario": "Tatiana Pilar Martín Ruiz",
-      "protocolos": 1290,
-      "polizas": 31
-    }
-  ],
-  "asturias|gijon": [
-    {
-      "notario": "Carlos Cortiñas Rodríguez-Arango",
-      "protocolos": 6845,
-      "polizas": 712
-    },
-    {
-      "notario": "Montserrat Martínez López",
-      "protocolos": 5469,
-      "polizas": 723
-    },
-    {
-      "notario": "Fernando Sánchez de Lamadrid Sicre",
-      "protocolos": 5000,
-      "polizas": 654
-    },
-    {
-      "notario": "José Clemente Vázquez López",
-      "protocolos": 4777,
-      "polizas": 530
-    },
-    {
-      "notario": "Francisco Javier Nogales Castillo",
-      "protocolos": 3828,
-      "polizas": 280
-    },
-    {
-      "notario": "Ignacio Bermejo Morales",
-      "protocolos": 3663,
-      "polizas": 365
-    },
-    {
-      "notario": "Carlos García Melón",
-      "protocolos": 2580,
-      "polizas": 299
-    },
-    {
-      "notario": "Miguel Angel Bañegil Espinosa",
-      "protocolos": 2552,
-      "polizas": 721
-    },
-    {
-      "notario": "José Ricardo Serrano Fernández",
-      "protocolos": 2320,
-      "polizas": 300
-    },
-    {
-      "notario": "María Dolores Rodríguez Fernández",
-      "protocolos": 2023,
-      "polizas": 231
-    },
-    {
-      "notario": "Sara Jimena Unceta de la Cruz",
-      "protocolos": 1309,
-      "polizas": 108
-    },
-    {
-      "notario": "Antonio Álvarez Soler",
-      "protocolos": 834,
-      "polizas": 84
-    }
-  ],
-  "madrid|alcorcon": [
-    {
-      "notario": "Urbano Alvarez Merino",
-      "protocolos": 6573,
-      "polizas": 726
-    },
-    {
-      "notario": "Antonio José Florit de Carranza",
-      "protocolos": 6547,
-      "polizas": 920
-    },
-    {
-      "notario": "María del Carmen Ruiz de Adana Jurado",
-      "protocolos": 3278,
-      "polizas": 253
-    },
-    {
-      "notario": "Pablo García Toral",
-      "protocolos": 3197,
-      "polizas": 241
-    },
-    {
-      "notario": "Francisco Javier Rodríguez Boix",
-      "protocolos": 1055,
-      "polizas": 108
-    },
-    {
-      "notario": "Juan Antonio Moncada y del Prado",
-      "protocolos": 319,
-      "polizas": 1
-    },
-    {
-      "notario": "Manuel Ignacio Cotorruelo Sánchez",
-      "protocolos": 2,
-      "polizas": 0
-    }
-  ],
-  "asturias|aviles": [
-    {
-      "notario": "Juan Álvarez Valdés",
-      "protocolos": 4463,
-      "polizas": 710
-    },
-    {
-      "notario": "Carmela Noguera Martín",
-      "protocolos": 2401,
-      "polizas": 312
-    },
-    {
-      "notario": "María Pilar Sousa Riobó",
-      "protocolos": 2255,
-      "polizas": 145
-    },
-    {
-      "notario": "Fernando Ovies Pérez",
-      "protocolos": 2088,
-      "polizas": 519
-    },
-    {
-      "notario": "Luis Sobrino González",
-      "protocolos": 1255,
-      "polizas": 174
-    }
-  ],
-  "jaen|jaen": [
-    {
-      "notario": "José Ramón Messia Alarcón",
-      "protocolos": 3426,
-      "polizas": 287
-    },
-    {
-      "notario": "Francisco Niño Aragón",
-      "protocolos": 2727,
-      "polizas": 396
-    },
-    {
-      "notario": "Susana Martínez Rodríguez",
-      "protocolos": 2598,
-      "polizas": 76
-    },
-    {
-      "notario": "Luis Antonio de Loma-Ossorio Rubio",
-      "protocolos": 2299,
-      "polizas": 339
-    },
-    {
-      "notario": "Luis María Martínez Pantoja",
-      "protocolos": 2270,
-      "polizas": 594
-    },
-    {
-      "notario": "Esperanza Méndez Vilchez",
-      "protocolos": 2253,
-      "polizas": 233
-    },
-    {
-      "notario": "Matilde María de Loma-Ossorio Rubio",
-      "protocolos": 2176,
-      "polizas": 285
-    },
-    {
-      "notario": "Alfonso Argüelles Luis",
-      "protocolos": 1829,
-      "polizas": 846
-    }
-  ],
-  "gipuzkoa/guipuzcoa|donostia/san sebastian": [
-    {
-      "notario": "Fermín Lizarazu Aramayo",
-      "protocolos": 4325,
-      "polizas": 840,
-      "notaria": "San Sebastián/Donostia"
-    },
-    {
-      "notario": "Manuel Fernando Cánovas Sánchez",
-      "protocolos": 3432,
-      "polizas": 525,
-      "notaria": "San Sebastián/Donostia"
-    },
-    {
-      "notario": "Enrique Miguel García-Jalón de la Lama",
-      "protocolos": 3087,
-      "polizas": 769,
-      "notaria": "San Sebastián/Donostia"
-    },
-    {
-      "notario": "Gaspar Rodríguez Santos",
-      "protocolos": 2687,
-      "polizas": 375,
-      "notaria": "San Sebastián/Donostia"
-    },
-    {
-      "notario": "José Carlos Arnedo Ruiz",
-      "protocolos": 2681,
-      "polizas": 569,
-      "notaria": "San Sebastián/Donostia"
-    },
-    {
-      "notario": "Martín Gabarain Astorqui",
-      "protocolos": 2637,
-      "polizas": 868,
-      "notaria": "San Sebastián/Donostia"
-    },
-    {
-      "notario": "José Gabriel González Botías",
-      "protocolos": 2575,
-      "polizas": 429,
-      "notaria": "San Sebastián/Donostia"
-    },
-    {
-      "notario": "Francisco Javier Oñate Cuadros",
-      "protocolos": 2409,
-      "polizas": 474,
-      "notaria": "San Sebastián/Donostia"
-    },
-    {
-      "notario": "María Larraitz Franco Galarraga",
-      "protocolos": 2232,
-      "polizas": 378,
-      "notaria": "San Sebastián/Donostia"
-    },
-    {
-      "notario": "Diego María Granados Asensio",
-      "protocolos": 1710,
-      "polizas": 115,
-      "notaria": "San Sebastián/Donostia"
-    },
-    {
-      "notario": "Ana Isabel Jaurrieta Alegria",
-      "protocolos": 1694,
-      "polizas": 441,
-      "notaria": "San Sebastián/Donostia"
-    },
-    {
-      "notario": "José Luis Carvajal García Pando",
-      "protocolos": 1645,
-      "polizas": 873,
-      "notaria": "San Sebastián/Donostia"
-    },
-    {
-      "notario": "Álvaro Rodríguez Santos",
-      "protocolos": 1456,
-      "polizas": 175,
-      "notaria": "San Sebastián/Donostia"
-    }
-  ],
-  "malaga|marbella": [
-    {
-      "notario": "Luis Plá Rubio",
-      "protocolos": 8838,
-      "polizas": 654
-    },
-    {
-      "notario": "Manuel Javier de Churruca y García de Fuentes",
-      "protocolos": 8413,
-      "polizas": 219
-    },
-    {
-      "notario": "Joaquín María Crespo Candela",
-      "protocolos": 6209,
-      "polizas": 235
-    },
-    {
-      "notario": "Alberto Jesús Hinojosa Bolivar",
-      "protocolos": 5094,
-      "polizas": 369
-    },
-    {
-      "notario": "Filiberto Carrillo de Albornoz Fisac",
-      "protocolos": 4437,
-      "polizas": 194
-    },
-    {
-      "notario": "José Ordóñez Cuadros",
-      "protocolos": 3982,
-      "polizas": 278
-    },
-    {
-      "notario": "Miguel Ángel de la Fuente del Real",
-      "protocolos": 3921,
-      "polizas": 224
-    },
-    {
-      "notario": "José Andújar Hurtado",
-      "protocolos": 3698,
-      "polizas": 502,
-      "notaria": "Marbella-San Pedro de Alcántara"
-    },
-    {
-      "notario": "Marta Patricia Pascua Ponce",
-      "protocolos": 2637,
-      "polizas": 94
-    },
-    {
-      "notario": "Eduardo Hernández Compta",
-      "protocolos": 2609,
-      "polizas": 48
-    },
-    {
-      "notario": "Miguel Muñoz Cervera",
-      "protocolos": 2479,
-      "polizas": 197,
-      "notaria": "Marbella-S. P. Alcantara"
-    },
-    {
-      "notario": "Jesús María Sanza Amurrio",
-      "protocolos": 1810,
-      "polizas": 41
-    }
-  ],
-  "valladolid|valladolid": [
-    {
-      "notario": "Javier Gómez Martínez",
-      "protocolos": 8545,
-      "polizas": 1530
-    },
-    {
-      "notario": "Teresa Hervella Durántez",
-      "protocolos": 4915,
-      "polizas": 511
-    },
-    {
-      "notario": "Ignacio Cuadrado Zuloaga",
-      "protocolos": 4868,
-      "polizas": 1061
-    },
-    {
-      "notario": "María del Coro García Simón",
-      "protocolos": 4572,
-      "polizas": 1256
-    },
-    {
-      "notario": "María de la Cruz Cano Torres",
-      "protocolos": 4028,
-      "polizas": 322
-    },
-    {
-      "notario": "Carlos Luis Herrero Ordoñez",
-      "protocolos": 3686,
-      "polizas": 1367
-    },
-    {
-      "notario": "Leopoldo Martínez de Salinas Alonso",
-      "protocolos": 2886,
-      "polizas": 247
-    },
-    {
-      "notario": "Luis Ramos Torres",
-      "protocolos": 2870,
-      "polizas": 398
-    },
-    {
-      "notario": "María Teresa de la Fuente Escudero",
-      "protocolos": 2814,
-      "polizas": 290
-    },
-    {
-      "notario": "Alejandro Marcos Hidalgo",
-      "protocolos": 2772,
-      "polizas": 321
-    },
-    {
-      "notario": "Jesús Martínez-Cortes Gimeno",
-      "protocolos": 2743,
-      "polizas": 448
-    },
-    {
-      "notario": "Rafael Galán Díaz",
-      "protocolos": 2585,
-      "polizas": 118,
-      "notaria": "Valladolid-Parquesol"
-    },
-    {
-      "notario": "María González-Carballo Almodóvar",
-      "protocolos": 2376,
-      "polizas": 130
-    },
-    {
-      "notario": "María Belén Barrios Garrido-Lestache",
-      "protocolos": 2033,
-      "polizas": 285
-    },
-    {
-      "notario": "Carmen Fernández-Prida Casado",
-      "protocolos": 1935,
-      "polizas": 248
-    },
-    {
-      "notario": "José María Cano Calvo",
-      "protocolos": 1801,
-      "polizas": 242
-    },
-    {
-      "notario": "Carlos León Matorras",
-      "protocolos": 1268,
-      "polizas": 120
-    },
-    {
-      "notario": "Pablo Fernández-Prida Casado",
-      "protocolos": 344,
-      "polizas": 49
-    },
-    {
-      "notario": "Virginia Loriente Lobo",
-      "protocolos": 228,
-      "polizas": 2
-    },
-    {
-      "notario": "Álvaro Cordero Taborda",
-      "protocolos": 112,
-      "polizas": 4
-    }
-  ],
-  "leon|ponferrada": [
-    {
-      "notario": "Rogelio Pacios Yáñez",
-      "protocolos": 4269,
-      "polizas": 729
-    },
-    {
-      "notario": "Ana María Gómez García",
-      "protocolos": 3305,
-      "polizas": 294
-    },
-    {
-      "notario": "Bernardo Martínez López",
-      "protocolos": 1557,
-      "polizas": 380
-    },
-    {
-      "notario": "Héitor Bello Díaz-Quintela",
-      "protocolos": 959,
-      "polizas": 231
-    },
-    {
-      "notario": "Jorge Luis Sánchez Carballo",
-      "protocolos": 137,
-      "polizas": 15
-    }
-  ],
-  "a coruna|carballo": [
-    {
-      "notario": "Javier Manuel Elbo Ferrant",
-      "protocolos": 3383,
-      "polizas": 645
-    },
-    {
-      "notario": "Carlos Andrés Mosquera Delgado",
-      "protocolos": 2016,
-      "polizas": 206
-    }
-  ],
-  "guadalajara|azuqueca de henares": [
-    {
-      "notario": "María Raquel Alcocer Ballesteros",
-      "protocolos": 3146,
-      "polizas": 124
-    },
-    {
-      "notario": "Macrina García Moreno",
-      "protocolos": 1687,
-      "polizas": 333
-    }
-  ],
-  "murcia|san javier": [
-    {
-      "notario": "Alfredo Gómez Hita",
-      "protocolos": 4376,
-      "polizas": 992
-    },
-    {
-      "notario": "Pedro Facundo Garre Navarro",
-      "protocolos": 2630,
-      "polizas": 239
-    },
-    {
-      "notario": "Íñigo Guillermo Revilla Fernández",
-      "protocolos": 330,
-      "polizas": 17
-    },
-    {
-      "notario": "Francisco Javier Madrid Conesa",
-      "protocolos": 70,
-      "polizas": 18
-    }
-  ],
-  "pontevedra|ponteareas": [
-    {
-      "notario": "Álvaro Lorenzo-Fariña Domínguez",
-      "protocolos": 5255,
-      "polizas": 383,
-      "notaria": "Puenteareas/Ponteareas"
-    },
-    {
-      "notario": "Alma María Carbajal de la Iglesia",
-      "protocolos": 2450,
-      "polizas": 124
-    }
-  ],
-  "santa cruz de tenerife|los realejos": [
-    {
-      "notario": "Javier Pichel Pichel",
-      "protocolos": 2144,
-      "polizas": 382
-    },
-    {
-      "notario": "Juan Montes Martínez",
-      "protocolos": 1642,
-      "polizas": 159
-    }
-  ],
-  "alicante/alacant|xabia/javea": [
-    {
-      "notario": "Antonio Jiménez Clar",
-      "protocolos": 3571,
-      "polizas": 148
-    },
-    {
-      "notario": "Juan Luis Millet Sancho",
-      "protocolos": 1523,
-      "polizas": 81,
-      "notaria": "Jávea/Xàbia"
-    },
-    {
-      "notario": "Vicente Salvador Sanjuán Pellicer",
-      "protocolos": 1229,
-      "polizas": 91,
-      "notaria": "Jávea/Xàbia"
-    }
-  ],
-  "cordoba|cabra": [
-    {
-      "notario": "Álvaro Jesús López Riesco",
-      "protocolos": 1049,
-      "polizas": 220
-    },
-    {
-      "notario": "Manuel Pozuelo Vázquez de Agredos",
-      "protocolos": 892,
-      "polizas": 111
-    }
-  ],
-  "alicante/alacant|petrer": [
-    {
-      "notario": "Alejandro Constantino Pérez Martínez",
-      "protocolos": 2557,
-      "polizas": 290,
-      "notaria": "Petrel/Petrer"
-    },
-    {
-      "notario": "María Ángeles Santamaría Juan",
-      "protocolos": 2090,
-      "polizas": 88,
-      "notaria": "Petrel/Petrer"
-    }
-  ],
-  "sevilla|lora del rio": [
-    {
-      "notario": "María del Carmen Martínez Fernández",
-      "protocolos": 892,
-      "polizas": 144
-    },
-    {
-      "notario": "María Aránzazu Amorós Buqueras",
-      "protocolos": 800,
-      "polizas": 149
-    }
-  ],
-  "jaen|alcala la real": [
-    {
-      "notario": "Mercedes Carazo Carazo",
-      "protocolos": 1284,
-      "polizas": 331
-    },
-    {
-      "notario": "Isabel Martí del Moral",
-      "protocolos": 843,
-      "polizas": 178
-    }
-  ],
-  "valencia/valencia|gandia": [
-    {
-      "notario": "Concepción Barber Vidal",
-      "protocolos": 3543,
-      "polizas": 164
-    },
-    {
-      "notario": "María Teresa Marín Garrido",
-      "protocolos": 2683,
-      "polizas": 230
-    },
-    {
-      "notario": "María Esther Rupérez Paracuellos",
-      "protocolos": 2094,
-      "polizas": 209
-    },
-    {
-      "notario": "José Miguel Marzal Gas",
-      "protocolos": 2072,
-      "polizas": 300
-    },
-    {
-      "notario": "Luis Moreno Ávila",
-      "protocolos": 2048,
-      "polizas": 208
-    },
-    {
-      "notario": "María José Perelló Agustina",
-      "protocolos": 1903,
-      "polizas": 358
-    },
-    {
-      "notario": "Gonzalo Cano Mora",
-      "protocolos": 1689,
-      "polizas": 149
-    }
-  ],
-  "valencia/valencia|alzira": [
-    {
-      "notario": "Ricardo Tabernero Capella",
-      "protocolos": 2870,
-      "polizas": 339,
-      "notaria": "Alcira/Alzira"
-    },
-    {
-      "notario": "Federico Palasi Roig",
-      "protocolos": 2712,
-      "polizas": 409,
-      "notaria": "Alcira/Alzira"
-    },
-    {
-      "notario": "José Juan Llobregat Vaya",
-      "protocolos": 2212,
-      "polizas": 256,
-      "notaria": "Alcira/Alzira"
-    },
-    {
-      "notario": "Miguel Ildefonso Gallut Ortega",
-      "protocolos": 1407,
-      "polizas": 176,
-      "notaria": "Alcira/Alzira"
-    }
-  ],
-  "madrid|arganda del rey": [
-    {
-      "notario": "Domingo Paniagua Santamaría",
-      "protocolos": 4510,
-      "polizas": 1227
-    },
-    {
-      "notario": "Pedro Horcajada Fernández-Quero",
-      "protocolos": 2100,
-      "polizas": 157
-    }
-  ],
-  "zaragoza|calatayud": [
-    {
-      "notario": "Fernando Agustín Bonaga",
-      "protocolos": 1572,
-      "polizas": 227
-    },
-    {
-      "notario": "Javier Lorenzo Mazana Puyol",
-      "protocolos": 1527,
-      "polizas": 243
-    }
-  ],
-  "madrid|san sebastian de los reyes": [
-    {
-      "notario": "Álvaro José Obando Bigeriego",
-      "protocolos": 4841,
-      "polizas": 374
-    },
-    {
-      "notario": "María Jesús Arcos Domínguez",
-      "protocolos": 4724,
-      "polizas": 527
-    }
-  ],
-  "cadiz|chiclana de la frontera": [
-    {
-      "notario": "José Manuel Paez Moreno",
-      "protocolos": 2642,
-      "polizas": 160
-    },
-    {
-      "notario": "José Enrique Carmona Cuenca",
-      "protocolos": 2274,
-      "polizas": 454
-    },
-    {
-      "notario": "María José Beviá Gomis",
-      "protocolos": 2220,
-      "polizas": 149
-    },
-    {
-      "notario": "María Lourdes Zaragoza Tafalla",
-      "protocolos": 1013,
-      "polizas": 253
-    }
-  ],
-  "navarra|estella-lizarra": [
-    {
-      "notario": "Lorenzo Doval de Mateo",
-      "protocolos": 1578,
-      "polizas": 211,
-      "notaria": "Estella/Lizarra"
-    },
-    {
-      "notario": "Ricardo Viana Ruiz",
-      "protocolos": 1470,
-      "polizas": 329,
-      "notaria": "Estella/Lizarra"
-    },
-    {
-      "notario": "Eduardo Yuste Sánchez",
-      "protocolos": 705,
-      "polizas": 79,
-      "notaria": "Estella/Lizarra"
-    }
-  ],
-  "gipuzkoa/guipuzcoa|bergara": [
-    {
-      "notario": "Roberto Rafael Oliver Puertolas",
-      "protocolos": 1074,
-      "polizas": 128,
-      "notaria": "Vergara/Bergara"
-    },
-    {
-      "notario": "María Longarte Ulacia",
-      "protocolos": 1027,
-      "polizas": 99,
-      "notaria": "Vergara/Bergara"
-    }
-  ],
-  "gipuzkoa/guipuzcoa|tolosa": [
-    {
-      "notario": "María Valentina Montero Vilar",
-      "protocolos": 2534,
-      "polizas": 359
-    },
-    {
-      "notario": "Pedro Elosegui Bergareche",
-      "protocolos": 2513,
-      "polizas": 345
-    }
-  ],
-  "bizkaia/vizcaya|balmaseda": [
-    {
-      "notario": "Igone Arechaga González",
-      "protocolos": 1987,
-      "polizas": 66
-    },
-    {
-      "notario": "Carlos Alberto Muley Posso",
-      "protocolos": 1659,
-      "polizas": 124
-    }
-  ],
-  "bizkaia/vizcaya|gernika-lumo": [
-    {
-      "notario": "Igor Ispizua Omar",
-      "protocolos": 1215,
-      "polizas": 112,
-      "notaria": "Guernica y Lumo/Gernika-Lumo"
-    },
-    {
-      "notario": "Alfonso Ansola Horcajo",
-      "protocolos": 1025,
-      "polizas": 81,
-      "notaria": "Guernica y Lumo/Gernika-Lumo"
-    }
-  ],
-  "alicante/alacant|dolores": [
-    {
-      "notario": "Jorge Pérez Álvarez",
-      "protocolos": 2206,
-      "polizas": 144
-    },
-    {
-      "notario": "Alicia Ruiz Torregrosa",
-      "protocolos": 1672,
-      "polizas": 187
-    }
-  ],
-  "gipuzkoa/guipuzcoa|zumarraga": [
-    {
-      "notario": "Eduardo Vallejo Inchausti",
-      "protocolos": 1242,
-      "polizas": 85
-    },
-    {
-      "notario": "Marta García-Jalón Luzuriaga",
-      "protocolos": 1185,
-      "polizas": 102
-    }
-  ],
-  "leon|astorga": [
-    {
-      "notario": "María Antonia Torga Noval",
-      "protocolos": 1388,
-      "polizas": 200
-    },
-    {
-      "notario": "Marta Rovira Fernández-Arche",
-      "protocolos": 1161,
-      "polizas": 187
-    }
-  ],
-  "cantabria|laredo": [
-    {
-      "notario": "Jesús Elías Corral Delgado",
-      "protocolos": 1236,
-      "polizas": 109
-    },
-    {
-      "notario": "Roberto Follía Martínez",
-      "protocolos": 665,
-      "polizas": 82
-    }
-  ],
-  "salamanca|ciudad rodrigo": [
-    {
-      "notario": "Francisco Echávarri López",
-      "protocolos": 2187,
-      "polizas": 227
-    },
-    {
-      "notario": "Pablo Fernández-Prida Casado",
-      "protocolos": 854,
-      "polizas": 125
-    }
-  ],
-  "ourense|o barco de valdeorras": [
-    {
-      "notario": "Marta Luisa Diz Amor",
-      "protocolos": 1518,
-      "polizas": 246
-    },
-    {
-      "notario": "Gabriela Marqués Mosquera",
-      "protocolos": 1205,
-      "polizas": 175
-    }
-  ],
-  "illes balears|felanitx": [
-    {
-      "notario": "Luis Leoncio Bustillo Tejedor",
-      "protocolos": 3566,
-      "polizas": 247
-    },
-    {
-      "notario": "María Magdalena Sans Gelabert",
-      "protocolos": 1990,
-      "polizas": 176
-    }
-  ],
-  "la rioja|arnedo": [
-    {
-      "notario": "Ignacio Otaño Calvo",
-      "protocolos": 1202,
-      "polizas": 148
-    },
-    {
-      "notario": "Susana Garzón Echevarría",
-      "protocolos": 1157,
-      "polizas": 212
-    }
-  ],
-  "barcelona|barcelona": [
-    {
-      "notario": "Jesús Javier Benavides Lima",
-      "protocolos": 19859,
-      "polizas": 605
-    },
-    {
-      "notario": "Salvador Farrés Ripoll",
-      "protocolos": 16855,
-      "polizas": 1384
-    },
-    {
-      "notario": "María del Camino Quiroga Martínez",
-      "protocolos": 13171,
-      "polizas": 721
-    },
-    {
-      "notario": "Jaime Calvo Francia",
-      "protocolos": 11901,
-      "polizas": 660
-    },
-    {
-      "notario": "Miguel de Páramo Argüelles",
-      "protocolos": 10881,
-      "polizas": 207
-    },
-    {
-      "notario": "Ariel Sultán Benguigui",
-      "protocolos": 9199,
-      "polizas": 900
-    },
-    {
-      "notario": "Jesús Gómez Taboada",
-      "protocolos": 8791,
-      "polizas": 321
-    },
-    {
-      "notario": "Ramón García-Torrent Carballo",
-      "protocolos": 8347,
-      "polizas": 1488
-    },
-    {
-      "notario": "Francisca Aloy Martorell",
-      "protocolos": 7620,
-      "polizas": 830,
-      "notaria": "Barcelona -Sant Andreu-"
-    },
-    {
-      "notario": "Isabel Molinos Gil",
-      "protocolos": 7192,
-      "polizas": 466
-    },
-    {
-      "notario": "María de Zulueta Sagarra",
-      "protocolos": 6025,
-      "polizas": 766
-    },
-    {
-      "notario": "Francisco Palop Tordera",
-      "protocolos": 5713,
-      "polizas": 418
-    },
-    {
-      "notario": "Joaquín Rodríguez-Carlancha Romero",
-      "protocolos": 5710,
-      "polizas": 184
-    },
-    {
-      "notario": "Borja Criado Malagarriga",
-      "protocolos": 5609,
-      "polizas": 290
-    },
-    {
-      "notario": "Antonio Díez de Blas",
-      "protocolos": 5221,
-      "polizas": 542
-    },
-    {
-      "notario": "Raúl González Fuentes",
-      "protocolos": 5198,
-      "polizas": 851
-    },
-    {
-      "notario": "Joan Carles Ollé Favaró",
-      "protocolos": 5133,
-      "polizas": 0
-    },
-    {
-      "notario": "Gerardo Conesa Martínez",
-      "protocolos": 5129,
-      "polizas": 1673
-    },
-    {
-      "notario": "Blanca Pardo García",
-      "protocolos": 5072,
-      "polizas": 1456
-    },
-    {
-      "notario": "José Vicente Torres Montero",
-      "protocolos": 5007,
-      "polizas": 223
-    },
-    {
-      "notario": "Ana María Vázquez Vázquez",
-      "protocolos": 5004,
-      "polizas": 237,
-      "notaria": "Barcelona -Horta-"
-    },
-    {
-      "notario": "Emilio Roselló Carrión",
-      "protocolos": 4999,
-      "polizas": 322
-    },
-    {
-      "notario": "Antonio Bosch Carrera",
-      "protocolos": 4821,
-      "polizas": 0
-    },
-    {
-      "notario": "Fernando José de Yllescas Muñoz",
-      "protocolos": 4724,
-      "polizas": 792
-    },
-    {
-      "notario": "Rafael Córdoba Benedicto",
-      "protocolos": 4705,
-      "polizas": 1455
-    },
-    {
-      "notario": "Tomás Feliu Alvarez de Sotomayor",
-      "protocolos": 4660,
-      "polizas": 752
-    },
-    {
-      "notario": "Juan Antonio Andújar Hurtado",
-      "protocolos": 4655,
-      "polizas": 340
-    },
-    {
-      "notario": "Cristina Requena Torrecillas",
-      "protocolos": 4573,
-      "polizas": 369
-    },
-    {
-      "notario": "Eduardo Bautista Blázquez",
-      "protocolos": 4542,
-      "polizas": 351
-    },
-    {
-      "notario": "María Dolores Giménez Arbona",
-      "protocolos": 4132,
-      "polizas": 399
-    },
-    {
-      "notario": "Manuel Piquer Belloch",
-      "protocolos": 4124,
-      "polizas": 1159
-    },
-    {
-      "notario": "Pablo Pleguezuelos Merino",
-      "protocolos": 4099,
-      "polizas": 339
-    },
-    {
-      "notario": "Sergi González Delgado",
-      "protocolos": 4098,
-      "polizas": 761
-    },
-    {
-      "notario": "Camilo José Sexto Presas",
-      "protocolos": 4089,
-      "polizas": 374
-    },
-    {
-      "notario": "Luis Alberto Álvarez Moreno",
-      "protocolos": 3904,
-      "polizas": 0
-    },
-    {
-      "notario": "Julio Martínez-Gil Pardo de Vera",
-      "protocolos": 3902,
-      "polizas": 297
-    },
-    {
-      "notario": "Rosa María Pérez Paniagua",
-      "protocolos": 3814,
-      "polizas": 873
-    },
-    {
-      "notario": "Gonzalo Sauca Núñez de Prado",
-      "protocolos": 3768,
-      "polizas": 648
-    },
-    {
-      "notario": "Laura Nogales Martín",
-      "protocolos": 3759,
-      "polizas": 323
-    },
-    {
-      "notario": "Damián Moreno Maya",
-      "protocolos": 3716,
-      "polizas": 277
-    },
-    {
-      "notario": "Immaculada Rúbies Royo",
-      "protocolos": 3628,
-      "polizas": 399
-    },
-    {
-      "notario": "Francisco Javier Hernández Alonso",
-      "protocolos": 3620,
-      "polizas": 212
-    },
-    {
-      "notario": "Juan Madridejos Velasco",
-      "protocolos": 3582,
-      "polizas": 150
-    },
-    {
-      "notario": "Miguel Ángel Campo Güerri",
-      "protocolos": 3579,
-      "polizas": 189
-    },
-    {
-      "notario": "Leopoldo Martínez de Salinas Bassols",
-      "protocolos": 3574,
-      "polizas": 195
-    },
-    {
-      "notario": "Enrique Oliver de Querol",
-      "protocolos": 3561,
-      "polizas": 174
-    },
-    {
-      "notario": "José Ramón Salamero Rodríguez-Varo",
-      "protocolos": 3420,
-      "polizas": 430
-    },
-    {
-      "notario": "Antonio Alfonso Rosselló Mestre",
-      "protocolos": 3405,
-      "polizas": 309
-    },
-    {
-      "notario": "Juan Ignacio Castro-Girona Martínez",
-      "protocolos": 3347,
-      "polizas": 169
-    },
-    {
-      "notario": "José Ángel Ruiz Prado",
-      "protocolos": 3342,
-      "polizas": 231
-    },
-    {
-      "notario": "Valero Soler Martín-Javato",
-      "protocolos": 3337,
-      "polizas": 3627
-    },
-    {
-      "notario": "Javier Martínez Lehmann",
-      "protocolos": 3260,
-      "polizas": 3697
-    },
-    {
-      "notario": "Elena Cantos Márquez",
-      "protocolos": 3248,
-      "polizas": 482
-    },
-    {
-      "notario": "Marco Antonio Alonso Hevia",
-      "protocolos": 3204,
-      "polizas": 367
-    },
-    {
-      "notario": "Blanca María García Oquendo",
-      "protocolos": 3200,
-      "polizas": 275
-    },
-    {
-      "notario": "Miquel Tarragona Coromina",
-      "protocolos": 3197,
-      "polizas": 414
-    },
-    {
-      "notario": "María Garay Gil",
-      "protocolos": 3191,
-      "polizas": 201
-    },
-    {
-      "notario": "Paula Alonso Rodríguez",
-      "protocolos": 3156,
-      "polizas": 369
-    },
-    {
-      "notario": "Ricardo Manén Barceló",
-      "protocolos": 3125,
-      "polizas": 195
-    },
-    {
-      "notario": "Francisco Javier García Ruiz",
-      "protocolos": 3050,
-      "polizas": 174
-    },
-    {
-      "notario": "Santiago María Giménez Arbona",
-      "protocolos": 3031,
-      "polizas": 216
-    },
-    {
-      "notario": "José Daniel Gil Pérez",
-      "protocolos": 2975,
-      "polizas": 168
-    },
-    {
-      "notario": "Íñigo Martín Ramírez de Cárdenas Cabello de los Cobos",
-      "protocolos": 2955,
-      "polizas": 248,
-      "notaria": "Barcelona -Sants-"
-    },
-    {
-      "notario": "María Paz Juárez Olmos",
-      "protocolos": 2953,
-      "polizas": 222
-    },
-    {
-      "notario": "Ruperto Isidoro Martínez Martínez",
-      "protocolos": 2950,
-      "polizas": 156
-    },
-    {
-      "notario": "Carlota Royes Perdrix",
-      "protocolos": 2943,
-      "polizas": 225
-    },
-    {
-      "notario": "Lorenzo Pío Valverde García",
-      "protocolos": 2935,
-      "polizas": 0
-    },
-    {
-      "notario": "Pablo Lluna Andreu",
-      "protocolos": 2848,
-      "polizas": 443
-    },
-    {
-      "notario": "Adolfo Bujarrabal Antón",
-      "protocolos": 2817,
-      "polizas": 208
-    },
-    {
-      "notario": "Ausencio José Santos Martín",
-      "protocolos": 2770,
-      "polizas": 220
-    },
-    {
-      "notario": "Pedro Esteban-Feliu Coll",
-      "protocolos": 2766,
-      "polizas": 161
-    },
-    {
-      "notario": "Lucía Pilar Gil López de Sagredo",
-      "protocolos": 2677,
-      "polizas": 130
-    },
-    {
-      "notario": "Francisco Alejandro Armas Omedes",
-      "protocolos": 2673,
-      "polizas": 116
-    },
-    {
-      "notario": "Luis Sampietro Villacampa",
-      "protocolos": 2655,
-      "polizas": 180
-    },
-    {
-      "notario": "Joan Carles Farrés Ustrell",
-      "protocolos": 2626,
-      "polizas": 642
-    },
-    {
-      "notario": "Diego de Dueñas Alvarez",
-      "protocolos": 2620,
-      "polizas": 190
-    },
-    {
-      "notario": "José Marqueño Ellacuría",
-      "protocolos": 2613,
-      "polizas": 512
-    },
-    {
-      "notario": "María Armas Herráez",
-      "protocolos": 2597,
-      "polizas": 116
-    },
-    {
-      "notario": "Jaime Agustín Justribó",
-      "protocolos": 2595,
-      "polizas": 191
-    },
-    {
-      "notario": "Jesús Julián Fuentes Martínez",
-      "protocolos": 2593,
-      "polizas": 323
-    },
-    {
-      "notario": "Álvaro Marqueño Ellacuría",
-      "protocolos": 2592,
-      "polizas": 434
-    },
-    {
-      "notario": "Luis Jou Mirabent",
-      "protocolos": 2577,
-      "polizas": 0
-    },
-    {
-      "notario": "María de los Desamparados Ríos Messana",
-      "protocolos": 2568,
-      "polizas": 296
-    },
-    {
-      "notario": "Pedro Ángel Casado Martín",
-      "protocolos": 2516,
-      "polizas": 219
-    },
-    {
-      "notario": "Juan Carlos Alonso Alvarez",
-      "protocolos": 2424,
-      "polizas": 247
-    },
-    {
-      "notario": "Ignacio Javier Boisán Cañamero",
-      "protocolos": 2409,
-      "polizas": 310
-    },
-    {
-      "notario": "Gonzalo Antonio Veciana García-Boente",
-      "protocolos": 2351,
-      "polizas": 208
-    },
-    {
-      "notario": "María de Rocafiguera Gibert",
-      "protocolos": 2323,
-      "polizas": 721
-    },
-    {
-      "notario": "José Luis Martínez-Gil Calero",
-      "protocolos": 2292,
-      "polizas": 183,
-      "notaria": "Barcelona -Horta-"
-    },
-    {
-      "notario": "Ignacio de Prada Martínez",
-      "protocolos": 2283,
-      "polizas": 184
-    },
-    {
-      "notario": "Eduardo Pobes Layunta",
-      "protocolos": 2275,
-      "polizas": 252
-    },
-    {
-      "notario": "Salvador Farrés Reig",
-      "protocolos": 2262,
-      "polizas": 306
-    },
-    {
-      "notario": "María Lourdes Rodríguez Ramírez",
-      "protocolos": 2233,
-      "polizas": 220
-    },
-    {
-      "notario": "María del Mar Illueca Oltra",
-      "protocolos": 2161,
-      "polizas": 198
-    },
-    {
-      "notario": "Miguel Yuste Sánchez",
-      "protocolos": 2142,
-      "polizas": 320,
-      "notaria": "Barcelona-Besós-Poble Nou"
-    },
-    {
-      "notario": "Luis Fernando Pazos Pezzi",
-      "protocolos": 2139,
-      "polizas": 136
-    },
-    {
-      "notario": "Adela García Arana",
-      "protocolos": 2119,
-      "polizas": 98
-    },
-    {
-      "notario": "María del Rocío Maestre Cavanna",
-      "protocolos": 2101,
-      "polizas": 241
-    },
-    {
-      "notario": "Rubén Perán Sánchez",
-      "protocolos": 2041,
-      "polizas": 56
-    },
-    {
-      "notario": "Belén García-Sancha Saez",
-      "protocolos": 2015,
-      "polizas": 74,
-      "notaria": "Barcelona -Sant Andreu-"
-    },
-    {
-      "notario": "Blanca María de la Cámara Entrena",
-      "protocolos": 1997,
-      "polizas": 233
-    },
-    {
-      "notario": "José Alberto Marín Sánchez",
-      "protocolos": 1936,
-      "polizas": 157
-    },
-    {
-      "notario": "María del Pilar Martínez-Cortés Gimeno",
-      "protocolos": 1896,
-      "polizas": 64
-    },
-    {
-      "notario": "Marta Fuentes Blanco",
-      "protocolos": 1871,
-      "polizas": 166
-    },
-    {
-      "notario": "Alberto Ares de Parga Adán",
-      "protocolos": 1818,
-      "polizas": 139
-    },
-    {
-      "notario": "Mariana Querejeta Roca",
-      "protocolos": 1769,
-      "polizas": 460
-    },
-    {
-      "notario": "María Mercedes Martínez Parra",
-      "protocolos": 1717,
-      "polizas": 213
-    },
-    {
-      "notario": "Ángelo Jesús Carretero Ramírez",
-      "protocolos": 1666,
-      "polizas": 254
-    },
-    {
-      "notario": "María Olga Hernández Hernández",
-      "protocolos": 1638,
-      "polizas": 36
-    },
-    {
-      "notario": "Elisabeth García Cueto",
-      "protocolos": 1587,
-      "polizas": 180
-    },
-    {
-      "notario": "Carlos Masiá Martí",
-      "protocolos": 1482,
-      "polizas": 92
-    },
-    {
-      "notario": "Ángel Serrano de Nicolás",
-      "protocolos": 1439,
-      "polizas": 52
-    },
-    {
-      "notario": "Ildefonso Sánchez Prat",
-      "protocolos": 1432,
-      "polizas": 63
-    },
-    {
-      "notario": "Javier Serrano Copete",
-      "protocolos": 1379,
-      "polizas": 61
-    },
-    {
-      "notario": "Albert Capell Martinez",
-      "protocolos": 1296,
-      "polizas": 110
-    },
-    {
-      "notario": "José María Valls Xufré",
-      "protocolos": 1252,
-      "polizas": 57
-    },
-    {
-      "notario": "Francisco Javier Monedero Alcover",
-      "protocolos": 1237,
-      "polizas": 246
-    },
-    {
-      "notario": "Cristina Magalló Zapater",
-      "protocolos": 1190,
-      "polizas": 72
-    },
-    {
-      "notario": "Mario Rafael Romeo García",
-      "protocolos": 1175,
-      "polizas": 330
-    },
-    {
-      "notario": "Lucía Rodríguez Rodríguez",
-      "protocolos": 1171,
-      "polizas": 111
-    },
-    {
-      "notario": "Ignacio Navarro Martín",
-      "protocolos": 1123,
-      "polizas": 100
-    },
-    {
-      "notario": "Marc Sansalvadó Chalaux",
-      "protocolos": 1023,
-      "polizas": 71
-    },
-    {
-      "notario": "Ramón Abelló Diz",
-      "protocolos": 1022,
-      "polizas": 65
-    },
-    {
-      "notario": "María Isabel Gabarró Miquel",
-      "protocolos": 930,
-      "polizas": 16
-    },
-    {
-      "notario": "Teresa María Villazán Tovar",
-      "protocolos": 859,
-      "polizas": 46
-    },
-    {
-      "notario": "Fernando Bautista Pérez",
-      "protocolos": 753,
-      "polizas": 42
-    },
-    {
-      "notario": "José Antonio García Vila",
-      "protocolos": 340,
-      "polizas": 18
-    },
-    {
-      "notario": "Alberto Tomás López Blanco",
-      "protocolos": 219,
-      "polizas": 2
-    }
-  ],
-  "lleida|lleida": [
-    {
-      "notario": "Pablo Gómez Clavería",
-      "protocolos": 7153,
-      "polizas": 2511
-    },
-    {
-      "notario": "Sebastián Gutiérrez Gañán",
-      "protocolos": 5833,
-      "polizas": 2134
-    },
-    {
-      "notario": "Gerardo Mármol Llombart",
-      "protocolos": 4615,
-      "polizas": 1825
-    },
-    {
-      "notario": "Diego Martínez Sancho",
-      "protocolos": 3257,
-      "polizas": 298
-    },
-    {
-      "notario": "Jordi Puente González",
-      "protocolos": 3131,
-      "polizas": 208
-    },
-    {
-      "notario": "María Cristina Hernández Ruiz",
-      "protocolos": 2605,
-      "polizas": 657
-    },
-    {
-      "notario": "Joaquín Parejo García",
-      "protocolos": 1566,
-      "polizas": 109
-    },
-    {
-      "notario": "José Manuel Villafranca Mercé",
-      "protocolos": 1231,
-      "polizas": 84
-    },
-    {
-      "notario": "José Lorenzo Iribarne Blanco",
-      "protocolos": 973,
-      "polizas": 102
-    },
-    {
-      "notario": "Lourdes Martos García",
-      "protocolos": 197,
-      "polizas": 9
-    },
-    {
-      "notario": "Francisco Javier Cruz Gimeno",
-      "protocolos": 131,
-      "polizas": 17
-    }
-  ],
-  "barcelona|cornella de llobregat": [
-    {
-      "notario": "María Blanca Rodríguez Coladas",
-      "protocolos": 2755,
-      "polizas": 535
-    },
-    {
-      "notario": "Arturo Luis Ramírez Castelao",
-      "protocolos": 2119,
-      "polizas": 238
-    },
-    {
-      "notario": "Carlos Manuel Parejo-Merino Parejo",
-      "protocolos": 1542,
-      "polizas": 113
-    },
-    {
-      "notario": "Manuel Ángel Benedito Roig",
-      "protocolos": 304,
-      "polizas": 33
-    },
-    {
-      "notario": "José Manuel Sánchez Tapia",
-      "protocolos": 111,
-      "polizas": 26
-    }
-  ],
-  "barcelona|sabadell": [
-    {
-      "notario": "Javier Micó Giner",
-      "protocolos": 8571,
-      "polizas": 999
-    },
-    {
-      "notario": "Alejandro Sáez Ripoll",
-      "protocolos": 4476,
-      "polizas": 402
-    },
-    {
-      "notario": "Montserrat Prieto Santos",
-      "protocolos": 4192,
-      "polizas": 1225
-    },
-    {
-      "notario": "Aurora Cristina Díaz-Fraile del Monte",
-      "protocolos": 3195,
-      "polizas": 118
-    },
-    {
-      "notario": "Ignacio Corbí González",
-      "protocolos": 2878,
-      "polizas": 301
-    },
-    {
-      "notario": "Jesús Cembrano Zaldivar",
-      "protocolos": 2729,
-      "polizas": 75
-    },
-    {
-      "notario": "Juan Gómez Martínez",
-      "protocolos": 2554,
-      "polizas": 250
-    },
-    {
-      "notario": "José Antonio Simón Hernández",
-      "protocolos": 2486,
-      "polizas": 202
-    },
-    {
-      "notario": "Marta Navarro Redondo",
-      "protocolos": 2407,
-      "polizas": 204
-    },
-    {
-      "notario": "María Lara Domínguez Martínez",
-      "protocolos": 2305,
-      "polizas": 874
-    },
-    {
-      "notario": "María Mercedes Lázaro Velo",
-      "protocolos": 1950,
-      "polizas": 86
-    },
-    {
-      "notario": "Enrique Ruiz de Bustillo Pont",
-      "protocolos": 1760,
-      "polizas": 81
-    },
-    {
-      "notario": "Joan Bosch Boada",
-      "protocolos": 660,
-      "polizas": 18
-    },
-    {
-      "notario": "Sergio García-Rosado Cutillas",
-      "protocolos": 149,
-      "polizas": 61
-    }
-  ],
-  "barcelona|l'hospitalet de llobregat": [
-    {
-      "notario": "Santiago Gotor Sánchez",
-      "protocolos": 5986,
-      "polizas": 594
-    },
-    {
-      "notario": "Ana Nogales Martín",
-      "protocolos": 3716,
-      "polizas": 367
-    },
-    {
-      "notario": "Alberto Verde Continente",
-      "protocolos": 3282,
-      "polizas": 591
-    },
-    {
-      "notario": "Fernando María Díaz Gallardo",
-      "protocolos": 3194,
-      "polizas": 188
-    },
-    {
-      "notario": "Jorge Vicente Farrés Reig",
-      "protocolos": 3081,
-      "polizas": 301
-    },
-    {
-      "notario": "Juan García Saez",
-      "protocolos": 2710,
-      "polizas": 85
-    },
-    {
-      "notario": "Fernando Morales Limia",
-      "protocolos": 2376,
-      "polizas": 127
-    },
-    {
-      "notario": "José Castaño López",
-      "protocolos": 2253,
-      "polizas": 126
-    },
-    {
-      "notario": "Jorge Colmeiro de las Cuevas",
-      "protocolos": 620,
-      "polizas": 64
-    },
-    {
-      "notario": "María Sánchez García",
-      "protocolos": 442,
-      "polizas": 25
-    }
-  ],
-  "barcelona|granollers": [
-    {
-      "notario": "Anna Arandes Marcocci",
-      "protocolos": 5302,
-      "polizas": 587
-    },
-    {
-      "notario": "Ana María Fortuny Subirats",
-      "protocolos": 4237,
-      "polizas": 1284
-    },
-    {
-      "notario": "José Ignacio de Navasqües Eireos",
-      "protocolos": 3502,
-      "polizas": 223
-    },
-    {
-      "notario": "María Ángeles Vidal Davydoff",
-      "protocolos": 2162,
-      "polizas": 203
-    },
-    {
-      "notario": "José Poyatos Diaz",
-      "protocolos": 352,
-      "polizas": 40
-    }
-  ],
-  "barcelona|sant cugat del valles": [
-    {
-      "notario": "Luis Antonio Boada Dotor",
-      "protocolos": 1561,
-      "polizas": 541
-    },
-    {
-      "notario": "Luis Fort López-Barajas",
-      "protocolos": 1557,
-      "polizas": 531
-    },
-    {
-      "notario": "María Concepción Alonso Vasallo",
-      "protocolos": 1342,
-      "polizas": 425
-    }
-  ],
-  "girona|blanes": [
-    {
-      "notario": "Daniel Rodríguez Dengra",
-      "protocolos": 3950,
-      "polizas": 283
-    },
-    {
-      "notario": "Marta Marín del Campo",
-      "protocolos": 3615,
-      "polizas": 300
-    },
-    {
-      "notario": "Javier Salas Ramos",
-      "protocolos": 231,
-      "polizas": 16
-    }
-  ],
-  "barcelona|pineda de mar": [
-    {
-      "notario": "Sonia Sánchez Ruiz",
-      "protocolos": 1931,
-      "polizas": 155
-    },
-    {
-      "notario": "Pedro Pablo Albiol Ballesteros",
-      "protocolos": 982,
-      "polizas": 81
-    }
-  ],
-  "barcelona|sant adria de besos": [
-    {
-      "notario": "Víctor Mateu Prades",
-      "protocolos": 1644,
-      "polizas": 226
-    },
-    {
-      "notario": "María Blanca Pascual Sequeros",
-      "protocolos": 1556,
-      "polizas": 219
-    }
-  ],
-  "barcelona|sant vicenc dels horts": [
-    {
-      "notario": "María del Carmen Parra Martínez",
-      "protocolos": 1483,
-      "polizas": 182
-    },
-    {
-      "notario": "Francisco Javier García-Más Vélez",
-      "protocolos": 1372,
-      "polizas": 159
-    }
-  ],
-  "barcelona|el masnou": [
-    {
-      "notario": "Víctor Esquirol Jiménez",
-      "protocolos": 1566,
-      "polizas": 221
-    },
-    {
-      "notario": "Francesc Torrent Cufí",
-      "protocolos": 1387,
-      "polizas": 214
-    }
-  ],
-  "girona|figueres": [
-    {
-      "notario": "Vicente Daudí Arnal",
-      "protocolos": 6117,
-      "polizas": 923
-    },
-    {
-      "notario": "Miguel Ángel Vera Moreno",
-      "protocolos": 2332,
-      "polizas": 185
-    },
-    {
-      "notario": "Joan Fortaner i Torrent",
-      "protocolos": 2232,
-      "polizas": 233
-    },
-    {
-      "notario": "Júlia Descamps Muntada",
-      "protocolos": 1776,
-      "polizas": 542
-    },
-    {
-      "notario": "Lucía Martínez Clement",
-      "protocolos": 640,
-      "polizas": 139
-    }
-  ],
-  "barcelona|esplugues de llobregat": [
-    {
-      "notario": "José Vicente Galdón Garrido",
-      "protocolos": 3605,
-      "polizas": 419
-    },
-    {
-      "notario": "Juan Galdón López",
-      "protocolos": 3507,
-      "polizas": 353
-    },
-    {
-      "notario": "María Gracia Criado Fernández",
-      "protocolos": 817,
-      "polizas": 34
-    },
-    {
-      "notario": "Miguel Ángel Rodríguez Barroso",
-      "protocolos": 58,
-      "polizas": 0
-    }
-  ],
-  "girona|palafrugell": [
-    {
-      "notario": "Enrique Jaime Ventura Paradinas",
-      "protocolos": 1886,
-      "polizas": 353
-    },
-    {
-      "notario": "Jaime Fernández Tussy",
-      "protocolos": 1537,
-      "polizas": 247
-    }
-  ],
-  "barcelona|esparreguera": [
-    {
-      "notario": "Vicente Miguel Mestre Soro",
-      "protocolos": 2517,
-      "polizas": 359
-    },
-    {
-      "notario": "Gonzalo Quiralte Moreno",
-      "protocolos": 1093,
-      "polizas": 56
-    }
-  ],
-  "girona|torroella de montgri-estartit": [
-    {
-      "notario": "Purificación Almansa Losada",
-      "protocolos": 1533,
-      "polizas": 377
-    },
-    {
-      "notario": "Rocio Ramírez López-Frías",
-      "protocolos": 739,
-      "polizas": 73,
-      "notaria": "Torroella de Montgrí-L'Estartit"
-    }
-  ],
-  "barcelona|calaf": [
-    {
-      "notario": "Blanca Camacho López-Barajas",
-      "protocolos": 321,
-      "polizas": 119
-    },
-    {
-      "notario": "Alberto Ares de Parga Adán",
-      "protocolos": 22,
-      "polizas": 7
-    }
-  ],
-  "barcelona|calella": [
-    {
-      "notario": "Mónica de Blas Esteban",
-      "protocolos": 1933,
-      "polizas": 230
-    },
-    {
-      "notario": "José Luis Ballestín González",
-      "protocolos": 1839,
-      "polizas": 218
-    }
-  ],
-  "girona|l'escala": [
-    {
-      "notario": "Javier Eduardo Satue de Velasco",
-      "protocolos": 1958,
-      "polizas": 257
-    },
-    {
-      "notario": "María José Solís de la Fuente",
-      "protocolos": 76,
-      "polizas": 14
-    }
-  ],
-  "girona|palamos": [
-    {
-      "notario": "José Fernando Ribes García",
-      "protocolos": 3773,
-      "polizas": 570
-    },
-    {
-      "notario": "Joan Ignasi Sorigue Abel",
-      "protocolos": 95,
-      "polizas": 16
-    }
-  ],
-  "girona|la bisbal d'emporda": [
-    {
-      "notario": "Marta Bernabeu Farrus",
-      "protocolos": 1973,
-      "polizas": 418
-    },
-    {
-      "notario": "Marco Ciani García",
-      "protocolos": 306,
-      "polizas": 37
-    }
-  ]
-};
