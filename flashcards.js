@@ -407,6 +407,13 @@ function loadFcStateFromStorage() {
 
 function remapFcIdIfNeeded(oldId, usedTargets) {
   if (fcState.plazas.some(p => p.fcId === oldId)) return oldId;
+  if (oldId === 'fc_172_ugijar_almeria') {
+    const ugi = fcState.plazas.find(p => p.fcId === 'fc_172_ugijar_granada');
+    if (ugi && !usedTargets.has(ugi.fcId)) {
+      usedTargets.add(ugi.fcId);
+      return ugi.fcId;
+    }
+  }
   const suffix = String(oldId).replace(/^fc_\d+_/, '');
   const candidate = fcState.plazas.find(p =>
     !usedTargets.has(p.fcId) &&

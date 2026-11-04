@@ -13526,7 +13526,7 @@ const DATA_VACANTES = [
     "numero": 172,
     "origen": "BOE",
     "comunidad": "Andalucía",
-    "provincia": "Almería",
+    "provincia": "Granada",
     "localidad": "Ugíjar",
     "distrito": "Órgiva",
     "clase": "Resulta",

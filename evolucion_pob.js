@@ -818,7 +818,7 @@ const DATA_EVOLUCION_POB = {
     "añoAntiguo": 2013,
     "añoActual": 2023
   },
-  "Nava|Badajoz": {
+  "Nava|Asturias": {
     "crecimiento": -5.9,
     "pobAntigua": 5511,
     "pobActual": 5186,
@@ -1140,7 +1140,7 @@ const DATA_EVOLUCION_POB = {
     "añoAntiguo": 2013,
     "añoActual": 2023
   },
-  "Ugíjar|Almería": {
+  "Ugíjar|Granada": {
     "crecimiento": -2.43,
     "pobAntigua": 2638,
     "pobActual": 2574,

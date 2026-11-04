@@ -3,7 +3,7 @@ const DATA_COORDS = {
     "lat": 37.3477463,
     "lon": -2.3608085
   },
-  "Ugíjar|Almería": {
+  "Ugíjar|Granada": {
     "lat": 36.9471481,
     "lon": -3.0496151
   },
@@ -687,9 +687,9 @@ const DATA_COORDS = {
     "lat": 42.455401,
     "lon": -6.052924
   },
-  "Nava|Badajoz": {
-    "lat": 39.0626847,
-    "lon": -6.5060021
+  "Nava|Asturias": {
+    "lat": 43.3582,
+    "lon": -5.5057
   },
   "La Robla|León": {
     "lat": 42.8029091,
